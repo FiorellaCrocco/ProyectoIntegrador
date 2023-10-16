@@ -1,0 +1,39 @@
+-- Datos ficticios para la tabla "Users"
+INSERT INTO users (name, lastname, email, password)
+VALUES ('Juan', 'Pérez', 'juan.perez@email.com', 'password123');
+
+INSERT INTO users (name, lastname, email, password)
+VALUES ('Ana', 'García', 'ana.garcia@email.com', 'securepass');
+
+INSERT INTO users (name, lastname, email, password)
+VALUES ('Carlos', 'Rodríguez', 'carlos@email.com', 'mypassword');
+
+-- Datos ficticios para la tabla "Books"
+INSERT INTO books (title, author, description, gender, isbn, publication_year)
+VALUES ('El misterio de la mansión', 'Laura Smith', 'Una emocionante novela de misterio', 1, 123456789, '2023-01-15');
+
+INSERT INTO books (title, author, description, gender, isbn, publication_year)
+VALUES ('Aventuras en la jungla', 'David Johnson', 'Un emocionante viaje al corazón de la jungla', 3, 987654321, '2022-05-20');
+
+INSERT INTO books (title, author, description, gender, isbn, publication_year)
+VALUES ('La magia de la historia', 'María González', 'Descubre la historia a través de la magia', 2, 456789123, '2021-11-10');
+
+-- Datos ficticios para la tabla "Subscriptions"
+INSERT INTO subscriptions (start_subs, end_subs, subs_type, user_id)
+VALUES ('2023-01-01', '2023-12-31', 'GOLD', 1);
+
+INSERT INTO subscriptions (start_subs, end_subs, subs_type, user_id)
+VALUES ('2023-02-15', '2023-08-15', 'PLATINUM', 2);
+
+INSERT INTO subscriptions (start_subs, end_subs, subs_type, user_id)
+VALUES ('2023-03-20', '2023-06-30', 'DIAMOND', 3);
+
+-- Datos ficticios para la tabla "Book_Rents"
+INSERT INTO book_rents (start_date, return_date, book_id, user_id)
+VALUES ('2023-01-05', '2023-01-15', 1, 1);
+
+INSERT INTO book_rents (start_date, return_date, book_id, user_id)
+VALUES ('2023-02-20', '2023-03-05', 2, 2);
+
+INSERT INTO book_rents (start_date, return_date, book_id, user_id)
+VALUES ('2023-03-10', '2023-03-25', 3, 3);
