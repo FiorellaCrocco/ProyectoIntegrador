@@ -1,0 +1,73 @@
+
+/* Footer */
+footer {    
+    width: 100%;
+    height: auto;
+    
+    
+    background-color: #FF642F;
+    
+    
+    
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    /* max-width: 1200px;  */
+    /* width: 960px; */
+    margin: 0 auto;
+}
+
+.footer-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.footer-left img {
+    width: 50px; /* Ajusta el tamaño del logotipo según tus necesidades */
+    margin-right: 10px; /* Agregamos un espacio entre el logotipo y el texto */
+}
+
+.copyright {
+    /* font-size: 12px; */
+    color: #000;
+}
+
+/* Estilos para la sección "COMPANY" y "SERVICES" */
+.footer-left, .footer-mid, .footer-right {
+    flex: 1; /* Distribuye el espacio de manera uniforme entre las dos columnas */
+    padding: 10px; /* Agregamos un poco de espacio alrededor del contenido */
+}
+
+/* Estilos para los encabezados (h4) en "COMPANY" y "SERVICES" */
+.footer-mid h4, .footer-right h4 {
+    font-size: 18px; /* Ajusta el tamaño del encabezado según tus necesidades */
+    margin-bottom: 10px; /* Agregamos un espacio debajo del encabezado */
+}
+
+/* Estilos para los elementos de lista en "COMPANY" y "SERVICES" */
+.footer-mid p, .footer-right p {
+    margin: 5px 0; /* Agregamos espacio entre los elementos de la lista */
+    color: #333; /* Cambiamos el color del texto de la lista */
+}
+
+/* @media (max-width: 960px) {
+    .footer-container  {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-left {
+        float: none;
+        text-align: center;
+    }
+
+    .footer-right {
+        float: none;
+        text-align: center;
+    }
+}  */
