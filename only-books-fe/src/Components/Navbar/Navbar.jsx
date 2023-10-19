@@ -15,8 +15,11 @@ const Navbar = () => {
             <div className="header-container">
                 <div className="header-left">
                     <Link to="/">
-                        <img src="/vite.svg" alt="Logo" />
-                        {/* <img src="src\img\logoOnlyBooksv1.jpeg" alt="Logo" /> */}
+                        {/* <img src="/vite.svg" alt="Logo" /> */}
+                        <img style={{
+                            width: "150px",
+                            marginRight: "10px",
+                        }} src="src\img\logoOnlyBooksv1.jpeg" alt="Logo" />
                     </Link>
 
                     <div className="lema">
