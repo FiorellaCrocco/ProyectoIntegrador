@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
@@ -26,8 +26,8 @@ const Navbar = () => {
 
                 </div>
                 <div className="header-right">
-                    <button onClick={toggleMenu}>Crear cuenta</button>
-                    <button onClick={toggleMenu}>Iniciar sesión</button>
+                    <button className="btn-create" onClick={toggleMenu}>Crear cuenta</button>
+                    <button className="btn-login" onClick={toggleMenu}>Iniciar sesión</button>
                 </div>
             </div>
         </header>
