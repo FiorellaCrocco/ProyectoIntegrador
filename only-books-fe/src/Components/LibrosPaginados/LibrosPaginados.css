@@ -19,10 +19,11 @@ li {
     text-overflow: ellipsis;
 }
 
-.listaContainer p{
+p {
+    color: rgb(49, 49, 49);
     padding-top: 5px;
     margin-bottom: 2px;
-} 
+}
 
 .price {
     color: rgb(216, 61, 61);
