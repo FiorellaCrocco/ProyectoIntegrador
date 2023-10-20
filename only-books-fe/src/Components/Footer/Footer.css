@@ -13,49 +13,99 @@ footer {
 }
 
 .footer-container {
-    width: 100%;
+    /* width: 100%; */
+    
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     /* max-width: 1200px;  */
     /* width: 960px; */
-    margin: 0 auto;
+    margin: 0;
 }
 
 .footer-left {
-    display: flex;
+    /* display: flex; */
+    width: 20px;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     
+}
+
+.footer-left p{
+    margin : 3px;
 }
 
 .footer-left img {
     width: 50px; /* Ajusta el tamaño del logotipo según tus necesidades */
-    margin-right: 10px; /* Agregamos un espacio entre el logotipo y el texto */
+    margin: 5px auto; 
 }
 
 .copyright {
     /* font-size: 12px; */
-    color: #000;
+    color: #EFFAFF;
 }
 
 /* Estilos para la sección "COMPANY" y "SERVICES" */
 .footer-left, .footer-mid, .footer-right {
     flex: 1; /* Distribuye el espacio de manera uniforme entre las dos columnas */
-    padding: 10px; /* Agregamos un poco de espacio alrededor del contenido */
+    /* padding: 10px; */
+    /* margin-top: 10px; */
 }
 
 /* Estilos para los encabezados (h4) en "COMPANY" y "SERVICES" */
 .footer-mid h4, .footer-right h4 {
     font-size: 18px; /* Ajusta el tamaño del encabezado según tus necesidades */
-    margin-bottom: 10px; /* Agregamos un espacio debajo del encabezado */
+    /* margin-bottom: 10px;  */
 }
 
 /* Estilos para los elementos de lista en "COMPANY" y "SERVICES" */
 .footer-mid p, .footer-right p {
-    margin: 5px 0; /* Agregamos espacio entre los elementos de la lista */
+    margin:  0; /* Agregamos espacio entre los elementos de la lista */
     color: #333; /* Cambiamos el color del texto de la lista */
 }
+
+
+.social-icons {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	margin: 0 auto;
+	width: auto;
+    /* padding-top: 20px; */
+    margin-top: 0;
+	gap: 5%;
+}
+
+.social-icons .social-icon {
+	color: #EFFAFF;
+	/* width: 100%; */
+}
+
+
+/* .animation:hover {
+    background-size: 0 3px, 100% 3px;
+}
+
+.animation {
+    background:
+    linear-gradient(
+        to right,
+        rgba(100, 200, 200, 1),
+        rgba(100, 200, 200, 1)
+    ),
+    linear-gradient(
+        to right,
+        rgba(255, 0, 0, 1),
+        rgba(255, 0, 180, 1),
+        rgba(0, 100, 200, 1)
+    );
+    background-size: 100% 3px, 0 3px;
+    background-position: 100% 100%, 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 400ms;
+} */
 
 /* @media (max-width: 960px) {
     .footer-container  {

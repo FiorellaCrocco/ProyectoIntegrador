@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import './LibrosPaginados.css'
 
@@ -25,15 +26,16 @@ function LibrosPaginados({libros}){
         <>
         <div className="listaContainer">
             <ul className="listaPaginada">
-                {currentItem.map((item) =>{{console.log(item)}
+                {currentItem.map((item) =>{
+                    // {console.log(item)}
                     return <li className="book" key={item.id}><img src={item.imgUrl}/><p>{item.title}</p> <p className="price">${item.price}</p></li>
                 })}
             </ul>
-            <button onClick={prevPage}disabled={pagina===1}>
+            <button className="btn-anterior" onClick={prevPage} disabled={pagina===1}>
                 Anterior
             </button>
-            <button onClick={nextPage}disabled={pagina===Math.ceil(libros.length/librosPorPagina)}>
-                Anterior
+            <button className="btn-siguiente" onClick={nextPage} disabled={pagina===Math.ceil(libros.length/librosPorPagina)}>
+                Siguiente
             </button>
         </div>
         </>
