@@ -34,6 +34,11 @@ public class User {
     @NotBlank
     private String name;
 
+    @Size(max=8, message="DNI maximo 8 caracteres.")
+    @NotNull
+    @NotBlank
+    private Integer dni;
+
     @Size(max=30, message="Email maximo 30 caracteres.")
     @NotNull
     @NotBlank
@@ -44,6 +49,11 @@ public class User {
     @NotBlank
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$", message = "La contraseña no cumple con los requisitos.")
     private String password;
+
+    @NotNull
+    @NotBlank
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
 
     @OneToMany(mappedBy = "user")
     private List<BookRent> rentedBooks;

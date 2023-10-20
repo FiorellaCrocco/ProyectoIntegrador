@@ -50,7 +50,20 @@ public class Book {
 
     @NotNull
     @NotBlank
-    private Integer gender;
+    private Integer qualification;
+
+    @NotNull
+    @NotBlank
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
+    @NotNull
+    @NotBlank
+    private String imgUrl;
+
+    @NotNull
+    @NotBlank
+    private Float price;
 
     @OneToMany(mappedBy = "book")
     private List<BookRent> rentedByUsers;

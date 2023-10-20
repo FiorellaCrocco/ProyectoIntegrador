@@ -24,6 +24,14 @@ public class Subscription {
 
     @NotNull
     @NotBlank
+    private Integer discount;
+
+    @NotNull
+    @NotBlank
+    private Integer cantBooks;
+
+    @NotNull
+    @NotBlank
     @Enumerated(EnumType.STRING)
     private SubsType subsType;
 

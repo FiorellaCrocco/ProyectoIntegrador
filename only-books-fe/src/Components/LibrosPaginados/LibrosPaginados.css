@@ -1,0 +1,59 @@
+.listaPaginada {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(100px, 1fr));
+    gap: 10px;
+    padding: 20px;
+}
+
+li {
+    flex-direction: column;
+    font-weight: 700;
+}
+
+.book {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.listaContainer p{
+    padding-top: 5px;
+    margin-bottom: 2px;
+} 
+
+.price {
+    color: rgb(216, 61, 61);
+}
+
+.book img {
+    width: 80%;
+    height: auto;
+}
+
+.listaContainer {
+
+    align-items: center;
+    padding-top: 100px;
+    padding-bottom: 200px;
+}
+
+
+
+.btn-anterior,
+.btn-siguiente {
+    background-color: #FF642F;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    color: #EFFAFF;
+    cursor: pointer;
+    padding: 10px 15px;
+    margin-left: 10px;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    transition: border-color 0.25s;
+}

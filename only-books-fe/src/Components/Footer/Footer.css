@@ -1,0 +1,125 @@
+
+/* Footer */
+footer {    
+    width: 100%;
+    height: auto;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    /* background-color: #FF642F; */
+    background-color: #F89344;
+    
+}
+
+.footer-container {
+    /* width: 100%; */
+    
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    /* max-width: 1200px;  */
+    /* width: 960px; */
+    margin: 0;
+}
+
+.footer-left {
+    /* display: flex; */
+    width: 20px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    
+}
+
+.footer-left p{
+    margin : 3px;
+}
+
+.footer-left img {
+    width: 50px; /* Ajusta el tamaño del logotipo según tus necesidades */
+    margin: 5px auto; 
+}
+
+.copyright {
+    /* font-size: 12px; */
+    color: #EFFAFF;
+}
+
+/* Estilos para la sección "COMPANY" y "SERVICES" */
+.footer-left, .footer-mid, .footer-right {
+    flex: 1; /* Distribuye el espacio de manera uniforme entre las dos columnas */
+    /* padding: 10px; */
+    /* margin-top: 10px; */
+}
+
+/* Estilos para los encabezados (h4) en "COMPANY" y "SERVICES" */
+.footer-mid h4, .footer-right h4 {
+    font-size: 18px; /* Ajusta el tamaño del encabezado según tus necesidades */
+    /* margin-bottom: 10px;  */
+}
+
+/* Estilos para los elementos de lista en "COMPANY" y "SERVICES" */
+.footer-mid p, .footer-right p {
+    margin:  0; /* Agregamos espacio entre los elementos de la lista */
+    color: #333; /* Cambiamos el color del texto de la lista */
+}
+
+
+.social-icons {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	margin: 0 auto;
+	width: auto;
+    /* padding-top: 20px; */
+    margin-top: 0;
+	gap: 5%;
+}
+
+.social-icons .social-icon {
+	color: #EFFAFF;
+	/* width: 100%; */
+}
+
+
+/* .animation:hover {
+    background-size: 0 3px, 100% 3px;
+}
+
+.animation {
+    background:
+    linear-gradient(
+        to right,
+        rgba(100, 200, 200, 1),
+        rgba(100, 200, 200, 1)
+    ),
+    linear-gradient(
+        to right,
+        rgba(255, 0, 0, 1),
+        rgba(255, 0, 180, 1),
+        rgba(0, 100, 200, 1)
+    );
+    background-size: 100% 3px, 0 3px;
+    background-position: 100% 100%, 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 400ms;
+} */
+
+/* @media (max-width: 960px) {
+    .footer-container  {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-left {
+        float: none;
+        text-align: center;
+    }
+
+    .footer-right {
+        float: none;
+        text-align: center;
+    }
+}  */
