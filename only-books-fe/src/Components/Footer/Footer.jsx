@@ -8,7 +8,9 @@ const Footer = () => {
             <div className='footer-container'>
                 <div className='footer-left'>
                     <Link>
-                        <img src="/vite.svg" alt="Logo" />
+                        <img style={{
+                            width: "150px",
+                        }} src="src\img\logoOnlyBooksv1.jpeg" alt="Logo" />
                     </Link>
                     <div className='social-icons'>
                         {/* iconos de redes sociales */}

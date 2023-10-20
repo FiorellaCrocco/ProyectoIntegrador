@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
@@ -15,8 +15,11 @@ const Navbar = () => {
             <div className="header-container">
                 <div className="header-left">
                     <Link to="/">
-                        <img src="/vite.svg" alt="Logo" />
-                        {/* <img src="src\img\logoOnlyBooksv1.jpeg" alt="Logo" /> */}
+                        {/* <img src="/vite.svg" alt="Logo" /> */}
+                        <img style={{
+                            width: "150px",
+                            marginRight: "10px",
+                        }} src="src\img\logoOnlyBooksv1.jpeg" alt="Logo" />
                     </Link>
 
                     <div className="lema">
@@ -26,8 +29,8 @@ const Navbar = () => {
 
                 </div>
                 <div className="header-right">
-                    <button onClick={toggleMenu}>Crear cuenta</button>
-                    <button onClick={toggleMenu}>Iniciar sesión</button>
+                    <button className="btn-create" onClick={toggleMenu}>Crear cuenta</button>
+                    <button className="btn-login" onClick={toggleMenu}>Iniciar sesión</button>
                 </div>
             </div>
         </header>
