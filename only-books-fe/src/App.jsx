@@ -4,6 +4,7 @@ import './App.css'
 import Navbar from './Components/Navbar/Navbar'
 import Footer from './Components/Footer/Footer'
 import { routes } from './Utils/routes.js'
+// import AddProduct from './Routes/AddProduct'
 
 
 import { Routes, Route } from 'react-router-dom'
@@ -17,12 +18,9 @@ function App() {
       <div className="content-container">
         <Routes>
           <Route path={routes.home}></Route>
-
-
-
           
         </Routes>
-        
+        {/* <AddProduct/> */}
       </div>
       <Footer />
     </div>
