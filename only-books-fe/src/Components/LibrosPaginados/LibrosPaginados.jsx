@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from './LibrosPaginados.css'
+import './LibrosPaginados.css'
 
 function LibrosPaginados({libros}){
     const librosPorPagina= 10;
