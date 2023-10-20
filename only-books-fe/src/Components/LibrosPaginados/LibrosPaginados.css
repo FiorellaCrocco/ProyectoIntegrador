@@ -1,0 +1,36 @@
+.listaPaginada{
+    display: grid;
+    grid-template-columns: repeat(5, minmax(100px,1fr));
+    gap: 10px;
+    padding: 20px;
+}
+li{
+    flex-direction: column;
+    font-weight: 700;
+}
+
+.book{
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+p{
+    padding-top: 5px;
+    margin-bottom: 2px;
+}
+.price{
+    color: rgb(216, 61, 61);
+}
+.book img {
+    width: 80%;
+    height: auto; 
+}
+.listaContainer{
+
+    align-items: center;
+    padding-top: 100px;
+    padding-bottom: 200px;
+}
