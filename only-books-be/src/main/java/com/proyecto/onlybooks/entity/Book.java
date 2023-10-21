@@ -38,21 +38,16 @@ public class Book {
     @NotBlank
     private String description;
 
-    @Size(max=13, message="ISBN no valido")
     @NotNull
-    @NotBlank
     private Integer isbn;
 
     @NotNull
-    @NotBlank
     private Date publication_year;
 
     @NotNull
-    @NotBlank
     private Integer qualification;
 
     @NotNull
-    @NotBlank
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
@@ -61,7 +56,6 @@ public class Book {
     private String imgUrl;
 
     @NotNull
-    @NotBlank
     private Double price;
 
     // Un Book puede tener muchos BookRent, pero cada BookRent tiene un Book.
