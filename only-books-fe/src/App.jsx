@@ -1,13 +1,10 @@
-
 import './App.css'
 import Navbar from './Components/Navbar/Navbar'
 import Footer from './Components/Footer/Footer'
 import { routes } from './Utils/routes.js'
-import LibrosPaginados from './Components/LibrosPaginados/LibrosPaginados.jsx';
-import data from './Components/LibrosPaginados/libros'
-import Search from './Components/Search/Search'
-import Administrador from './Routes/Administrador/Administrador'
-
+import Administrador from './Routes/Administrador'
+import CargarProducto from './Components/Administrador/CargarProducto'
+import Home from './Routes/Home';
 
 
 import { Routes, Route } from 'react-router-dom'
@@ -19,13 +16,14 @@ function App() {
 
     <div className="app">
       <Navbar />
-      <Search />
-      <LibrosPaginados libros={data}></LibrosPaginados>
+    
+ 
 
 
       <div className="content-container">
         <Routes>
-          <Route path={routes.home}></Route>
+          <Route path='/' Component={Home}></Route>
+          <Route path='/administrador/cargar' Component={CargarProducto}></Route>
           <Route path='/administrador' Component={Administrador}></Route>
 
         </Routes>

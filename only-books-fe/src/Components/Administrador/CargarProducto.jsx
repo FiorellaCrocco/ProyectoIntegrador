@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "./Administrador.css"
+import "./CargarProducto.css"
 
 function ImageUploadForm() {
   const [formData, setFormData] = useState({
@@ -24,21 +24,39 @@ function ImageUploadForm() {
     });
   };
 
+  const [libros, setLibros] = useState([]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí puedes realizar acciones con los datos del formulario, como enviarlos a un servidor.
     console.log('Nombre:', formData.name);
     console.log('Detalle:', formData.detail);
     console.log('Imagen seleccionada:', formData.image ? formData.image.name : 'Ninguna imagen seleccionada');
+    
+    // Crear un nuevo objeto con los datos del formulario
+  const nuevoLibro = {
+    name: formData.name,
+    detail: formData.detail,
+    image: formData.image,
+  };
+
+  // Agregar el nuevo libro al array de libros
+  setLibros([...libros, nuevoLibro]);
+
+  // Limpiar los campos del formulario
+  setFormData({
+    name: '',
+    detail: '',
+    image: null,
+  });
   };
 
   return (
-    <div>
-      <h2>Formulario de Carga de Imagen</h2>
-      <form className="form-container" onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Nombre:</label>
-          <input
+    <div className="Container">
+      <h1 className='titulo'>Cargar Libro</h1>
+      <form  className='formulario' onSubmit={handleSubmit}>
+        <div className='div'>
+          <label className='labels' htmlFor="name">Titulo:</label>
+          <input className='input'
             type="text"
             id="name"
             name="name"
@@ -46,9 +64,9 @@ function ImageUploadForm() {
             onChange={handleInputChange}
           />
         </div>
-        <div>
-          <label htmlFor="detail">Detalle:</label>
-          <input
+        <div className='div'>
+          <label className='labels' htmlFor="detail">Detalle:</label>
+          <input className='detail'
             type="text"
             id="detail"
             name="detail"
@@ -56,9 +74,9 @@ function ImageUploadForm() {
             onChange={handleInputChange}
           />
         </div>
-        <div>
-          <label htmlFor="image">Imagen:</label>
-          <input
+        <div className='div'>
+          <label className='labels' htmlFor="image">Imagen:</label>
+          <input className='input'
             type="file"
             id="image"
             name="image"
@@ -66,10 +84,20 @@ function ImageUploadForm() {
             onChange={handleImageChange}
           />
         </div>
-        <button type="submit">Subir Imagen</button>
+        <button className = "FormBtn" type="submit">Guardar Libro</button>
       </form>
+
+      
+
+    
+  
     </div>
+
+    
   );
 }
 
 export default ImageUploadForm;
+
+
+
