@@ -6,6 +6,7 @@ import { routes } from './Utils/routes.js'
 import LibrosPaginados from './Components/LibrosPaginados/LibrosPaginados.jsx';
 import data from './Components/LibrosPaginados/libros'
 import Search from './Components/Search/Search'
+import Administrador from './Routes/Administrador/Administrador'
 
 
 
@@ -25,6 +26,7 @@ function App() {
       <div className="content-container">
         <Routes>
           <Route path={routes.home}></Route>
+          <Route path='/administrador' Component={Administrador}></Route>
 
         </Routes>
         {/* <AddProduct/> */}
