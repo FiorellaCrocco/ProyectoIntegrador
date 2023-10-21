@@ -20,6 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name="users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -44,7 +45,8 @@ public class User {
     @NotBlank
     private String email;
 
-    @Size(max=30, message="Apellido maximo 30 caracteres.")
+    // La contraseña debe tener al menos una letra mayúscula, una minúscula, un número, entre 8 y 30 caracteres.
+    @Size(max=30, message="Contraseña maximo 30 caracteres.")
     @NotNull
     @NotBlank
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$", message = "La contraseña no cumple con los requisitos.")
@@ -55,8 +57,13 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Rol rol;
 
+    // Un User puede tener muchos BookRent
     @OneToMany(mappedBy = "user")
-    private List<BookRent> rentedBooks;
+    private List<BookRent> bookRents;
 
+    // Un User tienen una Subscripion.
+    @OneToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="subscription_id")
+    private Subscription  subscription;
 
 }
