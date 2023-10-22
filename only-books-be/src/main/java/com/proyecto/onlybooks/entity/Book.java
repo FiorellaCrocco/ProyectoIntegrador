@@ -39,7 +39,7 @@ public class Book {
     private String description;
 
     @NotNull
-    private Integer isbn;
+    private String isbn;
 
     @NotNull
     private Date publication_year;
@@ -59,7 +59,18 @@ public class Book {
     private Double price;
 
     // Un Book puede tener muchos BookRent, pero cada BookRent tiene un Book.
-    @OneToMany(mappedBy = "book")
+    @OneToMany( fetch=FetchType.EAGER, mappedBy = "book")
     private List<BookRent> rentedByUsers;
 
+    public Book(String title, String author, String description, String isbn, Date publication_year, Integer qualification, Gender gender, String imgUrl, Double price) {
+        this.title = title;
+        this.author = author;
+        this.description = description;
+        this.isbn = isbn;
+        this.publication_year = publication_year;
+        this.qualification = qualification;
+        this.gender = gender;
+        this.imgUrl = imgUrl;
+        this.price = price;
+    }
 }

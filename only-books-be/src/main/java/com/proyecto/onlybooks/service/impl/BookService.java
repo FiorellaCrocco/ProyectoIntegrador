@@ -8,6 +8,7 @@ import com.proyecto.onlybooks.exceptions.ResourceNotFoundException;
 import com.proyecto.onlybooks.repository.IBookRepository;
 import com.proyecto.onlybooks.service.IBookService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,12 +21,13 @@ public class BookService implements IBookService {
     private static final Logger logger = Logger.getLogger(BookService.class);
 
     // Repositorio de Book utilizado para acceder a la base de datos.
-    private IBookRepository iBookRepository;
+    private final IBookRepository iBookRepository;
 
     // Para la conversión de objetos.
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
 
     // Constructor de BookService que permite la inyección de dependencias.
+    @Autowired
     public BookService(IBookRepository iBookRepository, ObjectMapper objectMapper) {
         this.iBookRepository = iBookRepository;
         this.objectMapper = objectMapper;
@@ -78,5 +80,9 @@ public class BookService implements IBookService {
             logger.error("No se ha encontrado el libro con id " + id);
             throw new ResourceNotFoundException("No se ha encontrado el libro");
         }
+    }
+
+    public double precioConDescuento (double price, double discount){
+       return price - (price * discount/100);
     }
 }
