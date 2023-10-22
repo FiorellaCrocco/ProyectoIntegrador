@@ -23,7 +23,7 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(max=30, message="Titulo maximo 30 caracteres.")
+    @Size(max=50, message="Titulo maximo 30 caracteres.")
     @NotNull
     @NotBlank
     private String title;
@@ -52,17 +52,16 @@ public class Book {
     private Gender gender;
 
     @NotNull
-    @NotBlank
-    private String imgUrl;
-
-    @NotNull
     private Double price;
 
     // Un Book puede tener muchos BookRent, pero cada BookRent tiene un Book.
     @OneToMany( fetch=FetchType.EAGER, mappedBy = "book")
     private List<BookRent> rentedByUsers;
 
-    public Book(String title, String author, String description, String isbn, Date publication_year, Integer qualification, Gender gender, String imgUrl, Double price) {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "book")
+    private List<Image> images;
+
+    public Book(String title, String author, String description, String isbn, Date publication_year, Integer qualification, Gender gender, Double price) {
         this.title = title;
         this.author = author;
         this.description = description;
@@ -70,7 +69,6 @@ public class Book {
         this.publication_year = publication_year;
         this.qualification = qualification;
         this.gender = gender;
-        this.imgUrl = imgUrl;
         this.price = price;
     }
 }
