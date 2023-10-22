@@ -10,6 +10,9 @@
         <module name="onlybooks" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="onlybooks" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

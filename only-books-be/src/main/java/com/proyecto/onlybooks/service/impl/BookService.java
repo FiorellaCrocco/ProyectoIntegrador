@@ -79,4 +79,8 @@ public class BookService implements IBookService {
             throw new ResourceNotFoundException("No se ha encontrado el libro");
         }
     }
+
+    public double precioConDescuento (double price, double discount){
+       return price - (price * discount/100);
+    }
 }
