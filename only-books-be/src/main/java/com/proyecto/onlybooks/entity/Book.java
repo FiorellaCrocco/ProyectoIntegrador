@@ -12,13 +12,13 @@ import lombok.Setter;
 import java.util.Date;
 import java.util.List;
 
-
 @Entity
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="books")
 public class Book {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,27 +33,21 @@ public class Book {
     @NotBlank
     private String author;
 
-    @Size(max=200, message="Descripcion maximo 40 caracteres.")
+    @Size(max=200, message="Descripcion maximo 200 caracteres.")
     @NotNull
     @NotBlank
     private String description;
 
-    @Size(max=13, message="ISBN no valido")
     @NotNull
-    @NotBlank
     private Integer isbn;
 
     @NotNull
-    @NotBlank
-    @Column(name="publication_year")
-    private Date year;
+    private Date publication_year;
 
     @NotNull
-    @NotBlank
     private Integer qualification;
 
     @NotNull
-    @NotBlank
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
@@ -62,11 +56,10 @@ public class Book {
     private String imgUrl;
 
     @NotNull
-    @NotBlank
-    private Float price;
+    private Double price;
 
+    // Un Book puede tener muchos BookRent, pero cada BookRent tiene un Book.
     @OneToMany(mappedBy = "book")
     private List<BookRent> rentedByUsers;
-
 
 }

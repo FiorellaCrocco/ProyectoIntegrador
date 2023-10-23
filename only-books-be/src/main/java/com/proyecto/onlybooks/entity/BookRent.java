@@ -12,20 +12,22 @@ import lombok.Setter;
 import java.util.Date;
 
 @Entity
-@Getter
-@Setter
+@Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="bookRents")
 public class BookRent {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Muchos BookRent puede tener un User.
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
+    // Muchos BookRent puede tener un Book.
     @ManyToOne
     @JoinColumn(name = "book_id")
     private Book book;
@@ -37,6 +39,5 @@ public class BookRent {
     @NotNull
     @NotBlank
     private Date returnDate;
-
 
 }

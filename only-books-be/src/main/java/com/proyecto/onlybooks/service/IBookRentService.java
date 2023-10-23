@@ -7,12 +7,11 @@ import com.proyecto.onlybooks.exceptions.ResourceNotFoundException;
 import java.util.List;
 
 public interface IBookRentService {
-    public interface IUserService {
-        void guardar(BookRent bookRent);
-        BookRentDTO buscarPorId(Long id) throws ResourceNotFoundException;
-        void modificar(BookRent bookRent) throws ResourceNotFoundException;
-        void eliminar(Long id) throws ResourceNotFoundException;
+
+        Long guardar(BookRent bookRent);
         List<BookRentDTO> mostrarTodos();
-    }
+        BookRentDTO buscarPorId(Long id) throws ResourceNotFoundException;
+        void modificar(BookRent bookRent);
+        void eliminar(Long id) throws ResourceNotFoundException;
 
 }

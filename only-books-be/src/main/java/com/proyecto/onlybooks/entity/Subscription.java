@@ -18,13 +18,14 @@ import java.util.Date;
 @AllArgsConstructor
 @Table(name="subscriptions")
 public class Subscription {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
     @NotBlank
-    private Integer discount;
+    private Double discount; // CAMBIE DE INTEGER A DOUBLE, EJ. 18,3% DEL IVA
 
     @NotNull
     @NotBlank
@@ -43,9 +44,10 @@ public class Subscription {
     @NotBlank
     private Date endSubs;
 
-    @OneToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="user_id")
+    // Una subscription un usuario.
     @NotNull
+    @NotBlank
+    @OneToOne(mappedBy = "subscription")
     private User user;
 
 }

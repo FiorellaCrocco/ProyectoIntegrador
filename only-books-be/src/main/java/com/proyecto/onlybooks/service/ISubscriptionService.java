@@ -7,11 +7,11 @@ import com.proyecto.onlybooks.exceptions.ResourceNotFoundException;
 import java.util.List;
 
 public interface ISubscriptionService {
-    public interface IUserService {
-        void guardar(Subscription subscription);
-        SubscriptionDTO buscarPorId(Long id) throws ResourceNotFoundException;
-        void modificar(Subscription subscription) throws ResourceNotFoundException;
-        void eliminar(Long id) throws ResourceNotFoundException;
+
+        Long guardar(Subscription subscription);
         List<SubscriptionDTO> mostrarTodos();
-    }
+        SubscriptionDTO buscarPorId(Long id) throws ResourceNotFoundException;
+        void modificar(Subscription subscription);
+        void eliminar(Long id) throws ResourceNotFoundException;
+
 }
