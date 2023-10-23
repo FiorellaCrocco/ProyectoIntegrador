@@ -26,7 +26,7 @@ public class BookController {
 
     // En la url "/book/listar" retorno una lista de BookDTO
     @GetMapping("/listar")
-    public List<BookDTO> buscarBooks() {
+    public List<BookDTO> buscarBooks() throws Exception{
         List<BookDTO> listarBooks = bookService.mostrarTodos();
         return listarBooks;
     }

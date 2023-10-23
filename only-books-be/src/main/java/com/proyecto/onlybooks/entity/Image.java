@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="Image")
+@Table(name="images")
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -41,12 +41,18 @@ public class BookService implements IBookService {
     }
 
     @Override
-    public List<BookDTO> mostrarTodos() {
+    public List<BookDTO> mostrarTodos() throws ResourceNotFoundException {
         objectMapper.registerModule(new JavaTimeModule()); // Se utiliza para solucionar el error "not supported by default: add Module "com.fasterxml.jackson.datatype:jackson-datatype-jsr310""
         List<BookDTO> bookDTOS = new ArrayList<>();  // Creamos un ArrayList de tipo BookDTO
         for (Book p : iBookRepository.findAll()){    // Iteramos el array
             logger.info("Libro - buscarTodos: Se esta iterando el array de libros");
-            bookDTOS.add(objectMapper.convertValue(p,BookDTO.class));  // En cada iteración convertimos el objeto de tipo Book a BookDTO y lo agregamos al ArrayList
+            List<String> images = buscarListaImagenes(p.getId());
+            if(images==null){
+                throw new ResourceNotFoundException("Imagenes no encontradas.");
+            }
+            BookDTO bookDTO = objectMapper.convertValue(p,BookDTO.class);
+            bookDTO.setImgUrl(images);
+            bookDTOS.add(bookDTO);  // En cada iteración convertimos el objeto de tipo Book a BookDTO y lo agregamos al ArrayList
         }
         return bookDTOS;
     }
@@ -56,8 +62,12 @@ public class BookService implements IBookService {
         objectMapper.registerModule(new JavaTimeModule()); // Se utiliza para solucionar el error "not supported by default: add Module "com.fasterxml.jackson.datatype:jackson-datatype-jsr310""
         Optional<Book> found = iBookRepository.findById(id);  // Utilizo el objeto Optional que permite que "found" devuelva nulo o Book
         if(found.isPresent()) {  // Evaluamos si found tiene contenido
+            Book b = found.get();
             logger.info("Libro - buscarPorId: Se encontro el libro y se convertira a DTO para ser devuelto");
-            return objectMapper.convertValue(found, BookDTO.class);  // Convertimos a found que es de tipo Book a BookDTO.
+            List<String> images = buscarListaImagenes(id);
+            BookDTO bookDTO = objectMapper.convertValue(found, BookDTO.class);  // Convertimos a found que es de tipo Book a BookDTO.
+            bookDTO.setImgUrl(images);
+            return bookDTO;
         } else {
             logger.warn("Libro - buscarPorId: No se encontro ningun libro con ese ID");
             throw new ResourceNotFoundException("El libro no existe");
@@ -79,6 +89,15 @@ public class BookService implements IBookService {
         } else {
             logger.error("No se ha encontrado el libro con id " + id);
             throw new ResourceNotFoundException("No se ha encontrado el libro");
+        }
+    }
+
+    public List<String> buscarListaImagenes(Long id) throws ResourceNotFoundException{
+        List<String> lista = iBookRepository.buscarImages(id);
+        if(lista!=null){
+            return lista;
+        }else{
+            throw  new ResourceNotFoundException("No se encontraron imagenes para el libro con id: "+id);
         }
     }
 
