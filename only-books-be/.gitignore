@@ -4,7 +4,8 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-./avisos.log
+**/application.properties
+**/avisos.log
 
 ### STS ###
 .apt_generated
