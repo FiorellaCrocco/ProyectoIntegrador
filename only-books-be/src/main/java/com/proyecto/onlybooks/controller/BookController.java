@@ -4,6 +4,7 @@ import com.proyecto.onlybooks.dto.BookDTO;
 import com.proyecto.onlybooks.entity.Book;
 import com.proyecto.onlybooks.exceptions.ResourceNotFoundException;
 import com.proyecto.onlybooks.service.impl.BookService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import java.util.List;
 @RequestMapping("/book")
 public class BookController {
 
+    @Autowired
     BookService bookService;
 
     // Constructor de BookController que permite la inyección de dependencias.
@@ -24,7 +26,7 @@ public class BookController {
 
     // En la url "/book/listar" retorno una lista de BookDTO
     @GetMapping("/listar")
-    public List<BookDTO> buscarBooks() {
+    public List<BookDTO> buscarBooks() throws Exception{
         List<BookDTO> listarBooks = bookService.mostrarTodos();
         return listarBooks;
     }
