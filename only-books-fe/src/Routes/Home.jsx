@@ -10,9 +10,6 @@ const Home = () => {
     <div>
    <Search />
    <LibrosPaginados libros={data}></LibrosPaginados>
-
-  
-
     </div>
     
   )

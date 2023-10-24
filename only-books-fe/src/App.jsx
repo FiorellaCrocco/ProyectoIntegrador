@@ -8,6 +8,7 @@ import Home from './Routes/Home';
 
 
 import { Routes, Route } from 'react-router-dom'
+import Detail from './Routes/Detail'
 
 function App() {
   //const [count, setCount] = useState(0)
@@ -25,6 +26,7 @@ function App() {
           <Route path='/' Component={Home}></Route>
           <Route path='/administrador/cargar' Component={CargarProducto}></Route>
           <Route path='/administrador' Component={Administrador}></Route>
+          <Route path='/detail/:id' Component={Detail}></Route>
 
         </Routes>
         {/* <AddProduct/> */}
