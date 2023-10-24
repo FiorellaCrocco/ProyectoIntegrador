@@ -8,7 +8,7 @@ footer {
     left: 0;
     z-index: 100;
     /* background-color: #FF642F; */
-    background-color: #F89344;
+    background-color: #EFFAFF;
     
 }
 
@@ -79,7 +79,7 @@ footer {
 }
 
 .social-icons .social-icon {
-	color: #EFFAFF;
+	color: #539DC2;
 	/* width: 100%; */
 }
 

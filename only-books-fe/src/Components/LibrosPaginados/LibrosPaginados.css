@@ -3,6 +3,7 @@
     grid-template-columns: repeat(5, minmax(100px, 1fr));
     gap: 10px;
     padding: 20px;
+    background-color: white;
 }
 
 li {
@@ -35,7 +36,7 @@ p {
 }
 
 .listaContainer {
-
+    background-color: white;
     align-items: center;
     padding-top: 100px;
     padding-bottom: 200px;
@@ -45,10 +46,11 @@ p {
 
 .btn-anterior,
 .btn-siguiente {
-    background-color: #FF642F;
+    background-color: #EFFAFF;
     border: 1px solid transparent;
-    border-radius: 8px;
-    color: #EFFAFF;
+    border-radius: 80px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    color: #f89344;
     cursor: pointer;
     padding: 10px 15px;
     margin-left: 10px;

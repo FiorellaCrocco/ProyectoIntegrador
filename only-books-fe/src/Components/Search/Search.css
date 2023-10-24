@@ -2,7 +2,7 @@
     width: 100%;
     text-align: center;
     padding-top: 70px;
-    background-color: #BAE6EA;
+    background-color: #539DC2;
 }
 
 .search-input {
@@ -11,7 +11,8 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    background-color: #f1ba90;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    background-color: #EFFAFF;
     color: #ffffff;
     border: 1px solid transparent;
     border-radius: 8px;
@@ -23,15 +24,15 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    background-color: #f1ba90;
-    color: #ffffff;
-    
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    background-color: #EFFAFF;
+    color: #539DC2;
     border: 1px solid transparent;
     border-radius: 8px;
 }
 
 .product {
-    background-color: #f1ba90;
+    background-color: #EFFAFF;
     border: 1px solid #ccc;
     padding: 10px;
     margin-bottom: 10px;
