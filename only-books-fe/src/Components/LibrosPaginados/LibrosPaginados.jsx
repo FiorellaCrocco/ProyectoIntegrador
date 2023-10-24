@@ -1,11 +1,13 @@
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from 'react-router-dom';
+import { GlobalContext } from "../../Context/globalContext";
 import './LibrosPaginados.css'
 
 function LibrosPaginados({libros}){
     const librosPorPagina= 10;
     const [pagina, setPagina] = useState(1)
+    const { listaLibros }= useContext(GlobalContext)
 
     //Calculo el total de paginas
     const totalPaginas = Math.ceil(libros.length/librosPorPagina)
@@ -13,8 +15,6 @@ function LibrosPaginados({libros}){
     const startIndex = (pagina - 1)*librosPorPagina
     const endIndex = startIndex + librosPorPagina
     const currentItem = libros.slice(startIndex,endIndex)
-
-
 
     const nextPage = () =>{
         if(pagina<Math.ceil(libros.length/librosPorPagina)){
@@ -45,7 +45,6 @@ function LibrosPaginados({libros}){
         <div className="listaContainer">
             <ul className="listaPaginada">
                 {currentItem.map((item) =>{
-                    // {console.log(item)}
                     return (<li className="book" key={item.id}><Link to ={`/detail/${item.id}`}><img src={item.imgUrl[0]} alt={item.title}/></Link><p>{item.title}</p> <p className="price">${item.price}</p></li>)
                 })}
             </ul>

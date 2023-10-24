@@ -1,14 +1,12 @@
-//import { useState, useEffect } from "react"
-import  data  from '../LibrosPaginados/libros'
+import { useState, useEffect, createContext } from "react";
 
-function DetalleLibro({id}){
-    console.log("IMPRIMO EL ID")
-    console.log(id)
-    const libro = data.find((book)=>book.id==id)
-    console.log("Imprimo el libro")
-    console.log(libro)
+export const GlobalContext = createContext()
 
-    /*
+export function BookProvider ({children}){
+    const [listaLibros, setListaLibros] = useState(null)
+    const [isLoading, setIsLoading] = useState(true)
+    const url = "http://localhost:8080/book/listar"
+
     useEffect(()=>{
         const config ={
             method: 'GET',
@@ -17,7 +15,7 @@ function DetalleLibro({id}){
                 'Content-Type': 'application/json',
             }
         }
-        fetch(`/LibrosPaginados/libros.js`,config)
+        fetch(url,config)
             .then(response=>{
                 if(!response.ok){
                     throw new Error('No se encuentra el libro.')
@@ -25,32 +23,29 @@ function DetalleLibro({id}){
                 return response.json()
             })
             .then(data=>{
-                setLibro(data[0])
+                console.log(data)
+                setListaLibros(data)
                 setIsLoading(false)
             })
             .catch(error =>{
                 console.error("Error al cargar los detalles del libro:",error)
                 setIsLoading(false)
             })
-    },[{id}])
+    },[])
 
     if(isLoading){
         return <div>Cargando...</div>
     }
-    if(!libro){
+    if(!listaLibros){
         return <div>No se encontro el libro</div>
-    }*/
+    }
 
-    return(
+    return (
         <>
-        <div>
-            <h1>{libro.title}</h1>
-            <p>Autor: {libro.author}</p>
-            <p>Descripcion: {libro.description}</p>
-            <img src={libro.imgUrl[0]} alt={libro.title} />
-        </div>
-
+        <GlobalContext.Provider value={listaLibros}>
+            {children}
+        </GlobalContext.Provider>
         </>
     )
+
 }
-export default DetalleLibro
