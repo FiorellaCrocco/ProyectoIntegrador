@@ -100,8 +100,3 @@ public class BookService implements IBookService {
             throw  new ResourceNotFoundException("No se encontraron imagenes para el libro con id: "+id);
         }
     }
-
-    public double precioConDescuento (double price, double discount){
-       return price - (price * discount/100);
-    }
-}
