@@ -17,7 +17,7 @@ const Navbar = () => {
                     <Link to="/">
                         {/* <img src="/vite.svg" alt="Logo" /> */}
                         <img  className="logo"
-                        src="src\img\logoOnlyBooksv1.jpeg" alt="Logo" />
+                        src="https://onlybooksbucket.s3.amazonaws.com/Productos/logoOnlyBooksv2+(2).png" alt="Logo" />
 
                     </Link>
                     <Link  to="/">

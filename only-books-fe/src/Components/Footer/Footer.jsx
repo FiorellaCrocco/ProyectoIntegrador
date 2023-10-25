@@ -10,23 +10,24 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 const Footer = () => {
 
 
-    const handleClick = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-        });
-    };
+    // const handleClick = () => {
+    //     window.scrollTo({
+    //         top: 0,
+    //         behavior: "smooth",
+    //     });
+    // };
 
     return (
         <footer>
             <div className='footer-container'>
                 <div className='footer-left'>
-                    <Link>
-                        <img style={{
-                            width: "150px",
-                        }}
+                    {/* <Link to='/'> */}
+                        <img className='logo-footer'
+                            style={{
+                                width: "150px",
+                            }}
                             src="src\img\logoOnlyBooksv1.jpeg" alt="OnlyBooks_Logo" />
-                    </Link>
+                    {/* </Link> */}
                     <div className="social-icons">
                         <a href="https://www.whatsapp.com/" target="_blank"><WhatsAppIcon className="social-icon animation" /></a>
                         <a href="https://www.instagram.com/" target="_blank"><InstagramIcon className="social-icon animation" /></a>
