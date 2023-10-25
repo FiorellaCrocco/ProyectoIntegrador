@@ -380,7 +380,7 @@ const data = [
     price: 22.99,
   },
   {
-    id: 4,
+    id: 24,
     title: "101 Dalmatas",
     author: "Dodie Smith",
     description:
@@ -399,7 +399,7 @@ const data = [
     price: 12.99,
   },
   {
-    id: 5,
+    id: 25,
     title: "365 actividades",
     author: "Zazu Navarro",
     description:
@@ -418,7 +418,7 @@ const data = [
     price: 10.99,
   },
   {
-    id: 6,
+    id: 26,
     title: "Aladdin",
     author: "Ferrándiz Juan",
     description:
@@ -437,7 +437,7 @@ const data = [
     price: 13.99,
   },
   {
-    id: 7,
+    id: 27,
     title: "Alicia en el pais de las maravillas",
     author: "Lewis Carroll",
     description:
@@ -456,7 +456,7 @@ const data = [
     price: 15.99,
   },
   {
-    id: 8,
+    id: 28,
     title: "Blancanieves",
     author: "Jacob Grimm",
     description:
@@ -475,7 +475,7 @@ const data = [
     price: 15.99,
   },
   {
-    id: 9,
+    id: 29,
     title: "Facultad de Informatica",
     author: "John Smith",
     description:
@@ -494,7 +494,7 @@ const data = [
     price: 19.99,
   },
   {
-    id: 10,
+    id: 30,
     title: "Facultad de Informatica vol.2",
     author: "John Smith",
     description:
@@ -513,7 +513,7 @@ const data = [
     price: 22.99,
   },
   {
-    id: 11,
+    id: 31,
     title: "Facultad de Informatica vol.3",
     author: "John Smith",
     description:
@@ -532,7 +532,7 @@ const data = [
     price: 22.99,
   },
   {
-    id: 12,
+    id: 32,
     title: "Facultad de Informatica vol.4",
     author: "John Smith",
     description:
@@ -551,7 +551,7 @@ const data = [
     price: 16.99,
   },
   {
-    id: 13,
+    id: 33,
     title: "Facultad de Informatica vol.5",
     author: "John Smith",
     description:
@@ -570,7 +570,7 @@ const data = [
     price: 18.99,
   },
   {
-    id: 14,
+    id: 34,
     title: "1984",
     author: "George Orwell",
     description:
@@ -589,7 +589,7 @@ const data = [
     price: 18.99,
   },
   {
-    id: 15,
+    id: 35,
     title: "Batman",
     author: "Frank Miller",
     description:
@@ -608,7 +608,7 @@ const data = [
     price: 24.99,
   },
   {
-    id: 16,
+    id: 36,
     title: "El arte de la guerra",
     author: "Sun Tzu",
     description:
@@ -627,7 +627,7 @@ const data = [
     price: 22.99,
   },
   {
-    id: 17,
+    id: 37,
     title: "El Cid",
     author: "Jose Luis Corral",
     description:
@@ -646,7 +646,7 @@ const data = [
     price: 10.99,
   },
   {
-    id: 18,
+    id: 38,
     title: "El manifiesto comunista",
     author: "Karl Marx",
     description:
@@ -665,7 +665,7 @@ const data = [
     price: 11.99,
   },
   {
-    id: 19,
+    id: 39,
     title: "El señor de las moscas",
     author: "William Golding",
     description:
@@ -684,7 +684,7 @@ const data = [
     price: 18.99,
   },
   {
-    id: 20,
+    id: 40,
     title: "El ultimo pasajero",
     author: "Manel Loureiro",
     description:
@@ -703,7 +703,7 @@ const data = [
     price: 10.99,
   },
   {
-    id: 21,
+    id: 41,
     title: "La carretera",
     author: "Cormac McCarthy",
     description:
@@ -722,7 +722,7 @@ const data = [
     price: 16.99,
   },
   {
-    id: 22,
+    id: 42,
     title: "Las memorias de Sherlock Holmes",
     author: "Arthur Conan Doyle",
     description:
@@ -741,7 +741,7 @@ const data = [
     price: 22.99,
   },
   {
-    id: 23,
+    id: 43,
     title: "Martes con mi viejo profesor",
     author: "Mitch Albon",
     description:

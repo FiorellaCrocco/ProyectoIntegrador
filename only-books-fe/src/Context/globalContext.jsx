@@ -5,22 +5,27 @@ export const GlobalContext = createContext()
 export function BookProvider ({children}){
     const [listaLibros, setListaLibros] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
-    const url = "http://localhost:8080/book/listar"
-
+    const url = "https://onlybooks.isanerd.club/api/book/listar"
+    
+    /*
     useEffect(()=>{
-        const config ={
-            method: 'GET',
-            headers: {
-                'Accept':'application/json',
-                'Content-Type': 'application/json',
+        const storedData = localStorage.getItem('bookList')
+        if(storedData){
+            setListaLibros(JSON.parse(storedData))
+            setIsLoading(false)
+        }else{
+            const config ={
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
             }
-        }
-        fetch(url,config)
+            fetch(url)
             .then(response=>{
                 if(!response.ok){
                     throw new Error('No se encuentra el libro.')
                 }
-                return response.json()
+            return response.json()
             })
             .then(data=>{
                 console.log(data)
@@ -31,6 +36,7 @@ export function BookProvider ({children}){
                 console.error("Error al cargar los detalles del libro:",error)
                 setIsLoading(false)
             })
+        }
     },[])
 
     if(isLoading){
@@ -38,7 +44,7 @@ export function BookProvider ({children}){
     }
     if(!listaLibros){
         return <div>No se encontro el libro</div>
-    }
+    }*/
 
     return (
         <>

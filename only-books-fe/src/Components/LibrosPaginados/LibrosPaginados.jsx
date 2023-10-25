@@ -7,7 +7,7 @@ import './LibrosPaginados.css'
 function LibrosPaginados({libros}){
     const librosPorPagina= 10;
     const [pagina, setPagina] = useState(1)
-    const { listaLibros }= useContext(GlobalContext)
+    //const { listaLibros }= useContext(GlobalContext)
 
     //Calculo el total de paginas
     const totalPaginas = Math.ceil(libros.length/librosPorPagina)

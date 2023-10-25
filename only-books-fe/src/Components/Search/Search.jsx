@@ -2,10 +2,12 @@
 import React, { useState } from 'react';
 import './Search.css';
 import data from '../LibrosPaginados/libros'
+import LibrosPaginados from '../LibrosPaginados/LibrosPaginados';
 
 const Search = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('all');
+    const [filteredProducts, setFilteredProducts] = useState(null)
 
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value);
@@ -16,7 +18,7 @@ const Search = () => {
     };
 
     const renderCategoryOptions = () => {
-        const categories = ['all', 'Novela', 'Novelas Gráficas', 'Magazines', 'Infantiles'];
+        const categories = ['all', 'Novelas', 'No_Ficcion', 'Ficcion', 'Infantil'];
         return categories.map((category, index) => (
             <option key={index} value={category}>
                 {category}
@@ -31,24 +33,23 @@ const Search = () => {
         // console.log(products[1].gender)
         // console.log(products)
 
-        // const filteredProducts = products.filter((product) =>
-        //     selectedCategory === 'all' ? true : product.category === selectedCategory
-
-        // );
-        const filteredProducts = products.filter((product) => {
+        const filProducts = products.filter((product) =>
+            selectedCategory === 'all' ? true : product.category === selectedCategory
+        );
+        const libros = products.filter((product) => {
             const selectedCategoryUpper = selectedCategory.toUpperCase();
             if (selectedCategoryUpper === 'ALL') {
                 return true;
-            } else if (selectedCategoryUpper === 'NOVELA') {
-                return product.gender === selectedCategoryUpper;
-
-            } else {
-                return product.category === selectedCategoryUpper;
+            } else if (selectedCategoryUpper === product.gender) {
+                return true;
+            }else{
+                return false
             }
         });
+        //setFilteredProducts(libros)
 
-        const firstThreeProducts = filteredProducts.slice(0, 3);
-
+        //const firstThreeProducts = filteredProducts.slice(0, 3);
+        /*
         return firstThreeProducts.map((product, index) => (
             <div key={index} className="product" >
                 <img style={{
@@ -57,32 +58,38 @@ const Search = () => {
                 }} src={product.imgUrl} alt="" />
                 {console.log(products)}
             </div>
-
-        ));
-    };
-
+    
+        ));*/
+        console.log(libros)
+        return libros;
+    }
     return (
-        <div className="search-container">
-            <div className='input-select'>
-                <input
-                    type="text"
-                    placeholder="Search..."
-                    value={searchTerm}
-                    onChange={handleSearchChange}
-                    className="search-input"
-                />
-                <select value={selectedCategory}
-                    onChange={handleCategoryChange}
-                    className="category-select">
-                    {renderCategoryOptions()}
-                </select>
+        <>
+            <div className="search-container">
+                <div className='input-select'>
+                    <input
+                        type="text"
+                        placeholder="Search..."
+                        value={searchTerm}
+                        onChange={handleSearchChange}
+                        className="search-input"
+                    />
+                    <select value={selectedCategory}
+                        onChange={handleCategoryChange}
+                        className="category-select">
+                        {renderCategoryOptions()}
+                    </select>
+                </div>
+                {/* <div className='product-recommendations'>
+                    {renderProductRecommendations()}
+                </div> */}
+            </div>
+            <div>
+                {<LibrosPaginados libros={renderProductRecommendations()}></LibrosPaginados>
+                }
             </div>
 
-            {/* <div className='product-recommendations'>
-                {renderProductRecommendations()}
-            </div> */}
-        </div>
+        </>
     );
-};
-
+}
 export default Search;

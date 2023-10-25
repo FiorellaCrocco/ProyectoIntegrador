@@ -9,7 +9,8 @@ const Home = () => {
   return (
     <div>
    <Search />
-   <LibrosPaginados libros={data}></LibrosPaginados>
+   {//<LibrosPaginados libros={data}></LibrosPaginados>
+   }
     </div>
     
   )
