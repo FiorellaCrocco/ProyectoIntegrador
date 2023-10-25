@@ -5,6 +5,7 @@ import Footer from './Components/Footer/Footer'
 import Administrador from './Routes/Administrador'
 import CargarProducto from './Components/Administrador/CargarProducto'
 import Home from './Routes/Home';
+import ListarProducto from './Components/Administrador/ListarProducto'
 
 
 import { Routes, Route } from 'react-router-dom'
@@ -24,6 +25,7 @@ function App() {
           <Route path='/administrador/cargar' Component={CargarProducto}></Route>
           <Route path='/administrador' Component={Administrador}></Route>
           <Route path='/detail/:id' Component={Detail}></Route>
+          <Route path='/administrador/listar' Component={ListarProducto}></Route>
 
         </Routes>
       </div>

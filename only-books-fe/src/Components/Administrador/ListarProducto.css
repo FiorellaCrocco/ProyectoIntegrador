@@ -1,0 +1,12 @@
+.contenedor{
+    display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Divide la lista en dos columnas de igual ancho */
+  gap: 20px; /* Espacio entre las columnas */
+  justify-content: center;
+   
+}
+
+.titulo{
+   margin-top: 60px;
+
+}
