@@ -1,6 +1,7 @@
 .listaPaginada {
     display: grid;
     grid-template-columns: repeat(5, minmax(100px, 1fr));
+    /* grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); */
     gap: 10px;
     padding: 20px;
     background-color: white;
@@ -20,6 +21,10 @@ li {
     text-overflow: ellipsis;
 }
 
+.title{
+    font-size: 14px;
+}
+
 p {
     color: rgb(49, 49, 49);
     padding-top: 5px;
@@ -33,6 +38,8 @@ p {
 .book img {
     width: 80%;
     height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
 .listaContainer {
@@ -42,7 +49,12 @@ p {
     padding-bottom: 200px;
 }
 
-
+.btn-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
 
 .btn-anterior,
 .btn-siguiente {
@@ -61,6 +73,7 @@ p {
     transition: border-color 0.25s;
 }
 
+
 @media (max-width: 614px) {
     .listaPaginada {
         display: grid;
@@ -69,21 +82,28 @@ p {
         padding: 20px;
         background-color: white;
     }
-} 
 
-@media (max-width: 425px) {
-    /* Estilos específicos para pantallas con ancho máximo de 425px */
     .listaContainer {
-        /* Estilos para el contenedor en pantallas pequeñas */
+        padding-top: 50px;
+        padding-bottom: 100px;
     }
 
-    .listaPaginada {
-        /* Estilos para la lista paginada en pantallas pequeñas */
+    .book img {
+        width: 50%;
+
+        height: auto;
+        display: block;
+        margin: 0 auto;
     }
 
-    .book {
-        /* Estilos para los elementos individuales en pantallas pequeñas */
+    .title {
+        font-size: 10px;
     }
 
-    /* Otros estilos específicos para pantallas pequeñas */
+    .btn-anterior,
+    .btn-siguiente {
+        font-size: 12px; /* Adjust the font size */
+        padding: 5px 10px; /* Adjust the padding to make the buttons smaller */
+    }
+
 }
