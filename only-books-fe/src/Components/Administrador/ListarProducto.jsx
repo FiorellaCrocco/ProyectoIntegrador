@@ -7,14 +7,20 @@ const ListarProducto = () => {
   return (
     <div>
       <h2 className='titulo'>Listado de productos</h2>
-      <ul className='contenedor'>
+      <ul className='listaContainer'>
+        
         {data.map((libro) => (
-          <li className='lista' key={libro.id}>{libro.id}{libro.title}</li>
+          <li className='lista' key={libro.id}>
+            <div className='id'>{libro.id}
+            </div>
+            <div className='nombre'>{libro.title}</div>
+            <div >
+              <button className='btnEdit'>Eliminar</button>
+              <button className='btnEdit'>Editar</button>
+            </div>
+          </li>
         ))}
       </ul>
-  
-      
-  
     </div>
   )
 }

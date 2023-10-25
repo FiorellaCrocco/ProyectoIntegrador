@@ -25,9 +25,16 @@ function ImageUploadForm() {
   };
 
   const [libros, setLibros] = useState([]);
+  const [error, setError] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const nameExists = libros.some((libro) => libro.name === formData.name);
+    if (nameExists) {
+      setError('El nombre ya está en uso. Por favor, elige otro nombre.');
+    } else {
+      setError(null);
+    }
     console.log('Nombre:', formData.name);
     console.log('Detalle:', formData.detail);
     console.log('Imagen seleccionada:', formData.image ? formData.image.name : 'Ninguna imagen seleccionada');
@@ -77,7 +84,7 @@ function ImageUploadForm() {
         <div className='div'>
           <label className='labels' htmlFor="image">Imagen:</label>
           <input className='input'
-            type="file"
+            type="file" multiple
             id="image"
             name="image"
             accept="image/*"

@@ -1,12 +1,26 @@
-.contenedor{
-    display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Divide la lista en dos columnas de igual ancho */
-  gap: 20px; /* Espacio entre las columnas */
-  justify-content: center;
-   
+.listaContainer{
+  color: black; 
+
+
+}
+
+.lista{
+ margin: 0 0 10px;
+  column-count: 3;
+  column-gap: 20px; 
+
 }
 
 .titulo{
    margin-top: 60px;
 
 }
+
+.id{
+  font-weight: bold;
+}
+
+.btnEdit{
+  margin-right: 20px;
+}
+
