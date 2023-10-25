@@ -7,7 +7,11 @@
   flex-direction: column;
   min-height: 100vh;
 }
+body{
+  margin: 0
+}
 
 .content-container {
   flex: 1;
+  background-color: lightblue;
 }

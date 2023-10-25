@@ -48,7 +48,7 @@ function LibrosPaginados({libros}){
                     return (<li className="book" key={item.id}><Link to ={`/detail/${item.id}`}><img src={item.imgUrl[0]} alt={item.title}/></Link><p>{item.title}</p> <p className="price">${item.price}</p></li>)
                 })}
             </ul>
-            <div>
+            <div className="btn-container">
             <button className="btn-anterior" onClick={prevPage} disabled={pagina===1}>
                 Anterior
             </button>
