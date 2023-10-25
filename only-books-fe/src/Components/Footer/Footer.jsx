@@ -24,11 +24,15 @@ const Footer = () => {
                     <Link>
                         <img style={{
                             width: "150px",
-                        }} 
+                        }}
                             src="src\img\logoOnlyBooksv1.jpeg" alt="OnlyBooks_Logo" />
                     </Link>
                     <div className="social-icons">
-                        <Link onClick={handleClick} to={routes.WhatsApp}>
+                        <a href="https://www.whatsapp.com/" target="_blank"><WhatsAppIcon className="social-icon animation" /></a>
+                        <a href="https://www.instagram.com/" target="_blank"><InstagramIcon className="social-icon animation" /></a>
+                        <a href="https://www.facebook.com/" target="_blank"><FacebookIcon className="social-icon animation" /></a>
+                        <a href="https://uy.linkedin.com/" target="_blank"><LinkedInIcon className="social-icon animation" /></a>
+                        {/* <Link onClick={handleClick} to={routes.WhatsApp}>
                             <WhatsAppIcon className="social-icon animation" />
                         </Link>
                         <Link onClick={handleClick} to={routes.Instagram}>
@@ -39,7 +43,7 @@ const Footer = () => {
                         </Link>
                         <Link onClick={handleClick} to={routes.LinkedIn}>
                             <LinkedInIcon className="social-icon animation" />
-                        </Link>
+                        </Link> */}
                     </div>
                     <p className='copyright'>&copy; {new Date().getFullYear()} OnlyBooks - C13 Equipo 2</p>
                     <p className='copyright'>Todos los derechos reservados</p>
