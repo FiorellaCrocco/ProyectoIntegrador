@@ -16,16 +16,18 @@ const Navbar = () => {
                 <div className="header-left">
                     <Link to="/">
                         {/* <img src="/vite.svg" alt="Logo" /> */}
-                        <img style={{
-                            width: "150px",
-                            marginRight: "10px",
-                        }} src="src\img\logoOnlyBooksv1.jpeg" alt="Logo" />
+                        <img  className="logo"
+                        src="src\img\logoOnlyBooksv1.jpeg" alt="Logo" />
+
+                    </Link>
+                    <Link  to="/">
+                        <div className="lema">
+                            <span >Historias que alquilas,</span>
+                            <span >emociones que compartís</span>
+                        </div>
                     </Link>
 
-                    <div className="lema">
-                        <span >Historias que alquilas,</span>
-                        <span >emociones que compartís</span>
-                    </div>
+
 
                 </div>
                 <div className="header-right">

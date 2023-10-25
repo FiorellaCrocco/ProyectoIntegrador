@@ -60,3 +60,30 @@ p {
     font-family: inherit;
     transition: border-color 0.25s;
 }
+
+@media (max-width: 614px) {
+    .listaPaginada {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(100px, 1fr));
+        gap: 10px;
+        padding: 20px;
+        background-color: white;
+    }
+} 
+
+@media (max-width: 425px) {
+    /* Estilos específicos para pantallas con ancho máximo de 425px */
+    .listaContainer {
+        /* Estilos para el contenedor en pantallas pequeñas */
+    }
+
+    .listaPaginada {
+        /* Estilos para la lista paginada en pantallas pequeñas */
+    }
+
+    .book {
+        /* Estilos para los elementos individuales en pantallas pequeñas */
+    }
+
+    /* Otros estilos específicos para pantallas pequeñas */
+}

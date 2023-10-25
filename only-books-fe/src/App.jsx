@@ -1,7 +1,7 @@
 import './App.css'
 import Navbar from './Components/Navbar/Navbar'
 import Footer from './Components/Footer/Footer'
-import { routes } from './Utils/routes.js'
+// import { routes } from './Utils/routes.js'
 import Administrador from './Routes/Administrador'
 import CargarProducto from './Components/Administrador/CargarProducto'
 import Home from './Routes/Home';
@@ -17,9 +17,6 @@ function App() {
 
     <div className="app">
       <Navbar />
-    
- 
-
 
       <div className="content-container">
         <Routes>
@@ -29,7 +26,6 @@ function App() {
           <Route path='/detail/:id' Component={Detail}></Route>
 
         </Routes>
-        {/* <AddProduct/> */}
       </div>
       <Footer />
     </div>

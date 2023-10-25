@@ -78,9 +78,9 @@ const Search = () => {
                 </select>
             </div>
 
-            <div className='product-recommendations'>
+            {/* <div className='product-recommendations'>
                 {renderProductRecommendations()}
-            </div>
+            </div> */}
         </div>
     );
 };
