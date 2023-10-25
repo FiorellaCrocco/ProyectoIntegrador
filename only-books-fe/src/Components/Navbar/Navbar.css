@@ -23,7 +23,9 @@ header {
 
 .header-left {
     float: left;
+    
     display: flex;
+    align-items: center;
 }
 
 .logo {
