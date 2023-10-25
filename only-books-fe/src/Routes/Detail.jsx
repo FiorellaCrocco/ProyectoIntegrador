@@ -3,11 +3,8 @@ import { useParams } from 'react-router-dom'
 
 const Detail = (props) => {
     const {id} = useParams();
-    return (
-      <div>    
-        <DetalleLibro id={id}></DetalleLibro>
-      </div>
-      
+    return (   
+        <DetalleLibro id={id}></DetalleLibro>      
     )
   }
   

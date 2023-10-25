@@ -1,0 +1,90 @@
+.bookcontainer{
+    background-color:rgb(117, 190, 214) ;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.btnVer{
+    background-color: #F89344;
+    color: white;
+    width: fit-content;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 13px;
+    border-style: none;
+    border-radius: 10%;
+    margin: 20px;
+    margin-right: 120px;
+}
+.btnAtras:hover, .btnVer:hover{
+    background-color: #cf7937
+}
+
+.section{
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+
+}
+.book{
+    padding: 40px;
+    background-color: rgb(117, 190, 214);
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    height: 50vh;
+}
+.book img{
+    width: 90%;
+}
+.bookh1{
+    color: black;
+    margin: 20px;
+    margin-top: 20px;
+    font-size: 32px;
+    text-align: left;
+}
+.bookp{
+    color: black;
+    font-weight: 500;
+    margin-top: 20px;
+    margin-left: 30px;
+    font-size: 18px;
+}
+.galeria{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 10px;
+    align-content: normal;
+    justify-items: center;
+    align-items: center;
+    background-color:rgb(117, 190, 214) ;
+    flex-wrap: wrap;
+}
+.galeria img{
+    width: 50%;
+    height: auto;
+}
+.sectionDetalles{
+    display: flex;
+    justify-content: space-between;   
+    align-items: center; 
+}
+.btnAtras{
+    background-color: #F89344;
+    color: white;
+    width: fit-content;
+    height: fit-content;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 13px;
+    border-style: none;
+    border-radius: 10%;
+    margin: 20px;
+    margin-right: 120px;
+
+}
