@@ -31,12 +31,14 @@ header {
 }
 
 .lema {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
     color: #539DC2;
     display: flex;
     flex-direction: column;
 
+    justify-content: center;
+    
 }
 
 /*paloma ver color del lema*/
