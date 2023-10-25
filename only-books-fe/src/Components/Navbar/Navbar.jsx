@@ -23,8 +23,8 @@ const Navbar = () => {
                     </Link>
 
                     <div className="lema">
-                        <span >Historias que alquilas,</span>
-                        <span >emociones que compartís</span>
+                        <span >Historias que alquilas, emociones que compartís</span>
+                        
                     </div>
 
                 </div>

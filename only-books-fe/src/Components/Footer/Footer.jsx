@@ -41,7 +41,7 @@ const Footer = () => {
                             <LinkedInIcon className="social-icon animation" />
                         </Link>
                     </div>
-                    <p>&copy; {new Date().getFullYear()} 2023 OnlyBooks - C13 Equipo 2</p>
+                    <p className='copyright'>&copy; {new Date().getFullYear()} OnlyBooks - C13 Equipo 2</p>
                     <p className='copyright'>Todos los derechos reservados</p>
                 </div>
                 <div className='footer-mid'>
