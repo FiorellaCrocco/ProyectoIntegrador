@@ -12,6 +12,7 @@ function DetalleLibro({ id }) {
   return (
     <>
       <div className={styles.bookcontainer}>
+ 
         <div className={styles.section}>
           <div className={styles.book}>
             <img src={libro.imgUrl[0]} alt={libro.title} />
@@ -33,6 +34,7 @@ function DetalleLibro({ id }) {
         </div>
         <button className={styles.btnAtras} onClick={()=>window.history.back()}>Atras</button>
       </div>
+   
     </>
   );
 }
