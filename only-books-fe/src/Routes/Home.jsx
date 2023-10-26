@@ -3,16 +3,18 @@ import React from 'react'
 import LibrosPaginados from '../Components/LibrosPaginados/LibrosPaginados'
 import Search from '../Components/Search/Search'
 import data from '../Components/LibrosPaginados/libros'
+import Recomendados from '../Components/Recomendados/Recomendados'
 
 
 const Home = () => {
   return (
     <div>
-   <Search />
-   {//<LibrosPaginados libros={data}></LibrosPaginados>
-   }
+      <Recomendados libros={data}></Recomendados>
+      <Search />
+      {//<LibrosPaginados libros={data}></LibrosPaginados>
+      }
     </div>
-    
+
   )
 }
 
