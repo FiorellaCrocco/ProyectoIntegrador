@@ -1,10 +1,12 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useState , useContext } from 'react';
 import './Search.css';
-import data from '../LibrosPaginados/libros'
+//import data from '../LibrosPaginados/libros'
+import { GlobalContext } from "../../Context/globalContext";
 import LibrosPaginados from '../LibrosPaginados/LibrosPaginados';
 
 const Search = () => {
+    const { listaLibros, isLoading } = useContext(GlobalContext);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('all');
     const [filteredProducts, setFilteredProducts] = useState(null)
@@ -28,7 +30,7 @@ const Search = () => {
 
     const renderProductRecommendations = () => {
 
-        const products = Object.values(data);
+        const products = Object.values(listaLibros);
         // console.log(products[1].title);
         // console.log(products[1].gender)
         // console.log(products)
