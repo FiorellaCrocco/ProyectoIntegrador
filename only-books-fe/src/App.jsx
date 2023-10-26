@@ -10,7 +10,7 @@ import CargarProducto from './Components/Administrador/CargarProducto';
 import Home from './Routes/Home';
 import ListarProducto from './Components/Administrador/ListarProducto';
 import Detail from './Routes/Detail';
-import Restricted from './Routes/Restricted';
+import Restricted from './Components/Restricted';
 
 function App() {
   const isMobile = useMediaQuery({ query: '(max-width: 425px)' });
