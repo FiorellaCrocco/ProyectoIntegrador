@@ -26,7 +26,7 @@ const Footer = () => {
                             style={{
                                 width: "150px",
                             }}
-                            src="src\img\logoOnlyBooksv1.jpeg" alt="OnlyBooks_Logo" />
+                            src="https://onlybooksbucket.s3.amazonaws.com/Productos/logoOnlyBooksv2+(2).png" alt="OnlyBooks_Logo" />
                     {/* </Link> */}
                     <div className="social-icons">
                         <a href="https://www.whatsapp.com/" target="_blank"><WhatsAppIcon className="social-icon animation" /></a>
