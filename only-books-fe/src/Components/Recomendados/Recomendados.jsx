@@ -23,7 +23,7 @@ function Recomendados({ libros }) {
     return (
         <>
             <section className={style.listaContainer}>
-                <h1>RECOMENDADOS</h1>
+                <h1 className={style.recomendacion}>RECOMENDADOS</h1>
                 <ul className={style.listaPaginada}>
                     {
                     librosAleatorios.map((libro) => {

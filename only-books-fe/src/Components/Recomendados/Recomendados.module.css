@@ -9,6 +9,8 @@
     background-color: lightblue;
 }
 
+
+
 li {
     flex-direction: column;
     font-weight: 700;
@@ -53,4 +55,32 @@ p {
     align-items: center;
     padding-top: 50px;
     background-color: lightblue;
+}
+
+@media (max-width: 768px) {
+    .listaPaginada {
+        grid-template-columns: repeat(2, minmax(100px, 1fr));
+    }
+}
+
+/* Media query for screens smaller than 480px */
+@media (max-width: 480px) {
+    .listaPaginada {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .title {
+        font-size: 12px;
+    }
+
+    .recomendacion {
+        font-size: 38px; /* You can adjust the font size as needed */
+    }
+
+}
+
+@media (max-width: 340px) {
+    .recomendacion {
+        font-size: 28px; /* You can adjust the font size as needed */
+    }
 }

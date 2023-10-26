@@ -84,8 +84,8 @@ p {
         display: grid;
         grid-template-columns: repeat(2, minmax(100px, 1fr));
         gap: 10px;
-        padding: 20px;
-        background-color: white;
+        /* padding: 20px; */
+        
     }
 
     .listaContainer {
@@ -111,4 +111,12 @@ p {
         padding: 5px 10px; /* Adjust the padding to make the buttons smaller */
     }
 
+}
+
+@media (max-width: 320px) {
+    /* Show only the "Anterior" and "Siguiente" buttons */
+    .btn-siguiente:not(:first-child):not(:last-child),
+    .btn-anterior ~ .btn-siguiente:not(:last-child) {
+        display: none;
+    }
 }

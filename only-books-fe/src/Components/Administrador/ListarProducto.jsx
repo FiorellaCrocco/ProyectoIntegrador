@@ -30,7 +30,7 @@ const ListarProducto = () => {
             <div className='id'>{libro.id}
             </div>
             <div className='nombre'>{libro.title}</div>
-            <div  className='btn-container'>
+            <div  className='admin-btn-container'>
               {/* <button className='btnEdit' onClick={() => handleDelete(libro.id)}>Eliminar</button> */}
               <Button variant="outlined" color="error" className='btnEdit' onClick={() => handleDelete(libro.id)}>
                 Eliminar
