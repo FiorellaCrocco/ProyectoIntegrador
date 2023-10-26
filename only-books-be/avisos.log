@@ -435,3 +435,35 @@
 [2023-10-24 23:51:54] [ INFO ] [BookService:48] Libro - buscarTodos: Se esta iterando el array de libros
 [2023-10-24 23:51:54] [ INFO ] [BookService:48] Libro - buscarTodos: Se esta iterando el array de libros
 [2023-10-24 23:51:55] [ INFO ] [BookService:48] Libro - buscarTodos: Se esta iterando el array de libros
+[2023-10-26 00:34:29] [ INFO ] [BookService:38] Libros - guardar: Se va a guardar el libro
+[2023-10-26 00:34:29] [ INFO ] [BookService:79] Libro - actualizar: Se va a actualizar el libro
+[2023-10-26 00:34:29] [ INFO ] [BookService:38] Libros - guardar: Se va a guardar el libro
+[2023-10-26 00:34:29] [ INFO ] [BookService:66] Libro - buscarPorId: Se encontro el libro y se convertira a DTO para ser devuelto
+[2023-10-26 00:34:34] [ INFO ] [BookService:48] Libro - buscarTodos: Se esta iterando el array de libros
+[2023-10-26 00:34:34] [ INFO ] [BookService:48] Libro - buscarTodos: Se esta iterando el array de libros
+[2023-10-26 00:34:35] [ INFO ] [BookService:48] Libro - buscarTodos: Se esta iterando el array de libros
+[2023-10-26 00:34:35] [ INFO ] [BookService:48] Libro - buscarTodos: Se esta iterando el array de libros
+[2023-10-26 00:34:35] [ INFO ] [BookService:48] Libro - buscarTodos: Se esta iterando el array de libros
+[2023-10-26 00:34:35] [ INFO ] [BookService:48] Libro - buscarTodos: Se esta iterando el array de libros
+[2023-10-26 00:34:35] [ INFO ] [BookService:48] Libro - buscarTodos: Se esta iterando el array de libros
+[2023-10-26 00:34:35] [ INFO ] [BookService:48] Libro - buscarTodos: Se esta iterando el array de libros
+[2023-10-26 00:34:35] [ INFO ] [BookService:48] Libro - buscarTodos: Se esta iterando el array de libros
+[2023-10-26 00:34:36] [ INFO ] [BookService:48] Libro - buscarTodos: Se esta iterando el array de libros
+[2023-10-26 00:34:36] [ INFO ] [BookService:48] Libro - buscarTodos: Se esta iterando el array de libros
+[2023-10-26 00:34:36] [ INFO ] [BookService:48] Libro - buscarTodos: Se esta iterando el array de libros
+[2023-10-26 00:34:36] [ INFO ] [BookService:48] Libro - buscarTodos: Se esta iterando el array de libros
+[2023-10-26 00:34:36] [ INFO ] [BookService:48] Libro - buscarTodos: Se esta iterando el array de libros
+[2023-10-26 00:34:36] [ INFO ] [BookService:48] Libro - buscarTodos: Se esta iterando el array de libros
+[2023-10-26 00:34:36] [ INFO ] [BookService:48] Libro - buscarTodos: Se esta iterando el array de libros
+[2023-10-26 00:34:37] [ INFO ] [BookService:48] Libro - buscarTodos: Se esta iterando el array de libros
+[2023-10-26 00:34:37] [ INFO ] [BookService:48] Libro - buscarTodos: Se esta iterando el array de libros
+[2023-10-26 00:34:37] [ INFO ] [BookService:48] Libro - buscarTodos: Se esta iterando el array de libros
+[2023-10-26 00:34:37] [ INFO ] [BookService:48] Libro - buscarTodos: Se esta iterando el array de libros
+[2023-10-26 00:34:37] [ INFO ] [BookService:48] Libro - buscarTodos: Se esta iterando el array de libros
+[2023-10-26 00:34:37] [ INFO ] [BookService:48] Libro - buscarTodos: Se esta iterando el array de libros
+[2023-10-26 00:34:38] [ INFO ] [BookService:38] Libros - guardar: Se va a guardar el libro
+[2023-10-26 00:34:38] [ WARN ] [BookService:88] Libro - eliminar: Se ha eliminado el libro
+[2023-10-26 00:34:38] [ WARN ] [BookService:72] Libro - buscarPorId: No se encontro ningun libro con ese ID
+[2023-10-26 00:34:38] [ INFO ] [BookService:38] Libros - guardar: Se va a guardar el libro
+[2023-10-26 00:34:39] [ INFO ] [BookService:38] Libros - guardar: Se va a guardar el libro
+[2023-10-26 00:34:39] [ INFO ] [BookService:66] Libro - buscarPorId: Se encontro el libro y se convertira a DTO para ser devuelto
