@@ -11,6 +11,17 @@ const Search = () => {
     const [selectedCategory, setSelectedCategory] = useState('all');
     const [filteredProducts, setFilteredProducts] = useState(null)
 
+    const selectLibrosAleatorios = (libros, cantidad) => {
+        const librosSeleccionados = [];
+        while (librosSeleccionados.length < cantidad) {
+          const randomIndex = Math.floor(Math.random() * libros.length);
+          if (!librosSeleccionados.includes(libros[randomIndex])) {
+            librosSeleccionados.push(libros[randomIndex]);
+          }
+        }
+        return librosSeleccionados;
+      };
+
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value);
     };
@@ -28,9 +39,11 @@ const Search = () => {
         ));
     };
 
+    const listaAleatoria = selectLibrosAleatorios(listaLibros,listaLibros.length)
+
     const renderProductRecommendations = () => {
 
-        const products = Object.values(listaLibros);
+        const products = Object.values(listaAleatoria);
         // console.log(products[1].title);
         // console.log(products[1].gender)
         // console.log(products)
