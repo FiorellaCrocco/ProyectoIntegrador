@@ -47,6 +47,11 @@ p {
 }
 
 .listaContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
     background-color: white;
     align-items: center;
     padding-top: 20px;

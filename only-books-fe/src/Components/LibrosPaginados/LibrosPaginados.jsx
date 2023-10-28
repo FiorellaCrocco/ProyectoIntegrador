@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { GlobalContext } from "../../Context/globalContext";
 import './LibrosPaginados.css'
 
-function LibrosPaginados({ libros }) {
+function LibrosPaginados({ libros,isLoading }) {
     const librosPorPagina = 10;
     const [pagina, setPagina] = useState(1)
     //const { listaLibros }= useContext(GlobalContext)
@@ -43,6 +43,7 @@ function LibrosPaginados({ libros }) {
     return (
         <>
             <div className="listaContainer">
+                {isLoading?<div className="loader"></div>:<></>}
                 <ul className="listaPaginada">
                     {currentItem.map((item) => {
                         return (

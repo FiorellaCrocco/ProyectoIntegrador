@@ -99,10 +99,8 @@ const Search = () => {
                     {renderProductRecommendations()}
                 </div> */}
             </div>
-            <div>
-                {<LibrosPaginados libros={renderProductRecommendations()}></LibrosPaginados>
+                {<LibrosPaginados libros={renderProductRecommendations()} isLoading={isLoading}></LibrosPaginados>
                 }
-            </div>
 
         </>
     );
