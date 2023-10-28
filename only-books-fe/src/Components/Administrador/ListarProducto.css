@@ -1,30 +1,34 @@
-.listaContainer{
-  color: black; 
-
-
+.listaContainerAdmin {
+  color: black;
+  background-color: lightblue;
+  margin: 0;
+  padding-top: 15px;
 }
 
-.lista{
- margin: 0 0 10px;
+.lista {
+  padding-top: 5px;
+  padding-bottom: 5px;
   column-count: 3;
-  column-gap: 20px; 
-
+  column-gap: 20px;
 }
 
-.titulo{
-   margin-top: 60px;
-
+.tituloListaAdmin {
+  padding: 20px;
+  margin-top: 0;
+  margin-bottom: 0;
+  background-color: #f1ba90;
+  text-align: center;
 }
 
-.id{
+.id {
   font-weight: bold;
 }
 
-.btnEdit{
+.btnEdit {
   margin-right: 20px;
 }
 
-.admin-btn-container{
+.admin-btn-container {
   display: flex;
   width: 200px;
   justify-content: space-between;

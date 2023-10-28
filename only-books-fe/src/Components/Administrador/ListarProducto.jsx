@@ -53,8 +53,8 @@ const ListarProducto = () => {
 
   return (
     <div>
-      <h2 className="titulo">Listado de productos</h2>
-      <ul className="listaContainer">
+      <h2 className="tituloListaAdmin">Listado de productos</h2>
+      <ul className="listaContainerAdmin">
         {productos.map((libro) => (
           <li className="lista" key={libro.id}>
             <div className="id">{libro.id}</div>
