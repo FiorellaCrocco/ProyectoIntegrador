@@ -27,33 +27,24 @@ public class Book {
 
     @Size(max=50, message="Titulo maximo 30 caracteres.")
     @NotNull
-    @NotBlank
     private String title;
 
     @Size(max=40, message="Autor maximo 40 caracteres.")
-    @NotNull
-    @NotBlank
     private String author;
 
     @Size(max=200, message="Descripcion maximo 200 caracteres.")
     @NotNull
-    @NotBlank
     private String description;
 
-    @NotNull
     private String isbn;
 
-    @NotNull
     private Date publication_year;
 
-    @NotNull
     private Integer qualification;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @NotNull
     private Double price;
 
     // Un Book puede tener muchos BookRent, pero cada BookRent tiene un Book.
