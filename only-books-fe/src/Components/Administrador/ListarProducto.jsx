@@ -8,48 +8,45 @@ import { GlobalContext } from "../../Context/globalContext";
 
 const ListarProducto = () => {
   const { listaLibros, isLoading, actualizarListaLibros } = useContext(GlobalContext);
-  const [productos, setProductos] = useState(listaLibros);
-  console.log(listaLibros)
-  useEffect(()=>{
-    if(!isLoading){
-    setProductos(listaLibros)
-    }
-  },[isLoading,listaLibros])
-  
+  const [productos, setProductos] = useState([]);
 
-  const handleDelete = (id) => {
-    const settings = {
-      method:'DELETE',
-      headers:{
-        'Content-Type': 'application/json',
-      },
-    }
-    const url = `http://localhost:8080/book/eliminar/${id}`;
-    const fetchData = async () => {
+  useEffect(()=>{
+      setProductos(listaLibros)
+    },[listaLibros,productos])
+
+    const fetchData = async (url,settings) => {
       try {
         const res = await fetch(url,settings);
         if (!res.ok) {
           throw new Error("Error al eliminar el libro");
         }
-        const data = await res.json();
+        const data = await res.text();
       } catch (error) {
         console.log("Error al eliminar el libro", error);
       }
     };
 
+  const handleDelete = async (id) => {
     const confirmDelete = window.confirm(
       "¿Estás seguro de que deseas eliminar este producto?"
     );
+      
     if (confirmDelete) {
-      fetchData();
       const updatedProductos = productos.filter(
         (producto) => producto.id !== id
       );
-      setProductos(updatedProductos);
-      actualizarListaLibros();
+      const settings = {
+        method:'DELETE',
+        headers:{
+          'Content-Type': 'application/json',
+        },
+      }
+      const url = `http://localhost:8080/book/eliminar/${id}`;
+      await fetchData(url,settings);
+      await actualizarListaLibros();
+      setProductos(updatedProductos)
     }
-  };
-
+}
   return (
     <div>
       <h2 className="tituloListaAdmin">Listado de productos</h2>
@@ -59,7 +56,6 @@ const ListarProducto = () => {
             <div className="id">{libro.id}</div>
             <div className="nombre">{libro.title}</div>
             <div className="admin-btn-container">
-              {/* <button className='btnEdit' onClick={() => handleDelete(libro.id)}>Eliminar</button> */}
               <Button
                 variant="outlined"
                 color="error"
@@ -68,13 +64,9 @@ const ListarProducto = () => {
               >
                 Eliminar
               </Button>
-              {/* <Button variant="outlined" startIcon={<DeleteIcon />}>
-                Eliminar
-              </Button> */}
               <Button variant="outlined" color="success" className="btnEdit">
                 Editar
               </Button>
-              {/* <button className='btnEdit'>Editar</button> */}
             </div>
           </li>
         ))}
