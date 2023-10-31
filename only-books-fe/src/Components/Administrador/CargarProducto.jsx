@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./CargarProducto.css";
+import { GlobalContext } from "../../Context/globalContext";
 
 function ImageUploadForm() {
+  const { actualizarListaLibros} = useContext(GlobalContext)
+
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -36,7 +39,7 @@ function ImageUploadForm() {
   //const [libros, setLibros] = useState([]);
   //const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     const url="http://localhost:8080/book/agregar"
     const settings ={
@@ -46,16 +49,16 @@ function ImageUploadForm() {
       },
       body: JSON.stringify(formData)
     }
-
-    console.log(settings)
     
     fetch(url,settings)
       .then(response => response.json())
-      .then(data => console.log(data))
+      .then(data => {
+        console.log(data)
+      })
       .catch(error=>{
         console.log(error)
       })
-
+      await actualizarListaLibros();
 
     // Limpiar los campos del formulario
     setFormData({

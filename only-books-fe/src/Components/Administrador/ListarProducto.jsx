@@ -7,7 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { GlobalContext } from "../../Context/globalContext";
 
 const ListarProducto = () => {
-  const { listaLibros, isLoading } = useContext(GlobalContext);
+  const { listaLibros, isLoading, actualizarListaLibros } = useContext(GlobalContext);
   const [productos, setProductos] = useState(listaLibros);
   console.log(listaLibros)
   useEffect(()=>{
@@ -17,8 +17,6 @@ const ListarProducto = () => {
   },[isLoading,listaLibros])
   
 
-
-  // IMPLEMENTACION DE REFERENCIA, SOLO BORRA DE MANERA LOCAL, AL REFRESCAR LA PAGINA VUELVE A CARGAR LOS DATOS
   const handleDelete = (id) => {
     const settings = {
       method:'DELETE',
@@ -48,6 +46,7 @@ const ListarProducto = () => {
         (producto) => producto.id !== id
       );
       setProductos(updatedProductos);
+      actualizarListaLibros();
     }
   };
 
