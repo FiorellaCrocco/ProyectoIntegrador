@@ -5,7 +5,7 @@ function ImageUploadForm() {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    image: [""],
+    image: [],
   });
 
   const handleInputChange = (e) => {
@@ -56,37 +56,12 @@ function ImageUploadForm() {
         console.log(error)
       })
 
-    /*
-    const nameExists = libros.some((libro) => libro.name === formData.name);
-    if (nameExists) {
-      setError("El nombre ya está en uso. Por favor, elige otro nombre.");
-    } else {
-      setError(null);
-    }
-    console.log("Nombre:", formData.name);
-    console.log("Detalle:", formData.detail);
-    console.log(
-      "Imagen seleccionada:",
-      formData.image ? formData.image.name : "Ninguna imagen seleccionada"
-    );
-    */
-    /*
-    // Crear un nuevo objeto con los datos del formulario
-    const nuevoLibro = {
-      name: formData.name,
-      detail: formData.detail,
-      image: formData.image,
-    };
-
-    // Agregar el nuevo libro al array de libros
-    setLibros([...libros, nuevoLibro]);
-    */
 
     // Limpiar los campos del formulario
     setFormData({
-      name: "",
-      detail: "",
-      image: null,
+      title: "",
+      description: "",
+      image: [],
     });
   };
 
