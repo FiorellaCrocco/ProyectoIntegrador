@@ -3,6 +3,7 @@ package com.proyecto.onlybooks.controller;
 import com.proyecto.onlybooks.dto.BookDTO;
 import com.proyecto.onlybooks.entity.Book;
 import com.proyecto.onlybooks.exceptions.ResourceNotFoundException;
+import com.proyecto.onlybooks.service.ICategoriaService;
 import com.proyecto.onlybooks.service.impl.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,9 +20,13 @@ public class BookController {
     @Autowired
     BookService bookService;
 
+    @Autowired
+    private ICategoriaService iCategoriaService;
+
     // Constructor de BookController que permite la inyección de dependencias.
-    public BookController(BookService bookService) {
+    public BookController(BookService bookService, ICategoriaService iCategoriaService) {
         this.bookService = bookService;
+        this.iCategoriaService=iCategoriaService;
     }
 
     // En la url "/book/listar" retorno una lista de BookDTO
@@ -57,6 +62,13 @@ public class BookController {
         ResponseEntity<?> response = null;
         bookService.eliminar(id);
         response = ResponseEntity.status(HttpStatus.OK).body("Libro eliminado.");
+        return response;
+    }
+    // En la url "/book/{bookId}/categoria/{categoriaId]" utilizamos el metodo PUT para EDITAR un libro, y agregarle una categoria existente(categoriaID)
+    @PutMapping("/{bookId}/categoria/{categoriaId}")
+    public ResponseEntity<?> agregarCategoria(@PathVariable Long bookId, @PathVariable Long categoriaId) throws ResourceNotFoundException{
+        ResponseEntity<?> response=null;
+        bookService.guardarCategoria(bookId,categoriaId);
         return response;
     }
 

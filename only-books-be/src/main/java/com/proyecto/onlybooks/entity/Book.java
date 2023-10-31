@@ -41,27 +41,40 @@ public class Book {
     private Date publication_year;
 
     private Integer qualification;
-
+    /*
     @Enumerated(EnumType.STRING)
     private Gender gender;
-
+    */
     private Double price;
 
+    //Un libro puede tener muchas Categorias
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "books_categorias",
+                joinColumns = @JoinColumn(name="book_id"),
+                inverseJoinColumns = @JoinColumn(name="categorias_id"))
+    private List<Categoria> categorias;
+
+    //Un libro puede tener muchas Caracteristicas
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "books_caracteristicas",
+            joinColumns = @JoinColumn(name="book_id"),
+            inverseJoinColumns = @JoinColumn(name="caracteristica_id"))
+    private List<Caracteristica> caracteristicas;
+
     // Un Book puede tener muchos BookRent, pero cada BookRent tiene un Book.
-    @OneToMany( fetch=FetchType.EAGER, mappedBy = "book")
+    @OneToMany( fetch=FetchType.LAZY, mappedBy = "book")
     private List<BookRent> rentedByUsers;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "book")
     private List<Image> images;
 
-    public Book(String title, String author, String description, String isbn, Date publication_year, Integer qualification, Gender gender, Double price) {
+    public Book(String title, String author, String description, String isbn, Date publication_year, Integer qualification, Double price) {
         this.title = title;
         this.author = author;
         this.description = description;
         this.isbn = isbn;
         this.publication_year = publication_year;
         this.qualification = qualification;
-        this.gender = gender;
         this.price = price;
     }
 }

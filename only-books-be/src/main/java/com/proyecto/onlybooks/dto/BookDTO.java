@@ -1,5 +1,7 @@
 package com.proyecto.onlybooks.dto;
 
+import com.proyecto.onlybooks.entity.Caracteristica;
+import com.proyecto.onlybooks.entity.Categoria;
 import com.proyecto.onlybooks.entity.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,5 +27,7 @@ public class BookDTO {
     private Gender gender;
     private List<String> imgUrl;
     private Double price;
+    private List<Categoria> categorias;
+    private List<Caracteristica> caracteristicas;
 
 }
