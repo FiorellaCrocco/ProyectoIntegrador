@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import "./Navbar.css";
@@ -7,15 +8,15 @@ import "./Navbar.css";
 const Navbar = () => {
 
     const { state } = useLocation();
-	const navigate = useNavigate();
+    const navigate = useNavigate();
 
-	console.log(state);
+    console.log(state);
 
-	const onLogout = () => {
-		navigate('/login', {
-			replace: true,
-		});
-	};
+    const onLogout = () => {
+        navigate('/login', {
+            replace: true,
+        });
+    };
 
 
 
@@ -24,40 +25,35 @@ const Navbar = () => {
             <div className="header-container">
                 <div className="header-left">
                     <Link to="/">
-                        {/* <img src="/vite.svg" alt="Logo" /> */}
-                        <img  className="logo"
-                        src="https://onlybooksbucket.s3.amazonaws.com/Productos/logoOnlyBooksv2+(2).png" alt="Logo" />
-
+                        <img className="logo"
+                            src="https://onlybooksbucket.s3.amazonaws.com/Productos/logoOnlyBooksv2+(2).png"
+                            alt="Logo" />
                     </Link>
-
-                    <Link  to="/">
+                    <Link to="/">
                         <div className="lema">
                             {/* <span >Historias que alquilas, emociones que compartís</span> */}
                             <span >Historias que alquilas,</span>
                             <span >emociones que compartís</span>
                         </div>
                     </Link>
+                </div>
 
-                    {state?.logged ? (
-					<div className='user'>
-						<span className='username'>{state?.name}</span>
-						<button className='btn-logout' onClick={onLogout}>
-							Cerrar sesión
-						</button>
-					</div>
-				    ) : (
+                {state?.logged ? (
+                    <div className='user'>
+                        <span className='username'>{state?.name}</span>
+                        <button className='btn-logout' onClick={onLogout}>
+                            Cerrar sesión
+                        </button>
+                    </div>
+                ) : (
                     <div className="header-right">
                         <Link to='/registrarse'><button className="btn-create" >Crear cuenta</button></Link>
                         <Link to='/login'> <button className="btn-login">Iniciar sesión</button></Link>
                     </div>
                 )}
 
-                   
-
-                </div>
 
 
-               
             </div>
         </header>
     );

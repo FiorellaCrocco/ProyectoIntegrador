@@ -33,8 +33,8 @@ function App() {
           <Route path='/administrador/cargar' Component={CargarProducto} />
           <Route path='/administrador/listar' Component={ListarProducto} />
           <Route path='/detail/:id' Component={Detail} />
-          <Route path='/registrarse' Component={LoginPage}/>
-          <Route path='/login' Component={RegisterPage}/>
+          <Route path='/registrarse' Component={RegisterPage}/>
+          <Route path='/login' Component={LoginPage}/>
         </Routes>
       </div>
       <Footer />

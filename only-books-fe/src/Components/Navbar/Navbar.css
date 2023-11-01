@@ -10,7 +10,6 @@ header {
     justify-content: space-between;
     align-items: center;
     backdrop-filter: blur(20px) saturate(180%);
-    /* background-color: #FF642F; */
     background-color: #EFFAFF;
 }
 
@@ -25,10 +24,15 @@ header {
 
 .header-left {
     float: left;
-    
     display: flex;
     align-items: center;
 }
+
+
+.header-right {
+    float: right;
+}
+
 
 .logo {
     width: 150px; 
@@ -47,18 +51,9 @@ header {
 
 /*paloma ver color del lema*/
 
-.header-right {
-    float: right;
-}
-
 .btn-create,
 .btn-login {
-    /* Naranja */
-    /* background-color: #F89344; */
     background-color: #EFFAFF;
-    /* Azul */
-    /* background-color: #539DC2;*/
-    /* border: none; */
     border: 1px solid transparent;
     border-radius: 80px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);

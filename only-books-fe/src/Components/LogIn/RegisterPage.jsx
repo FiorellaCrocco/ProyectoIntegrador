@@ -1,22 +1,22 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import {useForm} from './Hook/UseForm';
+import { useForm } from './Hook/UseForm'
 import './index.css'
-
-
+//RegisterPage
 export const RegisterPage = () => {
 	const navigate = useNavigate();
 
-	const { name, email, password, onInputChange, onResetForm } =
+	const { name, surname, email, password, repeatPassword, onInputChange, onResetForm } =
 		useForm({
 			name: '',
+			surname:'',
 			email: '',
 			password: '',
-		
-
+			repeatPassword:'',
 		});
 
-	const onRegister = e => {
+	const onLogin = e => {
 		e.preventDefault();
 
 		navigate('/', {
@@ -32,8 +32,8 @@ export const RegisterPage = () => {
 
 	return (
 		<div className='wrapper'>
-			<form onSubmit={onRegister}>
-				<h1>Iniciar Sesion</h1>
+			<form className='loginForm' onSubmit={onLogin}>
+				<h1>Crear Usuario</h1>
 
 				<div className='input-group'>
 				<label htmlFor='name'>Nombre:</label>
@@ -47,6 +47,19 @@ export const RegisterPage = () => {
 						autoComplete='off'
 					/>
 					
+				</div>
+
+				<div className='input-group'> 
+				<label htmlFor='surname'>Apellido:</label>
+					<input
+						type='text'
+						name='surname'
+						id='surname'
+						value={surname}
+						onChange={onInputChange}
+						required
+						autoComplete='off'
+					/>
 				</div>
 
 				<div className='input-group'>
@@ -73,15 +86,29 @@ export const RegisterPage = () => {
 						required
 						autoComplete='off'
 					/>
+				
+				</div>
+
+				<div className='input-group'>
+				<label htmlFor='password'>Repetir Contraseña:</label>
+					<input
+						type='password'
+						name='repeatPassword'
+						id='repeatPassword'
+						value={repeatPassword}
+						onChange={onInputChange}
+						required
+						autoComplete='off'
+					/>
 					
 				</div>
 
-				
-
-				<button>Iniciar Sesion</button>
+				<button>Registrarse</button>
 			</form>
 		</div>
 	);
-};
+    }
 
-export default RegisterPage;
+	export default RegisterPage;
+	
+    
