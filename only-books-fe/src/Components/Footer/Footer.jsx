@@ -8,6 +8,10 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInstagram, faLinkedin, faYoutube, faXTwitter } from '@fortawesome/free-brands-svg-icons';
+
+
 
 const Footer = () => {
 
@@ -24,30 +28,13 @@ const Footer = () => {
             <div className='footer-container'>
                 <div className='footer-left'>
                     {/* <Link to='/'> */}
-                        <img className='logo-footer'
-                            style={{
-                                width: "150px",
-                            }}
-                            src="https://onlybooksbucket.s3.amazonaws.com/Productos/logoOnlyBooksv2+(2).png" alt="OnlyBooks_Logo" />
+                    <img className='logo-footer'
+                        style={{
+                            width: "150px",
+                        }}
+                        src="https://onlybooksbucket.s3.amazonaws.com/Productos/logoOnlyBooksv2+(2).png" alt="OnlyBooks_Logo" />
                     {/* </Link> */}
-                    <div className="social-icons">
-                        <a href="https://www.whatsapp.com/" target="_blank"><WhatsAppIcon className="social-icon animation" /></a>
-                        <a href="https://www.instagram.com/" target="_blank"><InstagramIcon className="social-icon animation" /></a>
-                        <a href="https://www.facebook.com/" target="_blank"><FacebookIcon className="social-icon animation" /></a>
-                        <a href="https://uy.linkedin.com/" target="_blank"><LinkedInIcon className="social-icon animation" /></a>
-                        {/* <Link onClick={handleClick} to={routes.WhatsApp}>
-                            <WhatsAppIcon className="social-icon animation" />
-                        </Link>
-                        <Link onClick={handleClick} to={routes.Instagram}>
-                            <InstagramIcon className="social-icon animation" />
-                        </Link>
-                        <Link onClick={handleClick} to={routes.Facebook}>
-                            <FacebookIcon className="social-icon animation" />
-                        </Link>
-                        <Link onClick={handleClick} to={routes.LinkedIn}>
-                            <LinkedInIcon className="social-icon animation" />
-                        </Link> */}
-                    </div>
+
                     <p className='copyright'>&copy; {new Date().getFullYear()} OnlyBooks - C13 Equipo 2</p>
                     <p className='copyright'>Todos los derechos reservados</p>
                 </div>
@@ -57,10 +44,33 @@ const Footer = () => {
                     <p>Contacts</p> */}
                 </div>
                 <div className='footer-right'>
-                    {/* <h4>SERVICES</h4>
-                    <p>Test</p>
-                    <p>Test</p> */}
+                    {/* <h4>CONTACTO</h4> */}
+                    <ul>
+                        <li className="item">
+                            <a href="https://www.instagram.com/">
+                                <FontAwesomeIcon className='icon' icon={faInstagram} />
+                            </a>
+                        </li>
+                        <li className="item">
+                            <a href="https://www.linkedin.com">
+                                <FontAwesomeIcon className='icon' icon={faLinkedin} />
+                            </a>
+                        </li>
+                        <li className="item">
+                            <a href="https://www.youtube.com">
+                                {/* <i className="fa-brands fa-youtube icon"></i> */}
+                                <FontAwesomeIcon className='icon' icon={faYoutube} />
+                            </a>
+                        </li>
+                        <li className="item">
+                            <a href="https://twitter.com">
+                                {/* <i className="fa-brands fa-x-twitter icon"></i> */}
+                                <FontAwesomeIcon className='icon' icon={faXTwitter} />
+                            </a>
+                        </li>
+                    </ul>
                 </div>
+
             </div>
         </footer>
     )

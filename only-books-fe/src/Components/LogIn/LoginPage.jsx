@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import {useForm} from './Hook/UseForm';
-import './index.css'
+import { useForm } from './Hook/UseForm';
+import './log&register.css'
 
 //LoginPage
 export const LoginPage = () => {
@@ -13,7 +13,7 @@ export const LoginPage = () => {
 			name: '',
 			email: '',
 			password: '',
-		
+
 
 		});
 
@@ -34,52 +34,55 @@ export const LoginPage = () => {
 	return (
 		<div className='wrapper'>
 			<form onSubmit={onRegister}>
-				<h1>Iniciar Sesion</h1>
+				<h2>Iniciar Sesion</h2>
 
 				<div className='input-group'>
-				<label htmlFor='name'>Nombre:</label>
+
 					<input
 						type='text'
 						name='name'
 						id='name'
+						className="input"
 						value={name}
 						onChange={onInputChange}
 						required
 						autoComplete='off'
 					/>
-					
+					<label className="label" htmlFor='name'>Nombre</label>
 				</div>
 
 				<div className='input-group'>
-				<label htmlFor='email'>Email:</label>
+
 					<input
 						type='email'
 						name='email'
 						id='email'
+						className="input"
 						value={email}
 						onChange={onInputChange}
 						required
 						autoComplete='off'
 					/>
-					
+					<label className="label" htmlFor='email'>Email</label>
 				</div>
 				<div className='input-group'>
-				<label htmlFor='password'>Contraseña:</label>
+
 					<input
 						type='password'
 						name='password'
 						id='password'
+						className="input"
 						value={password}
 						onChange={onInputChange}
 						required
 						autoComplete='off'
 					/>
-					
+					<label className="label" htmlFor='password'>Contraseña</label>
 				</div>
 
-				
 
-				<button>Iniciar Sesion</button>
+
+				<button className='btn-lr'>Iniciar Sesion</button>
 			</form>
 		</div>
 	);
