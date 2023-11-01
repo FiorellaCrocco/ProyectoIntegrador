@@ -10,6 +10,7 @@ import com.proyecto.onlybooks.exceptions.ResourceNotFoundException;
 import com.proyecto.onlybooks.repository.IBookRepository;
 import com.proyecto.onlybooks.repository.ICategoriaRepository;
 import com.proyecto.onlybooks.service.IBookService;
+import com.proyecto.onlybooks.service.ICaracteristicaService;
 import com.proyecto.onlybooks.service.ICategoriaService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,17 +29,18 @@ public class BookService implements IBookService {
     // Repositorio de Book utilizado para acceder a la base de datos.
     private final IBookRepository iBookRepository;
     private final ICategoriaService iCategoriaService;
+    private final ICaracteristicaService iCaracteristicaService;
 
     // Para la conversión de objetos.
     private final ObjectMapper objectMapper;
 
     // Constructor de BookService que permite la inyección de dependencias.
     @Autowired
-    public BookService(IBookRepository iBookRepository, ObjectMapper objectMapper, ICategoriaService iCategoriaService) {
+    public BookService(IBookRepository iBookRepository, ICategoriaService iCategoriaService, ICaracteristicaService iCaracteristicaService, ObjectMapper objectMapper) {
         this.iBookRepository = iBookRepository;
-        this.iCategoriaService=iCategoriaService;
+        this.iCategoriaService = iCategoriaService;
+        this.iCaracteristicaService = iCaracteristicaService;
         this.objectMapper = objectMapper;
-
     }
 
     @Override
@@ -161,6 +163,15 @@ public class BookService implements IBookService {
         List<Categoria> lista = b.getCategorias();
         lista.add(c);
         b.setCategorias(lista);
+        this.guardar(b);
+    }
+
+    public void guardarCaracteristica(Long bookId, Long caracteristicaId) throws ResourceNotFoundException{
+        Book b = this.buscarPorId2(bookId);
+        Caracteristica c = iCaracteristicaService.buscarPorId(caracteristicaId);
+        List<Caracteristica> lista = b.getCaracteristicas();
+        lista.add(c);
+        b.setCaracteristicas(lista);
         this.guardar(b);
     }
 }
