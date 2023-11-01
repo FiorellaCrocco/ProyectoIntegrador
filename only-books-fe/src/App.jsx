@@ -2,7 +2,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
-
 import Navbar from './Components/Navbar/Navbar';
 import Footer from './Components/Footer/Footer';
 import Administrador from './Routes/Administrador';
@@ -11,6 +10,8 @@ import Home from './Routes/Home';
 import ListarProducto from './Components/Administrador/ListarProducto';
 import Detail from './Routes/Detail';
 import Restricted from './Components/Restricted';
+import LoginPage from './Components/LogIn/LoginPage';
+import RegisterPage from './Components/LogIn/RegisterPage'
 
 function App() {
   const isMobile = useMediaQuery({ query: '(max-width: 425px)' });
@@ -32,6 +33,8 @@ function App() {
           <Route path='/administrador/cargar' Component={CargarProducto} />
           <Route path='/administrador/listar' Component={ListarProducto} />
           <Route path='/detail/:id' Component={Detail} />
+          <Route path='/registrarse' Component={LoginPage}/>
+          <Route path='/login' Component={RegisterPage}/>
         </Routes>
       </div>
       <Footer />

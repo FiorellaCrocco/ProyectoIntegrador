@@ -1,14 +1,23 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import "./Navbar.css";
+
 
 
 const Navbar = () => {
 
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
-    };
+    const { state } = useLocation();
+	const navigate = useNavigate();
+
+	console.log(state);
+
+	const onLogout = () => {
+		navigate('/login', {
+			replace: true,
+		});
+	};
+
+
 
     return (
         <header>
@@ -20,6 +29,7 @@ const Navbar = () => {
                         src="https://onlybooksbucket.s3.amazonaws.com/Productos/logoOnlyBooksv2+(2).png" alt="Logo" />
 
                     </Link>
+
                     <Link  to="/">
                         <div className="lema">
                             {/* <span >Historias que alquilas, emociones que compartís</span> */}
@@ -28,13 +38,26 @@ const Navbar = () => {
                         </div>
                     </Link>
 
+                    {state?.logged ? (
+					<div className='user'>
+						<span className='username'>{state?.name}</span>
+						<button className='btn-logout' onClick={onLogout}>
+							Cerrar sesión
+						</button>
+					</div>
+				    ) : (
+                    <div className="header-right">
+                        <Link to='/registrarse'><button className="btn-create" >Crear cuenta</button></Link>
+                        <Link to='/login'> <button className="btn-login">Iniciar sesión</button></Link>
+                    </div>
+                )}
 
+                   
 
                 </div>
-                <div className="header-right">
-                    <button className="btn-create" onClick={toggleMenu}>Crear cuenta</button>
-                    <button className="btn-login" onClick={toggleMenu}>Iniciar sesión</button>
-                </div>
+
+
+               
             </div>
         </header>
     );
