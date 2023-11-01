@@ -1,3 +1,8 @@
+.recomendacion {
+    font-size: 38px;
+    
+}
+
 .listaPaginada {
     width: 70%;
     display: grid;
@@ -8,8 +13,6 @@
     background-color: white;
     background-color: lightblue;
 }
-
-
 
 li {
     flex-direction: column;
@@ -25,7 +28,7 @@ li {
     text-overflow: ellipsis;
 }
 
-.title{
+.title {
     font-size: 14px;
     margin: 0
 }
@@ -73,13 +76,15 @@ p {
     }
 
     .recomendacion {
-        font-size: 38px; /* You can adjust the font size as needed */
+        font-size: 38px;
+        /* You can adjust the font size as needed */
     }
 
 }
 
 @media (max-width: 340px) {
     .recomendacion {
-        font-size: 28px; /* You can adjust the font size as needed */
+        font-size: 28px;
+        /* You can adjust the font size as needed */
     }
 }

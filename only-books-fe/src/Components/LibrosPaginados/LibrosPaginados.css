@@ -21,11 +21,13 @@ li {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-h1{
+
+h1 {
     margin-top: 30px;
     margin-bottom: 0px;
 }
-.title{
+
+.title {
     font-size: 14px;
 }
 
@@ -44,6 +46,11 @@ p {
     height: auto;
     display: block;
     margin: 0 auto;
+    transition: filter 0.3s;
+    
+    &:hover {
+        filter: brightness(1.2);
+    }
 }
 
 .listaContainer {
@@ -59,11 +66,11 @@ p {
     background-color: lightblue;
 }
 
-.btn-container{
+.btn-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
 }
 
 .btn-anterior,
@@ -90,7 +97,7 @@ p {
         grid-template-columns: repeat(2, minmax(100px, 1fr));
         gap: 10px;
         /* padding: 20px; */
-        
+
     }
 
     .listaContainer {
@@ -112,16 +119,19 @@ p {
 
     .btn-anterior,
     .btn-siguiente {
-        font-size: 12px; /* Adjust the font size */
-        padding: 5px 10px; /* Adjust the padding to make the buttons smaller */
+        font-size: 12px;
+        /* Adjust the font size */
+        padding: 5px 10px;
+        /* Adjust the padding to make the buttons smaller */
     }
 
 }
 
 @media (max-width: 320px) {
+
     /* Show only the "Anterior" and "Siguiente" buttons */
     .btn-siguiente:not(:first-child):not(:last-child),
-    .btn-anterior ~ .btn-siguiente:not(:last-child) {
+    .btn-anterior~.btn-siguiente:not(:last-child) {
         display: none;
     }
 }
