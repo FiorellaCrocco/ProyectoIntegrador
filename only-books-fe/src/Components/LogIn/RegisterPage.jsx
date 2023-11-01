@@ -31,90 +31,91 @@ export const RegisterPage = () => {
 	};
 
 	return (
-		
-		<div className='wrapper'>
-			<form className='loginForm' onSubmit={onLogin}>
-				<h2>Crear cuenta</h2>
+		<div className='login-container'>
+			<div className='wrapper'>
+				<form className='loginForm' onSubmit={onLogin}>
+					<h2>Crear cuenta</h2>
 
-				<div className="input-group">
-					<input
-						type='text'
-						name='name'
-						id='name'
-						className="input"
-						value={name}
-						onChange={onInputChange}
-						required
-						autoComplete='off'
-					/>
-					<label className="label" htmlFor='name'>Nombre</label>
+					<div className="input-group">
+						<input
+							type='text'
+							name='name'
+							id='name'
+							className="input"
+							value={name}
+							onChange={onInputChange}
+							required
+							autoComplete='off'
+						/>
+						<label className="label" htmlFor='name'>Nombre</label>
 
 
 
-				</div>
+					</div>
 
-				<div className='input-group'>
+					<div className='input-group'>
 
-					<input
-						type='text'
-						name='surname'
-						id='surname'
-						className='input'
-						value={surname}
-						onChange={onInputChange}
-						required
-						autoComplete='off'
-					/>
-					<label className='label' htmlFor='surname'>Apellido</label>
-				</div>
+						<input
+							type='text'
+							name='surname'
+							id='surname'
+							className='input'
+							value={surname}
+							onChange={onInputChange}
+							required
+							autoComplete='off'
+						/>
+						<label className='label' htmlFor='surname'>Apellido</label>
+					</div>
 
-				<div className='input-group'>
+					<div className='input-group'>
 
-					<input
-						type='email'
-						name='email'
-						id='email'
-						className='input'
-						value={email}
-						onChange={onInputChange}
-						required
-						autoComplete='off'
-					/>
-					<label className='label' htmlFor='email'>Email</label>
+						<input
+							type='email'
+							name='email'
+							id='email'
+							className='input'
+							value={email}
+							onChange={onInputChange}
+							required
+							autoComplete='off'
+						/>
+						<label className='label' htmlFor='email'>Email</label>
 
-				</div>
-				<div className='input-group'>
+					</div>
+					<div className='input-group'>
 
-					<input
-						type='password'
-						name='password'
-						id='password'
-						className='input'
-						value={password}
-						onChange={onInputChange}
-						required
-						autoComplete='off'
-					/>
-					<label className='label' htmlFor='password'>Contraseña</label>
-				</div>
+						<input
+							type='password'
+							name='password'
+							id='password'
+							className='input'
+							value={password}
+							onChange={onInputChange}
+							required
+							autoComplete='off'
+						/>
+						<label className='label' htmlFor='password'>Contraseña</label>
+					</div>
 
-				<div className='input-group'>
+					<div className='input-group'>
 
-					<input
-						type='password'
-						name='repeatPassword'
-						id='repeatPassword'
-						className='input'
-						value={repeatPassword}
-						onChange={onInputChange}
-						required
-						autoComplete='off'
-					/>
-					<label className='label' htmlFor='password'>Repetir Contraseña</label>
-				</div>
+						<input
+							type='password'
+							name='repeatPassword'
+							id='repeatPassword'
+							className='input'
+							value={repeatPassword}
+							onChange={onInputChange}
+							required
+							autoComplete='off'
+						/>
+						<label className='label' htmlFor='password'>Repetir Contraseña</label>
+					</div>
 
-				<button className='btn-lr'>Registrarse</button>
-			</form>
+					<button className='btn-lr'>Registrarse</button>
+				</form>
+			</div>
 		</div>
 	);
 }
