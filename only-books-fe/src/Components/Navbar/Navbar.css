@@ -1,5 +1,5 @@
 /* Header */
-header {
+.navbar {
     width: 100%;
     height: 70px;
     position: sticky;
@@ -10,7 +10,8 @@ header {
     justify-content: space-between;
     align-items: center;
     backdrop-filter: blur(20px) saturate(180%);
-    background-color: #EFFAFF;
+    /* background-color: #EFFAFF; */
+    /* background: linear-gradient(to right, #f4f8fb, #e7f1f7); */
 }
 
 .header-container {
@@ -23,29 +24,29 @@ header {
 }
 
 .header-left {
-    float: left;
+    /* float: left; */
     display: flex;
     align-items: center;
 }
 
-
-
 .logo {
     width: 150px; 
+    margin-right: 10px;
+    
+    box-shadow: 0 0 10px rgba(255, 63, 5, 0.3);
 }
 
 .lema {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
-    color: #539DC2;
+    /* color: #539DC2; */
+    color: #f4f8fb;
     display: flex;
     flex-direction: column;
-
-    justify-content: center;
-    
+    margin-left: 10px;
+    justify-content: center;    
 }
 
-/*paloma ver color del lema*/
 
 .btn-create,
 .btn-login {

@@ -21,7 +21,7 @@ const Navbar = () => {
 
 
     return (
-        <header>
+        <header className="navbar">
             <div className="header-container">
                 <div className="header-left">
                     <Link to="/">

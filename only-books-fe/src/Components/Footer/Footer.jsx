@@ -4,10 +4,6 @@
 import { Link } from 'react-router-dom'
 import { routes } from '../../Utils/routes.js'
 import './Footer.css'
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faLinkedin, faYoutube, faXTwitter } from '@fortawesome/free-brands-svg-icons';
 

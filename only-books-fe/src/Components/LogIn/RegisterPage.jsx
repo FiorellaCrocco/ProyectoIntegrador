@@ -16,7 +16,7 @@ export const RegisterPage = () => {
 			repeatPassword: '',
 		});
 
-	const onLogin = e => {
+	const onRegister = e => {
 		e.preventDefault();
 
 		navigate('/', {
@@ -33,7 +33,7 @@ export const RegisterPage = () => {
 	return (
 		<div className='login-container'>
 			<div className='wrapper'>
-				<form className='loginForm' onSubmit={onLogin}>
+				<form className='loginForm' onSubmit={onRegister}>
 					<h2 id='h2-form'>Crear cuenta</h2>
 
 					<div className="input-group">

@@ -16,8 +16,8 @@ export const LoginPage = () => {
 
 
 		});
-
-	const onRegister = e => {
+	//onLogin
+	const onLogin = e => {
 		e.preventDefault();
 
 		navigate('/', {
@@ -34,7 +34,7 @@ export const LoginPage = () => {
 	return (
 		<div className='login-container'>
 			<div className='wrapper'>
-				<form onSubmit={onRegister}>
+				<form onSubmit={onLogin}>
 					<h2 id='h2-form'>Iniciar Sesion</h2>
 
 					<div className='input-group'>
