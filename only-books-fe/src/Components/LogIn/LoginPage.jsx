@@ -32,59 +32,62 @@ export const LoginPage = () => {
 	};
 
 	return (
-		<div className='wrapper'>
-			<form onSubmit={onRegister}>
-				<h2>Iniciar Sesion</h2>
+		<div className='login-container'>
+			<div className='wrapper'>
+				<form onSubmit={onRegister}>
+					<h2 id='h2-form'>Iniciar Sesion</h2>
 
-				<div className='input-group'>
+					<div className='input-group'>
 
-					<input
-						type='text'
-						name='name'
-						id='name'
-						className="input"
-						value={name}
-						onChange={onInputChange}
-						required
-						autoComplete='off'
-					/>
-					<label className="label" htmlFor='name'>Nombre</label>
-				</div>
+						<input
+							type='text'
+							name='name'
+							id='name'
+							className="input"
+							value={name}
+							onChange={onInputChange}
+							required
+							autoComplete='off'
+						/>
+						<label className="label" htmlFor='name'>Nombre</label>
+					</div>
 
-				<div className='input-group'>
+					<div className='input-group'>
 
-					<input
-						type='email'
-						name='email'
-						id='email'
-						className="input"
-						value={email}
-						onChange={onInputChange}
-						required
-						autoComplete='off'
-					/>
-					<label className="label" htmlFor='email'>Email</label>
-				</div>
-				<div className='input-group'>
+						<input
+							type='email'
+							name='email'
+							id='email'
+							className="input"
+							value={email}
+							onChange={onInputChange}
+							required
+							autoComplete='off'
+						/>
+						<label className="label" htmlFor='email'>Email</label>
+					</div>
+					<div className='input-group'>
 
-					<input
-						type='password'
-						name='password'
-						id='password'
-						className="input"
-						value={password}
-						onChange={onInputChange}
-						required
-						autoComplete='off'
-					/>
-					<label className="label" htmlFor='password'>Contraseña</label>
-				</div>
+						<input
+							type='password'
+							name='password'
+							id='password'
+							className="input"
+							value={password}
+							onChange={onInputChange}
+							required
+							autoComplete='off'
+						/>
+						<label className="label" htmlFor='password'>Contraseña</label>
+					</div>
 
 
 
-				<button className='btn-lr'>Iniciar Sesion</button>
-			</form>
+					<button className='btn-lr'>Iniciar Sesion</button>
+				</form>
+			</div>
 		</div>
+
 	);
 };
 
