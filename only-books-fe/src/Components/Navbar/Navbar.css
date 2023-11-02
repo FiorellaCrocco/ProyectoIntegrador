@@ -67,7 +67,8 @@
 
 .btn-create:hover,
 .btn-login:hover {
-    background-color: #539DC2;
+    /* background-color: #539DC2; */
+    background-color: #04080a;
     color: #EFFAFF;
     border-color: #EFFAFF;
 }
