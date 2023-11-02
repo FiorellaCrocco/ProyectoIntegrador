@@ -1,11 +1,14 @@
 .listaContainerAdmin {
   display: flex;
   flex-direction: column;
-  align-items;
+  /* justify-content: center;
+  align-content: center;
+  align-items:center; */
   color: black;
   background-color: white;
-  margin: 0 80px;
+  margin: 20px 80px 20px;
   padding-top: 25px;
+  padding-bottom: 25px;
 }
 
 .lista {
