@@ -1,11 +1,22 @@
+.admin-panel{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    padding: 0;
+    margin: 0;
+}
+
+
 .bienvenida{
-    color: orange;
+    color: #fe4411;
     text-align: center;
     padding-top: 20px;
 }
 
 .subtit{
-    color: orange;
+    color: #fe4411;
 }
 
 .panel{
@@ -16,7 +27,7 @@
     background-color: lightblue;
     border: 15px solid transparent;
     border-radius: 8px;
-    height: 200px;
+    gap: 10px;
     margin: 50px;
 
 
@@ -28,13 +39,14 @@
     justify-content: center;
     margin-top: 10px;
     margin-bottom: 10px;
-    background-color: #FF642F;
+    background-color: #fe4411;
     border: 30px solid transparent;
     border-radius: 8px;
     color: #EFFAFF;
     cursor: pointer;
     padding: 10px 15px;
-    margin-left: 100px;
+    /* margin-left: 100px; */
+    
     padding: 0.6em 1.2em;
     font-size: 1.2em;
     font-weight: 500;
