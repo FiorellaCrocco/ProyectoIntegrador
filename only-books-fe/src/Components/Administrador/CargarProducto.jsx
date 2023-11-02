@@ -8,7 +8,7 @@ function ImageUploadForm() {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    image: [],
+    s: [],
   });
 
   const handleInputChange = (e) => {
@@ -26,15 +26,41 @@ function ImageUploadForm() {
     });
   };
 
-  const handleImageChange = (e) => {
-    const selectedImage = e.target.files[0];
+  const readFileAsBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+  
+      reader.onload = () => {
+        resolve(reader.result);
+      };
+  
+      reader.onerror = (error) => {
+        reject(error);
+      };
+  
+      reader.readAsDataURL(file);
+    })
+  };
+
+  const handleImageChange = async (e) => {
+    const files = e.target.files;
+    const base64Array = [];
+
+    for (const file of files) {
+      const base64Data = await readFileAsBase64(file);
+      base64Array.push(base64Data);
+    }
+    
+    console.log(base64Array);
+
     setFormData((prevData) => {
       return {
         ...prevData,
-        image: [...prevData.image, selectedImage],
+        images: base64Array,
       };
     });
   };
+
 
   //const [libros, setLibros] = useState([]);
   //const [error, setError] = useState(null);
@@ -51,22 +77,23 @@ function ImageUploadForm() {
       body: JSON.stringify(formData)
     }
     
-    fetch(url,settings)
-      .then(response => response.json())
-      .then(data => {
-        console.log(data)
-      })
-      .catch(error=>{
-        console.log(error)
-      })
-      await actualizarListaLibros();
+    try {
+      const response = await fetch(url, settings);
+      const data = await response.json();
+      console.log(data);
 
-    // Limpiar los campos del formulario
-    setFormData({
-      title: "",
-      description: "",
-      image: [],
-    });
+      // Limpiar los campos del formulario
+      setFormData({
+        title: "",
+        description: "",
+        images: [],
+      });
+
+      // Actualizar la lista de libros después de la carga exitosa
+      await actualizarListaLibros();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
