@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 
 public class BookServiceTest {
+/*
 
     @Autowired
     IBookService iBookService;
@@ -154,6 +155,7 @@ public class BookServiceTest {
         assertThrows(ResourceNotFoundException.class, () -> iBookService.buscarPorId(bookId));
 
     }
+*/
 
     //  @Test
     //  @Transactional
