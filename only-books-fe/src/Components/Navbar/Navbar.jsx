@@ -13,7 +13,7 @@ const Navbar = () => {
     console.log(state);
 
     const onLogout = () => {
-        navigate('/login', {
+        navigate('/', {
             replace: true,
         });
     };

@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "./ListarProducto.css";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
+// import label
 import { GlobalContext } from "../../Context/globalContext";
 
 const ListarProducto = () => {

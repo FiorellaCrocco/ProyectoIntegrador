@@ -1,6 +1,7 @@
 .recomendacion {
     font-size: 38px;
-    
+    color: #f89344;
+
 }
 
 .listaPaginada {
@@ -10,8 +11,8 @@
     /* grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); */
     gap: 10px;
     padding: 20px;
-    background-color: white;
-    background-color: lightblue;
+    background-color: #EFFAFF;
+
 }
 
 li {
@@ -56,7 +57,7 @@ p {
     justify-content: center;
     background-color: white;
     align-items: center;
-    background-color: lightblue;
+    background-color: #EFFAFF;
 }
 
 @media (max-width: 768px) {

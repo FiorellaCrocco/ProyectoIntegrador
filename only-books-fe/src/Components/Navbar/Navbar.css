@@ -32,7 +32,7 @@
 .logo {
     width: 150px; 
     margin-right: 10px;
-    
+    border-radius: 50px;
     box-shadow: 0 0 10px rgba(255, 63, 5, 0.3);
 }
 

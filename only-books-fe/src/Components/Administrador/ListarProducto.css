@@ -1,8 +1,11 @@
 .listaContainerAdmin {
+  display: flex;
+  flex-direction: column;
+  align-items;
   color: black;
-  background-color: lightblue;
-  margin: 0;
-  padding-top: 15px;
+  background-color: white;
+  margin: 0 80px;
+  padding-top: 25px;
 }
 
 .lista {
@@ -10,6 +13,7 @@
   padding-bottom: 5px;
   column-count: 3;
   column-gap: 20px;
+  margin: 5px 0;
 }
 
 .tituloListaAdmin {
