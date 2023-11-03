@@ -1,5 +1,8 @@
 package com.proyecto.onlybooks.controller;
 
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.proyecto.onlybooks.dto.BookDTO;
 import com.proyecto.onlybooks.entity.Book;
 import com.proyecto.onlybooks.entity.Image;
@@ -14,8 +17,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
-import java.util.List;
+import java.io.ByteArrayInputStream;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @CrossOrigin(origins="*")
@@ -34,6 +37,10 @@ public class BookController {
 
     @Autowired
     private IImageService iImageService;
+
+    @Autowired
+    private AmazonS3 s3;
+
 
     // Constructor de BookController que permite la inyección de dependencias.
     public BookController(BookService bookService, ICategoriaService iCategoriaService, ICaracteristicaService iCaracteristicaService, IImageService iImageService) {
@@ -55,44 +62,69 @@ public class BookController {
     public ResponseEntity<BookDTO> buscarUnBook(@PathVariable Long id) throws Exception {
         return ResponseEntity.ok(bookService.buscarPorId(id));
     }
-
+    /*
     // En la url "/book/agregar" hacemos un POST para guardar el book
     @PostMapping("/agregar")
     public ResponseEntity<?> agregarBook(@RequestBody Book book) {
         bookService.guardar(book);
         return ResponseEntity.status(HttpStatus.OK).body(book.getId());
-    }
-
-    /*
-    public ResponseEntity<?> agregarBook(@RequestBody Book bookRequest) {
-        try {
-            // Guardar el libro
-            Book book = new Book();
-            book.setTitle(bookRequest.getTitle());
-            book.setDescription(bookRequest.getDescription());
-            bookService.guardar(book);
-
-            // Crear y guardar las imágenes asociadas al libro
-            List<Image> images = bookRequest.getImages().stream()
-                    .map(imageUrl -> {
-                        Image image = new Image();
-                        image.setUrl(imageUrl.toString());
-                        image.setBook(book);
-                        return image;
-                    })
-                    .collect(Collectors.toList());
-
-            iImageService.guardarTodas(images);
-
-            // Actualizar las imágenes en el libro
-            book.setImages(images);
-            bookService.guardar(book);
-
-            return ResponseEntity.status(HttpStatus.OK).body(book.getId());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al agregar el libro");
-        }
     }*/
+
+    @PostMapping("/agregar")
+    public ResponseEntity<?> agregar(@RequestBody Book book) {
+        // Extraer otros datos del libro
+        String title = book.getTitle();
+        String description = book.getDescription();
+
+       /* // Obtener la lista de imágenes en formato Base64
+        List<String> base64Images = book.getImagesBase64();*/
+        // Obtener la lista de imágenes en formato Base64
+        List<String> base64Images = (book.getImagesBase64() != null) ? book.getImagesBase64() : Collections.emptyList();
+
+        // Crear una lista para almacenar las entidades Image
+        List<Image> images = new ArrayList<>();
+
+        ObjectMetadata objectMetadata = new ObjectMetadata();
+
+        // Iterar sobre la lista de imágenes y subirlas a S3
+        for (String base64Image : base64Images) {
+            System.out.println("Base64 Image: " + base64Image);
+
+            // Decodificar el archivo base64
+            byte[] binaryData = Base64.getDecoder().decode(base64Image);
+
+            // Generar un nombre de clave único para cada imagen
+            String key = title + "_" + UUID.randomUUID().toString() + ".jpg";
+
+            try {
+                // Configurar la longitud del contenido en ObjectMetadata
+                objectMetadata.setContentLength(binaryData.length);
+
+                // Subir la imagen a S3
+                s3.putObject("onlybooksbucket", key, new ByteArrayInputStream(binaryData), objectMetadata);
+
+               /* // Subir la imagen a S3
+                s3.putObject("onlybooksbucket", key, new ByteArrayInputStream(binaryData), new ObjectMetadata());
+*/
+                // Crear una nueva entidad Image con la URL de la imagen
+                Image image = new Image();
+                image.setUrl("https://onlybooksbucket.s3.amazonaws.com/" + key);
+                images.add(image);
+            } catch (IllegalArgumentException | AmazonServiceException e) {
+                System.err.println("Error al procesar la imagen " + e.getMessage());
+                // Manejar el error apropiadamente (puede ser útil lograrlo o devolver un mensaje más detallado)
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al agregar el libro.");
+            }
+        }
+        // Crear un nuevo libro con la lista de entidades Image
+        Book newBook = new Book(title, null, description, null, null, null, null);
+        newBook.setImages(images);
+
+        // Guardar el libro en la base de datos
+        bookService.guardar(newBook);
+
+        return ResponseEntity.status(HttpStatus.OK).body("Libro agregado exitosamente.");
+    }
 
     // En la url "/book/modificar" actualizamos un book ya existente
     @PutMapping("/modificar")

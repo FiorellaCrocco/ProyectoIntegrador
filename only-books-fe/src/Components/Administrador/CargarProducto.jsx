@@ -8,7 +8,7 @@ function ImageUploadForm() {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    s: [],
+    imagesBase64: [],
   });
 
   const handleInputChange = (e) => {
@@ -31,7 +31,9 @@ function ImageUploadForm() {
       const reader = new FileReader();
   
       reader.onload = () => {
-        resolve(reader.result);
+        // Obtener la cadena Base64 sin el prefijo
+        const base64WithoutPrefix = reader.result.split(',')[1];
+        resolve(base64WithoutPrefix);
       };
   
       reader.onerror = (error) => {
@@ -39,8 +41,9 @@ function ImageUploadForm() {
       };
   
       reader.readAsDataURL(file);
-    })
+    });
   };
+  
 
   const handleImageChange = async (e) => {
     const files = e.target.files;
@@ -50,13 +53,13 @@ function ImageUploadForm() {
       const base64Data = await readFileAsBase64(file);
       base64Array.push(base64Data);
     }
-    
+
     console.log(base64Array);
 
     setFormData((prevData) => {
       return {
         ...prevData,
-        images: base64Array,
+        imagesBase64: base64Array,
       };
     });
   };
@@ -76,17 +79,17 @@ function ImageUploadForm() {
       },
       body: JSON.stringify(formData)
     }
-    
+    console.log(formData)
     try {
       const response = await fetch(url, settings);
-      const data = await response.json();
+      const data = await response.text();
       console.log(data);
 
       // Limpiar los campos del formulario
       setFormData({
         title: "",
         description: "",
-        images: [],
+        imagesBase64: [],
       });
 
       // Actualizar la lista de libros después de la carga exitosa

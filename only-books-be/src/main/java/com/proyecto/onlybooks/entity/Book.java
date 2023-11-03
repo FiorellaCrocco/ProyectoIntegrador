@@ -2,7 +2,6 @@ package com.proyecto.onlybooks.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -65,8 +64,10 @@ public class Book {
     @OneToMany( fetch=FetchType.LAZY, mappedBy = "book")
     private List<BookRent> rentedByUsers;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "book")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = CascadeType.ALL)
     private List<Image> images;
+
+    private List<String> imagesBase64;
 
     public Book(String title, String author, String description, String isbn, Date publication_year, Integer qualification, Double price) {
         this.title = title;
