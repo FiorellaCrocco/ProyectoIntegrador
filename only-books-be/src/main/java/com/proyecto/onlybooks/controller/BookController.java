@@ -21,7 +21,7 @@ import java.io.ByteArrayInputStream;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins="*")
+@CrossOrigin(origins="http://localhost:5173")
 @RestController
 @RequestMapping("/book")
 public class BookController {
