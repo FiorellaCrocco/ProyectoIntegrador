@@ -1,18 +1,74 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React, { useState } from 'react'
 import './Administrador.css'
-import { Link } from 'react-router-dom';
-
+import AdminImg from '../img/admin.png'
+import { Button } from "@mui/material";
+import ListarProducto from '../Components/ListarProducto/ListarProducto';
+import AgregarCategoria from '../components/AgregarCategoria/AgregarCategoria';
+import CargarProducto from '../Components/CargarProducto/CargarProducto';
+import ArrowRightOutlinedIcon from '@mui/icons-material/ArrowRightOutlined';
 
 const Administrador = () => {
+
+
+
+  const [open, setOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+
+
+  const handleOpen = (item) => {
+    setSelectedItem(item);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setSelectedItem(null);
+    setOpen(false);
+  };
+
+
   return (
-    <div className='admin-panel'>
-      <h1 className='bienvenida'>Panel de Administracion</h1>
-      <h2 className='subtit'>Que deseas hacer?</h2>
-      <div className='panel'>
-        <Link to="/administrador/cargar" className='hipervinc'> <button className='adminBtn'>Cargar nuevo producto</button> </Link>
-        <Link to="/administrador/listar" className='hipervinc'> <button className='adminBtn'>Listar productos</button> </Link>
-        <button className='adminBtn'>Editar productos</button>
+    <div className="panel">
+      <div className="admin-panel">
+        <div className="buttons-container">
+          <div className='welcome-admin'>
+            <img className='admin-img' src={AdminImg} alt="" />
+            <div>
+              {/* <h1>Administración</h1> */}
+              <h1>Bienvenido</h1>
+              {/* <h2>{username}</h2> */}
+            </div>
+          </div>
+          <Button onClick={() => handleOpen(<CargarProducto />)}>
+            <div className="add-product">
+              <h3>Registrar Producto {<ArrowRightOutlinedIcon fontSize="large" />}</h3>
+
+            </div>
+          </Button>
+          <Button onClick={() => handleOpen(<ListarProducto />)}>
+            <div className="add-category">
+              <h3>Listar Productos {<ArrowRightOutlinedIcon fontSize="large" />}</h3>
+            </div>
+          </Button>
+          <Button onClick={() => handleOpen(<AgregarCategoria />)}>
+            <div className="add-category">
+              <h3>Agregar Categoría {<ArrowRightOutlinedIcon fontSize="large" />}</h3>
+            </div>
+          </Button>
+          <Button onClick={() => handleOpen(/*<ListarCategoria/>*/)}>
+            <div className="add-category">
+              <h3>Listar Categorias {<ArrowRightOutlinedIcon fontSize="large" />}</h3>
+            </div>
+          </Button>
+          <Button onClick={() => handleOpen(/*<AdministrarCaracteristicas/>*/)}>
+            <div className="add-feature">
+              <h3>Administrar Características {<ArrowRightOutlinedIcon fontSize="large" />}</h3>
+            </div>
+          </Button>
+        </div>
+        <div className="selected-item">
+          {selectedItem}
+        </div>
       </div>
     </div>
   )

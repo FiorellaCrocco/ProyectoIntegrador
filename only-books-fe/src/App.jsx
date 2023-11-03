@@ -5,11 +5,11 @@ import { useMediaQuery } from 'react-responsive';
 import Navbar from './Components/Navbar/Navbar';
 import Footer from './Components/Footer/Footer';
 import Administrador from './Routes/Administrador';
-import CargarProducto from './Components/Administrador/CargarProducto';
+import CargarProducto from './Components/CargarProducto/CargarProducto';
 import Home from './Routes/Home';
-import ListarProducto from './Components/Administrador/ListarProducto';
+import ListarProducto from './Components/ListarProducto/ListarProducto';
 import Detail from './Routes/Detail';
-import Restricted from './Components/Restricted';
+import Restricted from './Components/RestrictedPageResponsive/Restricted';
 import LoginPage from './Components/LogIn/LoginPage';
 import RegisterPage from './Components/LogIn/RegisterPage'
 
@@ -30,8 +30,6 @@ function App() {
           ) : (
             <Route path="/administrador" element={<Administrador />} />
           )}
-          <Route path='/administrador/cargar' Component={CargarProducto} />
-          <Route path='/administrador/listar' Component={ListarProducto} />
           <Route path='/detail/:id' Component={Detail} />
           <Route path='/registrarse' Component={RegisterPage}/>
           <Route path='/login' Component={LoginPage}/>
