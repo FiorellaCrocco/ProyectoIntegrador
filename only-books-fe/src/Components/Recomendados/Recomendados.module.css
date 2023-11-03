@@ -1,7 +1,9 @@
 .recomendacion {
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 38px;
     color: #f89344;
-
+    font-weight: bold;
+    text-shadow: 1px 1px 0px gray;
 }
 
 .listaPaginada {
@@ -11,7 +13,7 @@
     /* grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); */
     gap: 10px;
     padding: 20px;
-    background-color: #EFFAFF;
+    background-color: #CAE0ED;
 
 }
 
@@ -57,7 +59,7 @@ p {
     justify-content: center;
     background-color: white;
     align-items: center;
-    background-color: #EFFAFF;
+    background-color: #CAE0ED;
 }
 
 @media (max-width: 768px) {

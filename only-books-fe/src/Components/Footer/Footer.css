@@ -27,6 +27,12 @@ footer {
 
 }
 
+/*LOGO*/
+.logo-footer{
+    border-radius: 50px;
+    box-shadow: 0 0 10px rgba(255, 63, 5, 0.3);
+}
+
 .footer-left p {
     margin: 3px;
 }
