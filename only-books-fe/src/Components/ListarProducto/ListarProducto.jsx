@@ -1,54 +1,76 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useEffect, useState } from "react";
-//import data from '../LibrosPaginados/libros'
 import "./ListarProducto.css";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
-// import label
+import { Dialog, DialogContent, DialogActions } from "@mui/material";
 import { GlobalContext } from "../../Context/globalContext";
+import EditarProducto from "../EditarProducto/EditarProducto";
 
 const ListarProducto = () => {
   const { listaLibros, isLoading, actualizarListaLibros } = useContext(GlobalContext);
   const [productos, setProductos] = useState([]);
 
-  useEffect(()=>{
-      setProductos(listaLibros)
-    },[listaLibros,productos])
+  //Para la  funcionalidad de EDITAR
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [editOpen, setEditOpen] = useState(false);
 
-    const fetchData = async (url,settings) => {
-      try {
-        const res = await fetch(url,settings);
-        if (!res.ok) {
-          throw new Error("Error al eliminar el libro");
-        }
-        const data = await res.text();
-      } catch (error) {
-        console.log("Error al eliminar el libro", error);
+  const handleEditOpen = (product) => {
+    setSelectedProduct(product);
+    setEditOpen(true);
+  };
+
+  const handleEditClose = () => {
+    setEditOpen(false);
+  };
+
+  const handleUpdateList = async () => {
+    // Actualizar la lista de productos
+    await actualizarListaLibros();
+  };
+
+
+  ////////////////////////////////////////////////////////////////
+
+  useEffect(() => {
+    setProductos(listaLibros)
+  }, [listaLibros, productos])
+
+  const fetchData = async (url, settings) => {
+    try {
+      const res = await fetch(url, settings);
+      if (!res.ok) {
+        throw new Error("Error al eliminar el libro");
       }
-    };
+      const data = await res.text();
+    } catch (error) {
+      console.log("Error al eliminar el libro", error);
+    }
+  };
 
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm(
       "¿Estás seguro de que deseas eliminar este producto?"
     );
-      
+
     if (confirmDelete) {
       const updatedProductos = productos.filter(
         (producto) => producto.id !== id
       );
       const settings = {
-        method:'DELETE',
-        headers:{
+        method: 'DELETE',
+        headers: {
           'Content-Type': 'application/json',
         },
       }
       const url = `http://localhost:8080/book/eliminar/${id}`;
       //  const url = `https://onlybooks.isanerd.club/api/book/eliminar/${id}`;
-      await fetchData(url,settings);
+      await fetchData(url, settings);
       await actualizarListaLibros();
       setProductos(updatedProductos)
     }
-}
+  }
+
   return (
     <div>
       <h2 className="tituloListaAdmin">Listado de productos</h2>
@@ -66,12 +88,29 @@ const ListarProducto = () => {
               >
                 Eliminar
               </Button>
-              <Button variant="outlined" color="success" className="btnEdit">
+              <Button
+                variant="outlined"
+                color="success"
+                className="btnEdit"
+                onClick={() => handleEditOpen(libro)}
+              >
                 Editar
               </Button>
             </div>
           </li>
         ))}
+
+        <Dialog open={editOpen} onClose={handleEditClose} maxWidth="md" fullWidth>
+          <DialogContent>
+            {selectedProduct && <EditarProducto product={selectedProduct} onUpdateList={handleUpdateList} />}
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleEditClose} color="primary">
+              Cerrar
+            </Button>
+          </DialogActions>
+        </Dialog>
+
       </ul>
     </div>
   );
