@@ -1,6 +1,8 @@
 //import { useState, useEffect } from "react"
+import CaracteristicaLibro from "../CaracteristicaLibro/CaracteristicaLibro";
 import data from "../LibrosPaginados/libros";
 import styles from "./DetalleLibro.module.css";
+
 
 function DetalleLibro({ id }) {
   console.log("IMPRIMO EL ID");
@@ -34,6 +36,7 @@ function DetalleLibro({ id }) {
         </div>
         <button className={styles.btnAtras} onClick={() => window.history.back()}>Volver</button>
       </div>
+      <CaracteristicaLibro/>
 
     </div>
   );
