@@ -62,13 +62,6 @@ public class BookController {
     public ResponseEntity<BookDTO> buscarUnBook(@PathVariable Long id) throws Exception {
         return ResponseEntity.ok(bookService.buscarPorId(id));
     }
-    /*
-    // En la url "/book/agregar" hacemos un POST para guardar el book
-    @PostMapping("/agregar")
-    public ResponseEntity<?> agregarBook(@RequestBody Book book) {
-        bookService.guardar(book);
-        return ResponseEntity.status(HttpStatus.OK).body(book.getId());
-    }*/
 
     @PostMapping("/agregar")
     public ResponseEntity<?> agregar(@RequestBody Book book) {
@@ -76,8 +69,6 @@ public class BookController {
         String title = book.getTitle();
         String description = book.getDescription();
 
-       /* // Obtener la lista de imágenes en formato Base64
-        List<String> base64Images = book.getImagesBase64();*/
         // Obtener la lista de imágenes en formato Base64
         List<String> base64Images = (book.getImagesBase64() != null) ? book.getImagesBase64() : Collections.emptyList();
 
@@ -85,6 +76,11 @@ public class BookController {
         List<Image> images = new ArrayList<>();
 
         ObjectMetadata objectMetadata = new ObjectMetadata();
+
+        Book newBook = new Book(title, null, description, null, null, null, null);
+
+        Long id = bookService.guardar(newBook);
+        newBook.setId(id);
 
         // Iterar sobre la lista de imágenes y subirlas a S3
         for (String base64Image : base64Images) {
@@ -103,12 +99,10 @@ public class BookController {
                 // Subir la imagen a S3
                 s3.putObject("onlybooksbucket", key, new ByteArrayInputStream(binaryData), objectMetadata);
 
-               /* // Subir la imagen a S3
-                s3.putObject("onlybooksbucket", key, new ByteArrayInputStream(binaryData), new ObjectMetadata());
-*/
                 // Crear una nueva entidad Image con la URL de la imagen
                 Image image = new Image();
                 image.setUrl("https://onlybooksbucket.s3.amazonaws.com/" + key);
+                image.setBook(newBook);
                 images.add(image);
             } catch (IllegalArgumentException | AmazonServiceException e) {
                 System.err.println("Error al procesar la imagen " + e.getMessage());
@@ -117,7 +111,7 @@ public class BookController {
             }
         }
         // Crear un nuevo libro con la lista de entidades Image
-        Book newBook = new Book(title, null, description, null, null, null, null);
+
         newBook.setImages(images);
 
         // Guardar el libro en la base de datos
