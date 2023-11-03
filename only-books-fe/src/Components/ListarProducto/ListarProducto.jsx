@@ -24,6 +24,12 @@ const ListarProducto = () => {
     setEditOpen(false);
   };
 
+  const handleUpdateList = async () => {
+    // Actualizar la lista de productos
+    await actualizarListaLibros();
+  };
+
+
   ////////////////////////////////////////////////////////////////
 
   useEffect(() => {
@@ -96,7 +102,7 @@ const ListarProducto = () => {
 
         <Dialog open={editOpen} onClose={handleEditClose} maxWidth="md" fullWidth>
           <DialogContent>
-            {selectedProduct && <EditarProducto product={selectedProduct} />}
+            {selectedProduct && <EditarProducto product={selectedProduct} onUpdateList={handleUpdateList} />}
           </DialogContent>
           <DialogActions>
             <Button onClick={handleEditClose} color="primary">

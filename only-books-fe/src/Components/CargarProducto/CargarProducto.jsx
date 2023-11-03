@@ -2,48 +2,30 @@ import { useContext, useState } from "react";
 import "./CargarProducto.css";
 import { GlobalContext } from "../../Context/globalContext";
 
-function ImageUploadForm() {
-  const { actualizarListaLibros} = useContext(GlobalContext)
+function CargarProducto() {
+  const { actualizarListaLibros } = useContext(GlobalContext);
 
   const [formData, setFormData] = useState({
+    id: 0,
     title: "",
+    author: "",
     description: "",
+    isbn: "",
+    publication_year: "2023-11-03T19:58:15.945Z",
+    qualification: 0,
+    price: 0,
+    categorias: "",
+    caracteristicas: "",
     imagesBase64: [],
   });
 
   const handleInputChange = (e) => {
-    setFormData({
-        ...formData,
-        title: e.target.value,
-    });
-  };
-
-  const handleDetailChange = (e) => {
-    const { value } = e.target;
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      description: value,
+      [name]: value,
     });
   };
-
-  const readFileAsBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-  
-      reader.onload = () => {
-        // Obtener la cadena Base64 sin el prefijo
-        const base64WithoutPrefix = reader.result.split(',')[1];
-        resolve(base64WithoutPrefix);
-      };
-  
-      reader.onerror = (error) => {
-        reject(error);
-      };
-  
-      reader.readAsDataURL(file);
-    });
-  };
-  
 
   const handleImageChange = async (e) => {
     const files = e.target.files;
@@ -54,8 +36,6 @@ function ImageUploadForm() {
       base64Array.push(base64Data);
     }
 
-    console.log(base64Array);
-
     setFormData((prevData) => {
       return {
         ...prevData,
@@ -64,22 +44,36 @@ function ImageUploadForm() {
     });
   };
 
+  const readFileAsBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
 
-  //const [libros, setLibros] = useState([]);
-  //const [error, setError] = useState(null);
+      reader.onload = () => {
+        // Obtener la cadena Base64 sin el prefijo
+        const base64WithoutPrefix = reader.result.split(",")[1];
+        resolve(base64WithoutPrefix);
+      };
 
-  const handleSubmit = async(e) => {
+      reader.onerror = (error) => {
+        reject(error);
+      };
+
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const url="http://localhost:8080/book/agregar"
-   // const url = "https://onlybooks.isanerd.club/api/book/agregar";
-    const settings ={
-      method: 'POST',
-      headers:{
-        'Content-Type':'application/json'
+    const url = "http://localhost:8080/book/agregar";
+    // const url = "https://onlybooks.isanerd.club/api/book/agregar";
+    const settings = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData)
-    }
-    console.log(formData)
+      body: JSON.stringify(formData),
+    };
+
     try {
       const response = await fetch(url, settings);
       const data = await response.text();
@@ -87,8 +81,16 @@ function ImageUploadForm() {
 
       // Limpiar los campos del formulario
       setFormData({
+        id: 0,
         title: "",
+        author: "",
         description: "",
+        isbn: "",
+        publication_year: "2023-11-03T19:58:15.945Z",
+        qualification: 0,
+        price: 0,
+        categorias: "",
+        caracteristicas: "",
         imagesBase64: [],
       });
 
@@ -104,29 +106,119 @@ function ImageUploadForm() {
       <h1 className="titulo">Cargar Libro</h1>
       <form className="formulario" onSubmit={handleSubmit}>
         <div className="div">
-          <label className="labels" htmlFor="name">
-            Titulo:
+          <label className="labels" htmlFor="title">
+            Título:
           </label>
           <input
             className="input"
             type="text"
-            id="name"
-            name="name"
-            value={formData.name}
+            id="title"
+            name="title"
+            value={formData.title}
             onChange={handleInputChange}
           />
         </div>
         <div className="div">
-          <label className="labels" htmlFor="detail">
-            Detalle:
+          <label className="labels" htmlFor="author">
+            Autor:
           </label>
           <input
-            className="detail"
+            className="input"
             type="text"
-            id="detail"
-            name="detail"
-            value={formData.detail}
-            onChange={handleDetailChange}
+            id="author"
+            name="author"
+            value={formData.author}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="div">
+          <label className="labels" htmlFor="description">
+            Descripción:
+          </label>
+          <textarea
+            className="input"
+            id="description"
+            name="description"
+            value={formData.description}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="div">
+          <label className="labels" htmlFor="isbn">
+            ISBN:
+          </label>
+          <input
+            className="input"
+            type="text"
+            id="isbn"
+            name="isbn"
+            value={formData.isbn}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="div">
+          <label className="labels" htmlFor="publication_year">
+            Año de Publicación (formato: YYYY-MM-DDTHH:MM:SS.sssZ):
+          </label>
+          <input
+            className="input"
+            type="date"
+            id="publication_year"
+            name="publication_year"
+            value={formData.publication_year}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="div">
+          <label className="labels" htmlFor="qualification">
+            Calificación:
+          </label>
+          <input
+            className="input"
+            type="number"
+            id="qualification"
+            name="qualification"
+            value={formData.qualification}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="div">
+          <label className="labels" htmlFor="price">
+            Precio:
+          </label>
+          <input
+            className="input"
+            type="number"
+            id="price"
+            name="price"
+            value={formData.price}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="div">
+          <label className="labels" htmlFor="categorias">
+            Categorías:
+          </label>
+          <input
+            className="input"
+            type="text"
+            id="categorias"
+            name="categorias"
+            value={formData.categorias}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="div">
+          <label className="labels" htmlFor="caracteristicas">
+            Características:
+          </label>
+          <input
+            className="input"
+            type="text"
+            id="caracteristicas"
+            name="caracteristicas"
+            value={formData.caracteristicas}
+            onChange={handleInputChange}
           />
         </div>
         <div className="div">
@@ -151,4 +243,4 @@ function ImageUploadForm() {
   );
 }
 
-export default ImageUploadForm;
+export default CargarProducto;

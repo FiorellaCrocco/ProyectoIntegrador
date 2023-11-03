@@ -51,6 +51,7 @@
     width: 30vw;
     max-width: 20vw;
     height: 100vmax;
+    /* height: auto; */
     min-width: 200px;
     background: linear-gradient(#97c6e6, white);
 }
