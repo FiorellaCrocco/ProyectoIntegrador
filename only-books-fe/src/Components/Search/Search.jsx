@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState , useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import './Search.css';
 //import data from '../LibrosPaginados/libros'
 import { GlobalContext } from "../../Context/globalContext";
@@ -14,16 +14,17 @@ const Search = () => {
     const selectLibrosAleatorios = (libros, cantidad) => {
         const librosSeleccionados = [];
         while (librosSeleccionados.length < cantidad) {
-          const randomIndex = Math.floor(Math.random() * libros.length);
-          if (!librosSeleccionados.includes(libros[randomIndex])) {
-            librosSeleccionados.push(libros[randomIndex]);
-          }
+            const randomIndex = Math.floor(Math.random() * libros.length);
+            if (!librosSeleccionados.includes(libros[randomIndex])) {
+                librosSeleccionados.push(libros[randomIndex]);
+            }
         }
         return librosSeleccionados;
-      };
+    };
 
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value);
+
     };
 
     const handleCategoryChange = (event) => {
@@ -39,7 +40,9 @@ const Search = () => {
         ));
     };
 
-    const listaAleatoria = selectLibrosAleatorios(listaLibros,listaLibros.length)
+    
+
+    const listaAleatoria = selectLibrosAleatorios(listaLibros, listaLibros.length)
 
     const renderProductRecommendations = () => {
 
@@ -57,7 +60,7 @@ const Search = () => {
                 return true;
             } else if (selectedCategoryUpper === product.gender) {
                 return true;
-            }else{
+            } else {
                 return false
             }
         });
@@ -99,8 +102,8 @@ const Search = () => {
                     {renderProductRecommendations()}
                 </div> */}
             </div>
-                {<LibrosPaginados libros={renderProductRecommendations()} isLoading={isLoading}></LibrosPaginados>
-                }
+            {<LibrosPaginados libros={renderProductRecommendations()} isLoading={isLoading}></LibrosPaginados>
+            }
 
         </>
     );

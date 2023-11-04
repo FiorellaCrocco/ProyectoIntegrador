@@ -6,8 +6,10 @@ import "./EditarProducto";
 const EditarProducto = ({ product, onUpdateList }) => {
     const [formData, setFormData] = useState(product);
 
-    const params = useParams();
+    
     const updateProductUrl = `http://localhost:8080/book/modificar`;
+    // const url = "https://onlybooks.isanerd.club/api/book/modificar"
+    
 
 
     const handleInputChange = (e) => {

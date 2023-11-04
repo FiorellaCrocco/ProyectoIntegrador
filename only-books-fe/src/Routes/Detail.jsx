@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+
 import DetalleLibro from "../Components/DetalleLibro/DetalleLibro"
 import { useParams } from 'react-router-dom'
 

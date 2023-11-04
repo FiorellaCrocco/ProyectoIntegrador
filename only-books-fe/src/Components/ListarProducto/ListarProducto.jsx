@@ -8,7 +8,7 @@ import { GlobalContext } from "../../Context/globalContext";
 import EditarProducto from "../EditarProducto/EditarProducto";
 
 const ListarProducto = () => {
-  const { listaLibros, isLoading, actualizarListaLibros } = useContext(GlobalContext);
+  const { listaLibros, actualizarListaLibros } = useContext(GlobalContext);
   const [productos, setProductos] = useState([]);
 
   //Para la  funcionalidad de EDITAR

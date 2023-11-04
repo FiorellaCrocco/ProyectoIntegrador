@@ -7,6 +7,7 @@ import ListarProducto from '../Components/ListarProducto/ListarProducto';
 import AgregarCategoria from '../components/AgregarCategoria/AgregarCategoria';
 import CargarProducto from '../Components/CargarProducto/CargarProducto';
 import ArrowRightOutlinedIcon from '@mui/icons-material/ArrowRightOutlined';
+import ListarCategoria from '../Components/ListarCategoria/ListarCategoria';
 
 const Administrador = () => {
 
@@ -55,7 +56,7 @@ const Administrador = () => {
               <h3>Agregar Categoría {<ArrowRightOutlinedIcon fontSize="large" />}</h3>
             </div>
           </Button>
-          <Button onClick={() => handleOpen(/*<ListarCategoria/>*/)}>
+          <Button onClick={() => handleOpen(<ListarCategoria/>)}>
             <div className="add-category">
               <h3>Listar Categorias {<ArrowRightOutlinedIcon fontSize="large" />}</h3>
             </div>

@@ -10,7 +10,7 @@ export const LoginPage = () => {
 
 	const { name, email, password, onInputChange, onResetForm } =
 		useForm({
-			name: '',
+			// name: '',
 			email: '',
 			password: '',
 
@@ -19,7 +19,7 @@ export const LoginPage = () => {
 	//onLogin
 	const onLogin = e => {
 		e.preventDefault();
-
+		
 		navigate('/', {
 			replace: true,
 			state: {
