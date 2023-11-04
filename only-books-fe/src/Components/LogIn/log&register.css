@@ -149,7 +149,7 @@ body {
 }
 
 .btn-lr:hover {
-	color: #fff;
+	background: #9cc6dd;
 }
 
 .btn-lr:before {
@@ -159,8 +159,8 @@ body {
 	left: 100%;
 	width: 120%;
 	height: 220%;
-	/* background-color: #2196f3; */
-	background-color: #a11a8b;
+	/* background-color: #2196f3;*/ 
+	background: #a11a8b;
 	border-radius: 50%;
 	z-index: -1;
 	transition: all 0.6s ease;
@@ -169,4 +169,10 @@ body {
 .btn-lr:hover:before {
 	top: -50%;
 	left: -10%;
+}
+
+.passwordError{
+	color: rgb(236, 49, 32);
+	font-weight: 700;
+	margin: 10px;
 }

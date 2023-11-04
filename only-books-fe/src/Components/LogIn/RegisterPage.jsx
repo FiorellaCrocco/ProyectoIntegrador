@@ -1,39 +1,78 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from './Hook/UseForm'
 import './log&register.css'
 //RegisterPage
 export const RegisterPage = () => {
+	const [passwordError, setPasswordError] = useState('')
 	const navigate = useNavigate();
+	const url = "http://localhost:8080/auth/register"
+	//const url = "https://onlybooks.isanerd.club/api/auth/register";
 
-	const { name, surname, email, password, repeatPassword, onInputChange, onResetForm } =
+	const passwordRegex= /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+	function validatePassword(password){
+		const samePassword = password==repeatPassword? true:false
+		return passwordRegex.test(password)&&samePassword
+	}
+
+	const { name, lastname, email,dni, password, repeatPassword, onInputChange, onResetForm } =
 		useForm({
 			name: '',
-			surname: '',
+			lastname: '',
 			email: '',
+			dni:'',
 			password: '',
 			repeatPassword: '',
 		});
 
-	const onLogin = e => {
-		e.preventDefault();
-
-		navigate('/', {
-			replace: true,
-			state: {
-				logged: true,
-				name,
+		const settings={
+			method:'POST',
+			headers:{
+				'Content-Type':'application/json'
 			},
-		});
+			body: JSON.stringify({
+				name:name,
+				lastname:lastname,
+				email:email,
+				dni:dni,
+				password:password,
+				rol: 'USER'
+			})
+	
+		}
 
-		onResetForm();
-	};
+	const onRegister = async (e) => {
+		e.preventDefault();
+		if(validatePassword(password)){
+			setPasswordError('')
+			try{
+				const response = await fetch(url,settings)
+				console.log(response)
+				if(response.status==200){
+					navigate('/', {
+						replace: true,
+						state: {
+							logged: true
+						}
+					});
+				}
+			}catch{(error)=>{
+				console.log(error)
+			}}
+			onResetForm();
+		}else{
+			setPasswordError("La contraseña no cumple con los requerimientos")
+		}
+
+		}
+
 
 	return (
 		<div className='login-container'>
 			<div className='wrapper'>
-				<form className='loginForm' onSubmit={onLogin}>
+				<form className='loginForm' onSubmit={onRegister}>
 					<h2>Crear cuenta</h2>
 
 					<div className="input-group">
@@ -57,15 +96,15 @@ export const RegisterPage = () => {
 
 						<input
 							type='text'
-							name='surname'
-							id='surname'
+							name='lastname'
+							id='lastname'
 							className='input'
-							value={surname}
+							value={lastname}
 							onChange={onInputChange}
 							required
 							autoComplete='off'
 						/>
-						<label className='label' htmlFor='surname'>Apellido</label>
+						<label className='label' htmlFor='lastname'>Apellido</label>
 					</div>
 
 					<div className='input-group'>
@@ -83,6 +122,22 @@ export const RegisterPage = () => {
 						<label className='label' htmlFor='email'>Email</label>
 
 					</div>
+					<div className='input-group'>
+
+						<input
+							type='dni'
+							name='dni'
+							id='dni'
+							className='input'
+							value={dni}
+							onChange={onInputChange}
+							required
+							autoComplete='off'
+						/>
+						<label className='label' htmlFor='dni'>DNI</label>
+
+					</div>
+
 					<div className='input-group'>
 
 						<input
@@ -112,6 +167,7 @@ export const RegisterPage = () => {
 						/>
 						<label className='label' htmlFor='password'>Repetir Contraseña</label>
 					</div>
+					<div className='passwordError'>{passwordError}</div>
 
 					<button className='btn-lr'>Registrarse</button>
 				</form>

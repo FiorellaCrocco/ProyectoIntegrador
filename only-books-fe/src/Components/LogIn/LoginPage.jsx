@@ -6,28 +6,43 @@ import './log&register.css'
 
 //LoginPage
 export const LoginPage = () => {
+	const url = "http://localhost:8080/auth/login"
+	//const url = "https://onlybooks.isanerd.club/api/auth/login";
 	const navigate = useNavigate();
 
-	const { name, email, password, onInputChange, onResetForm } =
+	const { email, password, onInputChange, onResetForm } =
 		useForm({
-			name: '',
 			email: '',
 			password: '',
-
-
 		});
+	const settings={
+		method:'POST',
+		headers:{
+			'Content-Type':'application/json'
+		},
+		body: JSON.stringify({
+			email:email,
+			password:password
+		})
+
+	}
 	//onLogin
-	const onLogin = e => {
+	const onLogin = async(e) => {
 		e.preventDefault();
-
-		navigate('/', {
-			replace: true,
-			state: {
-				logged: true,
-				name,
-			},
-		});
-
+		try{
+			const response = await fetch(url,settings)
+			console.log(response)
+			if(response.status==200){
+				navigate('/', {
+					replace: true,
+					state: {
+						logged: true
+					}
+				});
+			}
+		}catch{(error)=>{
+			console.log(error)
+		}}
 		onResetForm();
 	};
 
@@ -36,21 +51,6 @@ export const LoginPage = () => {
 			<div className='wrapper'>
 				<form onSubmit={onLogin}>
 					<h2 id='h2-form'>Iniciar Sesion</h2>
-
-					<div className='input-group'>
-
-						<input
-							type='text'
-							name='name'
-							id='name'
-							className="input"
-							value={name}
-							onChange={onInputChange}
-							required
-							autoComplete='off'
-						/>
-						<label className="label" htmlFor='name'>Nombre</label>
-					</div>
 
 					<div className='input-group'>
 
@@ -80,9 +80,6 @@ export const LoginPage = () => {
 						/>
 						<label className="label" htmlFor='password'>Contraseña</label>
 					</div>
-
-
-
 					<button className='btn-lr'>Iniciar Sesion</button>
 				</form>
 			</div>
