@@ -1,0 +1,16 @@
+.divAmplio{
+    
+    
+}
+
+.listaCarac{
+    display: flex;
+    flex-direction: row;
+}
+
+.listaIcon{
+    display: flex;
+    flex-direction: row;
+    margin-left: 20px;
+    align-items: center;
+}
