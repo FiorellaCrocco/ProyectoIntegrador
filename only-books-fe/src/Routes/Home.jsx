@@ -11,10 +11,7 @@ const Home = () => {
   const { listaLibros, isLoading } = useContext(GlobalContext);
   return (
     <div className='home'>
-      <Recomendados libros={listaLibros}></Recomendados>
       <Search />
-      {//<LibrosPaginados libros={data}></LibrosPaginados>
-      }
     </div>
 
   )
