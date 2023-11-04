@@ -33,6 +33,12 @@ public class SecurityConfiguration {
                                 .requestMatchers("/auth/**").permitAll()
                                 //.requestMatchers("/book/listar/**").permitAll()
                                 .requestMatchers("/book/**").permitAll()
+                                .requestMatchers("/categoria/**").permitAll()
+                                .requestMatchers("/caracteristica/**").permitAll()
+                                .requestMatchers("/user/**").permitAll()
+                                .requestMatchers("/subscription/**").permitAll()
+                                .requestMatchers("/bookRent/**").permitAll()
+
                                 .anyRequest().authenticated()
                 )
                 .cors(withDefaults())

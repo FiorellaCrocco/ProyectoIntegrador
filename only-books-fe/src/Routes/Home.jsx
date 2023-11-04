@@ -12,10 +12,7 @@ const Home = () => {
   
   return (
     <div className='home'>
-      <Recomendados libros={listaLibros}></Recomendados>
       <Search />
-      {//<LibrosPaginados libros={data}></LibrosPaginados>
-      }
     </div>
 
   )

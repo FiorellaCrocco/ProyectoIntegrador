@@ -3,15 +3,15 @@ import { useState, useEffect, createContext } from "react";
 export const GlobalContext = createContext();
 
 export const BookProvider = ({ children }) => {
-  const [listaCategorias, setListaCategorias] = useState([])
+
   const [listaLibros, setListaLibros] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  const [listaCategorias, setListaCategorias] = useState([])
   const url = "http://localhost:8080/book/listar";
   //const url = "https://onlybooks.isanerd.club/api/book/listar";
-  
   const urlCategorias = "http://localhost:8080/categoria/listar";
-  //const urlCategorias = "https://onlybooks.isanerd.club/api/categoria/listar";
+  //const urlCategorias = "http://onlybooks.isanerd.club/api/categoria/listar";
+
 
   const fetchData = async () => {
     try {
@@ -28,12 +28,6 @@ export const BookProvider = ({ children }) => {
     }
   };
 
-  const actualizarListaLibros = async () => {
-    // Lógica para actualizar la lista después de realizar operaciones
-    // por ejemplo, puedes llamar a la función fetchData nuevamente
-    await fetchData();
-  };
-
   const fetchCategorias = async () => {
     try {
       const response = await fetch(urlCategorias);
@@ -47,6 +41,13 @@ export const BookProvider = ({ children }) => {
     }
   };
 
+  const actualizarListaLibros = async () => {
+    // Lógica para actualizar la lista después de realizar operaciones
+    // por ejemplo, puedes llamar a la función fetchData nuevamente
+    await fetchData();
+  };
+
+
   useEffect(() => {
     fetchData();
     fetchCategorias();
@@ -54,7 +55,7 @@ export const BookProvider = ({ children }) => {
 
 
   return (
-    <GlobalContext.Provider value={{ listaLibros, isLoading, actualizarListaLibros, listaCategorias }}>
+    <GlobalContext.Provider value={{ listaCategorias, listaLibros, isLoading, actualizarListaLibros }}>
       {children}
     </GlobalContext.Provider>
   );

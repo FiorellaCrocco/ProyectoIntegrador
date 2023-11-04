@@ -1,15 +1,15 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import './Search.css';
-//import data from '../LibrosPaginados/libros'
 import { GlobalContext } from "../../Context/globalContext";
 import LibrosPaginados from '../LibrosPaginados/LibrosPaginados';
+import Recomendados from '../Recomendados/Recomendados';
 
 const Search = () => {
-    const { listaLibros, isLoading } = useContext(GlobalContext);
-    const [searchTerm, setSearchTerm] = useState('');
-    const [selectedCategory, setSelectedCategory] = useState('all');
-    const [filteredProducts, setFilteredProducts] = useState(null)
+    const { listaLibros, isLoading, listaCategorias } = useContext(GlobalContext);
+    const [listaAleatoria, setListaAleatoria] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [selectedCategory, setSelectedCategory] = useState([]);
 
     const selectLibrosAleatorios = (libros, cantidad) => {
         const librosSeleccionados = [];
@@ -24,87 +24,71 @@ const Search = () => {
 
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value);
-
     };
 
     const handleCategoryChange = (event) => {
-        setSelectedCategory(event.target.value);
+        const category = event.target.value;
+        if (selectedCategory.includes(category)) {
+            setSelectedCategory(selectedCategory.filter((c) => c !== category));
+        } else {
+            setSelectedCategory([...selectedCategory, category]);
+        }
     };
 
+    useEffect(() => {
+        const listaAleatoria = selectLibrosAleatorios(
+            listaLibros,
+            listaLibros.length
+        );
+        setListaAleatoria(listaAleatoria);
+    }, [listaLibros]);
+
     const renderCategoryOptions = () => {
-        const categories = ['all', 'Novelas', 'No_Ficcion', 'Ficcion', 'Infantil'];
-        return categories.map((category, index) => (
-            <option key={index} value={category}>
-                {category}
-            </option>
+        const categorias = listaCategorias;
+
+        return categorias.map((category, index) => (
+            <div key={index} className="category-square">
+                <img src={category.imagen} alt={category.titulo} />
+                <label>
+                    <input
+                        type="checkbox"
+                        value={category.titulo}
+                        checked={selectedCategory.includes(category.titulo)}
+                        onChange={handleCategoryChange}
+                    />
+                    {category.titulo}
+                </label>
+            </div>
         ));
     };
 
-    
-
-    const listaAleatoria = selectLibrosAleatorios(listaLibros, listaLibros.length)
-
     const renderProductRecommendations = () => {
-
-        const products = Object.values(listaAleatoria);
-        // console.log(products[1].title);
-        // console.log(products[1].gender)
-        // console.log(products)
-
-        const filProducts = products.filter((product) =>
-            selectedCategory === 'all' ? true : product.category === selectedCategory
-        );
-        const libros = products.filter((product) => {
-            const selectedCategoryUpper = selectedCategory.toUpperCase();
-            if (selectedCategoryUpper === 'ALL') {
-                return true;
-            } else if (selectedCategoryUpper === product.gender) {
+        const filteredProducts = listaAleatoria.filter((product) => {
+            if (selectedCategory.length == 0 || selectedCategory == "") {
                 return true;
             } else {
-                return false
+                return (
+                    product.categorias &&
+                    product.categorias.some((categoria) =>
+                        selectedCategory.includes(categoria.titulo)
+                    )
+                );
             }
         });
-        //setFilteredProducts(libros)
-
-        //const firstThreeProducts = filteredProducts.slice(0, 3);
-        /*
-        return firstThreeProducts.map((product, index) => (
-            <div key={index} className="product" >
-                <img style={{
-                    width: "60px",
-                    margin: "2px"
-                }} src={product.imgUrl} alt="" />
-                {console.log(products)}
-            </div>
-    
-        ));*/
-        console.log(libros)
-        return libros;
-    }
+        return filteredProducts;
+    };
     return (
         <>
+
             <div className="search-container">
                 <div className='input-select'>
-                    <input
-                        type="text"
-                        placeholder="Search..."
-                        value={searchTerm}
-                        onChange={handleSearchChange}
-                        className="search-input"
-                    />
-                    <select value={selectedCategory}
-                        onChange={handleCategoryChange}
-                        className="category-select">
+                    <div className="category-select">
                         {renderCategoryOptions()}
-                    </select>
+                    </div>
                 </div>
-                {/* <div className='product-recommendations'>
-                    {renderProductRecommendations()}
-                </div> */}
             </div>
-            {<LibrosPaginados libros={renderProductRecommendations()} isLoading={isLoading}></LibrosPaginados>
-            }
-
+            <Recomendados libros={listaLibros}></Recomendados>
+            <LibrosPaginados libros={renderProductRecommendations()} isLoading={isLoading}></LibrosPaginados>
         </>
     );
 }

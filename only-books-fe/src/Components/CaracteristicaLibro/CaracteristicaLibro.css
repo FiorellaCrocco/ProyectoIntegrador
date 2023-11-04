@@ -6,11 +6,16 @@
 .listaCarac{
     display: flex;
     flex-direction: row;
+    align-items: end;
 }
 
 .listaIcon{
     display: flex;
     flex-direction: row;
-    margin-left: 20px;
-    align-items: center;
+
+    align-items: flex-end;
+}
+
+.listaIcon>p{
+    margin-left: 8px;
 }
