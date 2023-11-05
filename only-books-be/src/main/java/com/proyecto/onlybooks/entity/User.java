@@ -20,7 +20,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name="users")
+@Table(name = "users", indexes = {
+        @Index(name = "idx_email", columnList = "email"),
+        @Index(name = "idx_lastname", columnList = "lastname"),
+        @Index(name = "idx_name", columnList = "name")
+})
 public class User implements UserDetails {
 
     @Id
