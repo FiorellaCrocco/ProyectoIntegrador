@@ -10,7 +10,7 @@ const Navbar = () => {
     const { state } = useLocation();
     const navigate = useNavigate();
 
-    console.log(state);
+    // console.log(state);
 
     const onLogout = () => {
         navigate('/', {

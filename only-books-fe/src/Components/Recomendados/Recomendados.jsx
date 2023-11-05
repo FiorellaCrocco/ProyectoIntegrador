@@ -8,7 +8,7 @@ import '../Loading/Loading.css'
 const Recomendados = () => {
   const { listaLibros, isLoading } = useContext(GlobalContext);
 
-  console.log(listaLibros);
+  // console.log(listaLibros);
   const selectLibrosAleatorios = (libros, cantidad) => {
     const librosSeleccionados = [];
     while (librosSeleccionados.length < cantidad) {

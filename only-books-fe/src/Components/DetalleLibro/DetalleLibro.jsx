@@ -5,11 +5,11 @@ import styles from "./DetalleLibro.module.css";
 
 
 function DetalleLibro({ id }) {
-  console.log("IMPRIMO EL ID");
-  console.log(id);
+  // console.log("IMPRIMO EL ID");
+  // console.log(id);
   const libro = data.find((book) => book.id == id);
-  console.log("Imprimo el libro");
-  console.log(libro);
+  // console.log("Imprimo el libro");
+  // console.log(libro);
 
   return (
     <div className={styles.detailcontainer}>
