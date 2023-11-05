@@ -1,27 +1,20 @@
-/* eslint-disable no-unused-vars */
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react';
 import { GlobalContext } from "../../Context/globalContext";
+import './ListarCategoria.css';
 
 const ListarCategoria = () => {
-
     const { listaCategorias } = useContext(GlobalContext);
-    const [categorias, setCategorias] = useState([]);
-
-
-    useEffect(() => {
-        setCategorias(listaCategorias)
-    }, [listaCategorias, categorias])
 
     return (
-        <div>
-            ListarCategoria
-            <ul>
-                {categorias.map((categoria) => (
-                    <li key={categoria.id}>{categoria.nombre}</li>
+        <div className="categorias-list">
+            <h2>Lista de Categorías:</h2>
+            <ul className="vertical-list">
+                {listaCategorias.map((categoria) => (
+                    <li key={categoria.id}>{categoria.titulo}</li>
                 ))}
             </ul>
         </div>
-    )
+    );
 }
 
-export default ListarCategoria
+export default ListarCategoria;

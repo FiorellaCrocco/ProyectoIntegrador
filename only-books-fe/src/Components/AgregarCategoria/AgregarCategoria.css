@@ -1,0 +1,58 @@
+/* Estilos para AgregarCategoria */
+
+.agregar-categoria {
+    background: rgb(84, 157, 194);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
+    color: #EFFAFF;
+    width: 300px;
+}
+
+.agregar-categoria h2 {
+    color: #EFFAFF;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.agregar-categoria form {
+    display: flex;
+    flex-direction: column;
+}
+
+.agregar-categoria label {
+    color: #EFFAFF;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.agregar-categoria input,
+.agregar-categoria textarea {
+    all: unset;
+    color: #EFFAFF;
+    padding: 8px;
+    border: 1px solid #9cc6dd;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.agregar-categoria button[type="submit"] {
+    background-color: #28a745;
+    /* Cambia el color de fondo a verde brillante */
+    color: #fff;
+    /* Cambia el color del texto a blanco */
+    border: 1px solid #28a745;
+    /* Cambia el borde al mismo color de fondo */
+    border-radius: 10px;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.25s;
+    /* Agrega una transición al cambio de color de fondo */
+
+    /* Agrega un efecto de brillo al pasar el mouse */
+    &:hover {
+        background-color: #4caf50;
+        /* Cambia el color de fondo al pasar el mouse */
+    }
+}

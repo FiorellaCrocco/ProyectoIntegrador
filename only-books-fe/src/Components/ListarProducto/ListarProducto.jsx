@@ -1,8 +1,6 @@
-/* eslint-disable no-unused-vars */
 import React, { useContext, useEffect, useState } from "react";
 import "./ListarProducto.css";
 import Button from "@mui/material/Button";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { Dialog, DialogContent, DialogActions } from "@mui/material";
 import { GlobalContext } from "../../Context/globalContext";
 import EditarProducto from "../EditarProducto/EditarProducto";

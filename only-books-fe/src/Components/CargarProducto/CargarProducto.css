@@ -5,7 +5,11 @@
     padding-top: 10px;
     /* padding-bottom: 200px; */
     /* background-color: transparent */
-    
+    background: #cae0ed;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
+
 }
 
 .FormBtn {
@@ -22,7 +26,7 @@
     font-weight: 500;
     font-family: inherit;
     transition: border-color 0.25s;
-    
+
 }
 
 .titulo {
@@ -54,7 +58,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+
 }
 
 .div {

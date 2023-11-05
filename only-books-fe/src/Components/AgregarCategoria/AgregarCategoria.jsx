@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./AgregarCategoria.css";
 
 function AgregarCategoria() {
   const [categoria, setCategoria] = useState({
@@ -39,7 +40,7 @@ function AgregarCategoria() {
   }
 
   return (
-    <div>
+    <div className="agregar-categoria">
       <h2>Crear Nueva Categoría</h2>
       <form onSubmit={handleSubmit}>
         <div>

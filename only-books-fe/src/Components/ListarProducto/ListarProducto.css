@@ -1,14 +1,14 @@
 .listaContainerAdmin {
   display: flex;
   flex-direction: column;
-  /* justify-content: center;
-  align-content: center;
-  align-items:center; */
-  color: black;
-  background-color: white;
+  color: #182b39;
   margin: 20px 80px 20px;
   padding-top: 25px;
   padding-bottom: 25px;
+  background: #cae0ed;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
 }
 
 .lista {
@@ -23,8 +23,11 @@
   padding: 20px;
   margin-top: 0;
   margin-bottom: 0;
-  background-color: #f1ba90;
+  background-color: #cae0ed;
+  color: #182b39;
   text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 15px 35px rgba(16, 91, 230, 0.93);
 }
 
 .id {
@@ -33,6 +36,15 @@
 
 .btnEdit {
   margin-right: 20px;
+  background-color: #28a745; /* Cambia el color de fondo a verde brillante */
+  color: #fff; /* Cambia el color del texto a blanco */
+  border: 1px solid #28a745; /* Cambia el borde al mismo color de fondo */
+  transition: background-color 0.25s; /* Agrega una transición al cambio de color de fondo */
+
+  /* Agrega un efecto de brillo al pasar el mouse */
+  &:hover {
+    background-color: #4caf50; /* Cambia el color de fondo al pasar el mouse */
+  }
 }
 
 .admin-btn-container {
