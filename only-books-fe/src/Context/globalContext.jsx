@@ -7,11 +7,11 @@ export const BookProvider = ({ children }) => {
   const [listaLibros, setListaLibros] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [listaCategorias, setListaCategorias] = useState([])
+
   const url = "http://localhost:8080/book/listar";
   //const url = "https://onlybooks.isanerd.club/api/book/listar";
   const urlCategorias = "http://localhost:8080/categoria/listar";
   //const urlCategorias = "http://onlybooks.isanerd.club/api/categoria/listar";
-
 
   const fetchData = async () => {
     try {
@@ -41,6 +41,20 @@ export const BookProvider = ({ children }) => {
     }
   };
 
+  const fetchBookById = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:8080/book/${id}`);
+      if (!response.ok) {
+        throw new Error("No se pudo obtener el libro.");
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error al cargar el libro:", error);
+      return null;
+    }
+  };
+
   const actualizarListaLibros = async () => {
     // Lógica para actualizar la lista después de realizar operaciones
     // por ejemplo, puedes llamar a la función fetchData nuevamente
@@ -55,7 +69,7 @@ export const BookProvider = ({ children }) => {
 
 
   return (
-    <GlobalContext.Provider value={{ listaCategorias, listaLibros, isLoading, actualizarListaLibros }}>
+    <GlobalContext.Provider value={{ listaCategorias, listaLibros, isLoading, actualizarListaLibros, fetchBookById }}>
       {children}
     </GlobalContext.Provider>
   );

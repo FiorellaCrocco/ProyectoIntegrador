@@ -1,55 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import LanguageIcon from '@mui/icons-material/Language';
-import AutoStoriesIcon from '@mui/icons-material/AutoStories';
-import CakeIcon from '@mui/icons-material/Cake';
-import ExplicitIcon from '@mui/icons-material/Explicit';
+import React, { useState, useEffect, useContext } from 'react';
+import { GlobalContext } from "../../Context/globalContext";
 import './CaracteristicaLibro.css';
-import data from '../LibrosPaginados/libros';
 
-const CaracteristicaLibro = ({id}) => {
+const CaracteristicaLibro = ({ id }) => {
+  const { fetchBookById } = useContext(GlobalContext);
   const [bookData, setBookData] = useState(null);
-
-  const libro = data.find((book) => book.id == id);
-  console.log("Imprimo el libro");
-  console.log(libro);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch data from the API endpoint
-    fetch(`http://localhost:5173/book/${id}`) //la URL actual API endpoint
-      .then(response => response.json())
-      .then(data => setBookData(data))
-      .catch(error => console.error('Error fetching data:', error));
-      console.log(bookData)
-  }, []); // Empty dependency array ensures the effect runs once after the initial render
+    const loadBook = async () => {
+      setIsLoading(true);
+      const data = await fetchBookById(id);
+      if (data) {
+        setBookData(data);
+      }
+      setIsLoading(false);
+    };
+
+    loadBook();
+  }, [fetchBookById, id]);
 
   return (
-    <div className='divAmplio'> 
-        <h4 className='caract'>Caracteristicas</h4>
-        {bookData ? (
+    <div className='divAmplio'>
+      <h4 className='caract'>Caracteristicas</h4>
+      {console.log(bookData)}
+      {isLoading ? (
+        <p>Cargando información...</p>
+      ) : bookData && bookData.caracteristicas ? (
+        <div>
           <ul className='listaCarac'>
-            <li className='listaIcon'>
-                <LanguageIcon />
-                <p>{bookData.language}</p>
-            </li>
-            
-            <li className='listaIcon'>
-                <AutoStoriesIcon/>
-                <p>{bookData.pages} paginas</p>
-            </li>
-            
-            <li className='listaIcon'>
-                <CakeIcon/>
-                <p>{bookData.ageRestriction}</p>
-            </li>
-
-            <li className='listaIcon'>
-                <ExplicitIcon/>
-                <p>{bookData.explicit ? 'Si' : 'No'}</p>
-            </li>
+            {bookData.caracteristicas.map((caracteristica, index) => (
+              <li className='listaIcon' key={index}>
+                {/* <img src={caracteristica.icono} alt={caracteristica.title} /> */}
+                <p>
+                  <strong>{caracteristica.title}</strong> 
+                </p>
+              </li>
+            ))}
           </ul>
-        ) : (
-          <p>Cargando informacion...</p>
-        )}
+        </div>
+      ) : (
+        <p>No se pudieron cargar los datos del libro.</p>
+      )}
+
     </div>
   );
 }
