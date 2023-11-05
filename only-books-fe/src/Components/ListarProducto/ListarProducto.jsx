@@ -74,7 +74,9 @@ const ListarProducto = () => {
       <h2 className="tituloListaAdmin">Listado de productos</h2>
       <ul className="listaContainerAdmin">
         {productos.map((libro) => (
+          
           <li className="lista" key={libro.id}>
+            {console.log(libro)}
             <div className="id">{libro.id}</div>
             <div className="nombre">{libro.title}</div>
             <div className="admin-btn-container">
