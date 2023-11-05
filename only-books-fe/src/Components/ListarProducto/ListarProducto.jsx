@@ -77,6 +77,7 @@ const ListarProducto = () => {
           <li className="lista" key={libro.id}>
             <div className="id">{libro.id}</div>
             <div className="nombre">{libro.title}</div>
+            {console.log(libro)}
             <div className="admin-btn-container">
               <Button
                 variant="outlined"

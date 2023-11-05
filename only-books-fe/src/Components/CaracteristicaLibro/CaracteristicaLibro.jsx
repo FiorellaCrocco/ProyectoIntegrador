@@ -4,10 +4,14 @@ import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import CakeIcon from '@mui/icons-material/Cake';
 import ExplicitIcon from '@mui/icons-material/Explicit';
 import './CaracteristicaLibro.css';
-// import data from '../LibrosPaginados/libros';
+import data from '../LibrosPaginados/libros';
 
 const CaracteristicaLibro = ({id}) => {
   const [bookData, setBookData] = useState(null);
+
+  const libro = data.find((book) => book.id == id);
+  console.log("Imprimo el libro");
+  console.log(libro);
 
   useEffect(() => {
     // Fetch data from the API endpoint
