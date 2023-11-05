@@ -36,7 +36,7 @@ function DetalleLibro({ id }) {
         </div>
         <button className={styles.btnAtras} onClick={() => window.history.back()}>Volver</button>
       </div>
-      <CaracteristicaLibro/>
+      <CaracteristicaLibro id = {id}/>
 
     </div>
   );
