@@ -12,6 +12,7 @@ export const BookProvider = ({ children }) => {
   //const url = "https://onlybooks.isanerd.club/api/book/listar";
   const urlCategorias = "http://localhost:8080/categoria/listar";
   //const urlCategorias = "http://onlybooks.isanerd.club/api/categoria/listar";
+  
 
   const fetchData = async () => {
     try {

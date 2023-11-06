@@ -1,10 +1,9 @@
-
 h1 a {
 	text-decoration: none;
 	color: #EFFAFF;
 }
 
-#h2-form{
+#h2-form {
 	color: #EFFAFF;
 }
 
@@ -48,24 +47,25 @@ nav a {
 	background-color: #fff;
 	color: #000;
 }
+
 /*    background-color: #EFFAFF;
     color: #539DC2;
 */
 
 .wrapper {
 	width: 400px;
-	background:rgb(84, 157, 194);
+	background: rgb(84, 157, 194);
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	padding: 40px;
 	border-radius: 34px;
 	box-shadow: 0 15px 35px rgba(0, 0, 0, 9);
-	
-	
+
+
 }
 
-.login-container{
+.login-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -73,7 +73,7 @@ nav a {
 	padding-top: 30px;
 	padding-bottom: 30px;
 	height: 77vh;
-	background-color:#EFFAFF ;
+	background-color: #EFFAFF;
 }
 
 form {
@@ -92,6 +92,7 @@ body {
 }
 
 .input-group {
+	all: unset;
 	font-size: 1.25rem;
 	position: relative;
 	--primary: #EFFAFF;
@@ -131,6 +132,16 @@ body {
 	color: var(--primary);
 }
 
+.input:not(:placeholder-shown)~label,
+.input:focus~label {
+	transform: translateY(-170%) scale(0.7);
+	background-color: rgb(84, 157, 194);
+	padding-inline: 0.3rem;
+	color: var(--primary);
+}
+
+
+
 /* BOTON DE REGISTRO */
 
 .btn-lr {
@@ -159,7 +170,7 @@ body {
 	left: 100%;
 	width: 120%;
 	height: 220%;
-	/* background-color: #2196f3;*/ 
+	/* background-color: #2196f3;*/
 	background: #a11a8b;
 	border-radius: 50%;
 	z-index: -1;
@@ -171,8 +182,22 @@ body {
 	left: -10%;
 }
 
-.passwordError{
-	color: rgb(236, 49, 32);
-	font-weight: 700;
-	margin: 10px;
+.error-message {
+	color: #FF0000;
+	/* Color rojo */
+	font-size: 15px;
+	/* Tamaño de fuente */
+	margin-top: 5px;
+	/* Espacio superior */
+	text-align: center;
+	/* Alineación centrada */
+	background-color: #88c7f1;
+	/* Fondo ligero */
+	border: 1px solid #FF0000;
+	/* Borde rojo */
+	padding: 5px;
+	/* Espaciado interno */
+	border-radius: 4px;
+	/* Bordes redondeados */
+
 }
