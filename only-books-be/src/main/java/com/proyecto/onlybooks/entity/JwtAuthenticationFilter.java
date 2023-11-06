@@ -3,6 +3,7 @@ package com.proyecto.onlybooks.entity;
 
 import java.io.IOException;
 
+import com.proyecto.onlybooks.service.impl.JwtService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,7 +24,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-
+    private final JwtService jwtService;
+    private final UserDetailsService userDetailsService;
 
 
     @Override
@@ -31,11 +33,26 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         final String token = getTokenFromRequest(request);
+        final String username;
 
         if (token == null) {
             filterChain.doFilter(request, response);
             return;
 
+        }
+        username=jwtService.getUsernameFromToken(token);
+
+        if (username!=null && SecurityContextHolder.getContext().getAuthentication()==null) {
+            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+            if (jwtService.isTokenValid(token, userDetails)) {
+                UsernamePasswordAuthenticationToken authToken= new UsernamePasswordAuthenticationToken(
+                        userDetails,
+                        null,
+                        userDetails.getAuthorities());
+                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+                SecurityContextHolder.getContext().setAuthentication(authToken);
+            }
         }
         filterChain.doFilter(request, response);
 
@@ -48,7 +65,4 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         return null;
     }
-
-
-
 }

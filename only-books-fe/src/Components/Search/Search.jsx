@@ -8,8 +8,8 @@ import Recomendados from '../Recomendados/Recomendados';
 const Search = () => {
     const { listaLibros, isLoading, listaCategorias } = useContext(GlobalContext);
     const [listaAleatoria, setListaAleatoria] = useState([]);
-    const [searchTerm, setSearchTerm] = useState("");
     const [selectedCategory, setSelectedCategory] = useState([]);
+    const [filteredProducts,setFilteredProducts] = useState([]);
 
     const selectLibrosAleatorios = (libros, cantidad) => {
         const librosSeleccionados = [];
@@ -22,12 +22,7 @@ const Search = () => {
         return librosSeleccionados;
     };
 
-    const handleSearchChange = (event) => {
-        setSearchTerm(event.target.value);
-    };
-
-    const handleCategoryChange = (event) => {
-        const category = event.target.value;
+    const handleCategoryChange = (category) => {
         if (selectedCategory.includes(category)) {
             setSelectedCategory(selectedCategory.filter((c) => c !== category));
         } else {
@@ -43,28 +38,9 @@ const Search = () => {
         setListaAleatoria(listaAleatoria);
     }, [listaLibros]);
 
-    const renderCategoryOptions = () => {
-        const categorias = listaCategorias;
-
-        return categorias.map((category, index) => (
-            <div key={index} className="category-square">
-                <img src={category.imagen} alt={category.titulo} />
-                <label>
-                    <input
-                        type="checkbox"
-                        value={category.titulo}
-                        checked={selectedCategory.includes(category.titulo)}
-                        onChange={handleCategoryChange}
-                    />
-                    {category.titulo}
-                </label>
-            </div>
-        ));
-    };
-
-    const renderProductRecommendations = () => {
-        const filteredProducts = listaAleatoria.filter((product) => {
-            if (selectedCategory.length == 0 || selectedCategory == "") {
+    useEffect(() => {
+        const listaFiltrada = listaAleatoria.filter((product) => {
+            if (selectedCategory.length === 0 || selectedCategory === "") {
                 return true;
             } else {
                 return (
@@ -75,8 +51,22 @@ const Search = () => {
                 );
             }
         });
-        return filteredProducts;
+        setFilteredProducts(listaFiltrada);
+    }, [selectedCategory, listaAleatoria]);
+
+    const renderCategoryOptions = () => {
+        const categorias = listaCategorias;
+        return categorias.map((category, index) => (
+            <div key={index} className={`category-square  ${selectedCategory.includes(category.titulo)?'selected':''}`}>
+                <img src={category.imagen} alt={category.titulo} 
+                onClick={()=>handleCategoryChange(category.titulo)}/>
+                <label value={category.titulo}>
+                    {category.titulo}
+                </label>
+            </div>
+        ));
     };
+
     return (
         <>
 
@@ -85,10 +75,11 @@ const Search = () => {
                     <div className="category-select">
                         {renderCategoryOptions()}
                     </div>
+                    <button className="clearCategorybtn"onClick={()=>{setSelectedCategory([])}}>X</button>
                 </div>
             </div>
             <Recomendados libros={listaLibros}></Recomendados>
-            <LibrosPaginados libros={renderProductRecommendations()} isLoading={isLoading}></LibrosPaginados>
+            <LibrosPaginados libros={filteredProducts} isLoading={isLoading}></LibrosPaginados>
         </>
     );
 }

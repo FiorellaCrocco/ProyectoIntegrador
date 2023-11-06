@@ -20,34 +20,34 @@ public class CategoriaController {
         this.categoriaService = categoriaService;
     }
 
-    // En la url "/user/listar" retorno una lista de UserDTO
+    // En la url "/categoria/listar" retorno una lista de UserDTO
     @GetMapping("/listar")
     public List<Categoria> listarCategorias() {
         List<Categoria> categorias = categoriaService.mostrarTodos();
         return categorias;
     }
 
-    // En la url "/user/{id}" retorno el UserDTO deseado (segun el ID) y si no lo encuentra se dispara una Exception
+    // En la url "/categoria/{id}" retorno el UserDTO deseado (segun el ID) y si no lo encuentra se dispara una Exception
     @GetMapping("/{id}")
     public ResponseEntity<Categoria> buscarUnaCategoria(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(categoriaService.buscarPorId(id));
     }
 
-    // En la url "/user/agregar" hacemos un POST para guardar el user
+    // En la url "/categoria/agregar" hacemos un POST para guardar el user
     @PostMapping("/agregar")
     public ResponseEntity<?> agregarCategoria(@RequestBody Categoria categoria) {
         categoriaService.guardar(categoria);
         return ResponseEntity.status(HttpStatus.OK).body(categoria.getId());
     }
 
-    // En la url "/user/modificar" actualizamos un user ya existente
+    // En la url "/categoria/modificar" actualizamos un user ya existente
     @PutMapping("/modificar")
     public ResponseEntity<?> actualizarUnaCategoria(@RequestBody Categoria categoria) {
         categoriaService.modificar(categoria);
         return ResponseEntity.ok().body("Se modificó la categoría.");
     }
 
-    // En la url "/user/eliminar/{id}" utilizamos el metodo DELETE para eliminar un user segun su ID, si no existe lanzo ResourceNotFoundException
+    // En la url "/categoria/eliminar/{id}" utilizamos el metodo DELETE para eliminar un user segun su ID, si no existe lanzo ResourceNotFoundException
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<?> eliminarCategoria(@PathVariable Long id) throws ResourceNotFoundException {
         ResponseEntity<?> response = null;

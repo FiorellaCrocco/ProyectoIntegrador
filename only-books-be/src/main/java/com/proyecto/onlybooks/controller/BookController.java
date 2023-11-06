@@ -14,6 +14,7 @@ import com.proyecto.onlybooks.service.impl.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
@@ -62,7 +63,8 @@ public class BookController {
     public ResponseEntity<BookDTO> buscarUnBook(@PathVariable Long id) throws Exception {
         return ResponseEntity.ok(bookService.buscarPorId(id));
     }
-
+    // En la url "/book/agregar"
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/agregar")
     public ResponseEntity<?> agregar(@RequestBody Book book) {
         // Extraer otros datos del libro
@@ -143,6 +145,7 @@ public class BookController {
         return response;
     }
 
+    // "/{bookId}/caracteristica/{caracteristicaId}"
     @PutMapping("/{bookId}/caracteristica/{caracteristicaId}")
     public ResponseEntity<?> agregarCaracteristica(@PathVariable Long bookId, @PathVariable Long caracteristicaId) throws ResourceNotFoundException{
         ResponseEntity<?> response=null;

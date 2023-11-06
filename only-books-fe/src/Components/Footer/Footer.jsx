@@ -43,23 +43,23 @@ const Footer = () => {
                     {/* <h4>CONTACTO</h4> */}
                     <ul>
                         <li className="item">
-                            <a href="https://www.instagram.com/">
+                            <a href="https://www.instagram.com/" target="_blank">
                                 <FontAwesomeIcon className='icon' icon={faInstagram} />
                             </a>
                         </li>
                         <li className="item">
-                            <a href="https://www.linkedin.com">
+                            <a href="https://www.linkedin.com" target="_blank">
                                 <FontAwesomeIcon className='icon' icon={faLinkedin} />
                             </a>
                         </li>
                         <li className="item">
-                            <a href="https://www.youtube.com">
+                            <a href="https://www.youtube.com" target="_blank">
                                 {/* <i className="fa-brands fa-youtube icon"></i> */}
                                 <FontAwesomeIcon className='icon' icon={faYoutube} />
                             </a>
                         </li>
                         <li className="item">
-                            <a href="https://twitter.com">
+                            <a href="https://twitter.com" target="_blank">
                                 {/* <i className="fa-brands fa-x-twitter icon"></i> */}
                                 <FontAwesomeIcon className='icon' icon={faXTwitter} />
                             </a>
