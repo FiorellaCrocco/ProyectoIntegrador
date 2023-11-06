@@ -167,7 +167,7 @@ export const RegisterPage = () => {
 						/>
 						<label className='label' htmlFor='password'>Repetir Contraseña</label>
 					</div>
-					<div className='passwordError'>{passwordError}</div>
+					<div className='error-message'>{passwordError}</div>
 
 					<button className='btn-lr'>Registrarse</button>
 				</form>
