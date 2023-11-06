@@ -11,12 +11,12 @@ export const LoginPage = () => {
 	const [loginError, setLoginError] = useState(null);
 	const [isTyping, setIsTyping] = useState(false);
 
-
 	const { email, password, onInputChange, onResetForm } =
 		useForm({
 			email: '',
 			password: '',
 		});
+
 	const settings={
 		method:'POST',
 		headers:{
@@ -28,6 +28,7 @@ export const LoginPage = () => {
 		})
 
 	}
+
 	//onLogin
 	const onLogin = async(e) => {
 		e.preventDefault();
@@ -36,7 +37,14 @@ export const LoginPage = () => {
 		try{
 			const response = await fetch(url,settings)
 			console.log(response)
-			if(response.status==200){
+			if(response.status===200){
+
+				    // Autenticación exitosa, obtener el token del cuerpo de la respuesta
+					const data = await response.json();
+        			const { token } = data;		
+					// Almacenar el token en sessionStorage
+					sessionStorage.setItem('token', token);
+
 				navigate('/', {
 					replace: true,
 					state: {
