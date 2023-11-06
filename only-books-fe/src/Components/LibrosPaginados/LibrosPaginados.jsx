@@ -44,6 +44,7 @@ function LibrosPaginados({ libros,isLoading }) {
         <>
             <div className="listaContainer">
                 {isLoading?<div className="loader"></div>:<></>}
+                <h4 className="cantLibros">Cantidad de libros: {libros.length}</h4>
                 <ul className="listaPaginada">
                     {currentItem.map((item) => {
                         return (
