@@ -31,7 +31,7 @@ const CaracteristicaLibro = ({ id }) => {
           <ul className='listaCarac'>
             {bookData.caracteristicas.map((caracteristica, index) => (
               <li className='listaIcon' key={index}>
-                {/* <img src={caracteristica.icono} alt={caracteristica.title} /> */}
+                <img src={caracteristica.icono} alt={caracteristica.title} className='imgIcono'/> 
                 <p>
                   <strong>{caracteristica.title}</strong> 
                 </p>

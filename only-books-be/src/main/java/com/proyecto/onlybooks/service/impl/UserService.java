@@ -80,4 +80,16 @@ public class UserService implements IUserService {
         }
     }
 
+    public UserDTO buscarPorEmail(String email)throws ResourceNotFoundException{
+        Optional<User> found = iUserRepository.findByEmail(email);
+        objectMapper.registerModule(new JavaTimeModule());
+        if(found.isPresent()){
+            return objectMapper.convertValue(found, UserDTO.class);
+        }else{
+            logger.error("No se ha encontrado ningun usuario con email " + email);
+            throw new ResourceNotFoundException("No se ha encontrado el usuario");
+        }
+
+    }
+
 }

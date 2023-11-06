@@ -7,9 +7,11 @@ export const BookProvider = ({ children }) => {
   const [listaLibros, setListaLibros] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [listaCategorias, setListaCategorias] = useState([])
+  const [token, setToken] = useState(sessionStorage.getItem('token') || '');
 
-  const url = "http://localhost:8080/book/listar";
-  //const url = "https://onlybooks.isanerd.club/api/book/listar";
+
+  const url = "http://localhost:8080/book/listarexpress";
+  //const url = "https://onlybooks.isanerd.club/api/book/listarexpress";
   const urlCategorias = "http://localhost:8080/categoria/listar";
   //const urlCategorias = "http://onlybooks.isanerd.club/api/categoria/listar";
   
@@ -62,15 +64,23 @@ export const BookProvider = ({ children }) => {
     await fetchData();
   };
 
+  const actualizarCategorias = async () => {
+    await fetchCategorias();
+  };
 
   useEffect(() => {
     fetchData();
     fetchCategorias();
   }, []);
 
+  const logout = () => {
+    setToken('');
+    sessionStorage.removeItem('token');
+  };
+
 
   return (
-    <GlobalContext.Provider value={{ listaCategorias, listaLibros, isLoading, actualizarListaLibros, fetchBookById }}>
+    <GlobalContext.Provider value={{ listaCategorias, listaLibros, isLoading, actualizarListaLibros, actualizarCategorias, fetchBookById, logout }}>
       {children}
     </GlobalContext.Provider>
   );

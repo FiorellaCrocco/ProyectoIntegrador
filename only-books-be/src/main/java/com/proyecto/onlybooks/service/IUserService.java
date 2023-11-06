@@ -13,5 +13,5 @@ public interface IUserService {
     UserDTO buscarPorId(Long id) throws ResourceNotFoundException;
     void modificar(User user);
     void eliminar(Long id) throws ResourceNotFoundException;
-
+    UserDTO buscarPorEmail(String email) throws ResourceNotFoundException;
 }

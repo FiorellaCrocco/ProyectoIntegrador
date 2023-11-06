@@ -1,4 +1,6 @@
+/* eslint-disable no-unsafe-finally */
 /* eslint-disable no-unused-vars */
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from './Hook/UseForm'
@@ -6,67 +8,114 @@ import './log&register.css'
 //RegisterPage
 export const RegisterPage = () => {
 	const [passwordError, setPasswordError] = useState('')
+	const [emailError, setEmailError] = useState('')
+	const [userExist, setUserExist] = useState()
 	const navigate = useNavigate();
 	const url = "http://localhost:8080/auth/register"
 	//const url = "https://onlybooks.isanerd.club/api/auth/register";
 
-	const passwordRegex= /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+	const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 
-	function validatePassword(password){
-		const samePassword = password==repeatPassword? true:false
-		return passwordRegex.test(password)&&samePassword
+	function validatePassword(password) {
+		const samePassword = password == repeatPassword ? true : false
+		return passwordRegex.test(password) && samePassword
 	}
 
-	const { name, lastname, email,dni, password, repeatPassword, onInputChange, onResetForm } =
+	//const passwordRegex= /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,16}$/;
+	// function validatePassword(password) {
+	// 	const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,16}$/;
+	// 	if (password.length < 8) {
+	// 	  return "Tu contraseña es demasiado corta. Debe tener al menos 8 caracteres.";
+	// 	}
+	// 	if (!passwordRegex.test(password)) {
+	// 	  return "La contraseña no cumple con los requisitos.";
+	// 	}
+	// 	return true;
+	//   }
+
+	const validateUserExist = async (email) => {
+		setEmailError('');
+		try {
+			const url = `http://localhost:8080/user/perfil/${email}`;
+			const response = await fetch(url);
+
+			if (response.ok) {
+				const data = await response.json();
+
+				if (data && data.email === email) {
+					setEmailError('Ya existe un usuario con ese email');
+					console.log("Usuario existente");
+					setUserExist(true);
+				} else {
+					setUserExist(false);
+				}
+			} else {
+				setUserExist(false);
+			}
+		} catch (error) {
+			console.log(error);
+		} finally {
+			return userExist;
+		}
+	}
+
+
+	const { name, lastname, email, dni, password, repeatPassword, onInputChange, onResetForm } =
 		useForm({
 			name: '',
 			lastname: '',
 			email: '',
-			dni:'',
+			dni: '',
 			password: '',
 			repeatPassword: '',
 		});
 
-		const settings={
-			method:'POST',
-			headers:{
-				'Content-Type':'application/json'
-			},
-			body: JSON.stringify({
-				name:name,
-				lastname:lastname,
-				email:email,
-				dni:dni,
-				password:password,
-				rol: 'USER'
-			})
-	
-		}
+	const settings = {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			name: name,
+			lastname: lastname,
+			email: email,
+			dni: dni,
+			password: password,
+			rol: 'USER'
+		})
+
+	}
 
 	const onRegister = async (e) => {
 		e.preventDefault();
-		if(validatePassword(password)){
-			setPasswordError('')
-			try{
-				const response = await fetch(url,settings)
-				console.log(response)
-				if(response.status==200){
-					navigate('/', {
-						replace: true,
-						state: {
-							logged: true
-						}
-					});
+		validateUserExist(email)
+		console.log(userExist);
+		if (userExist == false) {
+			if (validatePassword(password)) {
+				setPasswordError('')
+				try {
+					const response = await fetch(url, settings)
+					console.log(response)
+					if (response.status == 200) {
+						navigate('/', {
+							replace: true,
+							state: {
+								logged: true
+							}
+						});
+					}
+				} catch {
+					(error) => {
+						console.log(error)
+					}
 				}
-			}catch{(error)=>{
-				console.log(error)
-			}}
-			onResetForm();
-		}else{
-			setPasswordError("La contraseña no cumple con los requerimientos")
+				onResetForm();
+			} else {
+				setPasswordError("La contraseña no cumple con los requerimientos")
+			}
 		}
 
-		}
+	}
 
 
 	return (
@@ -167,8 +216,8 @@ export const RegisterPage = () => {
 						/>
 						<label className='label' htmlFor='password'>Repetir Contraseña</label>
 					</div>
-					<div className='error-message'>{passwordError}</div>
-
+					<div className='passwordError'>{passwordError}</div>
+					<div className='passwordError'>{emailError}</div>
 					<button className='btn-lr'>Registrarse</button>
 				</form>
 			</div>
@@ -177,4 +226,3 @@ export const RegisterPage = () => {
 }
 
 export default RegisterPage;
-

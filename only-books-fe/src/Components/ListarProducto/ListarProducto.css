@@ -1,25 +1,36 @@
+.listaProductosAdmin{
+  width: 80%;
+}
+
 .listaContainerAdmin {
+  width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   color: #182b39;
-  margin: 20px 80px 20px;
+  /*margin: 20px 80px 20px;*/
   padding-top: 25px;
   padding-bottom: 25px;
   background: #cae0ed;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
+  overflow-y: scroll;
 }
 
 .lista {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
   padding-top: 5px;
   padding-bottom: 5px;
-  column-count: 3;
-  column-gap: 20px;
   margin: 5px 0;
 }
 
 .tituloListaAdmin {
+  width: 100%;
   padding: 20px;
   margin-top: 0;
   margin-bottom: 0;
@@ -51,5 +62,6 @@
   display: flex;
   width: 200px;
   justify-content: space-between;
-  margin-top: 10px;
+
+
 }

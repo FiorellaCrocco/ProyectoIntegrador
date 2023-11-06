@@ -3,6 +3,7 @@ package com.proyecto.onlybooks.service.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.proyecto.onlybooks.dto.BookDTO;
+import com.proyecto.onlybooks.dto.BookSummary;
 import com.proyecto.onlybooks.entity.Book;
 import com.proyecto.onlybooks.entity.Caracteristica;
 import com.proyecto.onlybooks.entity.Categoria;
@@ -173,5 +174,17 @@ public class BookService implements IBookService {
         lista.add(c);
         b.setCaracteristicas(lista);
         this.guardar(b);
+    }
+
+    public List<BookSummary> listarTodosExpress() throws ResourceNotFoundException{
+
+        List<BookSummary> lista = iBookRepository.findLibroSummary();
+        for(BookSummary b : lista){
+            b.setCategorias(iBookRepository.buscarCategoriaByBookId(b.getId()));
+            List<String> listaImagenes = iBookRepository.buscarImages(b.getId());
+            String imagen = listaImagenes.stream().findFirst().orElse(null);
+            b.setImgUrl(imagen);
+        }
+        return lista;
     }
 }
