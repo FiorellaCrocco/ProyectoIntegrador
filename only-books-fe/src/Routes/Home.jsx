@@ -1,4 +1,3 @@
-
 import React, { useContext, useEffect, useState } from 'react'
 import Search from '../Components/Search/Search'
 import { GlobalContext } from "../Context/globalContext";
@@ -7,7 +6,7 @@ import './Home.css'
 
 
 const Home = () => {
-
+  
   const { listaLibros, isLoading } = useContext(GlobalContext);
   
   return (
