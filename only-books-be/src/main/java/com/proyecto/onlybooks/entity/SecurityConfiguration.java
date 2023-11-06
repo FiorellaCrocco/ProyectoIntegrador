@@ -38,7 +38,8 @@ public class SecurityConfiguration {
                                 .requestMatchers("/user/**").permitAll()
                                 .requestMatchers("/subscription/**").permitAll()
                                 .requestMatchers("/bookRent/**").permitAll()
-
+                                .requestMatchers("/doc/**").permitAll()
+                                .requestMatchers("/v3/api-docs/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .cors(withDefaults())
