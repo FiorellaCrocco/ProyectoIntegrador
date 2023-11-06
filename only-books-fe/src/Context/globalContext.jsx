@@ -7,6 +7,8 @@ export const BookProvider = ({ children }) => {
   const [listaLibros, setListaLibros] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [listaCategorias, setListaCategorias] = useState([])
+  const [token, setToken] = useState(sessionStorage.getItem('token') || '');
+
 
   const url = "http://localhost:8080/book/listarexpress";
   //const url = "https://onlybooks.isanerd.club/api/book/listarexpress";
@@ -71,9 +73,14 @@ export const BookProvider = ({ children }) => {
     fetchCategorias();
   }, []);
 
+  const logout = () => {
+    setToken('');
+    sessionStorage.removeItem('token');
+  };
+
 
   return (
-    <GlobalContext.Provider value={{ listaCategorias, listaLibros, isLoading, actualizarListaLibros, actualizarCategorias, fetchBookById }}>
+    <GlobalContext.Provider value={{ listaCategorias, listaLibros, isLoading, actualizarListaLibros, actualizarCategorias, fetchBookById, logout }}>
       {children}
     </GlobalContext.Provider>
   );

@@ -1,23 +1,24 @@
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+import { useState , useContext} from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import "./Navbar.css";
-
+import { GlobalContext } from "../../Context/globalContext";
 
 
 const Navbar = () => {
 
+    const { logout } = useContext(GlobalContext);
     const { state } = useLocation();
     const navigate = useNavigate();
 
     // console.log(state);
 
     const onLogout = () => {
+        logout();
         navigate('/', {
             replace: true,
         });
     };
-
 
 
     return (
