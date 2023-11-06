@@ -6,6 +6,8 @@ import './log&register.css'
 //RegisterPage
 export const RegisterPage = () => {
 	const [passwordError, setPasswordError] = useState('')
+	const [emailError, setEmailError] = useState('')
+	const [userExist, setUserExist] = useState()
 	const navigate = useNavigate();
 	const url = "http://localhost:8080/auth/register"
 	//const url = "https://onlybooks.isanerd.club/api/auth/register";
@@ -16,6 +18,33 @@ export const RegisterPage = () => {
 		const samePassword = password==repeatPassword? true:false
 		return passwordRegex.test(password)&&samePassword
 	}
+
+	const validateUserExist = async (email) => { 
+		setEmailError('');
+		try {
+		  const url = `http://localhost:8080/user/perfil/${email}`;
+		  const response = await fetch(url);
+		  
+		  if (response.ok) {
+			const data = await response.json();
+			
+			if (data && data.email === email) {
+			  setEmailError('Ya existe un usuario con ese email');
+			  console.log("Usuario existente");
+			  setUserExist(true);
+			} else {
+			  setUserExist(false);
+			}
+		  } else {
+			setUserExist(false);
+		  }
+		} catch (error) {
+		  console.log(error);
+		} finally {
+		  return userExist;
+		}
+	  }
+	  
 
 	const { name, lastname, email,dni, password, repeatPassword, onInputChange, onResetForm } =
 		useForm({
@@ -45,27 +74,31 @@ export const RegisterPage = () => {
 
 	const onRegister = async (e) => {
 		e.preventDefault();
-		if(validatePassword(password)){
-			setPasswordError('')
-			try{
-				const response = await fetch(url,settings)
-				console.log(response)
-				if(response.status==200){
-					navigate('/', {
-						replace: true,
-						state: {
-							logged: true
-						}
-					});
-				}
-			}catch{(error)=>{
-				console.log(error)
-			}}
-			onResetForm();
-		}else{
-			setPasswordError("La contraseña no cumple con los requerimientos")
+		validateUserExist(email)
+		console.log(userExist);
+		if(userExist==false){
+			if(validatePassword(password)){
+						setPasswordError('')
+						try{
+							const response = await fetch(url,settings)
+							console.log(response)
+							if(response.status==200){
+								navigate('/', {
+									replace: true,
+									state: {
+										logged: true
+									}
+								});
+							}
+						}catch{(error)=>{
+							console.log(error)
+						}}
+						onResetForm();
+					}else{
+						setPasswordError("La contraseña no cumple con los requerimientos")
+					}
 		}
-
+		
 		}
 
 
@@ -168,7 +201,7 @@ export const RegisterPage = () => {
 						<label className='label' htmlFor='password'>Repetir Contraseña</label>
 					</div>
 					<div className='passwordError'>{passwordError}</div>
-
+					<div className='passwordError'>{emailError}</div>
 					<button className='btn-lr'>Registrarse</button>
 				</form>
 			</div>
