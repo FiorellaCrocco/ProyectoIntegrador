@@ -3,6 +3,11 @@
     
 }
 
+.caract{
+    text-align: center;
+    margin: 1px;
+}
+
 .listaCarac{
     display: flex;
     flex-direction: row;
@@ -12,10 +17,13 @@
 .listaIcon{
     display: flex;
     flex-direction: row;
-
     align-items: flex-end;
 }
 
 .listaIcon>p{
     margin-left: 8px;
+}
+
+.imgIcono{
+    max-width: 25px;
 }
