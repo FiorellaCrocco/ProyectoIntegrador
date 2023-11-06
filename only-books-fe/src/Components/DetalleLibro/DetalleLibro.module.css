@@ -115,3 +115,22 @@
 .btnAtras:hover {
     background-color: #cf7937;
 }
+
+/*alinear boton cerrar*/
+.popup{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.closeBtn{
+
+    background-color: #F89344;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 8px;
+    border: none;
+    border-radius: 10%;
+    margin: 20px;
+}
