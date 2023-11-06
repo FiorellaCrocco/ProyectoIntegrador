@@ -12,27 +12,24 @@ export const RegisterPage = () => {
 	const url = "http://localhost:8080/auth/register"
 	//const url = "https://onlybooks.isanerd.club/api/auth/register";
 
-	//const passwordRegex= /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,16}$/;
-
-	// function validatePassword(password) {
-	// 	const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,16}$/;
-	  
-	// 	if (password.length < 8) {
-	// 	  return "Tu contraseña es demasiado corta. Debe tener al menos 8 caracteres.";
-	// 	}
-	  
-	// 	if (!passwordRegex.test(password)) {
-	// 	  return "La contraseña no cumple con los requisitos.";
-	// 	}
-	  
-	// 	return true;
-	//   }
-	  
+	const passwordRegex= /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 
 	function validatePassword(password){
 		const samePassword = password==repeatPassword? true:false
 		return passwordRegex.test(password)&&samePassword
 	}
+
+	//const passwordRegex= /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,16}$/;
+	// function validatePassword(password) {
+	// 	const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,16}$/;
+	// 	if (password.length < 8) {
+	// 	  return "Tu contraseña es demasiado corta. Debe tener al menos 8 caracteres.";
+	// 	}
+	// 	if (!passwordRegex.test(password)) {
+	// 	  return "La contraseña no cumple con los requisitos.";
+	// 	}
+	// 	return true;
+	//   }
 
 	const validateUserExist = async (email) => { 
 		setEmailError('');
@@ -225,4 +222,3 @@ export const RegisterPage = () => {
 }
 
 export default RegisterPage;
-
