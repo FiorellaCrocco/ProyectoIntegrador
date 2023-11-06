@@ -50,7 +50,7 @@ function LibrosPaginados({ libros,isLoading }) {
                         return (
                             <li className="book" key={item.id}>
                                 <Link to={`/detail/${item.id}`}>
-                                    <img src={item.imgUrl[0]} alt={item.title} />
+                                    <img src={item.imgUrl} alt={item.title} />
                                 </Link>
                                 <p className="title">{item.title}</p>
                                 <p className="price">${item.price}</p>

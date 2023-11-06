@@ -4,6 +4,7 @@ import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.proyecto.onlybooks.dto.BookDTO;
+import com.proyecto.onlybooks.dto.BookSummary;
 import com.proyecto.onlybooks.entity.Book;
 import com.proyecto.onlybooks.entity.Image;
 import com.proyecto.onlybooks.exceptions.ResourceNotFoundException;
@@ -151,6 +152,16 @@ public class BookController {
         ResponseEntity<?> response=null;
         bookService.guardarCaracteristica(bookId,caracteristicaId);
         return response;
+    }
+    @GetMapping("/listarexpress")
+    public List<BookSummary> listarTodosExpress(){
+        List<BookSummary> lista = null;
+        try{
+            lista =bookService.listarTodosExpress();
+        }catch (ResourceNotFoundException e){
+            System.out.println(e);
+        }
+        return lista;
     }
 
 }

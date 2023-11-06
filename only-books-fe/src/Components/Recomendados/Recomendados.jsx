@@ -40,7 +40,7 @@ const Recomendados = () => {
             return (
               <li className={style.book} key={libro.id}>
                 <Link to={`/detail/${libro.id}`}>
-                  <img src={libro.imgUrl[0]} alt={libro.title} />
+                  <img src={libro.imgUrl} alt={libro.title} />
                 </Link>
                 <p className={style.title}>{libro.title}</p>
                 <p className={style.price}>${libro.price}</p>

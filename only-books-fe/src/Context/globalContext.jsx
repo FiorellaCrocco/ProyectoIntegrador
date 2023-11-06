@@ -8,8 +8,8 @@ export const BookProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [listaCategorias, setListaCategorias] = useState([])
 
-  const url = "http://localhost:8080/book/listar";
-  //const url = "https://onlybooks.isanerd.club/api/book/listar";
+  const url = "http://localhost:8080/book/listarexpress";
+  //const url = "https://onlybooks.isanerd.club/api/book/listarexpress";
   const urlCategorias = "http://localhost:8080/categoria/listar";
   //const urlCategorias = "http://onlybooks.isanerd.club/api/categoria/listar";
   
