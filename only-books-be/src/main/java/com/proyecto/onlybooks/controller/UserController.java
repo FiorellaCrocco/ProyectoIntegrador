@@ -58,4 +58,10 @@ public class UserController {
         return response;
     }
 
+    @GetMapping("/perfil/{email}")
+    public ResponseEntity<UserDTO> buscarPorEmail(@PathVariable String email)throws ResourceNotFoundException{
+        ResponseEntity<?> response = null;
+        UserDTO user = userService.buscarPorEmail(email);
+        return ResponseEntity.status(HttpStatus.OK).body(user);
+    }
 }
