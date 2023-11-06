@@ -8,6 +8,7 @@ import AgregarCategoria from '../components/AgregarCategoria/AgregarCategoria';
 import CargarProducto from '../Components/CargarProducto/CargarProducto';
 import ArrowRightOutlinedIcon from '@mui/icons-material/ArrowRightOutlined';
 import ListarCategoria from '../Components/ListarCategoria/ListarCategoria';
+import ListarUsuarios from '../Components/ListarUsuarios/ListarUsuarios'
 
 const Administrador = () => {
 
@@ -64,6 +65,11 @@ const Administrador = () => {
           <Button onClick={() => handleOpen(/*<AdministrarCaracteristicas/>*/)}>
             <div className="add-feature">
               <h3>Administrar Características {<ArrowRightOutlinedIcon fontSize="large" />}</h3>
+            </div>
+          </Button>
+          <Button onClick={() => handleOpen(<ListarUsuarios/>)}>
+            <div className="add-feature">
+              <h3>Listar Usuarios {<ArrowRightOutlinedIcon fontSize="large" />}</h3>
             </div>
           </Button>
         </div>
