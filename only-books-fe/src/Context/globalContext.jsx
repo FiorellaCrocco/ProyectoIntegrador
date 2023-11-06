@@ -62,6 +62,9 @@ export const BookProvider = ({ children }) => {
     await fetchData();
   };
 
+  const actualizarCategorias = async () => {
+    await fetchCategorias();
+  };
 
   useEffect(() => {
     fetchData();
@@ -70,7 +73,7 @@ export const BookProvider = ({ children }) => {
 
 
   return (
-    <GlobalContext.Provider value={{ listaCategorias, listaLibros, isLoading, actualizarListaLibros, fetchBookById }}>
+    <GlobalContext.Provider value={{ listaCategorias, listaLibros, isLoading, actualizarListaLibros, actualizarCategorias, fetchBookById }}>
       {children}
     </GlobalContext.Provider>
   );

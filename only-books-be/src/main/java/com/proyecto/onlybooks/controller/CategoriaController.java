@@ -1,13 +1,21 @@
 package com.proyecto.onlybooks.controller;
 
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.proyecto.onlybooks.entity.Categoria;
 import com.proyecto.onlybooks.exceptions.ResourceNotFoundException;
 import com.proyecto.onlybooks.service.impl.CategoriaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.ByteArrayInputStream;
+import java.util.Base64;
+import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 @CrossOrigin(origins="http://localhost:5173")
 @RestController
@@ -19,6 +27,9 @@ public class CategoriaController {
     public CategoriaController(CategoriaService categoriaService) {
         this.categoriaService = categoriaService;
     }
+
+    @Autowired
+    private AmazonS3 s3;
 
     // En la url "/categoria/listar" retorno una lista de UserDTO
     @GetMapping("/listar")
@@ -33,9 +44,24 @@ public class CategoriaController {
         return ResponseEntity.ok(categoriaService.buscarPorId(id));
     }
 
-    // En la url "/categoria/agregar" hacemos un POST para guardar el user
     @PostMapping("/agregar")
     public ResponseEntity<?> agregarCategoria(@RequestBody Categoria categoria) {
+        String base64Image = (categoria.getImagen() != null) ? categoria.getImagen() : "";
+        ObjectMetadata objectMetadata = new ObjectMetadata();
+
+        try {
+            byte[] binaryData = Base64.getDecoder().decode(base64Image);
+            System.out.println("Cadena base64 a decodificar: " + base64Image);
+
+            String key = categoria.getTitulo() + "_" + UUID.randomUUID().toString() + ".jpg";
+
+            objectMetadata.setContentLength(binaryData.length);
+            s3.putObject("onlybooksbucket", key, new ByteArrayInputStream(binaryData), objectMetadata);
+            categoria.setImagen("https://onlybooksbucket.s3.amazonaws.com/" + key);
+        } catch (IllegalArgumentException | AmazonServiceException e) {
+            System.err.println("Error al procesar la imagen " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al agregar la categoría.");
+        }
         categoriaService.guardar(categoria);
         return ResponseEntity.status(HttpStatus.OK).body(categoria.getId());
     }
