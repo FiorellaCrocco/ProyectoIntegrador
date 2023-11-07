@@ -101,7 +101,7 @@ body {
 
 .input {
 	all: unset;
-	color: #EFFAFF;
+	color: black;
 	padding: 1rem;
 	border: 1px solid #9cc6dd;
 	border-radius: 10px;

@@ -9,7 +9,6 @@ import './log&register.css'
 export const RegisterPage = () => {
 	const [passwordError, setPasswordError] = useState('')
 	const [emailError, setEmailError] = useState('')
-	const [userExist, setUserExist] = useState()
 	const navigate = useNavigate();
 	const url = "http://localhost:8080/auth/register"
 	//const url = "https://onlybooks.isanerd.club/api/auth/register";
@@ -32,32 +31,6 @@ export const RegisterPage = () => {
 	// 	}
 	// 	return true;
 	//   }
-
-	const validateUserExist = async (email) => {
-		setEmailError('');
-		try {
-			const url = `http://localhost:8080/user/perfil/${email}`;
-			const response = await fetch(url);
-
-			if (response.ok) {
-				const data = await response.json();
-
-				if (data && data.email === email) {
-					setEmailError('Ya existe un usuario con ese email');
-					console.log("Usuario existente");
-					setUserExist(true);
-				} else {
-					setUserExist(false);
-				}
-			} else {
-				setUserExist(false);
-			}
-		} catch (error) {
-			console.log(error);
-		} finally {
-			return userExist;
-		}
-	}
 
 
 	const { name, lastname, email, dni, password, repeatPassword, onInputChange, onResetForm } =
@@ -88,9 +61,8 @@ export const RegisterPage = () => {
 
 	const onRegister = async (e) => {
 		e.preventDefault();
-		validateUserExist(email)
-		console.log(userExist);
-		if (userExist == false) {
+
+
 			if (validatePassword(password)) {
 				setPasswordError('')
 				try {
@@ -104,17 +76,19 @@ export const RegisterPage = () => {
 							}
 						});
 					}
+					if(response.status==500){
+						setEmailError('Ya existe un usuario con ese email');
+					console.log("Usuario existente");	
+					}
 				} catch {
 					(error) => {
-						console.log(error)
+					console.log(error)
 					}
 				}
-				onResetForm();
+				//onResetForm();
 			} else {
 				setPasswordError("La contraseña no cumple con los requerimientos")
 			}
-		}
-
 	}
 
 
@@ -164,7 +138,7 @@ export const RegisterPage = () => {
 							id='email'
 							className='input'
 							value={email}
-							onChange={onInputChange}
+							onChange={(e)=>{onInputChange(e), setEmailError('')}}
 							required
 							autoComplete='off'
 						/>
