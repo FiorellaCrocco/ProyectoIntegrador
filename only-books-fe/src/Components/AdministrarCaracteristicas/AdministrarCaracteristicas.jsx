@@ -8,7 +8,7 @@ const AdministrarCaracteristicas = () => {
 
     return (
         <div className="listCaract">
-            <h2>Listado de Caracteristicas:</h2>
+            <h2>Listado de Caracteristicas: </h2>
             <ul className="elementsCaract">
                 {listaCaracteristicas.map((caracteristicas) => (
                     <li className='listId' key={caracteristicas.id}>
