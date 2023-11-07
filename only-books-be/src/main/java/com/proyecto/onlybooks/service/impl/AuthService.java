@@ -48,9 +48,5 @@ public class AuthService {
         }else {
             throw new Exception("Email esta en uso");
         }
-
-
-
-
     }
 }

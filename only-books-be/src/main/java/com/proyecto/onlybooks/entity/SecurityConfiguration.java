@@ -30,21 +30,22 @@ public class SecurityConfiguration {
                                 .disable())
                 .authorizeHttpRequests(authRequest ->
                         authRequest
-                                .requestMatchers("/**").permitAll()
+                          //      .requestMatchers("/**").permitAll()
                                 .requestMatchers("/doc/**").permitAll()
                                 .requestMatchers("/v3/api-docs/**").permitAll()
-                              /*  .requestMatchers("/auth/**").permitAll()
+                                .requestMatchers("/auth/**").permitAll()
                                 .requestMatchers("/book/listar").permitAll()
                                 .requestMatchers("/book/{id}").permitAll()
                                 .requestMatchers("/categoria/listar").permitAll()
                                 .requestMatchers("/categoria/{id}").permitAll()
                                 .requestMatchers("/caracteristica/listar").permitAll()
                                 .requestMatchers("/caracteristica/{id}").permitAll()
-                                .requestMatchers("/book/agregar").hasRole("ADMIN")
-                                .requestMatchers("/book/eliminar/**").hasRole("ADMIN")
-                                .requestMatchers("/user/**").hasRole("ADMIN")
-                                .requestMatchers("/subscription/**").hasRole("ADMIN")
-                                .requestMatchers("/bookRent/**").hasRole("ADMIN")*/
+
+                                .requestMatchers("/book/agregar").hasAuthority("ADMIN")
+                                .requestMatchers("/book/eliminar/**").hasAuthority("ADMIN")
+                                .requestMatchers("/user/**").hasAuthority("ADMIN")
+                                .requestMatchers("/subscription/**").hasAuthority("ADMIN")
+                                .requestMatchers("/bookRent/**").hasAuthority("ADMIN")
 
                                 .anyRequest().authenticated()
                 )

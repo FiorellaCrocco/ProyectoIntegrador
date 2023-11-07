@@ -13,7 +13,16 @@ const ListarUsuarios = () => {
   
     const fetchDataList = async () => {
         try {
-          const response = await fetch(urlListar);
+          const token = sessionStorage.getItem('token');
+          const settings = {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+            },
+          }
+          console.log(token);
+          const response = await fetch(urlListar, settings);
           if (!response.ok) {
             throw new Error("No se pudo obtener la lista de usuarios.");
           }
@@ -34,7 +43,7 @@ const ListarUsuarios = () => {
   
     useEffect(() => {
         fetchDataList();
-    }, [usuarios])
+    }, [])
 
   
     const handleDelete = async (id) => {
