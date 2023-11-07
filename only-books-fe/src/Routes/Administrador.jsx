@@ -8,7 +8,9 @@ import AgregarCategoria from '../components/AgregarCategoria/AgregarCategoria';
 import CargarProducto from '../Components/CargarProducto/CargarProducto';
 import ArrowRightOutlinedIcon from '@mui/icons-material/ArrowRightOutlined';
 import ListarCategoria from '../Components/ListarCategoria/ListarCategoria';
+import AdministrarCaracteristicas from '../Components/AdministrarCaracteristicas/AdministrarCaracteristicas';
 import ListarUsuarios from '../Components/ListarUsuarios/ListarUsuarios'
+
 
 const Administrador = () => {
 
@@ -62,7 +64,7 @@ const Administrador = () => {
               <h3>Listar Categorias {<ArrowRightOutlinedIcon fontSize="large" />}</h3>
             </div>
           </Button>
-          <Button onClick={() => handleOpen(/*<AdministrarCaracteristicas/>*/)}>
+          <Button onClick={() => handleOpen(<AdministrarCaracteristicas/>)}>
             <div className="add-feature">
               <h3>Administrar Características {<ArrowRightOutlinedIcon fontSize="large" />}</h3>
             </div>
@@ -81,4 +83,4 @@ const Administrador = () => {
   )
 }
 
-export default Administrador
+export default Administrador;

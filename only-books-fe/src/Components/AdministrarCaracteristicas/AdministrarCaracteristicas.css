@@ -1,0 +1,56 @@
+
+.listCaract {
+    display: flex;
+    flex-direction: column;
+    background: rgb(84, 157, 194);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
+    margin-top:110px;
+}
+.elementsCaract {
+    display: flex;
+    flex-direction: column;
+    color: #cae0ed;
+}
+.listId{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 5px 0;
+}
+
+.listCaract h2 {
+    color: #244356;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.listCaract ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.listCaract li {
+    font-size: 16px;
+    margin: 5px 0;
+    border-bottom: 1px solid #ddd;
+    padding: 5px 0;
+}
+
+.listCaract li:last-child {
+    border-bottom: none;
+}
+.btnCrear{
+    margin-left: 120px;
+    margin-right: 120px;
+    
+}
+
+.btnDelete{
+    background-color: ;
+}
