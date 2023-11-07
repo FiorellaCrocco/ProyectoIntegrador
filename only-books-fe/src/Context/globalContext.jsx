@@ -6,7 +6,8 @@ export const BookProvider = ({ children }) => {
 
   const [listaLibros, setListaLibros] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [listaCategorias, setListaCategorias] = useState([])
+  const [listaCategorias, setListaCategorias] = useState([]);
+  const [listaCaracteristicas, setListaCaracteristicas] = useState([]);
   const [token, setToken] = useState(sessionStorage.getItem('token') || '');
 
 
@@ -14,7 +15,7 @@ export const BookProvider = ({ children }) => {
   //const url = "https://onlybooks.isanerd.club/api/book/listarexpress";
   const urlCategorias = "http://localhost:8080/categoria/listar";
   //const urlCategorias = "http://onlybooks.isanerd.club/api/categoria/listar";
-  
+  const urlCaracteristicas = "http://localhost:8080/caracteristica/listar";
 
   const fetchData = async () => {
     try {
@@ -44,6 +45,22 @@ export const BookProvider = ({ children }) => {
     }
   };
 
+  const fetchCaracteristicas = async () => {
+    try {
+      const response = await fetch(urlCaracteristicas);
+      if (!response.ok) {
+        throw new Error("No se pudo obtener las caracteristicas.");
+      }
+      const data = await response.json();
+      setListaCaracteristicas(data);
+      console.log(data);
+    } catch (error) {
+      
+      console.error("Error al cargar las caracteristicas:", error);
+    }
+  };
+
+
   const fetchBookById = async (id) => {
     try {
       const response = await fetch(`http://localhost:8080/book/${id}`);
@@ -67,11 +84,17 @@ export const BookProvider = ({ children }) => {
   const actualizarCategorias = async () => {
     await fetchCategorias();
   };
+  // const actualizarCaracteristicas = async () => {
+  //   await fetchCaracteristicas();
+  // };
 
   useEffect(() => {
     fetchData();
     fetchCategorias();
+    fetchCaracteristicas();
   }, []);
+
+
 
   const logout = () => {
     setToken('');
@@ -80,7 +103,7 @@ export const BookProvider = ({ children }) => {
 
 
   return (
-    <GlobalContext.Provider value={{ listaCategorias, listaLibros, isLoading, actualizarListaLibros, actualizarCategorias, fetchBookById, logout }}>
+    <GlobalContext.Provider value={{ listaCategorias, listaLibros, isLoading, actualizarListaLibros, actualizarCategorias, fetchBookById, logout, listaCaracteristicas }}>
       {children}
     </GlobalContext.Provider>
   );
