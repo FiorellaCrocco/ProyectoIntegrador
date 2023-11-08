@@ -1,16 +1,24 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unsafe-finally */
 /* eslint-disable no-unused-vars */
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from './Hook/UseForm'
 import './log&register.css'
+import emailjs from '@emailjs/browser';
+
+
 //RegisterPage
 export const RegisterPage = () => {
 	const [passwordError, setPasswordError] = useState('')
 	const [emailError, setEmailError] = useState('')
-	const [userExist, setUserExist] = useState()
 	const navigate = useNavigate();
+	const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
+	const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
+	const userId = process.env.REACT_APP_EMAILJS_USER_ID;
+
+
 	const url = "http://localhost:8080/auth/register"
 	//const url = "https://onlybooks.isanerd.club/api/auth/register";
 
@@ -33,31 +41,31 @@ export const RegisterPage = () => {
 	// 	return true;
 	//   }
 
-	const validateUserExist = async (email) => {
-		setEmailError('');
-		try {
-			const url = `http://localhost:8080/user/perfil/${email}`;
-			const response = await fetch(url);
+	// const validateUserExist = async (email) => {
+	// 	setEmailError('');
+	// 	try {
+	// 		const url = `http://localhost:8080/user/perfil/${email}`;
+	// 		const response = await fetch(url);
 
-			if (response.ok) {
-				const data = await response.json();
+	// 		if (response.ok) {
+	// 			const data = await response.json();
 
-				if (data && data.email === email) {
-					setEmailError('Ya existe un usuario con ese email');
-					console.log("Usuario existente");
-					setUserExist(true);
-				} else {
-					setUserExist(false);
-				}
-			} else {
-				setUserExist(false);
-			}
-		} catch (error) {
-			console.log(error);
-		} finally {
-			return userExist;
-		}
-	}
+	// 			if (data && data.email === email) {
+	// 				setEmailError('Ya existe un usuario con ese email');
+	// 				console.log("Usuario existente");
+	// 				setUserExist(true);
+	// 			} else {
+	// 				setUserExist(false);
+	// 			}
+	// 		} else {
+	// 			setUserExist(false);
+	// 		}
+	// 	} catch (error) {
+	// 		console.log(error);
+	// 	} finally {
+	// 		return userExist;
+	// 	}
+	// }
 
 
 	const { name, lastname, email, dni, password, repeatPassword, onInputChange, onResetForm } =
@@ -86,42 +94,70 @@ export const RegisterPage = () => {
 
 	}
 
+
+	const sendConfirmationEmail = async () => {
+		try {
+			const templateParams = {
+				to_email: email, // El destinatario del correo (puede ser el correo del usuario)
+				message: '¡Tu cuenta ha sido creada exitosamente!',
+			};
+			console.log("Send email: " + email)
+			const response = await emailjs.send(
+				serviceId,
+				templateId,
+				templateParams,
+				userId
+			);
+
+			if (response.status === 200) {
+				console.log('Correo electrónico de confirmación enviado con éxito.');
+			}
+		} catch (error) {
+			console.error('Error al enviar el correo electrónico de confirmación:', error);
+		}
+	};
+
+
 	const onRegister = async (e) => {
 		e.preventDefault();
-		validateUserExist(email)
-		console.log(userExist);
-		if (userExist == false) {
-			if (validatePassword(password)) {
-				setPasswordError('')
-				try {
-					const response = await fetch(url, settings)
-					console.log(response)
-					if (response.status == 200) {
-						navigate('/', {
-							replace: true,
-							state: {
-								logged: true
-							}
-						});
-					}
-				} catch {
-					(error) => {
-						console.log(error)
-					}
-				}
-				onResetForm();
-			} else {
-				setPasswordError("La contraseña no cumple con los requerimientos")
-			}
-		}
 
+		if (validatePassword(password)) {
+			setPasswordError('')
+			try {
+				const response = await fetch(url, settings)
+				console.log(response)
+				if (response.status == 200) {
+
+					sendConfirmationEmail();
+					navigate('/', {
+						replace: true,
+						state: {
+							logged: true
+						}
+					});
+				}
+				if (response.status == 500) {
+					setEmailError('Ya existe un usuario con ese email');
+					console.log("Usuario existente");
+				}
+			} catch {
+				(error) => {
+					console.log(error)
+				}
+			}
+			// onResetForm();
+		} else {
+			setPasswordError("La contraseña no cumple con los requerimientos")
+		}
 	}
+
+
 
 
 	return (
 		<div className='login-container'>
 			<div className='wrapper'>
-				<form className='loginForm' onSubmit={onRegister}>
+				<form className='loginForm' onSubmit={onRegister} >
 					<h2>Crear cuenta</h2>
 
 					<div className="input-group">
