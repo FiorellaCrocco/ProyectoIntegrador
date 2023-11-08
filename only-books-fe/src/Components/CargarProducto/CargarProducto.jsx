@@ -150,7 +150,6 @@ for (const category of selectedCategory) {
 
   return (
     <div className="Container">
-      <img src="https://onlybooksbucket.s3.amazonaws.com/Kike_neitor_y_fio_rella_23d5941d-b8d4-4f7d-8939-b45c78c898be.jpg"/>
       <h1 className="titulo">Cargar Libro</h1>
       <form className="formulario" onSubmit={handleSubmit}>
         <div className="div">
