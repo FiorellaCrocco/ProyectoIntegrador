@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import "./AgregarCategoria.css";
+import './AgregarCategoria.css';
 import { GlobalContext } from "../../Context/globalContext";
 
 function AgregarCategoria() {
@@ -83,7 +83,7 @@ function AgregarCategoria() {
     <div className="agregar-categoria">
       <h2>Crear Nueva Categoría</h2>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="agregar-categoria-div">
           <label>Título:</label>
           <input
             type="text"
@@ -92,7 +92,7 @@ function AgregarCategoria() {
             onChange={handleChange}
           />
         </div>
-        <div>
+        <div className="agregar-categoria-div">
           <label>Descripción:</label>
           <textarea
             name="descripcion"
@@ -100,7 +100,7 @@ function AgregarCategoria() {
             onChange={handleChange}
           />
         </div>
-        <div>
+        <div className="agregar-categoria-div">
         <label>Imagen:</label>
           <input
             className="input"
