@@ -1,3 +1,4 @@
+
 import React, { useContext, useEffect, useState } from 'react';
 import { GlobalContext } from "../../Context/globalContext";
 import Button from "@mui/material/Button";
@@ -34,7 +35,7 @@ const ListarUsuarios = () => {
   
     useEffect(() => {
         fetchDataList();
-    }, [usuarios])
+    }, [])
 
   
     const handleDelete = async (id) => {
@@ -54,6 +55,7 @@ const ListarUsuarios = () => {
         }
         const url = `http://localhost:8080/user/eliminar/${id}`;
         //  const url = `https://onlybooks.isanerd.club/api/user/eliminar/${id}`;
+        // eslint-disable-next-line no-undef
         await fetchData(url, settings);
         setUsuarios(updatedUsuarios);
       }
@@ -66,6 +68,7 @@ const ListarUsuarios = () => {
           {usuarios.map((usuario) => (
             
             <li className="lista" key={usuario.id}>
+              {console.log(usuario)}
               <div className="id">{usuario.id}</div>
               <div className="nombre">{usuario.email}</div>
               <div className="admin-btn-container">
