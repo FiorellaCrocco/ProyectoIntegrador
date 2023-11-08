@@ -42,10 +42,20 @@ export const LoginPage = () => {
 				const { token } = data;
 				sessionStorage.setItem('token', token);
 				const userEmail = email; // Obtener el correo electrónico del formulario
-				const profileDataResponse = await fetch(`http://localhost:8080/user/perfil/${userEmail}`)
-				
-				
-				
+
+				const settings = {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+						'Authorization': `Bearer ${token}`,
+					},
+				}
+				const url = `http://localhost:8080/user/perfil/${userEmail}`
+
+				const profileDataResponse = await fetch(url, settings)
+
+
+
 
 				if (profileDataResponse.status === 200) {
 					const profileData = await profileDataResponse.json();
