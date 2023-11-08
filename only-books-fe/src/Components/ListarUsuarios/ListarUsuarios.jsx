@@ -8,6 +8,8 @@ const ListarUsuarios = () => {
 
     const [usuarios, setUsuarios] = useState([]);
     const urlListar = `http://localhost:8080/user/listar`;
+   //const urlListar = `https://onlybooks.isanerd.club/api/user/listar`;
+
     //Para la  funcionalidad de EDITAR
     const [selectedUser, setSelectedUser] = useState(null);
     const [editOpen, setEditOpen] = useState(false);

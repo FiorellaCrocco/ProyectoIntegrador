@@ -11,11 +11,12 @@ export const BookProvider = ({ children }) => {
   const [token, setToken] = useState(sessionStorage.getItem('token') || '');
 
 
-  const url = "http://localhost:8080/book/listarexpress";
-  //const url = "https://onlybooks.isanerd.club/api/book/listarexpress";
+ const url = "http://localhost:8080/book/listarexpress";
+//   const url = "https://onlybooks.isanerd.club/api/book/listarexpress";
   const urlCategorias = "http://localhost:8080/categoria/listar";
-  //const urlCategorias = "http://onlybooks.isanerd.club/api/categoria/listar";
-  const urlCaracteristicas = "http://localhost:8080/caracteristica/listar";
+//  const urlCategorias = "https://onlybooks.isanerd.club/api/categoria/listar";
+ const urlCaracteristicas = "http://localhost:8080/caracteristica/listar";
+//  const urlCaracteristicas = "https://onlybooks.isanerd.club/api/caracteristica/listar";
 
   const fetchData = async () => {
     try {

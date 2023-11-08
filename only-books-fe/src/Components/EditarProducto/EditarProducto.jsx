@@ -8,7 +8,7 @@ const EditarProducto = ({ product, onUpdateList }) => {
 
     
     const updateProductUrl = `http://localhost:8080/book/modificar`;
-    // const url = "https://onlybooks.isanerd.club/api/book/modificar"
+    // const updateProductUrl = "https://onlybooks.isanerd.club/api/book/modificar"
     
     const token = sessionStorage.getItem('token')
 

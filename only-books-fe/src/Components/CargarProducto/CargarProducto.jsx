@@ -115,6 +115,7 @@ for (const category of selectedCategory) {
       },
     };
       const url = `http://localhost:8080/book/${bookId}/categoria/${categoriaId}`;
+    //  const url = `https://onlybooks.isanerd.club/api/book/${bookId}/categoria/${categoriaId}`;
       try{
         const response = await fetch(url,settings)
         const data = await response.text()

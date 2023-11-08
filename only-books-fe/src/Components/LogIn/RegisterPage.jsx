@@ -20,7 +20,7 @@ export const RegisterPage = () => {
 
 
 	const url = "http://localhost:8080/auth/register"
-	//const url = "https://onlybooks.isanerd.club/api/auth/register";
+//	const url = "https://onlybooks.isanerd.club/api/auth/register";
 
 	const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 

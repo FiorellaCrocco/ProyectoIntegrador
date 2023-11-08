@@ -5,7 +5,8 @@ import './log&register.css';
 import { useAccount } from '../../Context/accountContext';
 
 export const LoginPage = () => {
-	const url = "http://localhost:8080/auth/login";
+	const url = "http://localhost:8080/auth/login"
+//	const url = "https://onlybooks.isanerd.club/api/auth/login";
 	const navigate = useNavigate();
 	const [loginError, setLoginError] = useState(null);
 	const [isTyping, setIsTyping] = useState(false);
