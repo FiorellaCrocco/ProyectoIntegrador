@@ -10,20 +10,10 @@ import UserMenu from '../UserMenu/UserMenu';
 
 const Navbar = () => {
 
-    const { logout } = useContext(GlobalContext);
-    const { userData, clearUserData } = useAccount();
-    const { state } = useLocation();
-    const navigate = useNavigate();
-
-    // console.log(state);
-
-    const onLogout = () => {
-        logout();
-        clearUserData();
-        navigate('/', {
-            replace: true,
-        });
-    };
+    // const { logout } = useContext(GlobalContext);
+    const { userData, isAuthenticated  } = useAccount();
+    // const { state } = useLocation();
+    // const navigate = useNavigate();
 
 
     return (
@@ -48,36 +38,20 @@ const Navbar = () => {
                     <input type="text" placeholder=" " />
                     <button type="reset"></button>
                 </form>
-
-                {/* {state?.logged ? (
-                    <div className='user'>
-                        <span className='username'>{state?.name}</span>
-                        <button className='btn-logout' onClick={onLogout}>
-                            Cerrar sesión
-                        </button>
-                    </div>
+                {console.log(userData)}
+                {/* {isAuthenticated ? ( */}
+                {userData ? (
+                    
+                    <UserMenu />
+                    
                 ) : (
                     <div className="header-right">
-                        <Link to='/registrarse'><button className="btn-create" >Crear cuenta</button></Link>
-                        <Link to='/login'> <button className="btn-login">Iniciar sesión</button></Link>
-                    </div>
-                )} */}
-
-                {userData ? ( // Verifica si userData tiene datos antes de mostrarlos
-                    <div className='user'>
-                        <span className='username'>{userData.name}</span>
-                        <button className='btn-logout' onClick={onLogout}>
-                            Cerrar sesión
-                        </button>
-                        {console.log(userData)}
-                    </div>
-                ) : (
-                    <div className="header-right">
+                        
                         <Link to='/registrarse'><button className="btn-create">Crear cuenta</button></Link>
                         <Link to='/login'> <button className="btn-login">Iniciar sesión</button></Link>
                     </div>
                 )}
-            {/* <UserMenu /> */}
+            
             </div>
         </header>
     );

@@ -1,16 +1,19 @@
 import React, { useState, useContext } from 'react';
-import Dropdown from 'react-bootstrap/Dropdown';
 import Avatar from '../Avatar/Avatar';
 import { GlobalContext } from "../../Context/globalContext";
 import { useAccount } from "../../Context/accountContext";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import './UserMenu.css';
 
 const UserMenu = () => {
     const [showMenu, setShowMenu] = useState(false);
     const { logout } = useContext(GlobalContext);
     const { userData, clearUserData } = useAccount();
     const navigate = useNavigate();
+    const name = userData && userData.name ? userData.name + ' ' + userData.lastname : "Usuario Desconocido";
 
+
+    
     const toggleMenu = () => {
         setShowMenu(!showMenu);
     };
@@ -26,17 +29,17 @@ const UserMenu = () => {
     return (
         <div className="user-menu">
             <div className="avatar-container" onClick={toggleMenu}>
-                <Avatar name="Nombre Apellido" />
+            
+                <Avatar name={name} />
             </div>
-            <Dropdown show={showMenu}>
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                    Menú
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                    <Dropdown.Item onClick={onLogout}>Cerrar sesión</Dropdown.Item>
+            {showMenu && (
+                <div className="custom-dropdown">
+                    <Link to="/" className="custom-dropdown-item">Mi perfil</Link>
+                    <Link to="/" className="custom-dropdown-item">Mis Reservas</Link>
+                    <div className="custom-dropdown-item  custom-logout" onClick={onLogout}>Cerrar sesión</div>
                     {/* Agrega otros elementos personalizables aquí */}
-                </Dropdown.Menu>
-            </Dropdown>
+                </div>
+            )}
         </div>
     );
 };

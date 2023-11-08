@@ -43,10 +43,13 @@ export const LoginPage = () => {
 				sessionStorage.setItem('token', token);
 				const userEmail = email; // Obtener el correo electrónico del formulario
 				const profileDataResponse = await fetch(`http://localhost:8080/user/perfil/${userEmail}`)
-
+				
+				
+				
 
 				if (profileDataResponse.status === 200) {
 					const profileData = await profileDataResponse.json();
+					sessionStorage.setItem('userData', JSON.stringify(profileData));
 					updateUserData(profileData);
 					console.log('profileData: ' + profileData);
 

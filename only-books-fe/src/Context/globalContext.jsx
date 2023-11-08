@@ -99,6 +99,8 @@ export const BookProvider = ({ children }) => {
   const logout = () => {
     setToken('');
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('userData');
+
   };
 
 

@@ -14,9 +14,9 @@ export const RegisterPage = () => {
 	const [passwordError, setPasswordError] = useState('')
 	const [emailError, setEmailError] = useState('')
 	const navigate = useNavigate();
-	const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
-	const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
-	const userId = process.env.REACT_APP_EMAILJS_USER_ID;
+	const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+	const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+	const userId = import.meta.env.VITE_EMAILJS_USER_ID;
 
 
 	const url = "http://localhost:8080/auth/register"
@@ -123,37 +123,37 @@ export const RegisterPage = () => {
 		} else {
 			setPasswordError("La contraseña no cumple con los requerimientos")
 		}
-	
 
 
 
 
-			if (validatePassword(password)) {
-				setPasswordError('')
-				try {
-					const response = await fetch(url, settings)
-					console.log(response)
-					if (response.status == 200) {
-						navigate('/', {
-							replace: true,
-							state: {
-								logged: true
-							}
-						});
-					}
-					if(response.status==500){
-						setEmailError('Ya existe un usuario con ese email');
-					console.log("Usuario existente");	
-					}
-				} catch {
-					(error) => {
-					console.log(error)
-					}
+
+		if (validatePassword(password)) {
+			setPasswordError('')
+			try {
+				const response = await fetch(url, settings)
+				console.log(response)
+				if (response.status == 200) {
+					navigate('/', {
+						replace: true,
+						state: {
+							logged: true
+						}
+					});
 				}
-				//onResetForm();
-			} else {
-				setPasswordError("La contraseña no cumple con los requerimientos")
+				if (response.status == 500) {
+					setEmailError('Ya existe un usuario con ese email');
+					console.log("Usuario existente");
+				}
+			} catch {
+				(error) => {
+					console.log(error)
+				}
 			}
+			//onResetForm();
+		} else {
+			setPasswordError("La contraseña no cumple con los requerimientos")
+		}
 	}
 
 
@@ -203,7 +203,7 @@ export const RegisterPage = () => {
 							id='email'
 							className='input'
 							value={email}
-							onChange={(e)=>{onInputChange(e), setEmailError('')}}
+							onChange={(e) => { onInputChange(e), setEmailError('') }}
 							required
 							autoComplete='off'
 						/>
