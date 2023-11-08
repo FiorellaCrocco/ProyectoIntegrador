@@ -13,6 +13,9 @@ const ListarProducto = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [editOpen, setEditOpen] = useState(false);
 
+  const token = sessionStorage.getItem('token')
+
+
   const handleEditOpen = (product) => {
     setSelectedProduct(product);
     setEditOpen(true);
@@ -59,6 +62,7 @@ const ListarProducto = () => {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
         },
       }
       const url = `http://localhost:8080/book/eliminar/${id}`;

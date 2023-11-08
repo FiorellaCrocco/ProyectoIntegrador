@@ -4,6 +4,8 @@ import { GlobalContext } from "../../Context/globalContext";
 
 function AgregarCategoria() {
 
+  const token = sessionStorage.getItem('token')
+
   const { actualizarCategorias } = useContext(GlobalContext);
 
   const [categoria, setCategoria] = useState({
@@ -57,6 +59,7 @@ function AgregarCategoria() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify(categoria),
     };

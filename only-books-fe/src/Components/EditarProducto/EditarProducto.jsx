@@ -10,6 +10,7 @@ const EditarProducto = ({ product, onUpdateList }) => {
     const updateProductUrl = `http://localhost:8080/book/modificar`;
     // const url = "https://onlybooks.isanerd.club/api/book/modificar"
     
+    const token = sessionStorage.getItem('token')
 
 
     const handleInputChange = (e) => {
@@ -30,6 +31,7 @@ const EditarProducto = ({ product, onUpdateList }) => {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
             },
             body: JSON.stringify(formData),
         };

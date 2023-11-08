@@ -67,7 +67,6 @@ public class BookController {
         return ResponseEntity.ok(bookService.buscarPorId(id));
     }
     // En la url "/book/agregar"
-    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/agregar")
     @Transactional
     public ResponseEntity<?> agregar(@RequestBody Book book) throws ResourceNotFoundException{

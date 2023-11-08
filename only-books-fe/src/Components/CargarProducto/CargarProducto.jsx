@@ -7,6 +7,8 @@ function CargarProducto() {
     useContext(GlobalContext);
   const [selectedCategory, setSelectedCategory] = useState([]);
 
+  const token = sessionStorage.getItem('token')
+
   const [formData, setFormData] = useState({
     title: "",
     author: "",
@@ -71,6 +73,7 @@ function CargarProducto() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify(formData),
     };
@@ -108,6 +111,7 @@ for (const category of selectedCategory) {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`,
       },
     };
       const url = `http://localhost:8080/book/${bookId}/categoria/${categoriaId}`;

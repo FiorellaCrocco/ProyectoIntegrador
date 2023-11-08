@@ -4,6 +4,16 @@ import { GlobalContext } from "../../Context/globalContext";
 
 
 const AdministrarCaracteristicas = () => {
+
+     /* const token = sessionStorage.getItem('token')
+  const settings = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
+  }*/
+  
     const { listaCaracteristicas } = useContext(GlobalContext);
 
     return (

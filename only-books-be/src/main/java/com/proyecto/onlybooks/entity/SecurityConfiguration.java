@@ -30,22 +30,43 @@ public class SecurityConfiguration {
                                 .disable())
                 .authorizeHttpRequests(authRequest ->
                         authRequest
-                                .requestMatchers("/**").permitAll()
+                        //        .requestMatchers("/**").permitAll()
                                 .requestMatchers("/doc/**").permitAll()
                                 .requestMatchers("/v3/api-docs/**").permitAll()
-                             /*   .requestMatchers("/auth/**").permitAll()
+                                .requestMatchers("/auth/**").permitAll()
+
                                 .requestMatchers("/book/listar").permitAll()
+                                .requestMatchers("/book/listarexpress").permitAll()
                                 .requestMatchers("/book/{id}").permitAll()
-                                .requestMatchers("/categoria/listar").permitAll()
-                                .requestMatchers("/categoria/{id}").permitAll()
+
+                        //        .requestMatchers("/bookRent/{id}").permitAll() // Usuario autenticado
+
                                 .requestMatchers("/caracteristica/listar").permitAll()
                                 .requestMatchers("/caracteristica/{id}").permitAll()
 
+                                .requestMatchers("/categoria/listar").permitAll()
+                                .requestMatchers("/categoria/{id}").permitAll()
+
                                 .requestMatchers("/book/agregar").hasAuthority("ADMIN")
                                 .requestMatchers("/book/eliminar/**").hasAuthority("ADMIN")
+                                .requestMatchers("/book/modificar").hasAuthority("ADMIN")
+                                .requestMatchers("/{bookId}/categoria/{categoriaId}").hasAuthority("ADMIN")
+                                .requestMatchers("/{bookId}/caracteristica/{caracteristicaId}").hasAuthority("ADMIN")
+
+                                .requestMatchers("/bookRent/agregar").hasAuthority("ADMIN")
+                                .requestMatchers("/bookRent/eliminar/**").hasAuthority("ADMIN")
+                                .requestMatchers("/bookRent/modificar").hasAuthority("ADMIN")
+
+                                .requestMatchers("/caracteristica/agregar").hasAuthority("ADMIN")
+                                .requestMatchers("/caracteristica/eliminar/**").hasAuthority("ADMIN")
+                                .requestMatchers("/caracteristica/modificar").hasAuthority("ADMIN")
+
+                                .requestMatchers("/categoria/agregar").hasAuthority("ADMIN")
+                                .requestMatchers("/categoria/eliminar/**").hasAuthority("ADMIN")
+                                .requestMatchers("/categoria/modificar").hasAuthority("ADMIN")
+
                                 .requestMatchers("/user/**").hasAuthority("ADMIN")
-                                .requestMatchers("/subscription/**").hasAuthority("ADMIN")
-                                .requestMatchers("/bookRent/**").hasAuthority("ADMIN")*/
+                                .requestMatchers("/bookRent/listar").hasAuthority("ADMIN")
 
                                 .anyRequest().authenticated()
                 )
