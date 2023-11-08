@@ -41,32 +41,6 @@ export const RegisterPage = () => {
 	// 	return true;
 	//   }
 
-	// const validateUserExist = async (email) => {
-	// 	setEmailError('');
-	// 	try {
-	// 		const url = `http://localhost:8080/user/perfil/${email}`;
-	// 		const response = await fetch(url);
-
-	// 		if (response.ok) {
-	// 			const data = await response.json();
-
-	// 			if (data && data.email === email) {
-	// 				setEmailError('Ya existe un usuario con ese email');
-	// 				console.log("Usuario existente");
-	// 				setUserExist(true);
-	// 			} else {
-	// 				setUserExist(false);
-	// 			}
-	// 		} else {
-	// 			setUserExist(false);
-	// 		}
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	} finally {
-	// 		return userExist;
-	// 	}
-	// }
-
 
 	const { name, lastname, email, dni, password, repeatPassword, onInputChange, onResetForm } =
 		useForm({
@@ -149,9 +123,38 @@ export const RegisterPage = () => {
 		} else {
 			setPasswordError("La contraseña no cumple con los requerimientos")
 		}
+	
+
+
+
+
+			if (validatePassword(password)) {
+				setPasswordError('')
+				try {
+					const response = await fetch(url, settings)
+					console.log(response)
+					if (response.status == 200) {
+						navigate('/', {
+							replace: true,
+							state: {
+								logged: true
+							}
+						});
+					}
+					if(response.status==500){
+						setEmailError('Ya existe un usuario con ese email');
+					console.log("Usuario existente");	
+					}
+				} catch {
+					(error) => {
+					console.log(error)
+					}
+				}
+				//onResetForm();
+			} else {
+				setPasswordError("La contraseña no cumple con los requerimientos")
+			}
 	}
-
-
 
 
 	return (
@@ -200,7 +203,7 @@ export const RegisterPage = () => {
 							id='email'
 							className='input'
 							value={email}
-							onChange={onInputChange}
+							onChange={(e)=>{onInputChange(e), setEmailError('')}}
 							required
 							autoComplete='off'
 						/>

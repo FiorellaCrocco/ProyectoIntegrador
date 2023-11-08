@@ -124,8 +124,3 @@ export const LoginPage = () => {
 
 export default LoginPage;
 
-/* Criterios de Aceptación:
-- Iniciar sesión en la cuenta del usuario utilizando una dirección de correo electrónico y una contraseña válidas.
-- Mostrar un mensaje de error claro y útil en caso de que el usuario proporcione información de inicio de sesión incorrecta.
-- Permitir al usuario acceder a la información personal y las funcionalidades disponibles después de iniciar sesión.
-- Cuando el usuario está identificado, mostrar su nombre, un avatar de letras con las iniciales del nombre de usuario. */

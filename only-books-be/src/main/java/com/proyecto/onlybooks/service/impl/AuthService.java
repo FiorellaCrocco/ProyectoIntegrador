@@ -10,6 +10,8 @@ import com.proyecto.onlybooks.entity.*;
 import com.proyecto.onlybooks.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -28,21 +30,23 @@ public class AuthService {
                 .build();
     }
 
-    public AuthResponse register(RegisterRequest request) {
-        User user = User.builder()
-                .lastname(request.getLastname())
-                .name(request.getName())
-                .dni(request.getDni())
-                .email(request.getEmail())
-                .password(passwordEncoder.encode( request.getPassword()))
-                .rol(Rol.USER)
-                .build();
-
-        iUserRepository.save(user);
-
-        return AuthResponse.builder()
-                .token(jwtService.getToken(user))
-                .build();
-
+    public AuthResponse register(RegisterRequest request) throws Exception {
+        Optional<User> found = iUserRepository.findByEmail(request.getEmail());
+        if(found.isEmpty()){
+            User user = User.builder()
+                    .lastname(request.getLastname())
+                    .name(request.getName())
+                    .dni(request.getDni())
+                    .email(request.getEmail())
+                    .password(passwordEncoder.encode( request.getPassword()))
+                    .rol(Rol.USER)
+                    .build();
+            iUserRepository.save(user);
+            return AuthResponse.builder()
+                    .token(jwtService.getToken(user))
+                    .build();
+        }else {
+            throw new Exception("Email esta en uso");
+        }
     }
 }
