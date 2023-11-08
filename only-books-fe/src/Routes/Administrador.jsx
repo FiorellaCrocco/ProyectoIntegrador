@@ -4,7 +4,7 @@ import './Administrador.css'
 import AdminImg from '../img/admin.png'
 import { Button } from "@mui/material";
 import ListarProducto from '../Components/ListarProducto/ListarProducto';
-import AgregarCategoria from '../components/AgregarCategoria/AgregarCategoria';
+import AgregarCategoria from '../Components/AgregarCategoria/AgregarCategoria';
 import CargarProducto from '../Components/CargarProducto/CargarProducto';
 import ArrowRightOutlinedIcon from '@mui/icons-material/ArrowRightOutlined';
 import ListarCategoria from '../Components/ListarCategoria/ListarCategoria';

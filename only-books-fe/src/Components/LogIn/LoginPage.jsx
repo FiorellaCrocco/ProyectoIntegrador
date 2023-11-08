@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from './Hook/UseForm';
-import './log&register.css'
+import './log&register.css';
+import { useAccount } from '../../Context/accountContext';
 
-//LoginPage
 export const LoginPage = () => {
 	const url = "http://localhost:8080/auth/login"
-	//const url = "https://onlybooks.isanerd.club/api/auth/login";
+//	const url = "https://onlybooks.isanerd.club/api/auth/login";
 	const navigate = useNavigate();
 	const [loginError, setLoginError] = useState(null);
 	const [isTyping, setIsTyping] = useState(false);
 
-	const { email, password, onInputChange, onResetForm } =
-		useForm({
-			email: '',
-			password: '',
-		});
+	const { email, password, onInputChange, onResetForm } = useForm({
+		email: '',
+		password: '',
+	});
 
 	const settings = {
 		method: 'POST',
@@ -26,34 +25,60 @@ export const LoginPage = () => {
 			email: email,
 			password: password
 		})
-
 	}
 
+	const { updateUserData } = useAccount();
 
-	//onLogin
 	const onLogin = async (e) => {
 		e.preventDefault();
-		setLoginError(null); // Limpiar el mensaje de error al intentar nuevamente
-		setIsTyping(false); // Restablecer el estado de escritura
+		setLoginError(null);
+		setIsTyping(false);
+
 		try {
 			const response = await fetch(url, settings)
-			console.log(response)
+			console.log("response: " + response)
 			if (response.status === 200) {
-
 				// Autenticación exitosa, obtener el token del cuerpo de la respuesta
 				const data = await response.json();
 				const { token } = data;
-				// Almacenar el token en sessionStorage
 				sessionStorage.setItem('token', token);
-				console.log(token)
-				navigate('/', {
-					replace: true,
-					state: {
-						logged: true
-					}
-				});
-			}
-			else if (response.status == 403) {
+				const userEmail = email; // Obtener el correo electrónico del formulario
+
+				const settings = {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+						'Authorization': `Bearer ${token}`,
+					},
+				}
+				const url = `http://localhost:8080/user/perfil/${userEmail}`
+
+				const profileDataResponse = await fetch(url, settings)
+
+
+
+
+				if (profileDataResponse.status === 200) {
+					const profileData = await profileDataResponse.json();
+					sessionStorage.setItem('userData', JSON.stringify(profileData));
+					updateUserData(profileData);
+					console.log('profileData: ' + profileData);
+
+					// Aquí puedes hacer lo que necesites con los datos del perfil
+					// Por ejemplo, almacenarlos en el estado local del componente
+
+					const { name, email, profileImage } = profileData;
+					console.log('Nombre: ', name);
+					console.log('Correo electrónico: ', email);
+
+					navigate('/', {
+						replace: true,
+						state: {
+							logged: true
+						},
+					});
+				}
+			} else if (response.status === 403) {
 				setLoginError("Credenciales incorrectas. Inténtelo de nuevo.");
 			}
 		} catch (error) {
@@ -70,7 +95,6 @@ export const LoginPage = () => {
 					<h2 id='h2-form'>Iniciar Sesión</h2>
 
 					<div className='input-group'>
-
 						<input
 							type='email'
 							name='email'
@@ -88,7 +112,6 @@ export const LoginPage = () => {
 						<label className="label" htmlFor='email'>Email</label>
 					</div>
 					<div className='input-group'>
-
 						<input
 							type='password'
 							name='password'
@@ -110,7 +133,6 @@ export const LoginPage = () => {
 				</form>
 			</div>
 		</div>
-
 	);
 };
 

@@ -7,47 +7,14 @@ import "./EditarProducto";
 import { GlobalContext } from "../../Context/globalContext";
 
 const EditarProducto = ({ product, onUpdateList }) => {
-  const { listaCategorias, actualizarCategorias } = useContext(GlobalContext);
-  const [formData, setFormData] = useState(product);
-  const [selectedCategory, setSelectedCategory] = useState(product.categorias);
-  const [editOpen, setEditOpen] = useState(false);
+    const [formData, setFormData] = useState(product);
 
-    const handleEditClose = () => {
-    setEditOpen(false);
-  };
+    
+    const updateProductUrl = `http://localhost:8080/book/modificar`;
+    // const updateProductUrl = "https://onlybooks.isanerd.club/api/book/modificar"
+    
+    const token = sessionStorage.getItem('token')
 
-  const handleCategoryChange = (category) => {
-    setSelectedCategory((prevSelectedCategory) => {
-        if (prevSelectedCategory.some((obj) => obj.titulo === category.titulo)) {
-          return prevSelectedCategory.filter((c) => c.titulo !== category.titulo);
-        } else {
-          return [...prevSelectedCategory, category];
-        }
-      });
-  };
-
-  const renderCategoryOptions = useMemo(() => {
-    console.log("Imprimiendo product en renderCategoryOpt")
-    console.log(selectedCategory)
-    const categorias = listaCategorias;
-    return categorias.map((category, index) =>{
-        const isSelected = selectedCategory.some(obj=>obj.titulo==category.titulo)
-     return(
-
-      <div
-        key={index}
-        className={`${isSelected ? "selected" : ""}`}
-        onClick={() => handleCategoryChange(category)}
-      >
-        <label value={category}>{category.titulo}</label>
-      </div>
-    )})
-  },[product, listaCategorias, selectedCategory]);
-
-  const updateProductUrl = `http://localhost:8080/book/modificar`;
-  // const url = "https://onlybooks.isanerd.club/api/book/modificar"
-
-  const token = sessionStorage.getItem("token");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

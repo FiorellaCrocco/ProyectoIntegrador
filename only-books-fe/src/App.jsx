@@ -12,6 +12,8 @@ import Detail from './Routes/Detail';
 import Restricted from './Components/RestrictedPageResponsive/Restricted';
 import LoginPage from './Components/LogIn/LoginPage';
 import RegisterPage from './Components/LogIn/RegisterPage'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
   const isMobile = useMediaQuery({ query: '(max-width: 425px)' });

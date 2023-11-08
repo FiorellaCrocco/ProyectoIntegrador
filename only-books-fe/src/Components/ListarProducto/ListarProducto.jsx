@@ -69,7 +69,7 @@ const ListarProducto = () => {
         },
       }
       const url = `http://localhost:8080/book/eliminar/${id}`;
-      //  const url = `https://onlybooks.isanerd.club/api/book/eliminar/${id}`;
+    //    const url = `https://onlybooks.isanerd.club/api/book/eliminar/${id}`;
       await fetchData(url, settings);
       await actualizarListaLibros();
       setProductos(updatedProductos)

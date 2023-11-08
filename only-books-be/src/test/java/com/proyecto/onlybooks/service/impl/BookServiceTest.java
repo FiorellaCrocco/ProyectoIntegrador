@@ -1,4 +1,4 @@
-package com.proyecto.onlybooks.service.impl;
+//package com.proyecto.onlybooks.service.impl;
 
 import com.proyecto.onlybooks.dto.BookDTO;
 import com.proyecto.onlybooks.entity.Book;
@@ -20,9 +20,8 @@ import java.util.List;
 import static com.proyecto.onlybooks.entity.Gender.SUSPENSO;
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
-
-public class BookServiceTest {
+//@SpringBootTest
+//public class BookServiceTest {
 /*
 
     @Autowired
@@ -184,4 +183,4 @@ public class BookServiceTest {
     //   assertNotNull(imagenesList);
 
     // }
-}
+//}

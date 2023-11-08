@@ -65,7 +65,10 @@ public class SecurityConfiguration {
                                 .requestMatchers("/categoria/eliminar/**").hasAuthority("ADMIN")
                                 .requestMatchers("/categoria/modificar").hasAuthority("ADMIN")
 
-                                .requestMatchers("/user/**").hasAuthority("ADMIN")
+                                .requestMatchers("/user/agregar").hasAuthority("ADMIN")
+                                .requestMatchers("/user/eliminar/**").hasAuthority("ADMIN")
+                                .requestMatchers("/user/modificar").hasAuthority("ADMIN")
+
                                 .requestMatchers("/bookRent/listar").hasAuthority("ADMIN")
 
                                 .anyRequest().authenticated()

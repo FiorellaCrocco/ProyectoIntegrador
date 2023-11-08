@@ -1,17 +1,26 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unsafe-finally */
 /* eslint-disable no-unused-vars */
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from './Hook/UseForm'
 import './log&register.css'
+import emailjs from '@emailjs/browser';
+
+
 //RegisterPage
 export const RegisterPage = () => {
 	const [passwordError, setPasswordError] = useState('')
 	const [emailError, setEmailError] = useState('')
 	const navigate = useNavigate();
+	const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+	const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+	const userId = import.meta.env.VITE_EMAILJS_USER_ID;
+
+
 	const url = "http://localhost:8080/auth/register"
-	//const url = "https://onlybooks.isanerd.club/api/auth/register";
+//	const url = "https://onlybooks.isanerd.club/api/auth/register";
 
 	const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 
@@ -59,43 +68,99 @@ export const RegisterPage = () => {
 
 	}
 
+
+	const sendConfirmationEmail = async () => {
+		try {
+			const templateParams = {
+				to_email: email, // El destinatario del correo (puede ser el correo del usuario)
+				message: '¡Tu cuenta ha sido creada exitosamente!',
+			};
+			console.log("Send email: " + email)
+			const response = await emailjs.send(
+				serviceId,
+				templateId,
+				templateParams,
+				userId
+			);
+
+			if (response.status === 200) {
+				console.log('Correo electrónico de confirmación enviado con éxito.');
+			}
+		} catch (error) {
+			console.error('Error al enviar el correo electrónico de confirmación:', error);
+		}
+	};
+
+
 	const onRegister = async (e) => {
 		e.preventDefault();
 
+		if (validatePassword(password)) {
+			setPasswordError('')
+			try {
+				const response = await fetch(url, settings)
+				console.log(response)
+				if (response.status == 200) {
 
-			if (validatePassword(password)) {
-				setPasswordError('')
-				try {
-					const response = await fetch(url, settings)
-					console.log(response)
-					if (response.status == 200) {
-						navigate('/', {
-							replace: true,
-							state: {
-								logged: true
-							}
-						});
-					}
-					if(response.status==500){
-						setEmailError('Ya existe un usuario con ese email');
-					console.log("Usuario existente");	
-					}
-				} catch {
-					(error) => {
-					console.log(error)
-					}
+					sendConfirmationEmail();
+					navigate('/', {
+						replace: true,
+						state: {
+							logged: true
+						}
+					});
 				}
-				//onResetForm();
-			} else {
-				setPasswordError("La contraseña no cumple con los requerimientos")
+				if (response.status == 500) {
+					setEmailError('Ya existe un usuario con ese email');
+					console.log("Usuario existente");
+				}
+			} catch {
+				(error) => {
+					console.log(error)
+				}
 			}
+			// onResetForm();
+		} else {
+			setPasswordError("La contraseña no cumple con los requerimientos")
+		}
+
+
+
+
+
+		if (validatePassword(password)) {
+			setPasswordError('')
+			try {
+				const response = await fetch(url, settings)
+				console.log(response)
+				if (response.status == 200) {
+					navigate('/', {
+						replace: true,
+						state: {
+							logged: true
+						}
+					});
+				}
+				if (response.status == 500) {
+					setEmailError('Ya existe un usuario con ese email');
+					console.log("Usuario existente");
+				}
+			} catch {
+				(error) => {
+					console.log(error)
+				}
+			}
+			//onResetForm();
+		} else {
+			setPasswordError("La contraseña no cumple con los requerimientos")
+		}
 	}
 
 
 	return (
 		<div className='login-container'>
 			<div className='wrapper'>
-				<form className='loginForm' onSubmit={onRegister}>
+				<form className='loginForm' onSubmit={onRegister} >
 					<h2>Crear cuenta</h2>
 
 					<div className="input-group">
@@ -138,7 +203,7 @@ export const RegisterPage = () => {
 							id='email'
 							className='input'
 							value={email}
-							onChange={(e)=>{onInputChange(e), setEmailError('')}}
+							onChange={(e) => { onInputChange(e), setEmailError('') }}
 							required
 							autoComplete='off'
 						/>
