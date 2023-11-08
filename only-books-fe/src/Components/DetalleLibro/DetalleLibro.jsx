@@ -2,11 +2,37 @@ import React, { useState, useContext, useEffect } from "react";
 import CaracteristicaLibro from "../CaracteristicaLibro/CaracteristicaLibro";
 import styles from "./DetalleLibro.module.css";
 import { GlobalContext } from "../../Context/globalContext";
+import "./Modal.css";
 
 function DetalleLibro({ id }) {
+
   const [showPopup, setShowPopup] = useState(false);
+
+  const openPopup = () => setShowPopup(true);
+  const closePopup = () => setShowPopup(false);
+
+  const [modal, setModal] = useState(false);
+  const [imagenActual, setImagenActual] = useState(0);
   const { fetchBookById } = useContext(GlobalContext);
   const[libro, setLibro]= useState(null)
+
+  const toggleModal = () => {
+    setModal(!modal);
+  };
+
+  const avanzarImagen = () => {
+    setImagenActual((imagenActual + 1) % libro.imgUrl.length);
+  };
+
+  const retrocederImagen = () => {
+    setImagenActual((imagenActual - 1 + libro.imgUrl.length) % libro.imgUrl.length);
+  };
+
+  if (modal) {
+    document.body.classList.add('active-modal');
+  } else {
+    document.body.classList.remove('active-modal');
+  }
 
   useEffect(()=>{
     const getLibro = async ()=>{
@@ -17,10 +43,6 @@ function DetalleLibro({ id }) {
     getLibro();
 
   },[id,fetchBookById])
-  
-  const openPopup = () => setShowPopup(true);
-  const closePopup = () => setShowPopup(false);
-  
 
   return (
     <>
@@ -29,26 +51,36 @@ function DetalleLibro({ id }) {
       <div className={styles.bookcontainer}>
         <div className={styles.section}>
           <div className={styles.book}>
-            {console.log(libro)}
-            <img className={styles.mainimg} src={libro.imgUrl[0]} alt={libro.title} />
+            <img className={styles.mainimg} src={libro.imgUrl[imagenActual]} alt={libro.title} />
           </div>
           <div className={styles.galeria}>
-            <img src={libro.imgUrl[1]} alt={libro.title} />
-            <img src={libro.imgUrl[2]} alt={libro.title} />
-            <img src={libro.imgUrl[3]} alt={libro.title} />
-            <img src={libro.imgUrl[4]} alt={libro.title} />
+            {libro.imgUrl.map((url, index) => (
+              <img
+                key={index}
+                src={url}
+                alt={`${libro.title} - Imagen ${index + 1}`}
+                className={index === imagenActual ? styles.active : ""}
+              />
+            ))}
           </div>
         </div>
-        <button className={styles.btnVer} onClick={openPopup}>
+
+        <button className={styles.btnVer} onClick={toggleModal}>
           Ver más
         </button>
 
-        {showPopup && (
-          <div className={styles.popup}>
-            <div className={styles.popupContent}>
-              CONTENIDO DEL POPUP AGREGAR
-              <br></br>
-              <button className={styles.closeBtn} onClick={closePopup}>
+        {modal && (
+          <div className="modal">
+            <div onClick={toggleModal} className="overlay"></div>
+            <div className="modal-content">
+              <div className="carrusel"/*className={styles.carrusel}*/>
+
+                <button className="btnBack" onClick={retrocederImagen}>&lt;</button>
+                <img className="imagenCarrusel" src={libro.imgUrl[imagenActual]} alt={libro.title} />
+              
+                <button className="btnNext" onClick={avanzarImagen}>&gt;</button>
+              </div>
+              <button className="close-modal" onClick={toggleModal}>
                 Cerrar
               </button>
             </div>
@@ -74,4 +106,5 @@ function DetalleLibro({ id }) {
 }
 
 export default DetalleLibro;
+
 
