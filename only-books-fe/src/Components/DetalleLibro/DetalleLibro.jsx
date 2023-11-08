@@ -1,20 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import CaracteristicaLibro from "../CaracteristicaLibro/CaracteristicaLibro";
-import data from "../LibrosPaginados/libros";
 import styles from "./DetalleLibro.module.css";
+import { GlobalContext } from "../../Context/globalContext";
 
 function DetalleLibro({ id }) {
-  const libro = data.find((book) => book.id == id);
   const [showPopup, setShowPopup] = useState(false);
+  const { fetchBookById } = useContext(GlobalContext);
+  const[libro, setLibro]= useState(null)
 
+  useEffect(()=>{
+    const getLibro = async ()=>{
+      const libroData = await fetchBookById(id)
+      setLibro(libroData)
+      console.log(libro)
+    }
+    getLibro();
+
+  },[id,fetchBookById])
+  
   const openPopup = () => setShowPopup(true);
   const closePopup = () => setShowPopup(false);
+  
 
   return (
-    <div className={styles.detailcontainer}>
+    <>
+    {
+      libro!=null? <div className={styles.detailcontainer}>
       <div className={styles.bookcontainer}>
         <div className={styles.section}>
           <div className={styles.book}>
+            {console.log(libro)}
             <img className={styles.mainimg} src={libro.imgUrl[0]} alt={libro.title} />
           </div>
           <div className={styles.galeria}>
@@ -51,7 +66,10 @@ function DetalleLibro({ id }) {
         </button>
       </div>
       <CaracteristicaLibro id={id} />
-    </div>
+      
+    </div>:<div>CARGANDO</div>
+    }
+    </>
   );
 }
 

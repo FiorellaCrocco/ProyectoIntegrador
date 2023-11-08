@@ -13,6 +13,7 @@ import com.proyecto.onlybooks.repository.ICategoriaRepository;
 import com.proyecto.onlybooks.service.IBookService;
 import com.proyecto.onlybooks.service.ICaracteristicaService;
 import com.proyecto.onlybooks.service.ICategoriaService;
+import jakarta.transaction.Transactional;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,9 +46,13 @@ public class BookService implements IBookService {
     }
 
     @Override
-    public Long guardar(Book book) {
+    public Long guardar(Book book) throws ResourceNotFoundException {
         logger.info("Libros - guardar: Se va a guardar el libro");
-        iBookRepository.save(book);
+        Long id = iBookRepository.save(book).getId();
+        /*List<Categoria> lista = book.getCategorias();
+        for (Categoria l : lista){
+            guardarCategoria(id,l.getId());
+        }*/
         return book.getId();
     }
 
@@ -103,7 +108,7 @@ public class BookService implements IBookService {
     }
 
     @Override
-    public void modificar(Book book) {
+    public void modificar(Book book) throws ResourceNotFoundException {
         logger.info("Libro - actualizar: Se va a actualizar el libro");
         guardar(book); // El método utiliza .save; este lo que hace es crear si el ID = 0 pero si ID!=0 actualiza los cambios.
     }

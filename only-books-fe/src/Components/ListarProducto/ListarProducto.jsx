@@ -76,10 +76,8 @@ const ListarProducto = () => {
         {productos.map((libro) => (
           
           <li className="lista" key={libro.id}>
-            {console.log(libro)}
             <div className="id">{libro.id}</div>
             <div className="nombre">{libro.title}</div>
-            {console.log(libro)}
             <div className="admin-btn-container">
               <Button
                 variant="outlined"
