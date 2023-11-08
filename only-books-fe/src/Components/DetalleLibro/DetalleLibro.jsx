@@ -1,13 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import CaracteristicaLibro from "../CaracteristicaLibro/CaracteristicaLibro";
-import data from "../LibrosPaginados/libros";
 import styles from "./DetalleLibro.module.css";
+import { GlobalContext } from "../../Context/globalContext";
 import "./Modal.css";
 
 function DetalleLibro({ id }) {
-  const libro = data.find((book) => book.id == id);
+
+  const [showPopup, setShowPopup] = useState(false);
+
+  const openPopup = () => setShowPopup(true);
+  const closePopup = () => setShowPopup(false);
+
   const [modal, setModal] = useState(false);
   const [imagenActual, setImagenActual] = useState(0);
+  const { fetchBookById } = useContext(GlobalContext);
+  const[libro, setLibro]= useState(null)
 
   const toggleModal = () => {
     setModal(!modal);
@@ -27,8 +34,20 @@ function DetalleLibro({ id }) {
     document.body.classList.remove('active-modal');
   }
 
+  useEffect(()=>{
+    const getLibro = async ()=>{
+      const libroData = await fetchBookById(id)
+      setLibro(libroData)
+      console.log(libro)
+    }
+    getLibro();
+
+  },[id,fetchBookById])
+
   return (
-    <div className={styles.detailcontainer}>
+    <>
+    {
+      libro!=null? <div className={styles.detailcontainer}>
       <div className={styles.bookcontainer}>
         <div className={styles.section}>
           <div className={styles.book}>
@@ -79,7 +98,10 @@ function DetalleLibro({ id }) {
         </button>
       </div>
       <CaracteristicaLibro id={id} />
-    </div>
+      
+    </div>:<div>CARGANDO</div>
+    }
+    </>
   );
 }
 

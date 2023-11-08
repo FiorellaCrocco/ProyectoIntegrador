@@ -29,5 +29,6 @@ public class BookDTO {
     private Double price;
     private List<Categoria> categorias;
     private List<Caracteristica> caracteristicas;
+    private List<String> imagesBase64;
 
 }

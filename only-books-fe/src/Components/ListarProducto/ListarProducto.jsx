@@ -13,6 +13,9 @@ const ListarProducto = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [editOpen, setEditOpen] = useState(false);
 
+  const token = sessionStorage.getItem('token')
+
+
   const handleEditOpen = (product) => {
     setSelectedProduct(product);
     setEditOpen(true);
@@ -59,6 +62,7 @@ const ListarProducto = () => {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
         },
       }
       const url = `http://localhost:8080/book/eliminar/${id}`;
@@ -76,10 +80,8 @@ const ListarProducto = () => {
         {productos.map((libro) => (
           
           <li className="lista" key={libro.id}>
-            {console.log(libro)}
             <div className="id">{libro.id}</div>
             <div className="nombre">{libro.title}</div>
-            {console.log(libro)}
             <div className="admin-btn-container">
               <Button
                 variant="outlined"

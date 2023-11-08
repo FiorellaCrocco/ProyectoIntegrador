@@ -3,19 +3,20 @@ import "./CargarProducto.css";
 import { GlobalContext } from "../../Context/globalContext";
 
 function CargarProducto() {
-  const { actualizarListaLibros } = useContext(GlobalContext);
+  const { actualizarListaLibros, listaCategorias, actualizarCategorias } =
+    useContext(GlobalContext);
+  const [selectedCategory, setSelectedCategory] = useState([]);
+
+  const token = sessionStorage.getItem('token')
 
   const [formData, setFormData] = useState({
-    id: 0,
     title: "",
     author: "",
     description: "",
     isbn: "",
-    publication_year: "2023-11-03T19:58:15.945Z",
+    publication_year: "2023-11-03",
     qualification: 0,
     price: 0,
-    categorias: "",
-    caracteristicas: "",
     imagesBase64: [],
   });
 
@@ -64,12 +65,15 @@ function CargarProducto() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData);
+
     const url = "http://localhost:8080/book/agregar";
     // const url = "https://onlybooks.isanerd.club/api/book/agregar";
     const settings = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify(formData),
     };
@@ -79,6 +83,9 @@ function CargarProducto() {
       const data = await response.text();
       console.log(data);
 
+for (const category of selectedCategory) {
+      await fetchCategoriaCaracteristica(data, category.id);
+    }
       // Limpiar los campos del formulario
       setFormData({
         id: 0,
@@ -86,11 +93,9 @@ function CargarProducto() {
         author: "",
         description: "",
         isbn: "",
-        publication_year: "2023-11-03T19:58:15.945Z",
+        publication_year: "2023-11-03",
         qualification: 0,
         price: 0,
-        categorias: "",
-        caracteristicas: "",
         imagesBase64: [],
       });
 
@@ -101,8 +106,50 @@ function CargarProducto() {
     }
   };
 
+  async function fetchCategoriaCaracteristica(bookId,categoriaId){
+    const settings = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`,
+      },
+    };
+      const url = `http://localhost:8080/book/${bookId}/categoria/${categoriaId}`;
+      try{
+        const response = await fetch(url,settings)
+        const data = await response.text()
+        console.log(data)
+      }catch(error){
+        console.error("ERROR:",error)
+      }
+
+  }
+
+  const renderCategoryOptions = () => {
+    const categorias = listaCategorias;
+    return categorias.map((category, index) => (
+      <div
+        key={index}
+        className={`${selectedCategory.includes(category) ? "selected" : ""}`}
+        onClick={() => handleCategoryChange(category)}
+      >
+        <label value={category}>{category.titulo}</label>
+      </div>
+    ));
+  };
+  const handleCategoryChange = (category) => {
+    if (selectedCategory.includes(category)) {
+      setSelectedCategory(
+        selectedCategory.filter((c) => c.titulo !== category.titulo)
+      );
+    } else {
+      setSelectedCategory([...selectedCategory, category]);
+    }
+  };
+
   return (
     <div className="Container">
+      <img src="https://onlybooksbucket.s3.amazonaws.com/Kike_neitor_y_fio_rella_23d5941d-b8d4-4f7d-8939-b45c78c898be.jpg"/>
       <h1 className="titulo">Cargar Libro</h1>
       <form className="formulario" onSubmit={handleSubmit}>
         <div className="div">
@@ -158,7 +205,7 @@ function CargarProducto() {
         </div>
         <div className="div">
           <label className="labels" htmlFor="publication_year">
-            Año de Publicación (formato: YYYY-MM-DDTHH:MM:SS.sssZ):
+            Año de Publicación (formato: YYYY-MM-DD):
           </label>
           <input
             className="input"
@@ -195,19 +242,14 @@ function CargarProducto() {
             onChange={handleInputChange}
           />
         </div>
-        <div className="div">
+
+        <div className="divSelect">
           <label className="labels" htmlFor="categorias">
             Categorías:
           </label>
-          <input
-            className="input"
-            type="text"
-            id="categorias"
-            name="categorias"
-            value={formData.categorias}
-            onChange={handleInputChange}
-          />
+          <>{renderCategoryOptions()}</>
         </div>
+
         <div className="div">
           <label className="labels" htmlFor="caracteristicas">
             Características:

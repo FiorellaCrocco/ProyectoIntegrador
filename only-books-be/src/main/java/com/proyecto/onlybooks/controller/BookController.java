@@ -6,6 +6,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.proyecto.onlybooks.dto.BookDTO;
 import com.proyecto.onlybooks.dto.BookSummary;
 import com.proyecto.onlybooks.entity.Book;
+import com.proyecto.onlybooks.entity.Categoria;
 import com.proyecto.onlybooks.entity.Image;
 import com.proyecto.onlybooks.exceptions.ResourceNotFoundException;
 import com.proyecto.onlybooks.service.ICaracteristicaService;
@@ -17,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.ByteArrayInputStream;
@@ -65,12 +67,13 @@ public class BookController {
         return ResponseEntity.ok(bookService.buscarPorId(id));
     }
     // En la url "/book/agregar"
-    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/agregar")
-    public ResponseEntity<?> agregar(@RequestBody Book book) {
+    @Transactional
+    public ResponseEntity<?> agregar(@RequestBody Book book) throws ResourceNotFoundException{
         // Extraer otros datos del libro
         String title = book.getTitle();
         String description = book.getDescription();
+        List<Categoria> lista = book.getCategorias();
 
         // Obtener la lista de imágenes en formato Base64
         List<String> base64Images = (book.getImagesBase64() != null) ? book.getImagesBase64() : Collections.emptyList();
@@ -80,10 +83,11 @@ public class BookController {
 
         ObjectMetadata objectMetadata = new ObjectMetadata();
 
-        Book newBook = new Book(title, null, description, null, null, null, null);
+        Book newBook = book;
 
         Long id = bookService.guardar(newBook);
         newBook.setId(id);
+        newBook.setCategorias(lista);
 
         // Iterar sobre la lista de imágenes y subirlas a S3
         for (String base64Image : base64Images) {
@@ -93,6 +97,7 @@ public class BookController {
             byte[] binaryData = Base64.getDecoder().decode(base64Image);
 
             // Generar un nombre de clave único para cada imagen
+            title=title.replace(" ","_");
             String key = title + "_" + UUID.randomUUID().toString() + ".jpg";
 
             try {
@@ -106,7 +111,10 @@ public class BookController {
                 Image image = new Image();
                 image.setUrl("https://onlybooksbucket.s3.amazonaws.com/" + key);
                 image.setBook(newBook);
+                //iImageService.guardar(image);
                 images.add(image);
+
+
             } catch (IllegalArgumentException | AmazonServiceException e) {
                 System.err.println("Error al procesar la imagen " + e.getMessage());
                 // Manejar el error apropiadamente (puede ser útil lograrlo o devolver un mensaje más detallado)
@@ -114,18 +122,19 @@ public class BookController {
             }
         }
         // Crear un nuevo libro con la lista de entidades Image
-
+        newBook.setImagesBase64(null);
         newBook.setImages(images);
 
         // Guardar el libro en la base de datos
         bookService.guardar(newBook);
 
-        return ResponseEntity.status(HttpStatus.OK).body("Libro agregado exitosamente.");
+
+        return ResponseEntity.status(HttpStatus.OK).body(book.getId());
     }
 
     // En la url "/book/modificar" actualizamos un book ya existente
     @PutMapping("/modificar")
-    public ResponseEntity<?> actualizarUnBook(@RequestBody Book book) {
+    public ResponseEntity<?> actualizarUnBook(@RequestBody Book book) throws ResourceNotFoundException{
         bookService.modificar(book);
         return ResponseEntity.ok().body("Se modifico el Libro.");
     }
@@ -143,7 +152,7 @@ public class BookController {
     public ResponseEntity<?> agregarCategoria(@PathVariable Long bookId, @PathVariable Long categoriaId) throws ResourceNotFoundException{
         ResponseEntity<?> response=null;
         bookService.guardarCategoria(bookId,categoriaId);
-        return response;
+        return  ResponseEntity.ok().body("Categoria agregada");
     }
 
     // "/{bookId}/caracteristica/{caracteristicaId}"

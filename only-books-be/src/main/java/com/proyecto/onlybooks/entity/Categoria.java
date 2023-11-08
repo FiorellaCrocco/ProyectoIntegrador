@@ -23,11 +23,9 @@ public class Categoria {
     private Long id;
 
     @Size(max=30, message="Titulo maximo 30 caracteres.")
-    @NotNull
     private String titulo;
 
     @Size(max=255, message="Descripcion maximo 255 caracteres.")
-    @NotNull
     private String descripcion;
 
     private String imagen;

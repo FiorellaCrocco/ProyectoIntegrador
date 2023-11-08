@@ -11,10 +11,10 @@ const ListarUsuarios = () => {
     //Para la  funcionalidad de EDITAR
     const [selectedUser, setSelectedUser] = useState(null);
     const [editOpen, setEditOpen] = useState(false);
-  
+    const token = sessionStorage.getItem('token');
+
     const fetchDataList = async () => {
-        try {
-          const token = sessionStorage.getItem('token');
+        try {  
           const settings = {
             method: 'GET',
             headers: {
@@ -44,8 +44,7 @@ const ListarUsuarios = () => {
   
     useEffect(() => {
         fetchDataList();
-    }, [])
-
+    }, []) 
   
     const handleDelete = async (id) => {
       const confirmDelete = window.confirm(
@@ -60,12 +59,14 @@ const ListarUsuarios = () => {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
           },
         }
         const url = `http://localhost:8080/user/eliminar/${id}`;
         //  const url = `https://onlybooks.isanerd.club/api/user/eliminar/${id}`;
         // eslint-disable-next-line no-undef
         await fetchData(url, settings);
+        
         setUsuarios(updatedUsuarios);
       }
     }
