@@ -1,24 +1,17 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unsafe-finally */
-/* eslint-disable no-unused-vars */
 
 import React, { useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useForm } from './Hook/UseForm'
 import './log&register.css'
 import emailjs from '@emailjs/browser';
-
 
 //RegisterPage
 export const RegisterPage = () => {
 	const [passwordError, setPasswordError] = useState('')
 	const [emailError, setEmailError] = useState('')
-	const navigate = useNavigate();
 	const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 	const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 	const userId = import.meta.env.VITE_EMAILJS_USER_ID;
 	const [accountCreated, setAccountCreated] = useState(false);
-	const [confirmationEmailSent, setConfirmationEmailSent] = useState(false);
 	const [emailSentText, setEmailSentText] = useState('');
 
 	const url = "http://localhost:8080/auth/register"
@@ -54,7 +47,6 @@ export const RegisterPage = () => {
 			password: password,
 			rol: 'USER'
 		})
-
 	}
 
 	const onResendConfirmationEmail = () => {
@@ -70,7 +62,9 @@ export const RegisterPage = () => {
 	const sendConfirmationEmail = async () => {
 		try {
 			const templateParams = {
-				to_email: email, // El destinatario del correo (puede ser el correo del usuario)
+				to_email: email,
+				name: name,
+				email: email, 
 				message: '¡Tu cuenta ha sido creada exitosamente!',
 			};
 			console.log("Send email: " + email)
@@ -80,7 +74,6 @@ export const RegisterPage = () => {
 				templateParams,
 				userId
 			);
-
 			if (response.status === 200) {
 				console.log('Correo electrónico de confirmación enviado con éxito.');
 			}
@@ -92,7 +85,6 @@ export const RegisterPage = () => {
 
 	const onRegister = async (e) => {
 		e.preventDefault();
-
 		if (validatePassword(password)) {
 			setPasswordError('')
 			try {
@@ -102,22 +94,18 @@ export const RegisterPage = () => {
 					setAccountCreated(true);
 					sendConfirmationEmail();
 				}
-
 				if (response.status == 500) {
 					setEmailError('Ya existe un usuario con ese email');
 					console.log("Usuario existente");
 				}
 				if (response.status == 403) {
-
 					console.log("Error al crear la cuenta");
 				}
-
 			} catch {
 				(error) => {
 					console.log(error)
 				}
 			}
-
 		} else {
 			setPasswordError("La contraseña no cumple con los requerimientos")
 		}
@@ -223,18 +211,15 @@ export const RegisterPage = () => {
 					<div className='passwordError'>{emailError}</div>
 
 					<button className='btn-lr'>Registrarse</button>
-					{/* <button className='btn-lr'>Registrarse</button> */}
 					{accountCreated ? (
 						<div className="success-message">
 							Cuenta creada exitosamente. Un correo se ha enviado a su dirección. Si no lo recibe y desea reenviarlo, haga click aquí.
 							<button type='button' className="resend-email-button" onClick={onResendConfirmationEmail}>
-								{/* Reenviar Email */}
 								{emailSentText || 'Reenviar Email'} {/* Mostrar 'Mail Enviado!!' o 'Reenviar Email' */}
 							</button>
 						</div>
 					) : null}
 				</form>
-
 			</div>
 		</div>
 	);
