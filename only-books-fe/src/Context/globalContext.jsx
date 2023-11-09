@@ -84,9 +84,10 @@ export const BookProvider = ({ children }) => {
   const actualizarCategorias = async () => {
     await fetchCategorias();
   };
-  // const actualizarCaracteristicas = async () => {
-  //   await fetchCaracteristicas();
-  // };
+
+//  const actualizarCaracteristicas = async () => {
+//  await fetchCaracteristicas();
+//};
 
   useEffect(() => {
     fetchData();
