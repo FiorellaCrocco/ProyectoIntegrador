@@ -96,7 +96,7 @@
 .editPopup>button:hover {
 	background: #9cc6dd;
 }
-.btnEdit{
+.btnEditCaracteristica{
 	background: linear-gradient(to right, #418cb1, #327297);
 	font-size: 0.9rem;
 	color: #e7f1f7;

@@ -123,7 +123,7 @@ const AdministrarCaracteristicas = () => {
               >
                 Eliminar
               </button>
-              <button className='btnEdit' onClick={() => abrirPopupEdicion(caracteristica)}>
+              <button className='btnEditCaracteristica' onClick={() => abrirPopupEdicion(caracteristica)}>
                 Editar
               </button>
             </div>
