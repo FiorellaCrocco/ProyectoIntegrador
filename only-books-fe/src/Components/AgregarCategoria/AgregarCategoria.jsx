@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useRef } from "react";
 import './AgregarCategoria.css';
 import { GlobalContext } from "../../Context/globalContext";
 import Swal from 'sweetalert2'
@@ -8,6 +8,7 @@ function AgregarCategoria() {
   const token = sessionStorage.getItem('token')
 
   const { actualizarCategorias } = useContext(GlobalContext);
+  const formRef = useRef(null);
 
   const [categoria, setCategoria] = useState({
     titulo: "",
@@ -70,9 +71,10 @@ function AgregarCategoria() {
   
       if (res.status === 200) {
         await actualizarCategorias();
-        setCategoria({ titulo: "",
-        descripcion: "",
-        imagen: ''})
+        formRef.current.reset()
+      
+         setCategoria({ titulo: "",
+        descripcion: ""}) 
         // Mostrar mensaje de éxito
         Swal.fire({
           text: "Categoría creada con éxito",
@@ -94,7 +96,7 @@ function AgregarCategoria() {
   return (
     <div className="agregar-categoria">
       <h2>Crear Nueva Categoría</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} ref={formRef}>
         <div className="agregar-categoria-div">
           <label>Título:</label>
           <input
