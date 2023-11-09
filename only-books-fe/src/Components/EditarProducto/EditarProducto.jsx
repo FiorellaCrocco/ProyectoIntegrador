@@ -150,8 +150,11 @@ const EditarProducto = ({ product, onUpdateList }) => {
       categorias: [],
       caracteristicas:[]
     });
-    lanzarFetch == true ? setLanzarFetch(false) : setLanzarFetch(true);
+    setLanzarFetch(true)
+    
   };
+
+
   useEffect(() => {
     const fetchData = async () => {
       const settings = {
@@ -203,8 +206,10 @@ const EditarProducto = ({ product, onUpdateList }) => {
         });
       }
     };
-
-    fetchData();
+    if(lanzarFetch){
+      fetchData();
+      setLanzarFetch(false)
+    }
   }, [lanzarFetch]);
 
   return (
