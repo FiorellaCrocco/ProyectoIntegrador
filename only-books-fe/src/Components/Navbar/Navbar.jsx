@@ -17,7 +17,7 @@ const Navbar = () => {
 
 
     return (
-        <header className="navbar">
+        <header className="navbar" id="navbar">
             <div className="header-container">
                 <div className="header-left">
                     <Link to="/">
