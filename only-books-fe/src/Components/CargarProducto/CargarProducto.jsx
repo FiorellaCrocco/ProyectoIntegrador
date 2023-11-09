@@ -3,11 +3,16 @@ import "./CargarProducto.css";
 import { GlobalContext } from "../../Context/globalContext";
 
 function CargarProducto() {
-  const { actualizarListaLibros, listaCategorias, actualizarCategorias } =
-    useContext(GlobalContext);
+  const {
+    actualizarListaLibros,
+    listaCategorias,
+    listaCaracteristicas,
+    actualizarCategorias,
+  } = useContext(GlobalContext);
   const [selectedCategory, setSelectedCategory] = useState([]);
+  const [selectedCaracteristica, setSelectedCaracteristica] = useState([]);
 
-  const token = sessionStorage.getItem('token')
+  const token = sessionStorage.getItem("token");
 
   const [formData, setFormData] = useState({
     title: "",
@@ -65,7 +70,6 @@ function CargarProducto() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
 
     const url = "http://localhost:8080/book/agregar";
     // const url = "https://onlybooks.isanerd.club/api/book/agregar";
@@ -73,7 +77,7 @@ function CargarProducto() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(formData),
     };
@@ -83,9 +87,12 @@ function CargarProducto() {
       const data = await response.text();
       console.log(data);
 
-for (const category of selectedCategory) {
-      await fetchCategoriaCaracteristica(data, category.id);
-    }
+      for (const category of selectedCategory) {
+        await fetchCategoria(data, category.id);
+      }
+      for (const caracteristica of selectedCaracteristica) {
+        await fetchCaracteristica(data, caracteristica.id);
+      }
       // Limpiar los campos del formulario
       setFormData({
         id: 0,
@@ -106,25 +113,44 @@ for (const category of selectedCategory) {
     }
   };
 
-  async function fetchCategoriaCaracteristica(bookId,categoriaId){
+  async function fetchCategoria(bookId, categoriaId) {
     const settings = {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     };
-      const url = `http://localhost:8080/book/${bookId}/categoria/${categoriaId}`;
-    //  const url = `https://onlybooks.isanerd.club/api/book/${bookId}/categoria/${categoriaId}`;
-      try{
-        const response = await fetch(url,settings)
-        const data = await response.text()
-        console.log(data)
-      }catch(error){
-        console.error("ERROR:",error)
-      }
-
+    const url = `http://localhost:8080/book/${bookId}/categoria/${categoriaId}`;
+    // const url = "https://onlybooks.isanerd.club/api/book/${bookId}/categoria/${categoriaId}";
+    try {
+      const response = await fetch(url, settings);
+      const data = await response.text();
+      console.log(data);
+    } catch (error) {
+      console.error("ERROR:", error);
+    }
   }
+
+  async function fetchCaracteristica(bookId, caracteristicaId) {
+    const settings = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const url = `http://localhost:8080/book/${bookId}/caracteristica/${caracteristicaId}`;
+     // const url = "https://onlybooks.isanerd.club/api/book/${bookId}/caracteristica/${caracteristicaId}";
+    try {
+      const response = await fetch(url, settings);
+      const data = await response.text();
+      console.log(data);
+    } catch (error) {
+      console.error("ERROR:", error);
+    }
+  }
+
 
   const renderCategoryOptions = () => {
     const categorias = listaCategorias;
@@ -138,6 +164,24 @@ for (const category of selectedCategory) {
       </div>
     ));
   };
+
+  const renderCaracteristicasOptions = () => {
+    const caracteristicas = listaCaracteristicas;
+    return caracteristicas.map((caracteristica, index) => (
+      <div
+        key={index}
+        className={`${
+          selectedCaracteristica.includes(caracteristica) ? "selected" : ""
+        }`}
+        onClick={() => handleCaracteristicaChange(caracteristica)}
+      >
+        <label value={caracteristica}>
+          {caracteristica.title.toUpperCase()}
+        </label>
+      </div>
+    ));
+  };
+
   const handleCategoryChange = (category) => {
     if (selectedCategory.includes(category)) {
       setSelectedCategory(
@@ -145,6 +189,16 @@ for (const category of selectedCategory) {
       );
     } else {
       setSelectedCategory([...selectedCategory, category]);
+    }
+  };
+
+  const handleCaracteristicaChange = (caracteristica) => {
+    if (selectedCaracteristica.includes(caracteristica)) {
+      setSelectedCaracteristica(
+        selectedCaracteristica.filter((c) => c.title !== caracteristica.title)
+      );
+    } else {
+      setSelectedCaracteristica([...selectedCaracteristica, caracteristica]);
     }
   };
 
@@ -242,27 +296,22 @@ for (const category of selectedCategory) {
             onChange={handleInputChange}
           />
         </div>
+        <div className="ccSelect">
+          <div className="divSelect">
+            <label className="labels" htmlFor="categorias">
+              Categorías:
+            </label>
+            <>{renderCategoryOptions()}</>
+          </div>
 
-        <div className="divSelect">
-          <label className="labels" htmlFor="categorias">
-            Categorías:
-          </label>
-          <>{renderCategoryOptions()}</>
+          <div className="divSelect">
+            <label className="labels" htmlFor="caracteristicas">
+              Características:
+            </label>
+            <>{renderCaracteristicasOptions()}</>
+          </div>
         </div>
 
-        <div className="div">
-          <label className="labels" htmlFor="caracteristicas">
-            Características:
-          </label>
-          <input
-            className="input"
-            type="text"
-            id="caracteristicas"
-            name="caracteristicas"
-            value={formData.caracteristicas}
-            onChange={handleInputChange}
-          />
-        </div>
         <div className="div">
           <label className="labels" htmlFor="image">
             Imagen:

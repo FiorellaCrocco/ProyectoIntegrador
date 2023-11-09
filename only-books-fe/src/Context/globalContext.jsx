@@ -54,7 +54,6 @@ export const BookProvider = ({ children }) => {
       }
       const data = await response.json();
       setListaCaracteristicas(data);
-      console.log(data);
     } catch (error) {
       
       console.error("Error al cargar las caracteristicas:", error);

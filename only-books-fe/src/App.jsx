@@ -4,12 +4,11 @@ import { Routes, Route } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import Navbar from './Components/Navbar/Navbar';
 import Footer from './Components/Footer/Footer';
-import Administrador from './Routes/Administrador';
-import CargarProducto from './Components/CargarProducto/CargarProducto';
+import Administrador from './Routes/Administrador';;
 import Home from './Routes/Home';
-import ListarProducto from './Components/ListarProducto/ListarProducto';
 import Detail from './Routes/Detail';
-import Restricted from './Components/RestrictedPageResponsive/Restricted';
+import RestrictedMobile from './Components/RestrictedPageResponsive/RestrictedMobile';
+import RestrictedNotAdmin from './Components/RestrictedPageResponsive/RestrictedNotAdmin'
 import LoginPage from './Components/LogIn/LoginPage';
 import RegisterPage from './Components/LogIn/RegisterPage'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -17,6 +16,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const isMobile = useMediaQuery({ query: '(max-width: 425px)' });
+  
+  const userDataString = sessionStorage.getItem('userData');
+  const userData = userDataString ? JSON.parse(userDataString) : null;
+  const isAdmin = userData?.rol === 'ADMIN';
 
   return (
     <div className="app">
@@ -25,12 +28,11 @@ function App() {
         <Routes>
           <Route path='/' Component={Home} />
           {isMobile ? (
-            <Route
-              path="/administrador"
-              element={<Restricted/>}
-            />
+            <Route path="/administrador" element={<RestrictedMobile />} />
           ) : (
-            <Route path="/administrador" element={<Administrador />} />
+            isAdmin ? (
+              <Route path="/administrador" element={<Administrador />} />
+            ) : <Route path="/administrador" element={<RestrictedNotAdmin />} />
           )}
           <Route path='/detail/:id' Component={Detail} />
           <Route path='/registrarse' Component={RegisterPage}/>

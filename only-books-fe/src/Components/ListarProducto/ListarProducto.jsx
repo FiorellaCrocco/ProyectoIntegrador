@@ -6,7 +6,7 @@ import { GlobalContext } from "../../Context/globalContext";
 import EditarProducto from "../EditarProducto/EditarProducto";
 
 const ListarProducto = () => {
-  const { listaLibros, actualizarListaLibros } = useContext(GlobalContext);
+  const { listaLibros, actualizarListaLibros,fetchBookById } = useContext(GlobalContext);
   const [productos, setProductos] = useState([]);
 
   //Para la  funcionalidad de EDITAR
@@ -16,8 +16,11 @@ const ListarProducto = () => {
   const token = sessionStorage.getItem('token')
 
 
-  const handleEditOpen = (product) => {
-    setSelectedProduct(product);
+  const handleEditOpen = async (product) => {
+    const book = await fetchBookById(product.id)
+    console.log(book)
+    setSelectedProduct(book);
+    
     setEditOpen(true);
   };
 
