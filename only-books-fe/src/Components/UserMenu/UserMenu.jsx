@@ -3,6 +3,7 @@ import Avatar from '../Avatar/Avatar';
 import { GlobalContext } from "../../Context/globalContext";
 import { useAccount } from "../../Context/accountContext";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import Perfil from '../MiPerfil/Perfil'
 import './UserMenu.css';
 
 const UserMenu = () => {
@@ -34,7 +35,7 @@ const UserMenu = () => {
             </div>
             {showMenu && (
                 <div className="custom-dropdown">
-                    <Link to="/" className="custom-dropdown-item">Mi perfil</Link>
+                    <Link to="/perfil" className="custom-dropdown-item">Mi perfil</Link>
                     <Link to="/" className="custom-dropdown-item">Mis Reservas</Link>
                     <div className="custom-dropdown-item  custom-logout" onClick={onLogout}>Cerrar sesión</div>
                     {/* Agrega otros elementos personalizables aquí */}

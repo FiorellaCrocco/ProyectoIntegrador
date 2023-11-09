@@ -7,6 +7,7 @@ import Footer from './Components/Footer/Footer';
 import Administrador from './Routes/Administrador';;
 import Home from './Routes/Home';
 import Detail from './Routes/Detail';
+import Perfil from './Components/MiPerfil/Perfil';
 import RestrictedMobile from './Components/RestrictedPageResponsive/RestrictedMobile';
 import RestrictedNotAdmin from './Components/RestrictedPageResponsive/RestrictedNotAdmin'
 import LoginPage from './Components/LogIn/LoginPage';
@@ -36,6 +37,7 @@ function App() {
           )}
           <Route path='/detail/:id' Component={Detail} />
           <Route path='/registrarse' Component={RegisterPage}/>
+          <Route path='/perfil' Component={Perfil}/>
           <Route path='/login' Component={LoginPage}/>
         </Routes>
       </div>
