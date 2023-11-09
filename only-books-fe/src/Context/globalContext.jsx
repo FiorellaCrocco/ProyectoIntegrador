@@ -105,7 +105,7 @@ export const BookProvider = ({ children }) => {
 
 
   return (
-    <GlobalContext.Provider value={{ listaCategorias, listaLibros, isLoading, actualizarListaLibros, actualizarCategorias, fetchBookById, logout, listaCaracteristicas }}>
+    <GlobalContext.Provider value={{ listaCategorias, listaLibros, isLoading, actualizarListaLibros, actualizarCategorias, fetchBookById, logout, fetchCaracteristicas, listaCaracteristicas }}>
       {children}
     </GlobalContext.Provider>
   );

@@ -7,49 +7,91 @@ import "./EditarProducto";
 import { GlobalContext } from "../../Context/globalContext";
 
 const EditarProducto = ({ product, onUpdateList }) => {
-    const { listaCategorias, actualizarCategorias } = useContext(GlobalContext);
-    const [formData, setFormData] = useState(product);
-    const [selectedCategory, setSelectedCategory] = useState(product.categorias);
-    const [editOpen, setEditOpen] = useState(false);
-    
+  const { listaCategorias, listaCaracteristicas, actualizarCategorias } =
+    useContext(GlobalContext);
+  const [formData, setFormData] = useState(product);
+  const [selectedCategory, setSelectedCategory] = useState(product.categorias);
+  const [selectedCaracteristica, setSelectedCaracteristica] = useState(
+    product.caracteristicas
+  );
+  const [editOpen, setEditOpen] = useState(false);
+  const [editCaracteristicaOpen, setEditCaracteristicaOpen] = useState(false);
+  const [lanzarFetch, setLanzarFetch] = useState(false);
 
-    
-    const updateProductUrl = `http://localhost:8080/book/modificar`;
-    // const updateProductUrl = "https://onlybooks.isanerd.club/api/book/modificar"
-    
-    const token = sessionStorage.getItem('token')
+  const updateProductUrl = `http://localhost:8080/book/modificar`;
+  // const updateProductUrl = "https://onlybooks.isanerd.club/api/book/modificar"
 
-    const handleEditClose = () => {
-        setEditOpen(false);
-      };
+  const token = sessionStorage.getItem("token");
 
-      const handleCategoryChange = (category) => {
-        setSelectedCategory((prevSelectedCategory) => {
-            if (prevSelectedCategory.some((obj) => obj.titulo === category.titulo)) {
-              return prevSelectedCategory.filter((c) => c.titulo !== category.titulo);
-            } else {
-              return [...prevSelectedCategory, category];
-            }
-          });
-      };
-    
-      const renderCategoryOptions = useMemo(() => {
-        console.log("Imprimiendo product en renderCategoryOpt")
-        console.log(selectedCategory)
-        const categorias = listaCategorias;
-        return categorias.map((category, index) =>{
-            const isSelected = selectedCategory.some(obj=>obj.titulo==category.titulo)
-         return(
-    
-          <div
-            key={index}
-            className={`${isSelected ? "selected" : ""}`}
-            onClick={() => handleCategoryChange(category)}
-          >
-            <label value={category}>{category.titulo}</label>
-          </div>
-        )})
-      },[product, listaCategorias, selectedCategory]);
+  const handleEditClose = () => {
+    setEditOpen(false);
+  };
+
+  const handleEditCaracteristicaClose = () => {
+    setEditCaracteristicaOpen(false);
+  };
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategory((prevSelectedCategory) => {
+      if (prevSelectedCategory.some((obj) => obj.titulo === category.titulo)) {
+        return prevSelectedCategory.filter((c) => c.titulo !== category.titulo);
+      } else {
+        return [...prevSelectedCategory, category];
+      }
+    });
+  };
+
+  const handleCaracteristicaChange = (caracteristica) => {
+    setSelectedCaracteristica((prevSelectedCaracteristica) => {
+      if (
+        prevSelectedCaracteristica.some(
+          (obj) => obj.title === caracteristica.title
+        )
+      ) {
+        return prevSelectedCaracteristica.filter(
+          (c) => c.title !== caracteristica.title
+        );
+      } else {
+        return [...prevSelectedCaracteristica, caracteristica];
+      }
+    });
+  };
+
+  const renderCaracteristicaOptions = useMemo(() => {
+    const caracteristica = listaCaracteristicas;
+    return caracteristica.map((caracteristica, index) => {
+      const isSelected = selectedCaracteristica.some(
+        (obj) => obj.title == caracteristica.title
+      );
+      return (
+        <div
+          key={index}
+          className={`${isSelected ? "selected" : ""}`}
+          onClick={() => handleCaracteristicaChange(caracteristica)}
+        >
+          <label value={caracteristica}>{caracteristica.title.toUpperCase()}</label>
+        </div>
+      );
+    });
+  }, [product, listaCaracteristicas, selectedCaracteristica]);
+
+  const renderCategoryOptions = useMemo(() => {
+    const categorias = listaCategorias;
+    return categorias.map((category, index) => {
+      const isSelected = selectedCategory.some(
+        (obj) => obj.titulo == category.titulo
+      );
+      return (
+        <div
+          key={index}
+          className={`${isSelected ? "selected" : ""}`}
+          onClick={() => handleCategoryChange(category)}
+        >
+          <label value={category}>{category.titulo}</label>
+        </div>
+      );
+    });
+  }, [product, listaCategorias, selectedCategory]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -58,23 +100,40 @@ const EditarProducto = ({ product, onUpdateList }) => {
       [name]: value,
     });
   };
-  async function fetchCategoriaCaracteristica(bookId,categoriaId){
+
+  async function fetchCategoria(bookId, categoriaId) {
     const settings = {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     };
-      const url = `http://localhost:8080/book/${bookId}/categoria/${categoriaId}`;
-      try{
-        const response = await fetch(url,settings)
-        const data = await response.text()
-        console.log(data)
-      }catch(error){
-        console.error("ERROR:",error)
-      }
+    const url = `http://localhost:8080/book/${bookId}/categoria/${categoriaId}`;
+    try {
+      const response = await fetch(url, settings);
+      const data = await response.text();
+    } catch (error) {
+      console.error("ERROR:", error);
+    }
+  }
 
+  async function fetchCaracteristica(bookId, caracteristicaId) {
+    console.log(caracteristicaId)
+    const settings = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const url = `http://localhost:8080/book/${bookId}/caracteristica/${caracteristicaId}`;
+    try {
+      const response = await fetch(url, settings);
+      const data = await response.text();
+    } catch (error) {
+      console.error("ERROR:", error);
+    }
   }
 
   //method PATCH en lugar de PUT si que podemos agregarlo al back, sino dejarlo en PUT
@@ -84,36 +143,43 @@ const EditarProducto = ({ product, onUpdateList }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await setFormData({
-        ...formData,
-        categorias: [],
-      });
-    console.log("imprimiendo formData antes del fetch")
-    console.log(formData)
+      ...formData,
+      categorias: [],
+      caracteristicas:[]
+    });
+    lanzarFetch == true ? setLanzarFetch(false) : setLanzarFetch(true);
+  };
+  useEffect(() => {
+    const fetchData = async () => {
+      const settings = {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(formData),
+      };
 
-    const settings = {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(formData),
+      try {
+        const response = await fetch(updateProductUrl, settings);
+        if (response.ok) {
+          for (const category of selectedCategory) {
+            await fetchCategoria(product.id, category.id);
+          }
+          for (const caracteristica of selectedCaracteristica) {
+            await fetchCaracteristica(product.id, caracteristica.id);
+          }
+          onUpdateList();
+        } else {
+          console.error("Error al modificar el producto");
+        }
+      } catch (error) {
+        console.error("Error al modificar el producto:", error);
+      }
     };
 
-    try {
-      const response = await fetch(updateProductUrl, settings);
-      if (response.ok) {
-        console.log("Producto modificado correctamente");
-        for (const category of selectedCategory) {
-            await fetchCategoriaCaracteristica(product.id, category.id);
-          }
-        onUpdateList();
-      } else {
-        console.error("Error al modificar el producto");
-      }
-    } catch (error) {
-      console.error("Error al modificar el producto:", error);
-    }
-  };
+    fetchData();
+  }, [lanzarFetch]);
 
   return (
     <div>
@@ -195,23 +261,22 @@ const EditarProducto = ({ product, onUpdateList }) => {
           </div>
             */
           }
-          
+
           <div className="form-group">
             <label htmlFor="categorias">Categoría:</label>
-            <button type="button" onClick={()=>setEditOpen(true)}>
+            <button type="button" onClick={() => setEditOpen(true)}>
               Editar Categoria
             </button>
           </div>
 
-
           <div className="form-group">
             <label htmlFor="caracteristicas">Características:</label>
-            <input
-              type="text"
-              name="caracteristicas"
-              value={formData.caracteristicas}
-              onChange={handleInputChange}
-            />
+            <button
+              type="button"
+              onClick={() => setEditCaracteristicaOpen(true)}
+            >
+              Editar Características
+            </button>
           </div>
           <button className="btn-dialog" type="submit">
             Guardar Cambios
@@ -228,19 +293,25 @@ const EditarProducto = ({ product, onUpdateList }) => {
           </Button>
         </DialogActions>
       </Dialog>
+
+
+      <Dialog
+        open={editCaracteristicaOpen}
+        onClose={handleEditCaracteristicaClose}
+        maxWidth="md"
+        fullWidth
+      >
+        <DialogContent>
+          {listaCaracteristicas && renderCaracteristicaOptions}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleEditCaracteristicaClose} color="primary">
+            Cerrar
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
 
 export default EditarProducto;
-
-// Titulo x
-// Autor x
-// Descripcion  x
-// isbn  x (numerico)
-// Año de publicacion  x
-// Precio x
-// Calificacion x
-// Imagen
-// Categoria
-// Caracteristicas
