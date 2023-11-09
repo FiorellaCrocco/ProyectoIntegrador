@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins="*")
+@CrossOrigin(origins="http://localhost:5173")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -58,4 +58,10 @@ public class UserController {
         return response;
     }
 
+    @GetMapping("/perfil/{email}")
+    public ResponseEntity<UserDTO> buscarPorEmail(@PathVariable String email)throws ResourceNotFoundException{
+        ResponseEntity<?> response = null;
+        UserDTO user = userService.buscarPorEmail(email);
+        return ResponseEntity.status(HttpStatus.OK).body(user);
+    }
 }

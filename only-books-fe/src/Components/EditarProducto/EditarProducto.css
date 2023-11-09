@@ -1,0 +1,9 @@
+.btn-dialog{
+    color: black;
+}
+
+.selected{
+    background-color: rgba(50, 113, 149,0.5);
+    border: 2px solid rgb(50, 113, 149);
+    color: white;
+}

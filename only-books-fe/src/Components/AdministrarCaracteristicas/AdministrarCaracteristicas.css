@@ -1,0 +1,125 @@
+
+.listCaract {
+    display: flex;
+    flex-direction: column;
+    background: rgb(84, 157, 194);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
+    margin: 20px;
+    width: 45%;
+}
+
+.elementsCaract {
+    display: flex;
+    flex-direction: column;
+    color: #cae0ed;
+}
+.listId{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 5px 0;
+}
+
+.listCaract h2 {
+    color: #244356;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.listCaract ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.listCaract li {
+    font-size: 16px;
+    margin: 5px 0;
+    
+    padding: 5px 0;
+}
+
+.listCaract li:last-child {
+    border-bottom: none;
+}
+.btnCrear{
+    margin-left: 120px;
+    margin-right: 120px;
+    background: linear-gradient(to right, #418cb1, #327297);
+	font-size: 0.9rem;
+	color: #e7f1f7;
+	padding: 10px 10px;
+	margin-top: 10px;
+	border: 2px solid #9cc6dd;
+	border-radius: 18px;
+	position: relative;
+	overflow: hidden;
+	transition: color 0.5s;
+    
+}
+.editPopup{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    color: #244356;
+    font-weight: 700;
+    align-items: center;
+}
+.editPopup>input{
+    padding-left: 10px;
+    color: white;
+    width: 70%;
+    background-color:#549dc2;
+    border: 2px white solid;
+    border-radius: 8px;
+    font-weight: 500;
+
+}
+.editPopup>button{
+        /* background-color: transparent; */
+        background: linear-gradient(to right, #418cb1, #327297);
+        font-size: 0.9rem;
+        color: #e7f1f7;
+        padding: 5px 33px;
+        margin-top: 5px;
+        border: 2px solid #9cc6dd;
+        border-radius: 10px;
+        position: relative;
+}
+
+.editPopup>button:hover {
+	background: #9cc6dd;
+}
+.btnEdit{
+	background: linear-gradient(to right, #418cb1, #327297);
+	font-size: 0.9rem;
+	color: #e7f1f7;
+	padding: 10px 10px;
+    margin-left: 6px;
+	margin-top: 10px;
+	border: 2px solid #9cc6dd;
+	border-radius: 18px;
+	position: relative;
+	overflow: hidden;
+	transition: color 0.5s;
+}
+.btnDelete{
+	background: linear-gradient(to right, #418cb1, #327297);
+	font-size: 0.9rem;
+	color: #e7f1f7;
+	padding: 10px 10px;
+    margin-left: 4px;
+    margin-right: 7px;
+	margin-top: 10px;
+	border: 2px solid #9cc6dd;
+	border-radius: 18px;
+	position: relative;
+	overflow: hidden;
+	transition: color 0.5s;
+}

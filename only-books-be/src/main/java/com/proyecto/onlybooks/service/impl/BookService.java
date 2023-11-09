@@ -3,6 +3,7 @@ package com.proyecto.onlybooks.service.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.proyecto.onlybooks.dto.BookDTO;
+import com.proyecto.onlybooks.dto.BookSummary;
 import com.proyecto.onlybooks.entity.Book;
 import com.proyecto.onlybooks.entity.Caracteristica;
 import com.proyecto.onlybooks.entity.Categoria;
@@ -12,6 +13,7 @@ import com.proyecto.onlybooks.repository.ICategoriaRepository;
 import com.proyecto.onlybooks.service.IBookService;
 import com.proyecto.onlybooks.service.ICaracteristicaService;
 import com.proyecto.onlybooks.service.ICategoriaService;
+import jakarta.transaction.Transactional;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,9 +46,13 @@ public class BookService implements IBookService {
     }
 
     @Override
-    public Long guardar(Book book) {
+    public Long guardar(Book book) throws ResourceNotFoundException {
         logger.info("Libros - guardar: Se va a guardar el libro");
-        iBookRepository.save(book);
+        Long id = iBookRepository.save(book).getId();
+        /*List<Categoria> lista = book.getCategorias();
+        for (Categoria l : lista){
+            guardarCategoria(id,l.getId());
+        }*/
         return book.getId();
     }
 
@@ -102,7 +108,7 @@ public class BookService implements IBookService {
     }
 
     @Override
-    public void modificar(Book book) {
+    public void modificar(Book book) throws ResourceNotFoundException {
         logger.info("Libro - actualizar: Se va a actualizar el libro");
         guardar(book); // El método utiliza .save; este lo que hace es crear si el ID = 0 pero si ID!=0 actualiza los cambios.
     }
@@ -173,5 +179,17 @@ public class BookService implements IBookService {
         lista.add(c);
         b.setCaracteristicas(lista);
         this.guardar(b);
+    }
+
+    public List<BookSummary> listarTodosExpress() throws ResourceNotFoundException{
+
+        List<BookSummary> lista = iBookRepository.findLibroSummary();
+        for(BookSummary b : lista){
+            b.setCategorias(iBookRepository.buscarCategoriaByBookId(b.getId()));
+            List<String> listaImagenes = iBookRepository.buscarImages(b.getId());
+            String imagen = listaImagenes.stream().findFirst().orElse(null);
+            b.setImgUrl(imagen);
+        }
+        return lista;
     }
 }

@@ -1,15 +1,37 @@
 .Container {
+    width: 40%;
     flex-direction: column;
     font-weight: 700;
     align-items: center;
     padding-top: 10px;
-    padding-bottom: 200px;
-    background-color: rgba(245, 255, 254, 0.986);
+    /* padding-bottom: 200px; */
+    /* background-color: transparent */
+    background: #cae0ed;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
+
+}
+.divSelect{
+    width: 50%;
+    text-align: center;
+}
+.divSelect>label{
+    font-size: 20px;
+
+}
+.divSelect>div>label{
+    color: rgb(59, 59, 59);
 }
 
-.FormBtn{
-margin-top: 10px;
-    background-color: #FF642F;
+.ccSelect{
+    
+    display: flex;
+    gap: 20px;
+}
+.FormBtn {
+    margin-top: 10px;
+    background-color: #3350f7;
     border: 1px solid transparent;
     border-radius: 8px;
     color: #EFFAFF;
@@ -21,67 +43,49 @@ margin-top: 10px;
     font-weight: 500;
     font-family: inherit;
     transition: border-color 0.25s;
+
 }
 
-.titulo{
+.titulo {
     text-align: center;
-    background-color:#f1ba90;
     border: 1px solid #ccc;
     border-radius: 4px;
-    background-color: #f1ba90;
-    color: #ffffff;
+    background-color: #4eb5c2;
+    color: #152e37;
     border: 1px solid transparent;
     border-radius: 8px;
- 
+    border-color: #152e37;
 
 
 }
 
-.input{
+.input {
     width: 300px;
     height: 50px;
     background-color: #BAE6EA;
     margin-top: 5px;
-    border: 1px solid transparent;
+    border: 1px solid #152e37;
     border-radius: 8px;
-    
+    padding: 5px;
 
 }
 
-.formulario{
+.formulario {
     margin-top: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
- 
-
-  
-}
-
-.div{
-display: flex;
-flex-direction: column;
-text-align: center;
-margin-top: 10px;
-font-size: 30px;
-
 
 }
 
-.labels{
-    color: #db5a2fd8;
+.div {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    /* margin-top: 10px; */
+    /* font-size: 30px; */
 }
 
-.detail{
-display: flex;
-flex-direction: column;
-text-align: center;
-margin-top: 10px;
-width: 300px;
-height: 100px;
-background-color: #BAE6EA;
-margin-top: 5px;
-border: 1px solid transparent;
-border-radius: 8px;
+.labels {
+    color: #152e37;
 }
-

@@ -1,10 +1,9 @@
-
 h1 a {
 	text-decoration: none;
 	color: #EFFAFF;
 }
 
-#h2-form{
+#h2-form {
 	color: #EFFAFF;
 }
 
@@ -48,24 +47,25 @@ nav a {
 	background-color: #fff;
 	color: #000;
 }
+
 /*    background-color: #EFFAFF;
     color: #539DC2;
 */
 
 .wrapper {
 	width: 400px;
-	background: #244356;
+	background: rgb(84, 157, 194);
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	padding: 40px;
 	border-radius: 34px;
 	box-shadow: 0 15px 35px rgba(0, 0, 0, 9);
-	
-	
+
+
 }
 
-.login-container{
+.login-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -73,7 +73,7 @@ nav a {
 	padding-top: 30px;
 	padding-bottom: 30px;
 	height: 77vh;
-	background-color:#EFFAFF ;
+	background-color: #EFFAFF;
 }
 
 form {
@@ -92,15 +92,16 @@ body {
 }
 
 .input-group {
+	all: unset;
 	font-size: 1.25rem;
 	position: relative;
-	--primary: #2196f3;
+	--primary: #EFFAFF;
 
 }
 
 .input {
 	all: unset;
-	color: #EFFAFF;
+	color: black;
 	padding: 1rem;
 	border: 1px solid #9cc6dd;
 	border-radius: 10px;
@@ -114,7 +115,7 @@ body {
 	top: 50%;
 	transform: translate(0%, -50%);
 	left: 1rem;
-	color: #2196f3;
+	color: #EFFAFF;
 	pointer-events: none;
 	transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -126,16 +127,26 @@ body {
 .input:is(:focus, :valid)~label {
 	transform: translateY(-170%) scale(0.7);
 	/* background-color: #9cc6dd; */
-	background-color: #244356;
+	background-color: rgb(84, 157, 194);
 	padding-inline: 0.3rem;
 	color: var(--primary);
 }
+
+.input:not(:placeholder-shown)~label,
+.input:focus~label {
+	transform: translateY(-170%) scale(0.7);
+	background-color: rgb(84, 157, 194);
+	padding-inline: 0.3rem;
+	color: var(--primary);
+}
+
+
 
 /* BOTON DE REGISTRO */
 
 .btn-lr {
 	/* background-color: transparent; */
-	background: linear-gradient(to right, #539dc2, #327297);
+	background: linear-gradient(to right, #418cb1, #327297);
 	font-size: 0.9rem;
 	color: #e7f1f7;
 	padding: 12px 33px;
@@ -149,7 +160,7 @@ body {
 }
 
 .btn-lr:hover {
-	color: #fff;
+	background: #9cc6dd;
 }
 
 .btn-lr:before {
@@ -159,8 +170,8 @@ body {
 	left: 100%;
 	width: 120%;
 	height: 220%;
-	/* background-color: #2196f3; */
-	background-color: #a11a8b;
+	/* background-color: #2196f3;*/
+	background: #a11a8b;
 	border-radius: 50%;
 	z-index: -1;
 	transition: all 0.6s ease;
@@ -169,4 +180,32 @@ body {
 .btn-lr:hover:before {
 	top: -50%;
 	left: -10%;
+}
+
+.error-message {
+	color: #FF0000;
+	/* Color rojo */
+	font-size: 15px;
+	/* Tamaño de fuente */
+	margin-top: 5px;
+	/* Espacio superior */
+	text-align: center;
+	/* Alineación centrada */
+	background-color: #88c7f1;
+	/* Fondo ligero */
+	border: 1px solid #FF0000;
+	/* Borde rojo */
+	padding: 5px;
+	/* Espaciado interno */
+	border-radius: 4px;
+	/* Bordes redondeados */
+
+}
+
+@media (max-width: 614px) {
+	.wrapper{
+		width: 340px;
+		padding: 40px;
+	}
+	
 }

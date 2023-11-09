@@ -1,33 +1,90 @@
-/* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from './Hook/UseForm';
-import './log&register.css'
+import './log&register.css';
+import { useAccount } from '../../Context/accountContext';
 
-//LoginPage
 export const LoginPage = () => {
+	const url = "http://localhost:8080/auth/login"
+//	const url = "https://onlybooks.isanerd.club/api/auth/login";
 	const navigate = useNavigate();
+	const [loginError, setLoginError] = useState(null);
+	const [isTyping, setIsTyping] = useState(false);
 
-	const { name, email, password, onInputChange, onResetForm } =
-		useForm({
-			name: '',
-			email: '',
-			password: '',
+	const { email, password, onInputChange, onResetForm } = useForm({
+		email: '',
+		password: '',
+	});
 
+	const settings = {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			email: email,
+			password: password
+		})
+	}
 
-		});
-	//onLogin
-	const onLogin = e => {
+	const { updateUserData } = useAccount();
+
+	const onLogin = async (e) => {
 		e.preventDefault();
+		setLoginError(null);
+		setIsTyping(false);
 
-		navigate('/', {
-			replace: true,
-			state: {
-				logged: true,
-				name,
-			},
-		});
+		try {
+			const response = await fetch(url, settings)
+			console.log("response: " + response)
+			if (response.status === 200) {
+				// Autenticación exitosa, obtener el token del cuerpo de la respuesta
+				const data = await response.json();
+				const { token } = data;
+				sessionStorage.setItem('token', token);
+				const userEmail = email; // Obtener el correo electrónico del formulario
 
+				const settings = {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+						'Authorization': `Bearer ${token}`,
+					},
+				}
+				const url = `http://localhost:8080/user/perfil/${userEmail}`
+
+				const profileDataResponse = await fetch(url, settings)
+
+
+
+
+				if (profileDataResponse.status === 200) {
+					const profileData = await profileDataResponse.json();
+					sessionStorage.setItem('userData', JSON.stringify(profileData));
+					updateUserData(profileData);
+					console.log('profileData: ' + profileData);
+
+					// Aquí puedes hacer lo que necesites con los datos del perfil
+					// Por ejemplo, almacenarlos en el estado local del componente
+
+					const { name, email, profileImage } = profileData;
+					console.log('Nombre: ', name);
+					console.log('Correo electrónico: ', email);
+
+					navigate('/', {
+						replace: true,
+						state: {
+							logged: true
+						},
+					});
+				}
+			} else if (response.status === 403) {
+				setLoginError("Credenciales incorrectas. Inténtelo de nuevo.");
+			}
+		} catch (error) {
+			console.log(error)
+			setLoginError("Ocurrió un error al iniciar sesión. Inténtelo de nuevo más tarde.");
+		}
 		onResetForm();
 	};
 
@@ -35,60 +92,49 @@ export const LoginPage = () => {
 		<div className='login-container'>
 			<div className='wrapper'>
 				<form onSubmit={onLogin}>
-					<h2 id='h2-form'>Iniciar Sesion</h2>
+					<h2 id='h2-form'>Iniciar Sesión</h2>
 
 					<div className='input-group'>
-
-						<input
-							type='text'
-							name='name'
-							id='name'
-							className="input"
-							value={name}
-							onChange={onInputChange}
-							required
-							autoComplete='off'
-						/>
-						<label className="label" htmlFor='name'>Nombre</label>
-					</div>
-
-					<div className='input-group'>
-
 						<input
 							type='email'
 							name='email'
 							id='email'
 							className="input"
 							value={email}
-							onChange={onInputChange}
+							onChange={(e) => {
+								onInputChange(e);
+								setIsTyping(true);
+							}}
 							required
 							autoComplete='off'
+							placeholder=' '
 						/>
 						<label className="label" htmlFor='email'>Email</label>
 					</div>
 					<div className='input-group'>
-
 						<input
 							type='password'
 							name='password'
 							id='password'
 							className="input"
 							value={password}
-							onChange={onInputChange}
+							onChange={(e) => {
+								onInputChange(e);
+								setIsTyping(true);
+							}}
 							required
 							autoComplete='off'
+							placeholder=' '
 						/>
 						<label className="label" htmlFor='password'>Contraseña</label>
 					</div>
-
-
-
+					{!isTyping && loginError && <p className="error-message">{loginError}</p>}
 					<button className='btn-lr'>Iniciar Sesion</button>
 				</form>
 			</div>
 		</div>
-
 	);
 };
 
 export default LoginPage;
+

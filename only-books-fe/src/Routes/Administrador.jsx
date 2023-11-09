@@ -4,9 +4,13 @@ import './Administrador.css'
 import AdminImg from '../img/admin.png'
 import { Button } from "@mui/material";
 import ListarProducto from '../Components/ListarProducto/ListarProducto';
-import AgregarCategoria from '../components/AgregarCategoria/AgregarCategoria';
+import AgregarCategoria from '../Components/AgregarCategoria/AgregarCategoria';
 import CargarProducto from '../Components/CargarProducto/CargarProducto';
 import ArrowRightOutlinedIcon from '@mui/icons-material/ArrowRightOutlined';
+import ListarCategoria from '../Components/ListarCategoria/ListarCategoria';
+import AdministrarCaracteristicas from '../Components/AdministrarCaracteristicas/AdministrarCaracteristicas';
+import ListarUsuarios from '../Components/ListarUsuarios/ListarUsuarios'
+
 
 const Administrador = () => {
 
@@ -55,14 +59,19 @@ const Administrador = () => {
               <h3>Agregar Categoría {<ArrowRightOutlinedIcon fontSize="large" />}</h3>
             </div>
           </Button>
-          <Button onClick={() => handleOpen(/*<ListarCategoria/>*/)}>
+          <Button onClick={() => handleOpen(<ListarCategoria/>)}>
             <div className="add-category">
               <h3>Listar Categorias {<ArrowRightOutlinedIcon fontSize="large" />}</h3>
             </div>
           </Button>
-          <Button onClick={() => handleOpen(/*<AdministrarCaracteristicas/>*/)}>
+          <Button onClick={() => handleOpen(<AdministrarCaracteristicas/>)}>
             <div className="add-feature">
               <h3>Administrar Características {<ArrowRightOutlinedIcon fontSize="large" />}</h3>
+            </div>
+          </Button>
+          <Button onClick={() => handleOpen(<ListarUsuarios/>)}>
+            <div className="add-feature">
+              <h3>Listar Usuarios {<ArrowRightOutlinedIcon fontSize="large" />}</h3>
             </div>
           </Button>
         </div>
@@ -74,4 +83,4 @@ const Administrador = () => {
   )
 }
 
-export default Administrador
+export default Administrador;

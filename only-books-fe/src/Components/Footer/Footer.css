@@ -4,7 +4,8 @@ footer {
     height: auto;
     /* background-color: #EFFAFF; */
     /* background: linear-gradient(to right, #f4f8fb, #e7f1f7); */
-    background: linear-gradient(to right, #e7f1f7, #cae0ed);
+    /*background: linear-gradient(to right, #e7f1f7, #cae0ed);*/
+    background-color: #e7f1f7;
 }
 
 .footer-container {
@@ -15,7 +16,7 @@ footer {
     align-items: center;
     /* max-width: 1200px;  */
     /* width: 960px; */
-    margin: 0;
+    padding: 20px 0;
 }
 
 .footer-left {
@@ -30,9 +31,8 @@ footer {
 /*LOGO*/
 .logo-footer{
     border-radius: 50px;
-    box-shadow: 0 0 10px rgba(255, 63, 5, 0.3);
+    box-shadow: 0 0 10px rgba(84, 157, 194, 0.5);
 }
-
 .footer-left p {
     margin: 3px;
 }

@@ -24,6 +24,7 @@ public class Image {
 
     @ManyToOne
     @JoinColumn(name="book_id")
+    @org.hibernate.annotations.Index(name = "idx_book")
     private Book book;
 
 }

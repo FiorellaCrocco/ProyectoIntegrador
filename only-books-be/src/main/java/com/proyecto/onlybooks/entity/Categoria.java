@@ -14,18 +14,18 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="categorias")
+@Table(name = "categorias", indexes = {
+        @Index(name = "idx_titulo", columnList = "titulo")
+})
 public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Size(max=30, message="Titulo maximo 30 caracteres.")
-    @NotNull
     private String titulo;
 
     @Size(max=255, message="Descripcion maximo 255 caracteres.")
-    @NotNull
     private String descripcion;
 
     private String imagen;
