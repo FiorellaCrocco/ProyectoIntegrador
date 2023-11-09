@@ -1,11 +1,10 @@
 import { useState, useContext, useRef } from "react";
-import './AgregarCategoria.css';
+import "./AgregarCategoria.css";
 import { GlobalContext } from "../../Context/globalContext";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
 function AgregarCategoria() {
-
-  const token = sessionStorage.getItem('token')
+  const token = sessionStorage.getItem("token");
 
   const { actualizarCategorias } = useContext(GlobalContext);
   const formRef = useRef(null);
@@ -25,34 +24,33 @@ function AgregarCategoria() {
   }
 
   const handleImageChange = async (e) => {
-    const file = e.target.files[0];  // Utiliza e.target.files[0] en lugar de e.target.file
+    const file = e.target.files[0]; // Utiliza e.target.files[0] en lugar de e.target.file
     const base64Data = await readFileAsBase64(file);
     setCategoria(() => {
       return {
-        ...categoria,  // Asegúrate de mantener el resto de las propiedades
+        ...categoria, // Asegúrate de mantener el resto de las propiedades
         imagen: base64Data,
       };
     });
   };
-  
+
   const readFileAsBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
-  
+
       reader.onload = () => {
         // Obtener la cadena Base64 sin el prefijo
         const base64WithoutPrefix = reader.result.split(",")[1];
         resolve(base64WithoutPrefix);
       };
-  
+
       reader.onerror = (error) => {
         reject(error);
       };
-  
+
       reader.readAsDataURL(file);
     });
   };
-  
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -62,20 +60,22 @@ function AgregarCategoria() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(categoria),
     };
-  
+
     try {
       const res = await fetch(url, config);
-  
+
       if (res.status === 200) {
         await actualizarCategorias();
-        formRef.current.reset()
-      
-         setCategoria({ titulo: "",
-        descripcion: ""}) 
+        formRef.current.reset();
+
+        setCategoria({
+          titulo: "",
+          descripcion: "",
+        });
         // Mostrar mensaje de éxito
         Swal.fire({
           text: "Categoría creada con éxito",
@@ -91,8 +91,6 @@ function AgregarCategoria() {
       console.error("Error de red:", error);
     }
   }
-  
-  
 
   return (
     <div className="agregar-categoria">
@@ -116,7 +114,7 @@ function AgregarCategoria() {
           />
         </div>
         <div className="agregar-categoria-div">
-        <label>Imagen:</label>
+          <label>Imagen:</label>
           <input
             className="input"
             type="file"

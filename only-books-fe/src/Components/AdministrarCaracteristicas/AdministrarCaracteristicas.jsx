@@ -126,6 +126,7 @@ const AdministrarCaracteristicas = () => {
               <button className='btnEditCaracteristica' onClick={() => abrirPopupEdicion(caracteristica)}>
                 Editar
               </button>
+              
             </div>
           </li>
         ))}
@@ -139,12 +140,16 @@ const AdministrarCaracteristicas = () => {
             value={caracteristicaEdit.title}
             onChange={(e) => setCaracteristicaEdit({ ...caracteristicaEdit, title: e.target.value })}
           />
-          <label>Icono:</label>
+          {/*
+
+<label>Icono:</label>
           <input
             type="text"
             value={caracteristicaEdit.icono}
             onChange={(e) => setCaracteristicaEdit({ ...caracteristicaEdit, icono: e.target.value })}
           />
+      */}
+          
           <button onClick={actualizarCaracteristica}>Guardar</button>
           <button onClick={cerrarPopupEdicion}>Cancelar</button>
           {/* Puedes agregar aquí los campos de edición y lógica de actualización */}
