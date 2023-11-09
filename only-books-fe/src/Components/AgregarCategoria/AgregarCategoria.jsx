@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import './AgregarCategoria.css';
 import { GlobalContext } from "../../Context/globalContext";
+import Swal from 'sweetalert2'
 
 function AgregarCategoria() {
 
@@ -55,7 +56,6 @@ function AgregarCategoria() {
   async function handleSubmit(e) {
     e.preventDefault();
     const url = "http://localhost:8080/categoria/agregar";
-    //const url = "https://onlybooks.isanerd.club/api/categoria/agregar";
     const config = {
       method: "POST",
       headers: {
@@ -70,14 +70,25 @@ function AgregarCategoria() {
   
       if (res.status === 200) {
         await actualizarCategorias();
-        console.log("Categoría creada con éxito");
+        setCategoria({ titulo: "",
+        descripcion: "",
+        imagen: ''})
+        // Mostrar mensaje de éxito
+        Swal.fire({
+          text: "Categoría creada con éxito",
+          icon: "success",
+        });
       } else {
-        console.log("Error al crear categoría");
+        Swal.fire({
+          text: "Error al crear categoría",
+          icon: "error",
+        });
       }
     } catch (error) {
       console.error("Error de red:", error);
     }
   }
+  
   
 
   return (
