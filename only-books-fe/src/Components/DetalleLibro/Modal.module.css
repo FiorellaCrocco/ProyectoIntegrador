@@ -22,7 +22,7 @@ body.active-modal {
 .overlay {
     background: rgba(49,49,49,0.8);
 }
-.modal-content {
+.modalcontent {
     position: absolute;
     top: 40%;
     left: 50%;
@@ -68,7 +68,7 @@ body.active-modal {
     border: none;
     border-radius: 10%;
 }
-.close-modal {
+.closemodal {
     position: absolute;
     margin-top: 10px;
     margin-right:8px;
