@@ -1,20 +1,11 @@
 /* eslint-disable no-unused-vars */
-import { useState, useContext } from "react";
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Navbar.css";
-import { GlobalContext } from "../../Context/globalContext";
 import { useAccount } from "../../Context/accountContext";
-// import Avatar from './Avatar';
 import UserMenu from '../UserMenu/UserMenu';
 
-
 const Navbar = () => {
-
-    // const { logout } = useContext(GlobalContext);
-    const { userData, isAuthenticated  } = useAccount();
-    // const { state } = useLocation();
-    // const navigate = useNavigate();
-
+    const { userData} = useAccount();
 
     return (
         <header className="navbar" id="navbar">
@@ -30,7 +21,6 @@ const Navbar = () => {
                             {/* <span >Historias que alquilas, emociones que compartís</span> */}
                             <span >Historias que alquilas,</span>
                             <span >emociones que compartís</span>
-
                         </div>
                     </Link>
                 </div>
@@ -38,20 +28,14 @@ const Navbar = () => {
                     <input type="text" placeholder=" " />
                     <button type="reset"></button>
                 </form>
-                {console.log(userData)}
-                {/* {isAuthenticated ? ( */}
                 {userData ? (
-                    
                     <UserMenu />
-                    
                 ) : (
                     <div className="header-right">
-                        
                         <Link to='/registrarse'><button className="btn-create">Crear cuenta</button></Link>
                         <Link to='/login'> <button className="btn-login">Iniciar sesión</button></Link>
                     </div>
                 )}
-            
             </div>
         </header>
     );

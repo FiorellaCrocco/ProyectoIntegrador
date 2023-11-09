@@ -1,10 +1,9 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import Navbar from './Components/Navbar/Navbar';
 import Footer from './Components/Footer/Footer';
-import Administrador from './Routes/Administrador';;
+import Administrador from './Routes/Administrador';
 import Home from './Routes/Home';
 import Detail from './Routes/Detail';
 import Perfil from './Components/MiPerfil/Perfil';
@@ -12,7 +11,7 @@ import RestrictedMobile from './Components/RestrictedPageResponsive/RestrictedMo
 import RestrictedNotAdmin from './Components/RestrictedPageResponsive/RestrictedNotAdmin'
 import LoginPage from './Components/LogIn/LoginPage';
 import RegisterPage from './Components/LogIn/RegisterPage'
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 function App() {
