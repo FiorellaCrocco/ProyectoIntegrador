@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import { Dialog, DialogContent, DialogActions } from "@mui/material";
 import "./EditarProducto";
 import { GlobalContext } from "../../Context/globalContext";
+import Swal from 'sweetalert2'
 
 const EditarProducto = ({ product, onUpdateList }) => {
   const { listaCategorias, listaCaracteristicas, actualizarCategorias } =
@@ -110,6 +111,7 @@ const EditarProducto = ({ product, onUpdateList }) => {
       },
     };
     const url = `http://localhost:8080/book/${bookId}/categoria/${categoriaId}`;
+    // const url = `https://onlybooks.isanerd.club/api/book/${bookId}/categoria/${categoriaId}`;
     try {
       const response = await fetch(url, settings);
       const data = await response.text();
@@ -128,6 +130,7 @@ const EditarProducto = ({ product, onUpdateList }) => {
       },
     };
     const url = `http://localhost:8080/book/${bookId}/caracteristica/${caracteristicaId}`;
+    // const url = `hhttps://onlybooks.isanerd.club/api/book/${bookId}/caracteristica/${caracteristicaId}`;
     try {
       const response = await fetch(url, settings);
       const data = await response.text();
@@ -170,11 +173,34 @@ const EditarProducto = ({ product, onUpdateList }) => {
             await fetchCaracteristica(product.id, caracteristica.id);
           }
           onUpdateList();
-        } else {
-          console.error("Error al modificar el producto");
-        }
+         // Mensaje de éxito
+         Swal.fire({
+          position: "top-end",
+          icon: "success",
+          text: 'Producto modificado con éxito',
+          showConfirmButton: false,
+          timer: 1500
+        });
+    } else {
+      // Mensaje de error
+      console.error("Error al modificar el producto");
+      Swal.fire({
+        position: "top-end",
+        text: 'Error al modificar el producto',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
       } catch (error) {
         console.error("Error al modificar el producto:", error);
+        Swal.fire({
+          position: "top-end",
+          text: 'Error al modificar el producto',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 1500
+        });
       }
     };
 
