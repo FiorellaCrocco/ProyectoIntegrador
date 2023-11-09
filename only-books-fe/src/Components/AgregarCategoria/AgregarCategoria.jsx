@@ -1,12 +1,14 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useRef } from "react";
 import './AgregarCategoria.css';
 import { GlobalContext } from "../../Context/globalContext";
+import Swal from 'sweetalert2'
 
 function AgregarCategoria() {
 
   const token = sessionStorage.getItem('token')
 
   const { actualizarCategorias } = useContext(GlobalContext);
+  const formRef = useRef(null);
 
   const [categoria, setCategoria] = useState({
     titulo: "",
@@ -55,7 +57,7 @@ function AgregarCategoria() {
   async function handleSubmit(e) {
     e.preventDefault();
     const url = "http://localhost:8080/categoria/agregar";
-    //const url = "https://onlybooks.isanerd.club/api/categoria/agregar";
+    // const url = "https://onlybooks.isanerd.club/api/categoria/agregar";
     const config = {
       method: "POST",
       headers: {
@@ -70,20 +72,32 @@ function AgregarCategoria() {
   
       if (res.status === 200) {
         await actualizarCategorias();
-        console.log("Categoría creada con éxito");
+        formRef.current.reset()
+      
+         setCategoria({ titulo: "",
+        descripcion: ""}) 
+        // Mostrar mensaje de éxito
+        Swal.fire({
+          text: "Categoría creada con éxito",
+          icon: "success",
+        });
       } else {
-        console.log("Error al crear categoría");
+        Swal.fire({
+          text: "Error al crear categoría",
+          icon: "error",
+        });
       }
     } catch (error) {
       console.error("Error de red:", error);
     }
   }
   
+  
 
   return (
     <div className="agregar-categoria">
       <h2>Crear Nueva Categoría</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} ref={formRef}>
         <div className="agregar-categoria-div">
           <label>Título:</label>
           <input

@@ -22,7 +22,7 @@ body.active-modal {
 .overlay {
     background: rgba(49,49,49,0.8);
 }
-.modal-content {
+.modalcontent {
     position: absolute;
     top: 40%;
     left: 50%;
@@ -39,7 +39,7 @@ body.active-modal {
     flex-direction: row;
 }
 .imagenCarrusel{
-    width: 500px;
+    width: 450px;
     margin-left: 20px;
     margin-right: 20px;
     margin-top: 65px;
@@ -68,7 +68,7 @@ body.active-modal {
     border: none;
     border-radius: 10%;
 }
-.close-modal {
+.closemodal {
     position: absolute;
     margin-top: 10px;
     margin-right:8px;

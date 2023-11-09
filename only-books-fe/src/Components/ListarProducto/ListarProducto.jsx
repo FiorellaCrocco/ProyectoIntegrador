@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import { Dialog, DialogContent, DialogActions } from "@mui/material";
 import { GlobalContext } from "../../Context/globalContext";
 import EditarProducto from "../EditarProducto/EditarProducto";
+import Swal from 'sweetalert2'
 
 const ListarProducto = () => {
   const { listaLibros, actualizarListaLibros,fetchBookById } = useContext(GlobalContext);
@@ -53,11 +54,16 @@ const ListarProducto = () => {
   };
 
   const handleDelete = async (id) => {
-    const confirmDelete = window.confirm(
-      "¿Estás seguro de que deseas eliminar este producto?"
-    );
-
-    if (confirmDelete) {
+    const confirmacion = await Swal.fire({
+      text: "¿Estás seguro de que deseas eliminar este producto?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminar!"
+    });
+  
+    if (confirmacion.isConfirmed) {
       const updatedProductos = productos.filter(
         (producto) => producto.id !== id
       );
@@ -70,9 +76,22 @@ const ListarProducto = () => {
       }
       const url = `http://localhost:8080/book/eliminar/${id}`;
     //    const url = `https://onlybooks.isanerd.club/api/book/eliminar/${id}`;
+    try{
       await fetchData(url, settings);
       await actualizarListaLibros();
       setProductos(updatedProductos)
+      Swal.fire({
+        text: 'Producto eliminado con éxito',
+        icon: 'success',
+      });
+    } catch (error) {
+      console.error('Error de red:', error);
+      // Mostrar mensaje de error
+      Swal.fire({
+        text: 'Error al eliminar el libro',
+        icon: 'error',
+      });
+    }
     }
   }
 

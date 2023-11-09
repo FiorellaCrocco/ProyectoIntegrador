@@ -1,5 +1,6 @@
-import React, { useState,} from 'react';
-
+import React, { useState, useContext, useEffect} from 'react';
+import { GlobalContext } from "../../Context/globalContext";
+import Swal from 'sweetalert2';
 
 function CrearCaracteristica() {
   //const [caracteristica, setCaracteristica] = useState({ titulo: '', icono: ""});
@@ -8,6 +9,8 @@ function CrearCaracteristica() {
     title: "",
     icono: "",
   });
+  const[actualizar, setActualizar] = useState(false)
+  const { listaCaracteristicas,fetchCaracteristicas } = useContext(GlobalContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,7 +23,7 @@ function CrearCaracteristica() {
   async function handleSubmit(e) {
     e.preventDefault();
     const url = "http://localhost:8080/caracteristica/agregar";
-
+ // const url = `https://onlybooks.isanerd.club/api/caracteristica/agregar`;
     const config = {
       method: "POST",
       headers: {
@@ -35,18 +38,36 @@ function CrearCaracteristica() {
 
       if (res.status === 200) {
         console.log("Caracteristica creada con éxito");
+        actualizar==true?setActualizar(false):setActualizar(true)
+        Swal.fire({
+          text: 'Característica creada con éxito',
+          icon: 'success',
+        });
       } else {
         console.log("Error al crear caracteristica");
+        // Mostrar mensaje de error
+        Swal.fire({
+          text: 'Error al crear característica',
+          icon: 'error',
+        });
       }
     } catch (error) {
       console.error("Error de red:", error);
     }
+    setCaracteristica({
+      title: "",
+      icono: "",
+    });
   }
+  useEffect(()=>{
+    fetchCaracteristicas();
+
+  },[actualizar])
 
   return (
-    <div>
+    <div className='editPopup'>
       <h3>Crear Caracteristica</h3>
-      <form onSubmit={handleSubmit}>
+      
         <label>Título</label>
         <input
           type="text"
@@ -62,8 +83,8 @@ function CrearCaracteristica() {
           value={caracteristica.icono}
           onChange={handleChange}
         />
-        <button type="submit">Crear Característica</button>
-      </form>
+        <button  onClick={handleSubmit} type="submit">Crear Característica</button>
+      
     </div>
   );
 }
