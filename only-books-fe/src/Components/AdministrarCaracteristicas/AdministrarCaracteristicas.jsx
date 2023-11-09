@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import './AdministrarCaracteristicas.css'
 import { GlobalContext } from "../../Context/globalContext";
 import CrearCaracteristica from "../AdministrarCaracteristicas/CrearCaracteristica";
+import Swal from 'sweetalert2'
 
 const AdministrarCaracteristicas = () => {
   const { listaCaracteristicas,fetchCaracteristicas } = useContext(GlobalContext);
@@ -11,6 +12,7 @@ const AdministrarCaracteristicas = () => {
 
   async function eliminarCaracteristica(id) {
     const url = `http://localhost:8080/caracteristica/eliminar/${id}`;
+    // const url = `https://onlybooks.isanerd.club/api/caracteristica/eliminar/${id}`;
     const token = sessionStorage.getItem('token');
     const config = {
       method: 'DELETE',
@@ -27,9 +29,18 @@ const AdministrarCaracteristicas = () => {
         console.log("Se eliminó la característica correctamente");
         actualizar==true?setActualizar(false):setActualizar(true)
         // Actualizar la lista de características eliminando la característica
+        Swal.fire({
+          text: 'Característica eliminada con éxito',
+          icon: 'success',
+        });
       } else {
         console.error('Error al eliminar característica');
-      }
+        // Mostrar mensaje de error
+        Swal.fire({
+          text: 'Error al eliminar característica',
+          icon: 'error',
+        });
+      } 
     } catch (error) {
       console.error('Error de red:', error);
     }
@@ -46,6 +57,7 @@ const AdministrarCaracteristicas = () => {
 
   async function actualizarCaracteristica() {
     const url = `http://localhost:8080/caracteristica/modificar`;
+    // const url = `https://onlybooks.isanerd.club/api/caracteristica/modificar`;
     const token = sessionStorage.getItem('token');
     const config = {
       method: 'PUT',
@@ -64,8 +76,17 @@ const AdministrarCaracteristicas = () => {
         console.log("Se editó la característica correctamente");
         actualizar==true?setActualizar(false):setActualizar(true)
         cerrarPopupEdicion();
+        Swal.fire({
+          text: 'Característica editada con éxito',
+          icon: 'success',
+        });
       } else {
         console.error('Error al editar característica');
+        // Mostrar mensaje de error
+        Swal.fire({
+          text: 'Error al editar característica',
+          icon: 'error',
+        });
       }
     } catch (error) {
       console.error('Error de red:', error);

@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect} from 'react';
 import { GlobalContext } from "../../Context/globalContext";
-
+import Swal from 'sweetalert2';
 
 function CrearCaracteristica() {
   //const [caracteristica, setCaracteristica] = useState({ titulo: '', icono: ""});
@@ -23,7 +23,7 @@ function CrearCaracteristica() {
   async function handleSubmit(e) {
     e.preventDefault();
     const url = "http://localhost:8080/caracteristica/agregar";
-
+ // const url = `https://onlybooks.isanerd.club/api/caracteristica/agregar`;
     const config = {
       method: "POST",
       headers: {
@@ -39,8 +39,17 @@ function CrearCaracteristica() {
       if (res.status === 200) {
         console.log("Caracteristica creada con éxito");
         actualizar==true?setActualizar(false):setActualizar(true)
+        Swal.fire({
+          text: 'Característica creada con éxito',
+          icon: 'success',
+        });
       } else {
         console.log("Error al crear caracteristica");
+        // Mostrar mensaje de error
+        Swal.fire({
+          text: 'Error al crear característica',
+          icon: 'error',
+        });
       }
     } catch (error) {
       console.error("Error de red:", error);
