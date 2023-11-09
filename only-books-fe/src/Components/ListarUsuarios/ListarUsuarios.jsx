@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import { Dialog, DialogContent, DialogActions } from "@mui/material";
 import "./ListarUsuarios.css";
+import Swal from 'sweetalert2'
 
 const ListarUsuarios = () => {
   const [usuarios, setUsuarios] = useState([]);
@@ -10,7 +11,9 @@ const ListarUsuarios = () => {
   const token = sessionStorage.getItem("token");
 
   const urlListar = "http://localhost:8080/user/listar";
+  // const urlListar = "https://onlybooks.isanerd.club/api/user/listar";
   const urlModificar = "http://localhost:8080/user/modificar";
+  // const urlModificar = "https://onlybooks.isanerd.club/api/user/modificar";
 
   const fetchDataList = async () => {
     try {
@@ -48,7 +51,12 @@ const ListarUsuarios = () => {
         body: JSON.stringify(user),
       };
       const response = await fetch(urlModificar, settings);
-
+      if(response.ok){
+        Swal.fire({
+          text: "Rol cambiado con éxito!",
+          icon: "success"
+        });
+      }
       if (!response.ok) {
         throw new Error("Error al modificar el rol del usuario.");
       }
@@ -63,35 +71,47 @@ const ListarUsuarios = () => {
   };
 
   const handleDelete = async (id) => {
-    const confirmDelete = window.confirm(
-      "¿Estás seguro de que deseas eliminar este usuario?"
-    );
-
-    if (confirmDelete) {
-      const updatedUsuarios = usuarios.filter((usuario) => usuario.id !== id);
-
-      const settings = {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      };
-
-      const url = `http://localhost:8080/user/eliminar/${id}`;
-
-      try {
-        const response = await fetch(url, settings);
-
-        if (!response.ok) {
-          throw new Error("No se pudo eliminar el usuario.");
+    Swal.fire({
+      text: "¿Estás seguro de que deseas eliminar este usuario?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminar!"
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const updatedUsuarios = usuarios.filter((usuario) => usuario.id !== id);
+          const settings = {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          };
+          const url = `http://localhost:8080/user/eliminar/${id}`;
+          // const url = `https://onlybooks.isanerd.club/api/user/eliminar/${id}`;
+          const response = await fetch(url, settings);
+  
+          if (!response.ok) {
+            throw new Error("No se pudo eliminar el usuario.");
+          }
+  
+          Swal.fire({
+            text: "Usuario eliminado con éxito",
+            icon: "success"
+          });
+  
+          setUsuarios(updatedUsuarios);
+        } catch (error) {
+          console.error("Error al eliminar el usuario:", error);
+          Swal.fire({
+            text: "Error al eliminar el usuario",
+            icon: "error"
+          });
         }
-
-        setUsuarios(updatedUsuarios);
-      } catch (error) {
-        console.error("Error al eliminar el usuario:", error);
       }
-    }
+    });
   };
 
   useEffect(() => {
