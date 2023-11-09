@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import "./CargarProducto.css";
 import { GlobalContext } from "../../Context/globalContext";
+import Swal from 'sweetalert2'
 
 function CargarProducto() {
   const {
@@ -93,6 +94,11 @@ function CargarProducto() {
       for (const caracteristica of selectedCaracteristica) {
         await fetchCaracteristica(data, caracteristica.id);
       }
+       // Mensaje de éxito
+       Swal.fire({
+        text: "Libro cargado con éxito",
+        icon: "success",
+      });
       // Limpiar los campos del formulario
       setFormData({
         id: 0,
