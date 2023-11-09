@@ -11,6 +11,16 @@ const AdministrarCaracteristicas = () => {
   const[actualizar, setActualizar] = useState(false)
 
   async function eliminarCaracteristica(id) {
+    const confirmacion = await Swal.fire({
+      text: "¿Estás seguro de que deseas eliminar esta característica?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminar!",
+    });
+
+    if (confirmacion.isConfirmed) {
     const url = `http://localhost:8080/caracteristica/eliminar/${id}`;
     // const url = `https://onlybooks.isanerd.club/api/caracteristica/eliminar/${id}`;
     const token = sessionStorage.getItem('token');
@@ -45,7 +55,7 @@ const AdministrarCaracteristicas = () => {
       console.error('Error de red:', error);
     }
   }
-
+  }
   function abrirPopupEdicion(caracteristica) {
     setCaracteristicaEdit(caracteristica);
     setEditPopupOpen(true);
