@@ -17,10 +17,12 @@ export const RegisterPage = () => {
 	const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 	const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 	const userId = import.meta.env.VITE_EMAILJS_USER_ID;
-
+	const [accountCreated, setAccountCreated] = useState(false);
+	const [confirmationEmailSent, setConfirmationEmailSent] = useState(false);
+	const [emailSentText, setEmailSentText] = useState('');
 
 	const url = "http://localhost:8080/auth/register"
-//	const url = "https://onlybooks.isanerd.club/api/auth/register";
+	//	const url = "https://onlybooks.isanerd.club/api/auth/register";
 
 	const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 
@@ -28,19 +30,6 @@ export const RegisterPage = () => {
 		const samePassword = password == repeatPassword ? true : false
 		return passwordRegex.test(password) && samePassword
 	}
-
-	//const passwordRegex= /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,16}$/;
-	// function validatePassword(password) {
-	// 	const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,16}$/;
-	// 	if (password.length < 8) {
-	// 	  return "Tu contraseña es demasiado corta. Debe tener al menos 8 caracteres.";
-	// 	}
-	// 	if (!passwordRegex.test(password)) {
-	// 	  return "La contraseña no cumple con los requisitos.";
-	// 	}
-	// 	return true;
-	//   }
-
 
 	const { name, lastname, email, dni, password, repeatPassword, onInputChange, onResetForm } =
 		useForm({
@@ -68,6 +57,15 @@ export const RegisterPage = () => {
 
 	}
 
+	const onResendConfirmationEmail = () => {
+		setEmailSentText('Mail Enviado!!'); // Cambia el texto del botón
+		sendConfirmationEmail();
+
+		// Borra el texto después de 4 segundos
+		setTimeout(() => {
+			setEmailSentText('');
+		}, 4000);
+	};
 
 	const sendConfirmationEmail = async () => {
 		try {
@@ -101,56 +99,25 @@ export const RegisterPage = () => {
 				const response = await fetch(url, settings)
 				console.log(response)
 				if (response.status == 200) {
-
+					setAccountCreated(true);
 					sendConfirmationEmail();
-					navigate('/', {
-						replace: true,
-						state: {
-							logged: true
-						}
-					});
 				}
+
 				if (response.status == 500) {
 					setEmailError('Ya existe un usuario con ese email');
 					console.log("Usuario existente");
 				}
+				if (response.status == 403) {
+
+					console.log("Error al crear la cuenta");
+				}
+
 			} catch {
 				(error) => {
 					console.log(error)
 				}
 			}
-			// onResetForm();
-		} else {
-			setPasswordError("La contraseña no cumple con los requerimientos")
-		}
 
-
-
-
-
-		if (validatePassword(password)) {
-			setPasswordError('')
-			try {
-				const response = await fetch(url, settings)
-				console.log(response)
-				if (response.status == 200) {
-					navigate('/', {
-						replace: true,
-						state: {
-							logged: true
-						}
-					});
-				}
-				if (response.status == 500) {
-					setEmailError('Ya existe un usuario con ese email');
-					console.log("Usuario existente");
-				}
-			} catch {
-				(error) => {
-					console.log(error)
-				}
-			}
-			//onResetForm();
 		} else {
 			setPasswordError("La contraseña no cumple con los requerimientos")
 		}
@@ -179,7 +146,6 @@ export const RegisterPage = () => {
 
 
 					</div>
-
 					<div className='input-group'>
 
 						<input
@@ -194,7 +160,6 @@ export const RegisterPage = () => {
 						/>
 						<label className='label' htmlFor='lastname'>Apellido</label>
 					</div>
-
 					<div className='input-group'>
 
 						<input
@@ -225,7 +190,6 @@ export const RegisterPage = () => {
 						<label className='label' htmlFor='dni'>DNI</label>
 
 					</div>
-
 					<div className='input-group'>
 
 						<input
@@ -240,7 +204,6 @@ export const RegisterPage = () => {
 						/>
 						<label className='label' htmlFor='password'>Contraseña</label>
 					</div>
-
 					<div className='input-group'>
 
 						<input
@@ -255,10 +218,23 @@ export const RegisterPage = () => {
 						/>
 						<label className='label' htmlFor='password'>Repetir Contraseña</label>
 					</div>
+
 					<div className='passwordError'>{passwordError}</div>
 					<div className='passwordError'>{emailError}</div>
+
 					<button className='btn-lr'>Registrarse</button>
+					{/* <button className='btn-lr'>Registrarse</button> */}
+					{accountCreated ? (
+						<div className="success-message">
+							Cuenta creada exitosamente. Un correo se ha enviado a su dirección. Si no lo recibe y desea reenviarlo, haga click aquí.
+							<button type='button' className="resend-email-button" onClick={onResendConfirmationEmail}>
+								{/* Reenviar Email */}
+								{emailSentText || 'Reenviar Email'} {/* Mostrar 'Mail Enviado!!' o 'Reenviar Email' */}
+							</button>
+						</div>
+					) : null}
 				</form>
+
 			</div>
 		</div>
 	);
