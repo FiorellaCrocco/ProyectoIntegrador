@@ -1,15 +1,22 @@
+.listaContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    background-color: white;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #CAE0ED;
+}
+
 .listaPaginada {
     display: grid;
     grid-template-columns: repeat(5, minmax(100px, 1fr));
-    /* grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); */
     gap: 10px;
     padding: 20px;
-    background-color: #e7f1f7;
-}
-
-li {
-    flex-direction: column;
-    font-weight: 700;
+    background-color: #CAE0ED;
 }
 
 .book {
@@ -21,55 +28,10 @@ li {
     text-overflow: ellipsis;
 }
 
-h1 {
-    margin-top: 30px;
-    margin-bottom: 0px;
-}
-
-.title {
-    font-size: 14px;
-}
-
-p {
-    color: rgb(49, 49, 49);
-    padding-top: 5px;
-    margin-bottom: 2px;
-}
-
-.price {
-    color: rgb(216, 61, 61);
-}
-
-.book img {
-    width: 80%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-    transition: filter 0.3s;
-    
-    &:hover {
-        filter: brightness(1.2);
-    }
-}
-
-.listaContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    background-color: white;
-    align-items: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    background-color: #e7f1f7;
-}
-
 .btn-container {
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 .btn-anterior,
@@ -90,25 +52,22 @@ p {
 }
 
 .btn-anterior:hover,
-.btn-siguiente:hover{
+.btn-siguiente:hover {
     background-color: #327297;
     border: white 3px solid;
 }
 
-.cantLibros{
+.cantLibros {
     margin-right: 50px;
-    align-self:flex-end;
+    align-self: flex-end;
     color: black;
 }
-
 
 @media (max-width: 614px) {
     .listaPaginada {
         display: grid;
         grid-template-columns: repeat(2, minmax(100px, 1fr));
         gap: 10px;
-        /* padding: 20px; */
-
     }
 
     .listaContainer {
@@ -118,7 +77,6 @@ p {
 
     .book img {
         width: 50%;
-
         height: auto;
         display: block;
         margin: 0 auto;
@@ -131,16 +89,12 @@ p {
     .btn-anterior,
     .btn-siguiente {
         font-size: 12px;
-        /* Adjust the font size */
         padding: 5px 10px;
-        /* Adjust the padding to make the buttons smaller */
     }
-
 }
 
 @media (max-width: 320px) {
 
-    /* Show only the "Anterior" and "Siguiente" buttons */
     .btn-siguiente:not(:first-child):not(:last-child),
     .btn-anterior~.btn-siguiente:not(:last-child) {
         display: none;

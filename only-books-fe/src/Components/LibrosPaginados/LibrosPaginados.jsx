@@ -1,74 +1,83 @@
-/* eslint-disable no-unused-vars */
-import { useContext, useState } from "react";
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from "react";
 import { GlobalContext } from "../../Context/globalContext";
-import './LibrosPaginados.css'
+import Card from "../Card/Card.jsx"; // Importa el componente Card
+import './LibrosPaginados.css';
 
-function LibrosPaginados({ libros,isLoading }) {
+function LibrosPaginados({ libros, isLoading }) {
     const librosPorPagina = 10;
-    const [pagina, setPagina] = useState(1)
-    //const { listaLibros }= useContext(GlobalContext)
+    const [pagina, setPagina] = useState(1);
 
-    //Calculo el total de paginas
-    const totalPaginas = Math.ceil(libros.length / librosPorPagina)
+    // Calculo el total de paginas
+    const totalPaginas = Math.ceil(libros.length / librosPorPagina);
 
-    const startIndex = (pagina - 1) * librosPorPagina
-    const endIndex = startIndex + librosPorPagina
-    const currentItem = libros.slice(startIndex, endIndex)
+    const startIndex = (pagina - 1) * librosPorPagina;
+    const endIndex = startIndex + librosPorPagina;
+    const currentItem = libros.slice(startIndex, endIndex);
 
     const nextPage = () => {
-        if (pagina < Math.ceil(libros.length / librosPorPagina)) {
-            setPagina(pagina + 1)
+        if (pagina < totalPaginas) {
+            setPagina(pagina + 1);
         }
-    }
+    };
+
     const prevPage = () => {
         if (pagina > 1) {
-            setPagina(pagina - 1)
+            setPagina(pagina - 1);
         }
-    }
+    };
 
     const goToPage = (pageNumber) => {
         if (pageNumber >= 1 && pageNumber <= totalPaginas) {
             setPagina(pageNumber);
         }
-    }
-    const pageButtons = [];
-    for (let i = 1; i <= totalPaginas; i++) {
-        pageButtons.push(
-            <button key={i} onClick={() => goToPage(i)} className={` btn-siguiente ${i === pagina ? 'pagina-actual' : ''}`}>
-                {i}
-            </button>
-        );
-    }
+    };
+
+    const renderCards = () => {
+        return currentItem.map((item) => (
+            <Card key={item.id} {...item} />
+        ));
+    };
+
+    const renderPageButtons = () => {
+        const buttons = [];
+        for (let i = 1; i <= totalPaginas; i++) {
+            buttons.push(
+                <button
+                    key={i}
+                    onClick={() => goToPage(i)}
+                    className={`btn-siguiente ${i === pagina ? 'pagina-actual' : ''}`}
+                >
+                    {i}
+                </button>
+            );
+        }
+        return buttons;
+    };
+
     return (
-        <>
-            <div className="listaContainer">
-                {isLoading?<div className="loader"></div>:<></>}
-                <h4 className="cantLibros">Cantidad de libros: {libros.length}</h4>
-                <ul className="listaPaginada">
-                    {currentItem.map((item) => {
-                        return (
-                            <li className="book" key={item.id}>
-                                <Link to={`/detail/${item.id}`}>
-                                    <img src={item.imgUrl} alt={item.title} />
-                                </Link>
-                                <p className="title">{item.title}</p>
-                                <p className="price">${item.price}</p>
-                            </li>)
-                    })}
-                </ul>
-                <div className="btn-container">
-                    <button className="btn-anterior" onClick={prevPage} disabled={pagina === 1}>
-                        Anterior
-                    </button>
-                    {pageButtons}
-                    <button className="btn-siguiente" onClick={nextPage} disabled={pagina === Math.ceil(libros.length / librosPorPagina)}>
-                        Siguiente
-                    </button>
-                </div>
+        <div className="listaContainer">
+            {isLoading ? <div className="loader"></div> : null}
+            <h4 className="cantLibros">Cantidad de libros: {libros.length}</h4>
+            <ul className="listaPaginada">{renderCards()}</ul>
+            <div className="btn-container">
+                <button
+                    className="btn-anterior"
+                    onClick={prevPage}
+                    disabled={pagina === 1}
+                >
+                    Anterior
+                </button>
+                {renderPageButtons()}
+                <button
+                    className="btn-siguiente"
+                    onClick={nextPage}
+                    disabled={pagina === totalPaginas}
+                >
+                    Siguiente
+                </button>
             </div>
-        </>
-    )
+        </div>
+    );
 }
 
-export default LibrosPaginados
+export default LibrosPaginados;
