@@ -9,7 +9,7 @@ const Search = () => {
     const { listaLibros, isLoading, listaCategorias } = useContext(GlobalContext);
     const [listaAleatoria, setListaAleatoria] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState([]);
-    const [filteredProducts,setFilteredProducts] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([]);
 
     const selectLibrosAleatorios = (libros, cantidad) => {
         const librosSeleccionados = [];
@@ -57,9 +57,9 @@ const Search = () => {
     const renderCategoryOptions = () => {
         const categorias = listaCategorias;
         return categorias.map((category, index) => (
-            <div key={index} className={`category-square  ${selectedCategory.includes(category.titulo)?'selected':''}`}>
-                <img src={category.imagen} alt={category.titulo} 
-                onClick={()=>handleCategoryChange(category.titulo)}/>
+            <div key={index} className={`category-square  ${selectedCategory.includes(category.titulo) ? 'selected' : ''}`}>
+                <img src={category.imagen} alt={category.titulo}
+                    onClick={() => handleCategoryChange(category.titulo)} />
                 <label value={category.titulo}>
                     {category.titulo}
                 </label>
@@ -68,19 +68,26 @@ const Search = () => {
     };
 
     return (
-        <>
-
+        <div >
+            <Recomendados libros={listaLibros}></Recomendados>
             <div className="search-container">
                 <div className='input-select'>
-                    <div className="category-select">
-                        {renderCategoryOptions()}
+                    <div >
+                        <div>
+                            <h2 className='category-title'>Categorias</h2>
+                        </div>
+                        <div className="category-select">
+                            {renderCategoryOptions()}
+                        </div>
+                        <div>
+                            <button className="clearCategorybtn" onClick={() => { setSelectedCategory([]) }}>X
+                        </button></div>
                     </div>
-                    <button className="clearCategorybtn"onClick={()=>{setSelectedCategory([])}}>X</button>
                 </div>
+                <LibrosPaginados libros={filteredProducts} isLoading={isLoading}></LibrosPaginados>
             </div>
-            <Recomendados libros={listaLibros}></Recomendados>
-            <LibrosPaginados libros={filteredProducts} isLoading={isLoading}></LibrosPaginados>
-        </>
+
+        </div>
     );
 }
 export default Search;

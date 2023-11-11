@@ -1,20 +1,28 @@
 .recomendacion {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 38px;
-    color: #f89344;
+    color: #ffffff;
     font-weight: bold;
-    text-shadow: 1px 1px 0px gray;
+    letter-spacing: 3px;
+    text-shadow:
+        -3px -3px 0 #a2c4d7,
+        3px -3px 0 #a2c4d7,
+        -3px 3px 0 #a2c4d7,
+        3px 3px 0 #a2c4d7,
+        3px 0 0 #a2c4d7,
+        0 3px 0 #a2c4d7,
+        -3px 0 0 #a2c4d7,
+        0 -3px 0 #a2c4d7,
+        3px 3px 6px #a2c4d7;
 }
 
 .listaPaginada {
-    width: 80%;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(100px, 1fr));
-    /* grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); */
     gap: 10px;
+    width: 80%;
     padding: 20px;
-    background-color: #a2c4d7;
-
+    display: grid;
+    background: transparent;
+    grid-template-columns: repeat(3, minmax(100px, 1fr));
 }
 
 li {
@@ -37,7 +45,9 @@ li {
 }
 
 p {
-    color: rgb(49, 49, 49);
+    /* color: rgb(49, 49, 49); */
+    color: #ffffff;
+    /* font-size: large; */
     padding-top: 5px;
     margin-bottom: 2px;
 }
@@ -54,13 +64,17 @@ p {
 }
 
 .listaContainer {
+    position: relative;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #a2c4d7;
+    background: url('../../img/bgrec.jpg') center/cover no-repeat;
+
 }
+
 
 @media (max-width: 768px) {
     .listaPaginada {
