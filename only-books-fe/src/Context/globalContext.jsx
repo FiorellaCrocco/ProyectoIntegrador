@@ -11,12 +11,12 @@ export const BookProvider = ({ children }) => {
   const [token, setToken] = useState(sessionStorage.getItem('token') || '');
 
 
- const url = "http://localhost:8080/book/listarexpress";
-//   const url = "https://onlybooks.isanerd.club/api/book/listarexpress";
-  const urlCategorias = "http://localhost:8080/categoria/listar";
-//  const urlCategorias = "https://onlybooks.isanerd.club/api/categoria/listar";
- const urlCaracteristicas = "http://localhost:8080/caracteristica/listar";
-//  const urlCaracteristicas = "https://onlybooks.isanerd.club/api/caracteristica/listar";
+const url = "http://localhost:8080/book/listarexpress";
+//    const url = "https://onlybooks.isanerd.club/api/book/listarexpress";
+ const urlCategorias = "http://localhost:8080/categoria/listar";
+//   const urlCategorias = "https://onlybooks.isanerd.club/api/categoria/listar";
+const urlCaracteristicas = "http://localhost:8080/caracteristica/listar";
+//   const urlCaracteristicas = "https://onlybooks.isanerd.club/api/caracteristica/listar";
 
   const fetchData = async () => {
     try {
@@ -63,7 +63,8 @@ export const BookProvider = ({ children }) => {
 
   const fetchBookById = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8080/book/${id}`);
+       const response = await fetch(`http://localhost:8080/book/${id}`);
+    //  const response = await fetch(`https://onlybooks.isanerd.club/api/book/${id}`);
       if (!response.ok) {
         throw new Error("No se pudo obtener el libro.");
       }

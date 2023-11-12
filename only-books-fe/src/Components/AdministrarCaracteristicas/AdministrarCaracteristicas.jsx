@@ -21,8 +21,8 @@ const AdministrarCaracteristicas = () => {
     });
 
     if (confirmacion.isConfirmed) {
-    const url = `http://localhost:8080/caracteristica/eliminar/${id}`;
-    // const url = `https://onlybooks.isanerd.club/api/caracteristica/eliminar/${id}`;
+  const url = `http://localhost:8080/caracteristica/eliminar/${id}`;
+   //    const url = `https://onlybooks.isanerd.club/api/caracteristica/eliminar/${id}`;
     const token = sessionStorage.getItem('token');
     const config = {
       method: 'DELETE',
@@ -67,7 +67,7 @@ const AdministrarCaracteristicas = () => {
 
   async function actualizarCaracteristica() {
     const url = `http://localhost:8080/caracteristica/modificar`;
-    // const url = `https://onlybooks.isanerd.club/api/caracteristica/modificar`;
+  //   const url = `https://onlybooks.isanerd.club/api/caracteristica/modificar`;
     const token = sessionStorage.getItem('token');
     const config = {
       method: 'PUT',
@@ -140,16 +140,12 @@ const AdministrarCaracteristicas = () => {
             value={caracteristicaEdit.title}
             onChange={(e) => setCaracteristicaEdit({ ...caracteristicaEdit, title: e.target.value })}
           />
-          {/*
-
-<label>Icono:</label>
+        {/*   <label>Icono:</label>
           <input
             type="text"
             value={caracteristicaEdit.icono}
             onChange={(e) => setCaracteristicaEdit({ ...caracteristicaEdit, icono: e.target.value })}
-          />
-      */}
-          
+          /> */}
           <button onClick={actualizarCaracteristica}>Guardar</button>
           <button onClick={cerrarPopupEdicion}>Cancelar</button>
           {/* Puedes agregar aquí los campos de edición y lógica de actualización */}

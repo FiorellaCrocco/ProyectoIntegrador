@@ -11,9 +11,9 @@ const ListarUsuarios = () => {
   const token = sessionStorage.getItem("token");
 
   const urlListar = "http://localhost:8080/user/listar";
-  // const urlListar = "https://onlybooks.isanerd.club/api/user/listar";
-  const urlModificar = "http://localhost:8080/user/modificar";
-  // const urlModificar = "https://onlybooks.isanerd.club/api/user/modificar";
+//   const urlListar = "https://onlybooks.isanerd.club/api/user/listar";
+   const urlModificar = "http://localhost:8080/user/modificar";
+//  const urlModificar = "https://onlybooks.isanerd.club/api/user/modificar";
 
   const fetchDataList = async () => {
     try {
@@ -90,7 +90,7 @@ const ListarUsuarios = () => {
             },
           };
           const url = `http://localhost:8080/user/eliminar/${id}`;
-          // const url = `https://onlybooks.isanerd.club/api/user/eliminar/${id}`;
+        //   const url = `https://onlybooks.isanerd.club/api/user/eliminar/${id}`;
           const response = await fetch(url, settings);
   
           if (!response.ok) {

@@ -5,7 +5,9 @@ import { useAccount } from "../../Context/accountContext";
 import UserMenu from '../UserMenu/UserMenu';
 
 const Navbar = () => {
-    const { userData} = useAccount();
+
+    const { userData} = useAccount()
+
 
     return (
         <header className="navbar" id="navbar">
@@ -32,6 +34,7 @@ const Navbar = () => {
                     <UserMenu />
                 ) : (
                     <div className="header-right">
+                        
                         <Link to='/registrarse'><button className="btn-create">Crear cuenta</button></Link>
                         <Link to='/login'> <button className="btn-login">Iniciar sesión</button></Link>
                     </div>
