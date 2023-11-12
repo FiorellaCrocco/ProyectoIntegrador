@@ -54,7 +54,7 @@
 .btn-anterior:hover,
 .btn-siguiente:hover {
     background-color: #327297;
-    border: white 3px solid;
+    /* border: white 3px solid; */
 }
 
 .cantLibros {
