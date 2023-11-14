@@ -1,8 +1,6 @@
 package com.proyecto.onlybooks.dto;
 
-import com.proyecto.onlybooks.entity.Caracteristica;
-import com.proyecto.onlybooks.entity.Categoria;
-import com.proyecto.onlybooks.entity.Gender;
+import com.proyecto.onlybooks.entity.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,10 +23,12 @@ public class BookDTO {
     private Date publication_year;
     private Integer qualification;
     private Gender gender;
-    private List<String> imgUrl;
     private Double price;
+    private List<String> imgUrl;
     private List<Categoria> categorias;
     private List<Caracteristica> caracteristicas;
     private List<String> imagesBase64;
+    private List<Resenia> resenias;
+    private List<BookRent> rentedByUsers;
 
 }

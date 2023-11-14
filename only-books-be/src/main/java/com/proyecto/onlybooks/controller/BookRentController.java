@@ -19,31 +19,37 @@ public class BookRentController {
 
     // Constructor de BookRentController que permite la inyección de dependencias.
     public BookRentController(BookRentService bookRentService) {
+
         this.bookRentService = bookRentService;
     }
 
     // En la url "/bookRent/listar" retorno una lista de booksRentDTO
     @GetMapping("/listar")
-    public List<BookRentDTO> buscarBooksRents() {
-        List<BookRentDTO> listarBookRents = bookRentService.mostrarTodos();
+    public List<BookRent> buscarBooksRents() {
+        List<BookRent> listarBookRents = bookRentService.mostrarTodos();
+        for(BookRent b : listarBookRents){
+            System.out.println(b.getStartDate()+b.getUser().getName());
+        }
+        System.out.println("Saliendo listar bookRentController");
         return listarBookRents;
     }
     // En la url "/bookRent/{id}" retorno el booksRentDTO deseado (segun el ID) y si no lo encuentra se dispara una Exception
     @GetMapping("/{id}")
-    public ResponseEntity<BookRentDTO> buscarUnBookRent(@PathVariable Long id) throws Exception {
+    public ResponseEntity<BookRent> buscarUnBookRent(@PathVariable Long id) throws Exception {
         return ResponseEntity.ok(bookRentService.buscarPorId(id));
     }
 
     // En la url "/bookRent/agregar" hacemos un POST para guardar el bookRent
     @PostMapping("/agregar")
-    public ResponseEntity<?> agregarBookRent(@RequestBody BookRent bookRent) {
+    public ResponseEntity<?> agregarBookRent(@RequestBody BookRent bookRent) throws ResourceNotFoundException {
+
         bookRentService.guardar(bookRent);
         return ResponseEntity.status(HttpStatus.OK).body(bookRent.getId());
     }
 
     // En la url "/bookRent/modificar" actualizamos un bookRent ya existente
     @PutMapping("/modificar")
-    public ResponseEntity<?> actualizarUnBookRent(@RequestBody BookRent bookRent) {
+    public ResponseEntity<?> actualizarUnBookRent(@RequestBody BookRent bookRent) throws ResourceNotFoundException {
         bookRentService.modificar(bookRent);
         return ResponseEntity.ok().body("Se modifico el bookRent.");
     }
@@ -55,5 +61,16 @@ public class BookRentController {
         bookRentService.eliminar(id);
         response = ResponseEntity.status(HttpStatus.OK).body("BookRent eliminado.");
         return response;
+    }
+
+    @GetMapping("/user/{id}")
+    public List<BookRent> buscarRentaPorUserId(@PathVariable Long id) throws ResourceNotFoundException {
+        List<BookRent> lista = bookRentService.buscarRentaPorUserId(id);
+        return lista;
+    }
+    @GetMapping("/book/{id}")
+    public List<BookRent> buscarRentaPorBookId(@PathVariable Long id) throws ResourceNotFoundException {
+        List<BookRent> lista = bookRentService.buscarRentaPorBookId(id);
+        return lista;
     }
 }

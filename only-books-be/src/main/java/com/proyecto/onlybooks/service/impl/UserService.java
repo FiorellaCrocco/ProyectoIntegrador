@@ -10,8 +10,7 @@ import com.proyecto.onlybooks.repository.IBookRepository;
 import com.proyecto.onlybooks.repository.IUserRepository;
 import com.proyecto.onlybooks.service.IUserService;
 import org.apache.log4j.Logger;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

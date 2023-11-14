@@ -53,7 +53,9 @@ public class SecurityConfiguration {
                                 .requestMatchers("/{bookId}/categoria/{categoriaId}").hasAuthority("ADMIN")
                                 .requestMatchers("/{bookId}/caracteristica/{caracteristicaId}").hasAuthority("ADMIN")
 
-                                .requestMatchers("/bookRent/agregar").hasAuthority("ADMIN")
+                                .requestMatchers("/bookRent/agregar").permitAll()
+                                .requestMatchers("/bookRent/user").permitAll()
+
                                 .requestMatchers("/bookRent/eliminar/**").hasAuthority("ADMIN")
                                 .requestMatchers("/bookRent/modificar").hasAuthority("ADMIN")
 

@@ -1,5 +1,6 @@
 package com.proyecto.onlybooks.dto;
 
+import com.proyecto.onlybooks.entity.Book;
 import com.proyecto.onlybooks.entity.BookRent;
 import com.proyecto.onlybooks.entity.Rol;
 import com.proyecto.onlybooks.entity.Subscription;
@@ -24,5 +25,6 @@ public class UserDTO {
     private Rol rol;
     private List<BookRent> bookRents;
     private Subscription subscription;
+    private List<Book> booksFavs;
 
 }

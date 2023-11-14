@@ -71,7 +71,7 @@ public class BookService implements IBookService {
                             throw new ResourceNotFoundException("Imagenes no encontradas.");
                         }
                         BookDTO bookDTO = objectMapper.convertValue(book, BookDTO.class);
-                        bookDTO.setImgUrl(images);
+                        //bookDTO.setImgUrl(images);
                         bookDTO.setCategorias(categorias);
                         bookDTO.setCaracteristicas(caracteristicas);
                         return bookDTO;

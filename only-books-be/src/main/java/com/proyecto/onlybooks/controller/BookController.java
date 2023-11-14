@@ -111,7 +111,7 @@ public class BookController {
                 Image image = new Image();
                 image.setUrl("https://onlybooksbucket.s3.amazonaws.com/" + key);
                 image.setBook(newBook);
-                //iImageService.guardar(image);
+                iImageService.guardar(image);
                 images.add(image);
 
 

@@ -40,7 +40,6 @@ function DetalleLibro({ id }) {
     const getLibro = async () => {
       const libroData = await fetchBookById(id);
       setLibro(libroData);
-      console.log(libro);
     };
     getLibro();
   }, [id, fetchBookById]);

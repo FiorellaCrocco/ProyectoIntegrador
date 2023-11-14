@@ -1,5 +1,6 @@
 package com.proyecto.onlybooks.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -70,6 +71,7 @@ public class Book {
 
     // Un Book puede tener muchos BookRent, pero cada BookRent tiene un Book.
     @OneToMany( fetch=FetchType.LAZY, mappedBy = "book")
+    @JsonIgnore
     private List<BookRent> rentedByUsers;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = CascadeType.ALL)

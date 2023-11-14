@@ -2,6 +2,7 @@ package com.proyecto.onlybooks.controller;
 
 import com.proyecto.onlybooks.dto.UserDTO;
 import com.proyecto.onlybooks.entity.Book;
+import com.proyecto.onlybooks.entity.BookRent;
 import com.proyecto.onlybooks.entity.User;
 import com.proyecto.onlybooks.exceptions.ResourceNotFoundException;
 import com.proyecto.onlybooks.service.impl.UserService;
