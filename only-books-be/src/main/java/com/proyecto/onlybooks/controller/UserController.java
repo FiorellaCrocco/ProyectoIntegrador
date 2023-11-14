@@ -1,6 +1,7 @@
 package com.proyecto.onlybooks.controller;
 
 import com.proyecto.onlybooks.dto.UserDTO;
+import com.proyecto.onlybooks.entity.Book;
 import com.proyecto.onlybooks.entity.User;
 import com.proyecto.onlybooks.exceptions.ResourceNotFoundException;
 import com.proyecto.onlybooks.service.impl.UserService;
@@ -64,4 +65,32 @@ public class UserController {
         UserDTO user = userService.buscarPorEmail(email);
         return ResponseEntity.status(HttpStatus.OK).body(user);
     }
+
+    @GetMapping("/mostrarFav/{id}")
+    public List<Book> mostrarFavoritos(@PathVariable Long id) throws ResourceNotFoundException{
+        List<Book> lista = null;
+        lista = userService.listarFavoritos(id);
+        if(lista!=null){
+            return lista;
+        }else {
+            throw new ResourceNotFoundException("No se encontraron favoritos.");
+        }
+    }
+
+    @PostMapping("/{userId}/agregarFav/{bookId}")
+    public ResponseEntity<?> agregarFavorito(@PathVariable Long userId, @PathVariable Long bookId)throws ResourceNotFoundException {
+        userService.guardarFavorito(userId, bookId);
+        ResponseEntity<?> response = null;
+        response = ResponseEntity.status(HttpStatus.OK).body("Libro agregado a favoritos con exito");
+        return response;
+    }
+
+    @DeleteMapping("/{userId}/eliminarFav/{bookId}")
+    public ResponseEntity<?> eliminarFavorito(@PathVariable Long userId, @PathVariable Long bookId)throws ResourceNotFoundException {
+        userService.eliminarFavorito(userId, bookId);
+        ResponseEntity<?> response = null;
+        response = ResponseEntity.status(HttpStatus.OK).body("Libro eliminado de favoritos con exito");
+        return response;
+    }
+
 }

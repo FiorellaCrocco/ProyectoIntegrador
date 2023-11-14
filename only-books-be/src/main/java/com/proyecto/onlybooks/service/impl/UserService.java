@@ -3,8 +3,10 @@ package com.proyecto.onlybooks.service.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.proyecto.onlybooks.dto.UserDTO;
+import com.proyecto.onlybooks.entity.Book;
 import com.proyecto.onlybooks.entity.User;
 import com.proyecto.onlybooks.exceptions.ResourceNotFoundException;
+import com.proyecto.onlybooks.repository.IBookRepository;
 import com.proyecto.onlybooks.repository.IUserRepository;
 import com.proyecto.onlybooks.service.IUserService;
 import org.apache.log4j.Logger;
@@ -23,14 +25,16 @@ public class UserService implements IUserService {
 
     // Repositorio de User utilizado para acceder a la base de datos.
     private IUserRepository iUserRepository;
+    private IBookRepository iBookRepository;
 
     // Para la conversión de objetos.
     private ObjectMapper objectMapper;
 
     // Constructor de SubscriptionService que permite la inyección de dependencias.
-    public UserService(IUserRepository iUserRepository, ObjectMapper objectMapper) {
+    public UserService(IUserRepository iUserRepository, ObjectMapper objectMapper, IBookRepository iBookRepository) {
         this.iUserRepository = iUserRepository;
         this.objectMapper = objectMapper;
+        this.iBookRepository= iBookRepository;
     }
 
     @Override
@@ -92,5 +96,48 @@ public class UserService implements IUserService {
             throw new ResourceNotFoundException("No se ha encontrado el usuario");
         }
     }
+
+    public List<Book> listarFavoritos(Long id) throws ResourceNotFoundException{
+        System.out.println("Buscando Favorito");
+        List<Book> lista = iUserRepository.buscarFavoritos(id);
+        if(lista != null){
+            return lista;
+        }else{
+            logger.error("No se ha encontrado ningun libro como favorito para el user  " + id);
+            throw new ResourceNotFoundException("No se encontraron libros favoritos para el user: "+ id);
+        }
+    }
+
+    public void guardarFavorito(Long userId, Long bookId) throws ResourceNotFoundException{
+        Optional<User> u = iUserRepository.findById(userId);
+        Optional<Book> b = iBookRepository.findById(bookId);
+        List<Book> listaFav = null;
+        if(u.isPresent()&& b.isPresent()){
+            listaFav= u.get().getBooksFavs();
+            listaFav.add(b.get());
+            u.get().setBooksFavs(listaFav);
+            guardar(u.get());
+        }else {
+            logger.error("No se pudo agregar el libro a favoritos.");
+            throw new ResourceNotFoundException("No se pudo agregar el libro a favoritos.");
+        }
+    }
+
+    public void eliminarFavorito(Long userId, Long bookId) throws ResourceNotFoundException{
+        Optional<User> u = iUserRepository.findById(userId);
+        Optional<Book> b = iBookRepository.findById(bookId);
+
+        List<Book> listaFav = null;
+        if(u.isPresent()&& b.isPresent()){
+            listaFav= u.get().getBooksFavs();
+            listaFav.remove(b.get());
+            u.get().setBooksFavs(listaFav);
+            guardar(u.get());
+        }else {
+            logger.error("No se pudo eliminar el libro a favoritos.");
+            throw new ResourceNotFoundException("No se pudo eliminar el libro a favoritos.");
+        }
+    }
+
 
 }
