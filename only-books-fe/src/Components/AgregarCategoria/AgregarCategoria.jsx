@@ -54,8 +54,8 @@ function AgregarCategoria() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const url = "http://localhost:8080/categoria/agregar";
-    // const url = "https://onlybooks.isanerd.club/api/categoria/agregar";
+     const url = "http://localhost:8080/categoria/agregar";
+  //  const url = "https://onlybooks.isanerd.club/api/categoria/agregar";
     const config = {
       method: "POST",
       headers: {

@@ -130,7 +130,7 @@ const EditarProducto = ({ product, onUpdateList }) => {
       },
     };
     const url = `http://localhost:8080/book/${bookId}/caracteristica/${caracteristicaId}`;
-    // const url = `hhttps://onlybooks.isanerd.club/api/book/${bookId}/caracteristica/${caracteristicaId}`;
+    // const url = `https://onlybooks.isanerd.club/api/book/${bookId}/caracteristica/${caracteristicaId}`;
     try {
       const response = await fetch(url, settings);
       const data = await response.text();

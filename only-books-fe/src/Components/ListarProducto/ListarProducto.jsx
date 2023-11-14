@@ -74,8 +74,8 @@ const ListarProducto = () => {
           'Authorization': `Bearer ${token}`,
         },
       }
-      const url = `http://localhost:8080/book/eliminar/${id}`;
-    //    const url = `https://onlybooks.isanerd.club/api/book/eliminar/${id}`;
+       const url = `http://localhost:8080/book/eliminar/${id}`;
+   //    const url = `https://onlybooks.isanerd.club/api/book/eliminar/${id}`;
     try{
       await fetchData(url, settings);
       await actualizarListaLibros();

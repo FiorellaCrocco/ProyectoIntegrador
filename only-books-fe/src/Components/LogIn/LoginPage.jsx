@@ -52,7 +52,7 @@ export const LoginPage = () => {
 					},
 				}
 				const url = `http://localhost:8080/user/perfil/${userEmail}`
-
+			//	const url = `https://onlybooks.isanerd.club/api/user/perfil/${userEmail}`;
 				const profileDataResponse = await fetch(url, settings)
 
 

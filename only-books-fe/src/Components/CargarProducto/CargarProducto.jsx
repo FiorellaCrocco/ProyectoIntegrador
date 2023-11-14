@@ -73,7 +73,7 @@ function CargarProducto() {
     e.preventDefault();
 
     const url = "http://localhost:8080/book/agregar";
-    // const url = "https://onlybooks.isanerd.club/api/book/agregar";
+  //   const url = "https://onlybooks.isanerd.club/api/book/agregar";
     const settings = {
       method: "POST",
       headers: {
@@ -128,7 +128,7 @@ function CargarProducto() {
       },
     };
     const url = `http://localhost:8080/book/${bookId}/categoria/${categoriaId}`;
-    // const url = "https://onlybooks.isanerd.club/api/book/${bookId}/categoria/${categoriaId}";
+  //   const url = `https://onlybooks.isanerd.club/api/book/${bookId}/categoria/${categoriaId}`;
     try {
       const response = await fetch(url, settings);
       const data = await response.text();
@@ -146,8 +146,8 @@ function CargarProducto() {
         Authorization: `Bearer ${token}`,
       },
     };
-    const url = `http://localhost:8080/book/${bookId}/caracteristica/${caracteristicaId}`;
-     // const url = "https://onlybooks.isanerd.club/api/book/${bookId}/caracteristica/${caracteristicaId}";
+   const url = `http://localhost:8080/book/${bookId}/caracteristica/${caracteristicaId}`;
+   //    const url = `https://onlybooks.isanerd.club/api/book/${bookId}/caracteristica/${caracteristicaId}`;
     try {
       const response = await fetch(url, settings);
       const data = await response.text();

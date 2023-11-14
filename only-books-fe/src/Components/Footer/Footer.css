@@ -2,7 +2,7 @@
 footer {
     width: 100%;
     height: auto;
-    background-color: #e7f1f7;
+    background-color: #539dc2;
 }
 
 .footer-container {
@@ -21,7 +21,7 @@ footer {
 }
 
 /*LOGO*/
-.logo-footer {
+.logo-footer  {
     border-radius: 50px;
     box-shadow: 0 0 10px rgba(84, 157, 194, 0.5);
 }

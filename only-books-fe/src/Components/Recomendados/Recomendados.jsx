@@ -31,7 +31,7 @@ const Recomendados = () => {
   const librosAleatorios = selectLibrosAleatorios(listaLibros, 3);
 
   return (
-    <>
+    <div>
       <section className={style.listaContainer}>
         <h1 className={style.recomendacion}>Recomendados</h1>
 				{isLoading?<div className="loader"></div>:<></>}
@@ -49,7 +49,7 @@ const Recomendados = () => {
           })}
         </ul>
       </section>
-    </>
+    </div>
   );
 };
 

@@ -51,6 +51,7 @@ public class CategoriaController {
 
         try {
             byte[] binaryData = Base64.getDecoder().decode(base64Image);
+         
 
             String key = categoria.getTitulo() + "_" + UUID.randomUUID().toString() + ".jpg";
 
