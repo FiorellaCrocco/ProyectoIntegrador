@@ -39,8 +39,6 @@ public class SecurityConfiguration {
                                 .requestMatchers("/book/listarexpress").permitAll()
                                 .requestMatchers("/book/{id}").permitAll()
 
-                        //        .requestMatchers("/bookRent/{id}").permitAll() // Usuario autenticado
-
                                 .requestMatchers("/caracteristica/listar").permitAll()
                                 .requestMatchers("/caracteristica/{id}").permitAll()
 
@@ -53,8 +51,8 @@ public class SecurityConfiguration {
                                 .requestMatchers("/{bookId}/categoria/{categoriaId}").hasAuthority("ADMIN")
                                 .requestMatchers("/{bookId}/caracteristica/{caracteristicaId}").hasAuthority("ADMIN")
 
-                                .requestMatchers("/bookRent/agregar").permitAll()
-                                .requestMatchers("/bookRent/user").permitAll()
+                                .requestMatchers("/bookRent/book").permitAll()
+                                .requestMatchers("/bookRent/listar").permitAll()
 
                                 .requestMatchers("/bookRent/eliminar/**").hasAuthority("ADMIN")
                                 .requestMatchers("/bookRent/modificar").hasAuthority("ADMIN")
@@ -70,8 +68,6 @@ public class SecurityConfiguration {
                                 .requestMatchers("/user/agregar").hasAuthority("ADMIN")
                                 .requestMatchers("/user/eliminar/**").hasAuthority("ADMIN")
                                 .requestMatchers("/user/modificar").hasAuthority("ADMIN")
-
-                                .requestMatchers("/bookRent/listar").hasAuthority("ADMIN")
 
                                 .anyRequest().authenticated()
                 )
