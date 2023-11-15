@@ -3,7 +3,7 @@ import { GlobalContext } from "../../Context/globalContext";
 import Card from "../Card/Card.jsx"; // Importa el componente Card
 import './LibrosPaginados.css';
 
-function LibrosPaginados({ libros, isLoading }) {
+function LibrosPaginados({ libros, isLoading, fechaInicio, fechaFin, librosReservados, totalLibros }) {
     const librosPorPagina = 10;
     const [pagina, setPagina] = useState(1);
 
@@ -12,7 +12,8 @@ function LibrosPaginados({ libros, isLoading }) {
 
     const startIndex = (pagina - 1) * librosPorPagina;
     const endIndex = startIndex + librosPorPagina;
-    const currentItem = libros.slice(startIndex, endIndex);
+    const librosSinReserva = libros.filter(libro => !librosReservados.includes(libro.id))
+    const currentItem = librosSinReserva.slice(startIndex, endIndex);
 
     const nextPage = () => {
         if (pagina < totalPaginas) {
@@ -33,6 +34,7 @@ function LibrosPaginados({ libros, isLoading }) {
     };
 
     const renderCards = () => {
+        
         return currentItem.map((item) => (
             <Card key={item.id} {...item} />
         ));
@@ -57,7 +59,7 @@ function LibrosPaginados({ libros, isLoading }) {
     return (
         <div className="listaContainer">
             {isLoading ? <div className="loader"></div> : null}
-            <h4 className="cantLibros">Cantidad de libros: {libros.length}</h4>
+            <h4 className="cantLibros">Cantidad de libros: {currentItem.length}/{totalLibros}</h4>
             <ul className="listaPaginada">{renderCards()}</ul>
             <div className="btn-container">
                 <button

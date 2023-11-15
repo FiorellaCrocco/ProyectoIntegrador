@@ -8,6 +8,7 @@ export const BookProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [listaCategorias, setListaCategorias] = useState([]);
   const [listaCaracteristicas, setListaCaracteristicas] = useState([]);
+  const [rentBook, setRentBook] = useState([])
   const [token, setToken] = useState(sessionStorage.getItem('token') || '');
 
 
@@ -17,6 +18,8 @@ const url = "http://localhost:8080/book/listarexpress";
 //   const urlCategorias = "https://onlybooks.isanerd.club/api/categoria/listar";
 const urlCaracteristicas = "http://localhost:8080/caracteristica/listar";
 //   const urlCaracteristicas = "https://onlybooks.isanerd.club/api/caracteristica/listar";
+const urlFiltro= "http://localhost:8080/bookRent/listar"
+//   const urlCaracteristicas = "https://onlybooks.isanerd.club/api/bookRent/listar";
 
   const fetchData = async () => {
     try {
@@ -27,6 +30,7 @@ const urlCaracteristicas = "http://localhost:8080/caracteristica/listar";
       const data = await response.json();
       setListaLibros(data);
       setIsLoading(false);
+      return data
     } catch (error) {
       console.error("Error al cargar la lista de libros:", error);
       setIsLoading(false);
@@ -86,6 +90,30 @@ const urlCaracteristicas = "http://localhost:8080/caracteristica/listar";
     await fetchCategorias();
   };
 
+
+
+  const fetchFiltroRent= async()=>{
+    const settings = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
+    };
+    try {
+      const response = await fetch(urlFiltro,settings);
+      if (!response.ok) {
+        throw new Error("No se pudo obtener la lista de RentBooks");
+      }
+      const data = await response.json();
+      setRentBook(data);
+      console.log(data)
+      return data;
+    } catch (error) {
+      console.error("Error al cargar la lista de RentBooks:", error);
+    }
+  }
+
 //  const actualizarCaracteristicas = async () => {
 //  await fetchCaracteristicas();
 //};
@@ -94,6 +122,7 @@ const urlCaracteristicas = "http://localhost:8080/caracteristica/listar";
     fetchData();
     fetchCategorias();
     fetchCaracteristicas();
+    fetchFiltroRent()
   }, []);
 
 
@@ -107,7 +136,7 @@ const urlCaracteristicas = "http://localhost:8080/caracteristica/listar";
 
 
   return (
-    <GlobalContext.Provider value={{ listaCategorias, listaLibros, isLoading, actualizarListaLibros, actualizarCategorias, fetchBookById, logout, fetchCaracteristicas, listaCaracteristicas }}>
+    <GlobalContext.Provider value={{ listaCategorias, listaLibros, isLoading, actualizarListaLibros, actualizarCategorias, fetchBookById, logout, fetchCaracteristicas, listaCaracteristicas, fetchFiltroRent, rentBook,fetchData }}>
       {children}
     </GlobalContext.Provider>
   );
