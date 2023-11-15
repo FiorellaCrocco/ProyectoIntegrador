@@ -84,11 +84,18 @@ const Search = () => {
   };
   const [fechaInicio, setFechaInicio] = useState("");
   const [fechaFin, setFechaFin] = useState("");
+  const [librosFiltrados, seLibrosFiltrados] = useState("");
+
   const obtenerDatos = (inicio, fin) => {
     setFechaInicio(inicio);
     setFechaFin(fin);
     setLibrosReservados([]);
   };
+
+  const obtenerDatosFilt = (librosFiltrados) => {
+    seLibrosFiltrados(librosFiltrados)
+    console.log("Search", librosFiltrados);
+  }
 
   useEffect(() => {
     setLibrosDisponibles(listaLibros);
@@ -124,7 +131,7 @@ const Search = () => {
   return (
     <div>
       <Recomendados libros={listaLibros}></Recomendados>
-      <Buscador obtenerDatos={obtenerDatos} listaLibros={listaLibros}></Buscador>
+      <Buscador obtenerDatos={obtenerDatos} obtenerDatosFilt={obtenerDatosFilt} listaLibros={listaLibros}></Buscador>
       <div className="search-container">
         <div className="input-select">
           <div>
@@ -153,6 +160,7 @@ const Search = () => {
           fechaInicio={fechaInicio}
           fechaFin={fechaFin}
           librosReservados={librosReservados}
+          librosFiltrados={librosFiltrados}
         ></LibrosPaginados>
       </div>
     </div>

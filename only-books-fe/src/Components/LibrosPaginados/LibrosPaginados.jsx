@@ -1,9 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { GlobalContext } from "../../Context/globalContext";
 import Card from "../Card/Card.jsx"; // Importa el componente Card
 import './LibrosPaginados.css';
 
-function LibrosPaginados({ libros, isLoading, fechaInicio, fechaFin, librosReservados, totalLibros }) {
+function LibrosPaginados({ libros, isLoading, fechaInicio, fechaFin, librosFiltrados, librosReservados, totalLibros }) {
     const librosPorPagina = 10;
     const [pagina, setPagina] = useState(1);
 
@@ -13,7 +13,17 @@ function LibrosPaginados({ libros, isLoading, fechaInicio, fechaFin, librosReser
     const startIndex = (pagina - 1) * librosPorPagina;
     const endIndex = startIndex + librosPorPagina;
     const librosSinReserva = libros.filter(libro => !librosReservados.includes(libro.id))
-    const currentItem = librosSinReserva.slice(startIndex, endIndex);
+
+  let librosBusqueda=librosSinReserva;
+
+    if (librosFiltrados.length > 0) {
+        console.log(librosSinReserva);
+        librosBusqueda = librosSinReserva.filter(libro => librosFiltrados.some(filtrado => filtrado.id == libro.id))
+    } else {
+        librosBusqueda = librosSinReserva;
+    }
+
+    const currentItem = librosBusqueda.slice(startIndex, endIndex);
 
     const nextPage = () => {
         if (pagina < totalPaginas) {
