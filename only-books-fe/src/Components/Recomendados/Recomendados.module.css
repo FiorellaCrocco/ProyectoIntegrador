@@ -16,6 +16,8 @@
         3px 3px 6px #a2c4d7;
 }
 
+
+
 .listaPaginada {
     gap: 10px;
     width: 80%;
@@ -69,8 +71,8 @@ p {
     justify-content: center;
     align-items: center;
     background-color: #a2c4d7;
-    background: url('../../img/bgrec.jpg') center/cover no-repeat;
-
+    background: url('../../img/bgrec.png') center/cover no-repeat;
+    padding-top: 35px;
 }
 
 

@@ -12,14 +12,14 @@ export const BookProvider = ({ children }) => {
   const [token, setToken] = useState(sessionStorage.getItem('token') || '');
 
 
-const url = "http://localhost:8080/book/listarexpress";
-//    const url = "https://onlybooks.isanerd.club/api/book/listarexpress";
- const urlCategorias = "http://localhost:8080/categoria/listar";
-//   const urlCategorias = "https://onlybooks.isanerd.club/api/categoria/listar";
-const urlCaracteristicas = "http://localhost:8080/caracteristica/listar";
-//   const urlCaracteristicas = "https://onlybooks.isanerd.club/api/caracteristica/listar";
-const urlFiltro= "http://localhost:8080/bookRent/listar"
-//   const urlCaracteristicas = "https://onlybooks.isanerd.club/api/bookRent/listar";
+  const url = "http://localhost:8080/book/listarexpress";
+  //    const url = "https://onlybooks.isanerd.club/api/book/listarexpress";
+  const urlCategorias = "http://localhost:8080/categoria/listar";
+  //   const urlCategorias = "https://onlybooks.isanerd.club/api/categoria/listar";
+  const urlCaracteristicas = "http://localhost:8080/caracteristica/listar";
+  //   const urlCaracteristicas = "https://onlybooks.isanerd.club/api/caracteristica/listar";
+  const urlFiltro = "http://localhost:8080/bookRent/listar"
+  //   const urlCaracteristicas = "https://onlybooks.isanerd.club/api/bookRent/listar";
 
   const fetchData = async () => {
     try {
@@ -59,7 +59,7 @@ const urlFiltro= "http://localhost:8080/bookRent/listar"
       const data = await response.json();
       setListaCaracteristicas(data);
     } catch (error) {
-      
+
       console.error("Error al cargar las caracteristicas:", error);
     }
   };
@@ -67,8 +67,8 @@ const urlFiltro= "http://localhost:8080/bookRent/listar"
 
   const fetchBookById = async (id) => {
     try {
-       const response = await fetch(`http://localhost:8080/book/${id}`);
-    //  const response = await fetch(`https://onlybooks.isanerd.club/api/book/${id}`);
+      const response = await fetch(`http://localhost:8080/book/${id}`);
+      //  const response = await fetch(`https://onlybooks.isanerd.club/api/book/${id}`);
       if (!response.ok) {
         throw new Error("No se pudo obtener el libro.");
       }
@@ -92,7 +92,7 @@ const urlFiltro= "http://localhost:8080/bookRent/listar"
 
 
 
-  const fetchFiltroRent= async()=>{
+  const fetchFiltroRent = async () => {
     const settings = {
       method: 'GET',
       headers: {
@@ -101,7 +101,7 @@ const urlFiltro= "http://localhost:8080/bookRent/listar"
       }
     };
     try {
-      const response = await fetch(urlFiltro,settings);
+      const response = await fetch(urlFiltro, settings);
       if (!response.ok) {
         throw new Error("No se pudo obtener la lista de RentBooks");
       }
@@ -114,9 +114,9 @@ const urlFiltro= "http://localhost:8080/bookRent/listar"
     }
   }
 
-//  const actualizarCaracteristicas = async () => {
-//  await fetchCaracteristicas();
-//};
+  //  const actualizarCaracteristicas = async () => {
+  //  await fetchCaracteristicas();
+  //};
 
   useEffect(() => {
     fetchData();
@@ -136,7 +136,7 @@ const urlFiltro= "http://localhost:8080/bookRent/listar"
 
 
   return (
-    <GlobalContext.Provider value={{ listaCategorias, listaLibros, isLoading, actualizarListaLibros, actualizarCategorias, fetchBookById, logout, fetchCaracteristicas, listaCaracteristicas, fetchFiltroRent, rentBook,fetchData }}>
+    <GlobalContext.Provider value={{ listaCategorias, listaLibros, isLoading, actualizarListaLibros, actualizarCategorias, fetchBookById, logout, fetchCaracteristicas, listaCaracteristicas, fetchFiltroRent, rentBook, fetchData }}>
       {children}
     </GlobalContext.Provider>
   );

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "../LibrosPaginados/LibrosPaginados.css";
 import style from "./Recomendados.module.css";
 import '../Loading/Loading.css'
+// import Subnavbar from "../Subnavbar/Subnavbar";
 
 const Recomendados = () => {
   const { listaLibros, isLoading } = useContext(GlobalContext);
@@ -32,9 +33,11 @@ const Recomendados = () => {
 
   return (
     <div>
+
       <section className={style.listaContainer}>
+        {/* <Subnavbar /> */}
         <h1 className={style.recomendacion}>Recomendados</h1>
-				{isLoading?<div className="loader"></div>:<></>}
+        {isLoading ? <div className="loader"></div> : <></>}
         <ul className={style.listaPaginada}>
           {librosAleatorios.map((libro) => {
             return (
