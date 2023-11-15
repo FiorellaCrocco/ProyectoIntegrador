@@ -124,7 +124,7 @@ const Search = () => {
   return (
     <div>
       <Recomendados libros={listaLibros}></Recomendados>
-      <Buscador obtenerDatos={obtenerDatos}></Buscador>
+      <Buscador obtenerDatos={obtenerDatos} listaLibros={listaLibros}></Buscador>
       <div className="search-container">
         <div className="input-select">
           <div>

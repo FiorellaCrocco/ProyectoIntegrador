@@ -1,0 +1,37 @@
+.politicascontainer {
+   text-align: center;
+    justify-content: center;
+    
+    
+    background-color: #51aee0;
+    padding-top: 30px;
+    margin-top: 10px;
+}
+
+
+.politicascontainercolum {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    
+    background-color: #51aee0;
+    padding-bottom: 10px;
+    margin-top: 10px;
+}
+
+.politicascontainercolum1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: justify;
+    flex-direction: column;
+    background-color: #51aee0;
+    padding: 10px 10px 0px 10px;
+    margin-top: 10px;
+}
+
+.titulopolitica{
+    
+    margin: 0px;
+}
+

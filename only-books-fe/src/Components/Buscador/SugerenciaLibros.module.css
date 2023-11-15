@@ -1,0 +1,22 @@
+.sugerenciaLibros {
+    position: absolute;
+    z-index: 1;
+   /* background-color: white;*/
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    background-color: red;
+  }
+  
+  .sugerenciaLibros ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sugerenciaLibros li {
+    padding: 5px;
+    cursor: pointer;
+  }
+  
+  

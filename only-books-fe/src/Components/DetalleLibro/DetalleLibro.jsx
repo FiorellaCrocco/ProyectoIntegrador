@@ -1,8 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
 import CaracteristicaLibro from "../CaracteristicaLibro/CaracteristicaLibro";
 import styles from "./DetalleLibro.module.css";
+
 import { GlobalContext } from "../../Context/globalContext";
 import stylesM from "./Modal.module.css";
+import Politicas from "../Politicas/Politicas"
 
 function DetalleLibro({ id }) {
   const [showPopup, setShowPopup] = useState(false);
@@ -47,6 +49,7 @@ function DetalleLibro({ id }) {
   return (
     <div>
       {libro != null ? (
+        <>
         <div className={styles.detailcontainer}>
           <div className={styles.bookcontainer}>
             <div className={styles.section}>
@@ -113,8 +116,13 @@ function DetalleLibro({ id }) {
           </div>
           <CaracteristicaLibro id={id} />
         </div>
+        <div >
+        <Politicas/>
+        </div>
+        </>
       ) : (
         <></>
+          
       )}
     </div>
   );
