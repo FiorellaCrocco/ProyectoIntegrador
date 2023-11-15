@@ -10,8 +10,13 @@ function Buscador({ obtenerDatos , listaLibros}) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setFechaInicio(values.toString().split(",")[0]);
-    setFechaFin(values.toString().split(",")[1]);
+    if(values != null){
+      setFechaInicio(values.toString().split(",")[0]);
+      setFechaFin(values.toString().split(",")[1]);
+    } else {
+      setFechaInicio("")
+      setFechaFin("")
+    }
   }
 
   useEffect(() => {
@@ -30,15 +35,18 @@ function Buscador({ obtenerDatos , listaLibros}) {
         <div>
           <form onSubmit={(e) => handleSubmit(e)}>
             <h2>Buscador de libros:</h2>
+            <label>Busqueda por título:</label>
             <input
+            placeholder="Escriba aquí el título a buscar"
               type="text"
               name="busqueda"
               id="busqueda"
               value={busqueda}
               onChange={handleChange}
             />
-
+<label>Busqueda por fecha disponible</label>
             <Calendar
+            placeholder="Seleccione la fecha de alquiler"
               format="YYYY-MM-DD"
               value={values}
               onChange={setValues}

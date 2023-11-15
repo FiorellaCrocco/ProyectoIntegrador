@@ -98,7 +98,7 @@ const Search = () => {
     const data = rentBook;
     setListaRentBook(data);
     console.log(listaRentBook);
-    if (!listaRentBook.length == 0) {
+    if (!listaRentBook.length == 0 && fechaInicio!=="") {
       listaRentBook.map((renta) => {
         const returnDate = new Date(renta.returnDate.split("T")[0]);
         const startDate = new Date(renta.startDate.split("T")[0]);
