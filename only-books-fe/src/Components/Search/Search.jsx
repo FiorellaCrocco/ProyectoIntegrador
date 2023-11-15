@@ -70,9 +70,8 @@ const Search = () => {
     return categorias.map((category, index) => (
       <div
         key={index}
-        className={`category-square  ${
-          selectedCategory.includes(category.titulo) ? "selected" : ""
-        }`}
+        className={`category-square  ${selectedCategory.includes(category.titulo) ? "selected" : ""
+          }`}
       >
         <img
           src={category.imagen}

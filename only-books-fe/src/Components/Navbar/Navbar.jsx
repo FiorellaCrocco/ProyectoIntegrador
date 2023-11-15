@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { useAccount } from "../../Context/accountContext";
 import UserMenu from '../UserMenu/UserMenu';
+import Subnavbar from "../Subnavbar/Subnavbar";
 
 const Navbar = () => {
 
@@ -40,6 +41,7 @@ const Navbar = () => {
                     </div>
                 )}
             </div>
+            <Subnavbar />
         </header>
     );
 };
