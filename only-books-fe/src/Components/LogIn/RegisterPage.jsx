@@ -14,7 +14,9 @@ export const RegisterPage = () => {
 	const [accountCreated, setAccountCreated] = useState(false);
 	const [emailSentText, setEmailSentText] = useState('');
 
-	const url = "http://localhost:8080/auth/register"
+	const API_URL= import.meta.env.VITE_API_URL
+
+	const url = `${API_URL}auth/register`
 //		const url = "https://onlybooks.isanerd.club/api/auth/register";
 
 	const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;

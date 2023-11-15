@@ -60,7 +60,7 @@ function CrearCaracteristica() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const url = "http://localhost:8080/caracteristica/agregar";
+    const url = `${API_URL}caracteristica/agregar`;
     // const url = `https://onlybooks.isanerd.club/api/caracteristica/agregar`;
     const config = {
       method: "POST",

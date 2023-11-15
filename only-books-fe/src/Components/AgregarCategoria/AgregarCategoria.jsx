@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 
 function AgregarCategoria() {
   const token = sessionStorage.getItem("token");
+  const API_URL= import.meta.env.VITE_API_URL
 
   const { actualizarCategorias } = useContext(GlobalContext);
   const formRef = useRef(null);
@@ -54,7 +55,7 @@ function AgregarCategoria() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-     const url = "http://localhost:8080/categoria/agregar";
+     const url = `${URL_API}categoria/agregar`;
   //  const url = "https://onlybooks.isanerd.club/api/categoria/agregar";
     const config = {
       method: "POST",

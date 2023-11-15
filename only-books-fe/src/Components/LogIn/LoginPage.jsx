@@ -5,7 +5,9 @@ import './log&register.css';
 import { useAccount } from '../../Context/accountContext';
 
 export const LoginPage = () => {
-	const url = "http://localhost:8080/auth/login"
+	const API_URL= import.meta.env.VITE_API_URL
+
+	const url = `${API_URL}auth/login`
 //	const url = "https://onlybooks.isanerd.club/api/auth/login";
 	const navigate = useNavigate();
 	const [loginError, setLoginError] = useState(null);
@@ -51,7 +53,7 @@ export const LoginPage = () => {
 						'Authorization': `Bearer ${token}`,
 					},
 				}
-				const url = `http://localhost:8080/user/perfil/${userEmail}`
+				const url = `${API_URL}user/perfil/${userEmail}`
 			//	const url = `https://onlybooks.isanerd.club/api/user/perfil/${userEmail}`;
 				const profileDataResponse = await fetch(url, settings)
 

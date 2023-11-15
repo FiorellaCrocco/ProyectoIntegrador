@@ -4,6 +4,7 @@ import { GlobalContext } from "../../Context/globalContext";
 import Swal from 'sweetalert2'
 
 function CargarProducto() {
+  const API_URL= import.meta.env.VITE_API_URL
   const {
     actualizarListaLibros,
     listaCategorias,
@@ -72,7 +73,7 @@ function CargarProducto() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const url = "http://localhost:8080/book/agregar";
+    const url = `${API_URL}book/agregar`;
   //   const url = "https://onlybooks.isanerd.club/api/book/agregar";
     const settings = {
       method: "POST",
@@ -127,7 +128,7 @@ function CargarProducto() {
         Authorization: `Bearer ${token}`,
       },
     };
-    const url = `http://localhost:8080/book/${bookId}/categoria/${categoriaId}`;
+    const url = `${API_URL}book/${bookId}/categoria/${categoriaId}`;
   //   const url = `https://onlybooks.isanerd.club/api/book/${bookId}/categoria/${categoriaId}`;
     try {
       const response = await fetch(url, settings);
@@ -146,7 +147,7 @@ function CargarProducto() {
         Authorization: `Bearer ${token}`,
       },
     };
-   const url = `http://localhost:8080/book/${bookId}/caracteristica/${caracteristicaId}`;
+   const url = `${API_URL}book/${bookId}/caracteristica/${caracteristicaId}`;
    //    const url = `https://onlybooks.isanerd.club/api/book/${bookId}/caracteristica/${caracteristicaId}`;
     try {
       const response = await fetch(url, settings);

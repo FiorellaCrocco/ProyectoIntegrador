@@ -11,15 +11,19 @@ export const BookProvider = ({ children }) => {
   const [rentBook, setRentBook] = useState([])
   const [token, setToken] = useState(sessionStorage.getItem('token') || '');
 
+ const API_URL= import.meta.env.VITE_API_URL
 
-const url = "http://localhost:8080/book/listarexpress";
+
+const url = `${API_URL}book/listarexpress`;
 //    const url = "https://onlybooks.isanerd.club/api/book/listarexpress";
- const urlCategorias = "http://localhost:8080/categoria/listar";
+ const urlCategorias = `${API_URL}categoria/listar`;
 //   const urlCategorias = "https://onlybooks.isanerd.club/api/categoria/listar";
-const urlCaracteristicas = "http://localhost:8080/caracteristica/listar";
+const urlCaracteristicas = `${API_URL}caracteristica/listar`;
 //   const urlCaracteristicas = "https://onlybooks.isanerd.club/api/caracteristica/listar";
-const urlFiltro= "http://localhost:8080/bookRent/listar"
+const urlFiltro= `${API_URL}bookRent/listar`
 //   const urlCaracteristicas = "https://onlybooks.isanerd.club/api/bookRent/listar";
+const urlBookId= `${API_URL}book/`
+
 
   const fetchData = async () => {
     try {
@@ -67,7 +71,7 @@ const urlFiltro= "http://localhost:8080/bookRent/listar"
 
   const fetchBookById = async (id) => {
     try {
-       const response = await fetch(`http://localhost:8080/book/${id}`);
+       const response = await fetch(`${urlBookId}${id}`);
     //  const response = await fetch(`https://onlybooks.isanerd.club/api/book/${id}`);
       if (!response.ok) {
         throw new Error("No se pudo obtener el libro.");

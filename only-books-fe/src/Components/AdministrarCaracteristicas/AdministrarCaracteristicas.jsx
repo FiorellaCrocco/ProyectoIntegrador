@@ -9,6 +9,7 @@ const AdministrarCaracteristicas = () => {
   const [editPopupOpen, setEditPopupOpen] = useState(false);
   const [caracteristicaEdit, setCaracteristicaEdit ] = useState({ id: 0, title: "", icono: "" });
   const[actualizar, setActualizar] = useState(false)
+  const API_URL= import.meta.env.VITE_API_URL
 
   async function eliminarCaracteristica(id) {
     const confirmacion = await Swal.fire({
@@ -21,7 +22,7 @@ const AdministrarCaracteristicas = () => {
     });
 
     if (confirmacion.isConfirmed) {
-  const url = `http://localhost:8080/caracteristica/eliminar/${id}`;
+  const url = `${API_URL}caracteristica/eliminar/${id}`;
    //    const url = `https://onlybooks.isanerd.club/api/caracteristica/eliminar/${id}`;
     const token = sessionStorage.getItem('token');
     const config = {
@@ -66,7 +67,7 @@ const AdministrarCaracteristicas = () => {
   }
 
   async function actualizarCaracteristica() {
-    const url = `http://localhost:8080/caracteristica/modificar`;
+    const url = `${API_URL}caracteristica/modificar`;
   //   const url = `https://onlybooks.isanerd.club/api/caracteristica/modificar`;
     const token = sessionStorage.getItem('token');
     const config = {
