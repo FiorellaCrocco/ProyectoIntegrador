@@ -13,9 +13,9 @@ function SugerenciaLibros({ listaLibros, busqueda , obtenerDatosFiltrados}) {
     }, [busqueda])
    
     const result = () => {
-      if (busqueda.length >= 3) {
+      if (busqueda.length > 0) {
         return librosFiltrados.map((libro) => (
-          <span key={libro.id}>{libro.title}</span>
+          <li key={libro.id} >{libro.title}</li>
         ));
       } else {
         return null;
@@ -23,7 +23,11 @@ function SugerenciaLibros({ listaLibros, busqueda , obtenerDatosFiltrados}) {
     };
   
     return (
-      <></>
+      <>
+      
+      {result()}
+
+      </>
     );
   }
   

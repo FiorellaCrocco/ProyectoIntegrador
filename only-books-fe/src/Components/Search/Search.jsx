@@ -94,7 +94,7 @@ const Search = () => {
 
   const obtenerDatosFilt = (librosFiltrados) => {
     seLibrosFiltrados(librosFiltrados)
-    console.log("Search", librosFiltrados);
+    //console.log("Search", librosFiltrados);
   }
 
   useEffect(() => {

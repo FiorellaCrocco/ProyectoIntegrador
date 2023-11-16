@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import './Card.css';
 import Favoritos from '../Favoritos/Favoritos';
 
-const Card = ({ id, imgUrl, title, price }) => (
+const Card = ({ id, imgUrl, title, price, isFavorite, actualizarListaFav }) => (
     <div className="body-cards">
         <div className="card">
-        <Favoritos variable={id} />
+        <Favoritos variable={id} isFavorite={isFavorite} actualizarListaFav={actualizarListaFav} />
             <div className="card-img">
                 <Link to={`/detail/${id}`}>
                     <img src={imgUrl} alt={title} />

@@ -3,7 +3,6 @@ import CaracteristicaLibro from "../CaracteristicaLibro/CaracteristicaLibro";
 import styles from "./DetalleLibro.module.css";
 import Calendar from "react-multi-date-picker";
 import DateObject from "react-date-object";
-import "./Calendario.css";
 
 
 import { GlobalContext } from "../../Context/globalContext";
