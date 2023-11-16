@@ -48,6 +48,7 @@ public class Book {
     private Integer qualification;
 
     private Double price;
+    private String imgUrl;
 
     //Un libro puede tener muchas Categorias
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
