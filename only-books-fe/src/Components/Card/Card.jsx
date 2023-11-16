@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Card.css';
+import Favoritos from '../Favoritos/Favoritos';
 
 const Card = ({ id, imgUrl, title, price }) => (
     <div className="body-cards">
         <div className="card">
+        <Favoritos variable={id} />
             <div className="card-img">
                 <Link to={`/detail/${id}`}>
                     <img src={imgUrl} alt={title} />
