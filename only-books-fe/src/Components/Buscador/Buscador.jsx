@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Calendar from "react-multi-date-picker";
 import SugerenciaLibros from "./SugerenciaLibros";
-import Autosuggest from "react-autosuggest";
 import "./Buscador.css";
 
 function Buscador({ obtenerDatos, listaLibros, obtenerDatosFilt }) {
@@ -46,75 +45,6 @@ function Buscador({ obtenerDatos, listaLibros, obtenerDatosFilt }) {
     setBusqueda(value);
   };
 
-  //////////////
-  /*
-  const onSuggestionsFetchRequested = ({ value }) => {
-    setLibros(filtrarLibros(valueAutoComplete));
-  };
-
-  const onSuggestionsClearRequested = ()=>{
-    setLibros([])
-  }
-  const getSuggestionValue = (suggestions)=>{
-    return `${suggestions.title} - ${suggestions. author}`
-  }
-
-  const renderSuggestion = (suggestions)=>{
-    return(
-    <div className="sugerencias" onClick={()=>seleccionarLibro(suggestions)}>
-      
-      {`${suggestions.title} - ${suggestions. author}`}
-
-    </div>)
-  }
-
-  const seleccionarLibro =(libro)=>{
-    setSeleccionado(libro)
-  }
-
-  const onChangeSelect=(e,{newValue})=>{
-    setValueAutoComplete(newValue)
-  }
-  const inputProps={
-    placeholder:"Ingrese titulo de un libro",
-    value:valueAutoComplete,
-    onChange: onChangeSelect    
-  }
-  
-
-  const eventEnter=(e)=>{
-    if(e.key=="Enter"){
-      let split = e.target.value.split('-')
-      let libro ={
-        title:split[0].trim(),
-        author:split[1].trim()
-      }
-      setSeleccionado(libro)
-    }
-
-  }
-
-
-  const filtrarLibros = (valueAutoComplete) => {
-    const inputValue = valueAutoComplete.trim().toLowerCase();
-    const inputLength = inputValue.length;
-    let filtrado = listaLibros.filter((libro) => {
-      let textoCompleto = `${libro.title}`.toLocaleLowerCase();
-
-      //Limpiar Acentos:
-
-       const textoSinAcentos =  textoCompleto
-          .toLocaleLowerCase()
-          .normalize("NFD")
-          console.log(textoSinAcentos)
-          return textoSinAcentos.includes(inputValue)
-      })
-
-    console.log(filtrado)
-    return filtrado
-  };
-  */
-
   return (
     <>
       <section>
@@ -142,17 +72,6 @@ function Buscador({ obtenerDatos, listaLibros, obtenerDatosFilt }) {
                 </ul>
               </div>
 
-              {/*
-            <Autosuggest
-            suggestions={libros}
-            onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-            onSuggestionsClearRequested={onSuggestionsClearRequested}
-            getSuggestionValue={getSuggestionValue}
-            renderSuggestion={renderSuggestion}
-            inputProps={inputProps}
-            onSuggestionSelected={eventEnter}
-            />
-          */}
               <div className="busquedaFechaContainer">
                 <label>Busqueda por fecha disponible</label>
                 <Calendar
