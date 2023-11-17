@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import CaracteristicaLibro from "../CaracteristicaLibro/CaracteristicaLibro";
 import styles from "./DetalleLibro.module.css";
 import Calendar from "react-multi-date-picker";
+import Swal from 'sweetalert2'
 import DateObject from "react-date-object";
 
 
@@ -77,11 +78,6 @@ function DetalleLibro({ id }) {
   useEffect(()=>{
     HandleReserva(reservaLibro)
   },[reservaLibro])
-
-  
-  
-
-  
 
   return (
     <div>
@@ -165,13 +161,23 @@ function DetalleLibro({ id }) {
                 let props = {};
                 fechasReservadas.map(fecha=>{
                   if(isSameDate(fecha,date)){
-                    props.style = {
+                    props.disabled = true;
+                      props.style = {
                       ...props.style,
                       color: "#666",
                       backgroundColor: "#ccc",
                       fontWeight: "bold",
                       border: "2px solid #777",
                     };
+                    props.onClick = () => {
+                      Swal.fire({
+                        position: "top-end",
+                        text: "Ya existe reserva en esa fecha, seleccione una nueva",
+                        icon: "error",
+                        showConfirmButton: false,
+                        timer: 2000,
+                      });
+                    }
                   }
                 })
                   

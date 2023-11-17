@@ -51,7 +51,7 @@ public class SecurityConfiguration {
                                 .requestMatchers("/{bookId}/categoria/{categoriaId}").hasAuthority("ADMIN")
                                 .requestMatchers("/{bookId}/caracteristica/{caracteristicaId}").hasAuthority("ADMIN")
 
-                                .requestMatchers("/bookRent/book").permitAll()
+                                .requestMatchers("/bookRent/book/**").permitAll()
                                 .requestMatchers("/bookRent/listar").permitAll()
 
                                 .requestMatchers("/bookRent/eliminar/**").hasAuthority("ADMIN")
