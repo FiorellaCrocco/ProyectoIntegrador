@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid #ddd;
+    /*border: 1px solid #ddd;*/
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 4;
@@ -14,7 +14,7 @@
     margin: 0 5px;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+ /*   box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);*/
 }
 
 .card .card-img {
@@ -86,7 +86,8 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    background-color: #e8f1ef;
+    background-color: #fff;
+    border-radius: 8px;
 }
 
 
