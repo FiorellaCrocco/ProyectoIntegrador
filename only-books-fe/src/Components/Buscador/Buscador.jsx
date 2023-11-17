@@ -10,9 +10,7 @@ function Buscador({ obtenerDatos, listaLibros, obtenerDatosFilt }) {
   const [busqueda, setBusqueda] = useState("");
   const [librosFiltrados, setLibrosFiltrados] = useState([]);
 
-  const [libros, setLibros] = useState(listaLibros);
-  const [valueAutoComplete, setValueAutoComplete] = useState("");
-  const [seleccionado, setSeleccionado] = useState({});
+  const [mostrar, setMostrar] = useState(false)
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -39,11 +37,19 @@ function Buscador({ obtenerDatos, listaLibros, obtenerDatosFilt }) {
     setLibrosFiltrados(() => librosFiltrados);
     //console.log("Buscador", librosFiltrados);
   };
+  const actualizarBusqueda = (libro)=>{
+    setBusqueda(libro);
+    setMostrar(false)
+  }
 
   const handleChange = (e) => {
     const { value } = e.target;
     setBusqueda(value);
   };
+  const handleBuscando=()=>{
+    setMostrar(true)
+  }
+
 
   return (
     <>
@@ -60,15 +66,19 @@ function Buscador({ obtenerDatos, listaLibros, obtenerDatosFilt }) {
                   type="text"
                   name="busqueda"
                   id="busqueda"
+                  autoComplete="off"
                   value={busqueda}
                   onChange={handleChange}
+                  onMouseDown={handleBuscando}
                 />
                 <ul className="options-list">
-                  <SugerenciaLibros
-                    listaLibros={listaLibros}
-                    busqueda={busqueda}
-                    obtenerDatosFiltrados={obtenerDatosFiltrados}
-                  />
+                    <SugerenciaLibros
+                      listaLibros={listaLibros}
+                      busqueda={busqueda}
+                      obtenerDatosFiltrados={obtenerDatosFiltrados}
+                      actualizarBusqueda={actualizarBusqueda}
+                      buscando={mostrar}
+                    />
                 </ul>
               </div>
 

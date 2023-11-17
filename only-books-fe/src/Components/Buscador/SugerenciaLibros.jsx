@@ -1,7 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from "./SugerenciaLibros.module.css"
 
-function SugerenciaLibros({ listaLibros, busqueda , obtenerDatosFiltrados}) {
+function SugerenciaLibros({ listaLibros, busqueda , obtenerDatosFiltrados,actualizarBusqueda, buscando}) {
+
+  const [mostrar, setMostrar] = useState(true)
   
     const librosFiltrados = listaLibros.filter((libro) =>
       libro.title.toLowerCase().includes(busqueda.toLowerCase())
@@ -9,16 +11,32 @@ function SugerenciaLibros({ listaLibros, busqueda , obtenerDatosFiltrados}) {
 
     useEffect(() => {
       obtenerDatosFiltrados(librosFiltrados);
-      console.log("Sugerencia", librosFiltrados);
+      console.log(mostrar)
     }, [busqueda])
+
+    useEffect(()=>{
+      setMostrar(buscando)
+    },[buscando])
+
+
+    const handleClick =(libro)=>{
+      setMostrar(false)
+      actualizarBusqueda(libro)
+    }
    
     const result = () => {
-      if (busqueda.length > 0) {
-        return librosFiltrados.map((libro) => (
-          <li key={libro.id} >{libro.title}</li>
-        ));
-      } else {
-        return null;
+      if(mostrar){
+        if (busqueda.length > 0) {
+          return librosFiltrados.map((libro) => (
+            <li className={styles.sugerenciaLibrosLi} key={libro.id} 
+            onClick={()=>handleClick(libro.title)}> 
+            <img className={styles.imgBusquedaMini}  src={libro.imgUrl} alt={libro.title}/>
+            {libro.title}
+            </li>
+          ));
+        } else {
+          return null;
+        }
       }
     };
   

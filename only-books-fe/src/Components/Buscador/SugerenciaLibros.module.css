@@ -5,7 +5,6 @@
     border: 1px solid #ccc;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 10px;
-    background-color: red;
   }
   
   .sugerenciaLibros ul {
@@ -14,9 +13,21 @@
     margin: 0;
   }
   
-  .sugerenciaLibros li {
-    padding: 5px;
+  .sugerenciaLibrosLi {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
     cursor: pointer;
+  }
+
+  .sugerenciaLibrosLi:hover{
+    background-color: #bbb;
+  }
+
+  .imgBusquedaMini{
+    width: 30px;
+    height: auto;
   }
   
   
