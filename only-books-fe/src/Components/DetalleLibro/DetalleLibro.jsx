@@ -93,12 +93,12 @@ function DetalleLibro({ id }) {
                 <div className={styles.book}>
                   <img
                     className={styles.mainimg}
-                    src={libro.imgUrl[0]}
+                    src={libro.listImgUrl[0]}
                     alt={libro.title}
                   />
                 </div>
                 <div className={styles.galeria}>
-                  {libro.imgUrl.slice(0, 4).map((url, index) => (
+                  {libro.listImgUrl.slice(0, 4).map((url, index) => (
                     <img
                       key={index}
                       src={url}

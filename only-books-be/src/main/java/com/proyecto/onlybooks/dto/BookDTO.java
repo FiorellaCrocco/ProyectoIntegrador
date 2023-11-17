@@ -24,7 +24,8 @@ public class BookDTO {
     private Integer qualification;
     private Gender gender;
     private Double price;
-    private List<String> imgUrl;
+    private String imgUrl;
+    private List<String> listImgUrl;
     private List<Categoria> categorias;
     private List<Caracteristica> caracteristicas;
     private List<String> imagesBase64;

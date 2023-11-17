@@ -17,4 +17,5 @@ public interface IUserService {
     void eliminar(Long id) throws ResourceNotFoundException;
     UserDTO buscarPorEmail(String email) throws ResourceNotFoundException;
     List<Book> listarFavoritos( Long id) throws ResourceNotFoundException;
+    void eliminarFavorito(Long userId, Long bookId) throws ResourceNotFoundException;
 }

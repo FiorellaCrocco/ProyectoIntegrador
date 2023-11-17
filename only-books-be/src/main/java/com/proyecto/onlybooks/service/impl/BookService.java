@@ -7,12 +7,15 @@ import com.proyecto.onlybooks.dto.BookSummary;
 import com.proyecto.onlybooks.entity.Book;
 import com.proyecto.onlybooks.entity.Caracteristica;
 import com.proyecto.onlybooks.entity.Categoria;
+import com.proyecto.onlybooks.entity.User;
 import com.proyecto.onlybooks.exceptions.ResourceNotFoundException;
 import com.proyecto.onlybooks.repository.IBookRepository;
 import com.proyecto.onlybooks.repository.ICategoriaRepository;
+import com.proyecto.onlybooks.repository.IUserRepository;
 import com.proyecto.onlybooks.service.IBookService;
 import com.proyecto.onlybooks.service.ICaracteristicaService;
 import com.proyecto.onlybooks.service.ICategoriaService;
+import com.proyecto.onlybooks.service.IUserService;
 import jakarta.transaction.Transactional;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,17 +35,21 @@ public class BookService implements IBookService {
     private final IBookRepository iBookRepository;
     private final ICategoriaService iCategoriaService;
     private final ICaracteristicaService iCaracteristicaService;
+    private final IUserRepository iUserRepository;
+    private final IUserService iUserService;
 
     // Para la conversión de objetos.
     private final ObjectMapper objectMapper;
 
     // Constructor de BookService que permite la inyección de dependencias.
     @Autowired
-    public BookService(IBookRepository iBookRepository, ICategoriaService iCategoriaService, ICaracteristicaService iCaracteristicaService, ObjectMapper objectMapper) {
+    public BookService(IBookRepository iBookRepository, ICategoriaService iCategoriaService, ICaracteristicaService iCaracteristicaService, ObjectMapper objectMapper, IUserRepository iUserRepository, IUserService iUserService) {
         this.iBookRepository = iBookRepository;
         this.iCategoriaService = iCategoriaService;
         this.iCaracteristicaService = iCaracteristicaService;
         this.objectMapper = objectMapper;
+        this.iUserRepository=iUserRepository;
+        this.iUserService=iUserService;
     }
 
     @Override
@@ -97,7 +104,7 @@ public class BookService implements IBookService {
             List<Categoria> categorias = buscarCategoria(id);
             List<Caracteristica> caracteristicas=buscarCaracteristica(id);
             BookDTO bookDTO = objectMapper.convertValue(found, BookDTO.class);  // Convertimos a found que es de tipo Book a BookDTO.
-            bookDTO.setImgUrl(images);
+            bookDTO.setListImgUrl(images);
             bookDTO.setCategorias(categorias);
             bookDTO.setCaracteristicas(caracteristicas);
             return bookDTO;
@@ -115,9 +122,11 @@ public class BookService implements IBookService {
 
     @Override
     public void eliminar(Long id) throws ResourceNotFoundException {
+        System.out.println("DENTRO DE ELIMINAR LIBRO");
         Optional<Book> found = iBookRepository.findById(id);
         if (found.isPresent()) {
-            iBookRepository.deleteById(id);
+            eliminarTodosLosFavoritos(id);
+            //iBookRepository.deleteById(id);
             logger.warn("Libro - eliminar: Se ha eliminado el libro");
         } else {
             logger.error("No se ha encontrado el libro con id " + id);
@@ -191,5 +200,17 @@ public class BookService implements IBookService {
             b.setImgUrl(imagen);
         }
         return lista;
+    }
+
+    public void eliminarTodosLosFavoritos(Long bookId) throws ResourceNotFoundException {
+        System.out.println("ELIMINANDO FAVORITOS");
+        List<User> listUser = iUserRepository.buscarBooksFavoritos(bookId);
+
+        for(User u : listUser){
+            System.out.println("USUARIO");
+
+            iUserService.eliminarFavorito(u.getId(),bookId);
+        }
+        iBookRepository.deleteById(bookId);
     }
 }

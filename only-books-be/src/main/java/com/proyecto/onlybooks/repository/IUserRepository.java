@@ -4,6 +4,7 @@ import com.proyecto.onlybooks.entity.Book;
 import com.proyecto.onlybooks.entity.Categoria;
 import com.proyecto.onlybooks.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -17,4 +18,8 @@ public interface IUserRepository extends JpaRepository<User,Long> {
 
     @Query("SELECT u.booksFavs FROM User u WHERE u.id = :userId")
     List<Book> buscarFavoritos(@Param("userId") Long userId);
+
+    @Query("SELECT u FROM User u JOIN u.booksFavs b WHERE b.id = :bookId")
+    List<User> buscarBooksFavoritos(@Param("bookId") Long bookId);
+
 }

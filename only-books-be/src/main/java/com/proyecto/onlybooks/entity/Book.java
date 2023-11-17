@@ -50,6 +50,13 @@ public class Book {
     private Double price;
     private String imgUrl;
 
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @JoinTable(name = "users_booksFavorite",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id"))
+    @JsonIgnore
+    private List<Book> booksFavs;
+
     //Un libro puede tener muchas Categorias
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "books_categorias",

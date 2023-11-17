@@ -10,6 +10,7 @@ function CrearCaracteristica() {
     title: "",
     icono: null,
   });
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const [actualizar, setActualizar] = useState(false);
   const { listaCaracteristicas, fetchCaracteristicas } =

@@ -69,7 +69,7 @@ public class User implements UserDetails {
     @JoinColumn(name="subscription_id")
     private Subscription  subscription;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.ALL, CascadeType.REMOVE})
     @JoinTable(name = "users_booksFavorite",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id"))
