@@ -11,6 +11,7 @@ import RestrictedMobile from './Components/RestrictedPageResponsive/RestrictedMo
 import RestrictedNotAdmin from './Components/RestrictedPageResponsive/RestrictedNotAdmin'
 import LoginPage from './Components/LogIn/LoginPage';
 import RegisterPage from './Components/LogIn/RegisterPage'
+import ListaFavoritos from './Components/Favoritos/ListaFavoritos';
 
 
 
@@ -38,6 +39,7 @@ function App() {
           <Route path='/registrarse' Component={RegisterPage}/>
           <Route path='/perfil' Component={Perfil}/>
           <Route path='/login' Component={LoginPage}/>
+          <Route path='/favoritos' Component={ListaFavoritos}/>
         </Routes>
       </div>
       <Footer />
