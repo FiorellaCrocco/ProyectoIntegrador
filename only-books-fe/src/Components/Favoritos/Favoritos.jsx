@@ -5,6 +5,7 @@ import {faHeart as farHeart,faHeart as fasHeart,} from "@fortawesome/free-regula
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { useAccount } from "../../Context/accountContext";
 import { GlobalContext } from "../../Context/globalContext";
+
 const Favoritos = (props) => {
   const API_URL = import.meta.env.VITE_API_URL;
   const [favorito, setFavorito] = useState(props.isFavorite);
