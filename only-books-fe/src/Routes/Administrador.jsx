@@ -61,7 +61,7 @@ const Administrador = () => {
           </Button>
           <Button onClick={() => handleOpen(<ListarCategoria/>)}>
             <div className="add-category">
-              <h3>Listar Categorias {<ArrowRightOutlinedIcon fontSize="large" />}</h3>
+              <h3>Administrar Categorias {<ArrowRightOutlinedIcon fontSize="large" />}</h3>
             </div>
           </Button>
           <Button onClick={() => handleOpen(<AdministrarCaracteristicas/>)}>
