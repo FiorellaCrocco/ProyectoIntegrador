@@ -2,6 +2,7 @@ package com.proyecto.onlybooks.repository;
 
 import com.proyecto.onlybooks.entity.Book;
 import com.proyecto.onlybooks.entity.Categoria;
+import com.proyecto.onlybooks.entity.Resenia;
 import com.proyecto.onlybooks.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

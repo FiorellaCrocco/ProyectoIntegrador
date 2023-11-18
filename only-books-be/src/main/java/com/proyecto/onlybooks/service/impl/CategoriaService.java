@@ -1,8 +1,6 @@
 package com.proyecto.onlybooks.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.proyecto.onlybooks.dto.UserDTO;
 import com.proyecto.onlybooks.entity.Categoria;
 import com.proyecto.onlybooks.entity.User;
 import com.proyecto.onlybooks.exceptions.ResourceNotFoundException;

@@ -71,10 +71,8 @@ public class Book {
             inverseJoinColumns = @JoinColumn(name = "caracteristica_id"))
     private List<Caracteristica> caracteristicas;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "books_resenias",
-            joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "resenia_id"))
+    @OneToMany(fetch=FetchType.LAZY, mappedBy = "book")
+    @JsonIgnore
     private List<Resenia> resenias;
 
     // Un Book puede tener muchos BookRent, pero cada BookRent tiene un Book.

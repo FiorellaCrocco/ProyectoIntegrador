@@ -64,6 +64,11 @@ public class User implements UserDetails {
     @JsonIgnore
     private List<BookRent> bookRents;
 
+    // Un User puede tener muchos Resenias
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Resenia> resenias;
+
     // Un User tienen una Subscripion.
     @OneToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="subscription_id")

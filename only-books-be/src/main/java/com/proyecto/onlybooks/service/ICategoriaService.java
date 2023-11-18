@@ -1,6 +1,5 @@
 package com.proyecto.onlybooks.service;
 
-
 import com.proyecto.onlybooks.entity.Categoria;
 import com.proyecto.onlybooks.exceptions.ResourceNotFoundException;
 

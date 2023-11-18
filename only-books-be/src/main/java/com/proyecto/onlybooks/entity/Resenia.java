@@ -21,9 +21,15 @@ public class Resenia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long userId;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     private Date fechaResenia;
     private int puntuacion;
     private String comentario;
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
 
 }
