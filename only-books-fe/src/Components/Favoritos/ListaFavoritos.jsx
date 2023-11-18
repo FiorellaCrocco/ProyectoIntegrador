@@ -10,6 +10,7 @@ const ListaFavoritos = () => {
   const API_URL = import.meta.env.VITE_API_URL;
   const [librosFavoritos, setLibrosFavoritos] = useState([]);
 
+
   useEffect(() => {
     // Llamar a la función para obtener y establecer la lista de libros favoritos
     fetchDataMostrar();
@@ -44,21 +45,49 @@ const ListaFavoritos = () => {
       console.error("Error:", error);
     }
   };
-
+    
+  const actualizarListaFav = () => {
+    fetchDataMostrar();
+  };
+  
+  const renderList = () => {
   return (
     <div className="listado">
       <h2>Tus Libros Favoritos:</h2>
       <ul className="cardFavs">
         {librosFavoritos.map((bookId) => (
           <li key={bookId.id}>
-            <Card key={bookId.id} {...bookId} isFavorite={true} />
-  
-        
+            <Card
+              key={bookId.id}
+              {...bookId}
+              isFavorite={true}
+              actualizarListaFav={actualizarListaFav}
+            />
           </li>
-     
         ))}
       </ul>
     </div>
+  );
+  }
+  
+            useEffect(() => {
+              renderList();
+            }, [librosFavoritos]);
+  
+
+
+  return (
+    /*<div className="listado">
+      <h2>Tus Libros Favoritos:</h2>
+      <ul className="cardFavs">
+        {librosFavoritos.map((bookId) => (
+          <li key={bookId.id}>
+            <Card key={bookId.id} {...bookId} isFavorite={true} />
+          </li>
+        ))}
+      </ul>
+    </div>*/
+    <div>{renderList()}</div>
   );
 };
 
