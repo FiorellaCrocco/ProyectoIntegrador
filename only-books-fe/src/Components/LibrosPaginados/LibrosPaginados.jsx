@@ -97,7 +97,6 @@ function LibrosPaginados({ libros, isLoading, librosFiltrados, librosReservados,
     const renderCards = () => {
         
         return currentItem.map((item) => {
-            console.log(currentItem)
             if(listaFavoritos.some((favorito)=>favorito.id==item.id)){
                return <Card key={item.id} {...item} isFavorite={true} actualizarListaFav={actualizarListaFav} />
             }else{

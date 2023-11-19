@@ -27,13 +27,19 @@ function DetalleLibro({ id }) {
   };
 
   const avanzarImagen = () => {
-    setImagenActual((imagenActual + 1) % libro.imgUrl.length);
+    if(imagenActual==libro.listImgUrl.length-1){
+      setImagenActual(0)
+    }else{
+      setImagenActual((imagenActual + 1));
+    }
   };
 
   const retrocederImagen = () => {
-    setImagenActual(
-      (imagenActual - 1 + libro.imgUrl.length) % libro.imgUrl.length
-    );
+    if(imagenActual==0){
+      setImagenActual(libro.listImgUrl.length-1)
+    }else{
+      setImagenActual(imagenActual-1)
+    }
   };
 
   if (modal) {
@@ -60,13 +66,11 @@ function DetalleLibro({ id }) {
 
   const obtenerFechas = (datos) => {
     setFechas(datos);
-    console.log(datos)
   };
 
 
   const obtenerReservaLibro = (datos) =>{
     setReservaLibro(datos)
-    console.log(reservaLibro)
   }
 
   const HandleReserva=(reserva)=>{
@@ -95,7 +99,7 @@ function DetalleLibro({ id }) {
                   />
                 </div>
                 <div className={styles.galeria}>
-                  {libro.listImgUrl.slice(0, 4).map((url, index) => (
+                  {libro.listImgUrl.slice(1, 5).map((url, index) => (
                     <img
                       key={index}
                       src={url}
@@ -127,7 +131,7 @@ function DetalleLibro({ id }) {
                       </button>
                       <img
                         className={stylesM.imagenCarrusel}
-                        src={libro.imgUrl[imagenActual]}
+                        src={libro.listImgUrl[imagenActual]}
                         alt={libro.title}
                       />
 
