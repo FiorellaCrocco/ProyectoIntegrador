@@ -53,6 +53,7 @@ public class SecurityConfiguration {
 
                                 .requestMatchers("/bookRent/book/**").permitAll()
                                 .requestMatchers("/bookRent/listar").permitAll()
+                                .requestMatchers("/resenia/book/**").permitAll()
 
                                 .requestMatchers("/bookRent/eliminar/**").hasAuthority("ADMIN")
                                 .requestMatchers("/bookRent/modificar").hasAuthority("ADMIN")
