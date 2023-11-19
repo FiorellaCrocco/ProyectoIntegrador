@@ -50,6 +50,14 @@ public class ReseniaService implements IReseniaService {
         BookDTO b = iBookService.buscarPorId(bookId);
         User user = objectMapper.convertValue(u,User.class);
         Book book = objectMapper.convertValue(b, Book.class);
+
+        if(book.getCantResenias()==null){
+            book.setQualification(0d);
+            book.setCantResenias(0);
+        }
+        book.setQualification(((book.getQualification()*book.getCantResenias())+resenia.getPuntuacion())/(book.getCantResenias()+1));
+        book.setCantResenias(book.getCantResenias()+1);
+
         resenia.setBook(book);
         resenia.setUser(user);
         if(book.getResenias()==null){

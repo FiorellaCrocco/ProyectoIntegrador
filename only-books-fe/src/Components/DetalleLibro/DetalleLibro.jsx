@@ -6,11 +6,15 @@ import Swal from 'sweetalert2'
 import DateObject from "react-date-object";
 import { Helmet } from 'react-helmet';
 import { ShareSocial } from 'react-share-social'
+
+
 import { GlobalContext } from "../../Context/globalContext";
 import stylesM from "./Modal.module.css";
 import Politicas from "../Politicas/Politicas";
 import VerReservas from "./VerReservas";
 import GenerateDates from "./GenerateDates";
+import Resenia from "../Resenia/Resenia";
+import ReseniaLista from "../ReseniaLista/ReseniaLista";
 
 
 
@@ -275,6 +279,8 @@ function DetalleLibro({ id }) {
               {console.log(shareData.title)}
             </div>
             <CaracteristicaLibro id={id} />
+            <Resenia id={id}/>
+            <ReseniaLista id={id}/>
           </div>
           <div>
             <Politicas />

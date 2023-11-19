@@ -50,8 +50,8 @@
 }
 
 .mainimg {
-    /* width: 40vw; */
-    /* max-height: 100%; */
+    width: 40vw;
+    /*max-height: 100%;*/
     object-fit: cover;
     display: block;
     

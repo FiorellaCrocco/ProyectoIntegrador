@@ -45,7 +45,8 @@ public class Book {
 
     private Date publication_year;
 
-    private Integer qualification;
+    private Double qualification;
+    private Integer cantResenias;
 
     private Double price;
     private String imgUrl;
@@ -85,7 +86,7 @@ public class Book {
 
     private List<String> imagesBase64;
 
-    public Book(String title, String author, String description, String isbn, Date publication_year, Integer qualification, Double price) {
+    public Book(String title, String author, String description, String isbn, Date publication_year, Double qualification, Double price) {
         this.title = title;
         this.author = author;
         this.description = description;

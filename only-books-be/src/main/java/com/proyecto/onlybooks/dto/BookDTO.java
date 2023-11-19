@@ -21,7 +21,8 @@ public class BookDTO {
     private String description;
     private String isbn;
     private Date publication_year;
-    private Integer qualification;
+    private Double qualification;
+    private Integer cantResenias;
     private Gender gender;
     private Double price;
     private String imgUrl;

@@ -7,6 +7,7 @@ export const BookProvider = ({ children }) => {
   const [listaLibros, setListaLibros] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [listaCategorias, setListaCategorias] = useState([]);
+  const [listaResenias, setListaResenias] = useState([])
   const [listaCaracteristicas, setListaCaracteristicas] = useState([]);
   const [rentBook, setRentBook] = useState([])
   const [token, setToken] = useState(sessionStorage.getItem('token') || '');
@@ -83,6 +84,28 @@ const urlBookId= `${API_URL}book/`
       return null;
     }
   };
+  
+
+  const fetchObtenerResenias = async (bookId) => {
+    const url = `${API_URL}resenia/book/${bookId}`;
+    console.log("FETCH GET RESENIA")
+
+    const settings = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    try {
+      const response = await fetch(url, settings);
+      const data = await response.json();
+      setListaResenias(data);
+      return data
+    } catch (error) {
+      console.error("ERROR: ", error);
+    }
+  };
 
   const actualizarListaLibros = async () => {
     // Lógica para actualizar la lista después de realizar operaciones
@@ -140,7 +163,7 @@ const urlBookId= `${API_URL}book/`
 
 
   return (
-    <GlobalContext.Provider value={{ listaCategorias, listaLibros, isLoading, actualizarListaLibros, actualizarCategorias, fetchBookById, logout, fetchCaracteristicas, listaCaracteristicas, fetchFiltroRent, rentBook,fetchData }}>
+    <GlobalContext.Provider value={{ listaCategorias, listaLibros, isLoading, listaResenias, actualizarListaLibros, actualizarCategorias, fetchBookById, logout, fetchCaracteristicas, listaCaracteristicas, fetchFiltroRent, rentBook,fetchData, fetchObtenerResenias }}>
       {children}
     </GlobalContext.Provider>
   );
