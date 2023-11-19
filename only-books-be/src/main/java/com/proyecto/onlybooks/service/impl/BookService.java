@@ -55,6 +55,10 @@ public class BookService implements IBookService {
     @Override
     public Long guardar(Book book) throws ResourceNotFoundException {
         logger.info("Libros - guardar: Se va a guardar el libro");
+        if(book.getCantResenias()==null){
+            book.setCantResenias(0);
+            book.setQualification(0d);
+        }
         Long id = iBookRepository.save(book).getId();
         /*List<Categoria> lista = book.getCategorias();
         for (Categoria l : lista){

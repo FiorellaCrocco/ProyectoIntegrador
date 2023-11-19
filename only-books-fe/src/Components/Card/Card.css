@@ -22,7 +22,15 @@
     /* height: 200px; */
     text-align: center;
 }
-
+.card-info{
+    font-size: 15px;
+    color: rgb(70, 70, 70);
+    font-weight: 550;
+    margin-bottom: 10px;
+}
+.card-star{
+    color: rgb(251, 205, 56);
+}
 .card .card-img img {
     height: 200px;
     margin: 0 15px 0;
