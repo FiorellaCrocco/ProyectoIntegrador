@@ -11,6 +11,8 @@ import stylesM from "./Modal.module.css";
 import Politicas from "../Politicas/Politicas";
 import VerReservas from "./VerReservas";
 import GenerateDates from "./GenerateDates";
+import Resenia from "../Resenia/Resenia";
+import ReseniaLista from "../ReseniaLista/ReseniaLista";
 
 function DetalleLibro({ id }) {
   const [showPopup, setShowPopup] = useState(false);
@@ -199,6 +201,8 @@ function DetalleLibro({ id }) {
               </button>
             </div>
             <CaracteristicaLibro id={id} />
+            <Resenia id={id}/>
+            <ReseniaLista id={id}/>
           </div>
           <div>
             <Politicas />
