@@ -16,45 +16,33 @@ import GenerateDates from "./GenerateDates";
 import Resenia from "../Resenia/Resenia";
 import ReseniaLista from "../ReseniaLista/ReseniaLista";
 
-
-
-
-
-
 function DetalleLibro({ id }) {
-
-
   const updateOpenGraphMetaTags = (libroData, id) => {
     const head = document.head;
-  
+
     const existingMetaTags = head.querySelectorAll("[property^='og:']");
     existingMetaTags.forEach((tag) => head.removeChild(tag));
-  
+
     const ogTitle = document.createElement("meta");
     ogTitle.setAttribute("property", "og:title");
     ogTitle.setAttribute("content", libroData.title);
-    console.log(ogTitle);
     head.appendChild(ogTitle);
-  
+
     const ogDescription = document.createElement("meta");
     ogDescription.setAttribute("property", "og:description");
     ogDescription.setAttribute("content", libroData.description);
-    console.log(ogDescription)
     head.appendChild(ogDescription);
-  
+
     const ogImage = document.createElement("meta");
     ogImage.setAttribute("property", "og:image");
     ogImage.setAttribute("content", libroData.listImgUrl[0]);
     head.appendChild(ogImage);
-  
+
     const ogUrl = document.createElement("meta");
     ogUrl.setAttribute("property", "og:url");
     ogUrl.setAttribute("content", `https://onlybooks.isanerd.club/detail/${id}`);
-    console.log(id)
-    console.log(libroData.id)
     head.appendChild(ogUrl);
   };
-
 
   const [showPopup, setShowPopup] = useState(false);
   const [modal, setModal] = useState(false);
@@ -70,26 +58,24 @@ function DetalleLibro({ id }) {
     link: `https://onlybooks.isanerd.club/detail/${id}`,
   });
 
-
-
   const toggleModal = () => {
     setModal(!modal);
     setShowPopup(!showPopup);
   };
 
   const avanzarImagen = () => {
-    if(imagenActual==libro.listImgUrl.length-1){
-      setImagenActual(0)
-    }else{
-      setImagenActual((imagenActual + 1));
+    if(imagenActual === libro.listImgUrl.length - 1){
+      setImagenActual(0);
+    } else {
+      setImagenActual(imagenActual + 1);
     }
   };
 
   const retrocederImagen = () => {
-    if(imagenActual==0){
-      setImagenActual(libro.listImgUrl.length-1)
-    }else{
-      setImagenActual(imagenActual-1)
+    if(imagenActual === 0){
+      setImagenActual(libro.listImgUrl.length - 1);
+    } else {
+      setImagenActual(imagenActual - 1);
     }
   };
 
@@ -109,6 +95,7 @@ function DetalleLibro({ id }) {
         imageUrl: libroData.listImgUrl[0],
         link: `https://onlybooks.isanerd.club/detail/${id}`,
       });
+      // Mover la función aquí para asegurarse de que el estado se haya actualizado
       updateOpenGraphMetaTags(libroData, id);
     };
     getLibro();
@@ -119,19 +106,16 @@ function DetalleLibro({ id }) {
   const [endDate, setEndDate] = useState("")
   const [startDate, setStartDate] = useState("")
 
-
-
   const obtenerFechas = (datos) => {
     setFechas(datos);
   };
-
 
   const obtenerReservaLibro = (datos) => {
     setReservaLibro(datos)
   }
 
   const HandleReserva = (reserva) => {
-    if (reserva.length != 0) {
+    if (reserva.length !== 0) {
       setEndDate(reserva[0].returnDate)
       setStartDate(reserva[0].startDate)
     }
@@ -144,15 +128,11 @@ function DetalleLibro({ id }) {
   return (
     <div>
       <Helmet>
-        {/* <meta property="og:title" content={shareData.title} /> */}
         <meta property="og:title" content={shareData.title} />
-        {console.log(shareData.title)}
         <meta property="og:description" content={shareData.description} />
-        {/* <meta property="og:image" content={shareData.imageUrl} /> */}
+        <meta property="og:image" content={shareData.imageUrl} />
         <meta property="og:url" content={shareData.link} />
       </Helmet>
-
-      <meta property="og:title" content="BOLUDECES"/>
 
       {libro != null ? (
         <>
@@ -278,9 +258,7 @@ function DetalleLibro({ id }) {
                 description={shareData.description}
                 image={shareData.imageUrl}
                 title={shareData.title}
-                
               />
-              {console.log(shareData.title)}
             </div>
             <CaracteristicaLibro id={id} />
             <Resenia id={id}/>
@@ -296,8 +274,8 @@ function DetalleLibro({ id }) {
     </div>
   );
 }
-export default DetalleLibro;
 
+export default DetalleLibro;
 
 const style = {
   root: {
@@ -306,7 +284,6 @@ const style = {
     border: 0,
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     color: 'white',
-
   },
   copyContainer: {
     border: '1px solid blue',
