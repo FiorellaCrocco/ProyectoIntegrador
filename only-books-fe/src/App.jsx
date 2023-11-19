@@ -16,6 +16,7 @@ import ListaFavoritos from './Components/Favoritos/ListaFavoritos';
 
 
 function App() {
+  const token = sessionStorage.getItem("token");
   const isMobile = useMediaQuery({ query: '(max-width: 425px)' });
   
   const userDataString = sessionStorage.getItem('userData');
@@ -39,7 +40,7 @@ function App() {
           <Route path='/registrarse' Component={RegisterPage}/>
           <Route path='/perfil' Component={Perfil}/>
           <Route path='/login' Component={LoginPage}/>
-          <Route path='/favoritos' Component={ListaFavoritos}/>
+          <Route path= '/favoritos' Component={token ? ListaFavoritos : LoginPage}/>
         </Routes>
       </div>
       <Footer />
