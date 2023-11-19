@@ -50,10 +50,10 @@
 }
 
 .mainimg {
-    width: 40vw;
-    /*max-height: 100%;*/
-    object-fit: cover;
-    display: block;
+    width: 25vw;
+    
+    /* object-fit: cover; */
+    /* display: block; */
     
 
 }
@@ -79,7 +79,7 @@
     align-content: center;
     justify-items: center;
     padding: 1rem;
-    width: 45vw;
+    width: 35vw;
 }
 
 .galeria img {
