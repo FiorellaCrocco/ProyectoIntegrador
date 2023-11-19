@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { GlobalContext } from "../../Context/globalContext";
 
 function ReseniaLista({ id }) {
-    console.log("Reenderizando ReseniaLista")
+    // console.log("Reenderizando ReseniaLista")
   const bookId = id;
 
   const { fetchObtenerResenias, listaResenias } = useContext(GlobalContext);

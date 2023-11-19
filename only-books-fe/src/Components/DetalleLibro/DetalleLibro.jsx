@@ -6,8 +6,9 @@ import Swal from 'sweetalert2'
 import DateObject from "react-date-object";
 import { Helmet } from 'react-helmet';
 import { ShareSocial } from 'react-share-social'
-
-
+import { FaShare } from 'react-icons/fa';
+import SharePopup from "./SharePopup";
+import CompartirRedes from "../Share/CompartirRedes";
 import { GlobalContext } from "../../Context/globalContext";
 import stylesM from "./Modal.module.css";
 import Politicas from "../Politicas/Politicas";
@@ -15,36 +16,15 @@ import VerReservas from "./VerReservas";
 import GenerateDates from "./GenerateDates";
 import Resenia from "../Resenia/Resenia";
 import ReseniaLista from "../ReseniaLista/ReseniaLista";
+import Modal from "./ModalShare";
+
 
 function DetalleLibro({ id }) {
-  const updateOpenGraphMetaTags = (libroData, id) => {
-    const head = document.head;
 
-    const existingMetaTags = head.querySelectorAll("[property^='og:']");
-    existingMetaTags.forEach((tag) => head.removeChild(tag));
-
-    const ogTitle = document.createElement("meta");
-    ogTitle.setAttribute("property", "og:title");
-    ogTitle.setAttribute("content", libroData.title);
-    head.appendChild(ogTitle);
-
-    const ogDescription = document.createElement("meta");
-    ogDescription.setAttribute("property", "og:description");
-    ogDescription.setAttribute("content", libroData.description);
-    head.appendChild(ogDescription);
-
-    const ogImage = document.createElement("meta");
-    ogImage.setAttribute("property", "og:image");
-    ogImage.setAttribute("content", libroData.listImgUrl[0]);
-    head.appendChild(ogImage);
-
-    const ogUrl = document.createElement("meta");
-    ogUrl.setAttribute("property", "og:url");
-    ogUrl.setAttribute("content", `https://onlybooks.isanerd.club/detail/${id}`);
-    head.appendChild(ogUrl);
-  };
-
+  const [showGalleryModal, setShowGalleryModal] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const [showPopupShare, setShowPopupShare] = useState(false);
   const [modal, setModal] = useState(false);
   const [imagenActual, setImagenActual] = useState(0);
   const { fetchBookById } = useContext(GlobalContext);
@@ -63,8 +43,19 @@ function DetalleLibro({ id }) {
     setShowPopup(!showPopup);
   };
 
+  const toggleGalleryModal = () => {
+    setShowGalleryModal(!showGalleryModal);
+    // setModal(!modal);
+    setShowPopup(!showPopup);
+  };
+
+  const toggleShareModal = () => {
+    setShowShareModal(!showShareModal);
+    setShowPopupShare(true);
+  };
+
   const avanzarImagen = () => {
-    if(imagenActual === libro.listImgUrl.length - 1){
+    if (imagenActual === libro.listImgUrl.length - 1) {
       setImagenActual(0);
     } else {
       setImagenActual(imagenActual + 1);
@@ -72,7 +63,7 @@ function DetalleLibro({ id }) {
   };
 
   const retrocederImagen = () => {
-    if(imagenActual === 0){
+    if (imagenActual === 0) {
       setImagenActual(libro.listImgUrl.length - 1);
     } else {
       setImagenActual(imagenActual - 1);
@@ -95,8 +86,6 @@ function DetalleLibro({ id }) {
         imageUrl: libroData.listImgUrl[0],
         link: `https://onlybooks.isanerd.club/detail/${id}`,
       });
-      // Mover la función aquí para asegurarse de que el estado se haya actualizado
-      updateOpenGraphMetaTags(libroData, id);
     };
     getLibro();
   }, [id, fetchBookById]);
@@ -125,15 +114,15 @@ function DetalleLibro({ id }) {
     HandleReserva(reservaLibro)
   }, [reservaLibro])
 
+
+
+  const handleShareClick = () => {
+    setShowPopupShare(true);
+    setModal(true);
+  };
+
   return (
     <div>
-      <Helmet>
-        <meta property="og:title" content={shareData.title} />
-        <meta property="og:description" content={shareData.description} />
-        <meta property="og:image" content={shareData.imageUrl} />
-        <meta property="og:url" content={shareData.link} />
-      </Helmet>
-
       {libro != null ? (
         <>
           <div className={styles.detailcontainer}>
@@ -158,11 +147,11 @@ function DetalleLibro({ id }) {
                 </div>
               </div>
 
-              <button className={styles.btnVer} onClick={toggleModal}>
+              <button className={styles.btnVer} onClick={toggleGalleryModal}>
                 Ver más
               </button>
 
-              {modal && (
+              {showGalleryModal && (
                 <div className={stylesM.modal}>
                   <div onClick={toggleModal} className={stylesM.overlay}></div>
                   <div className={stylesM.modalcontent}>
@@ -192,7 +181,7 @@ function DetalleLibro({ id }) {
                     </div>
                     <button
                       className={stylesM.closemodal}
-                      onClick={toggleModal}
+                      onClick={toggleGalleryModal}
                     >
                       Cerrar
                     </button>
@@ -250,19 +239,27 @@ function DetalleLibro({ id }) {
               >
                 Volver
               </button>
-              <ShareSocial
-                url={shareData.link}
-                socialTypes={['facebook', 'twitter', 'reddit', 'linkedin']}
-                onSocialButtonClicked={data => console.log(data)}
-                style={style}
-                description={shareData.description}
-                image={shareData.imageUrl}
-                title={shareData.title}
-              />
+              {/* <CompartirRedes shareData={shareData} /> */}
+              <button className={styles.customButton} onClick={toggleShareModal}>
+                <FaShare className={styles.shareIcon} />
+                <span style={{ fontSize: '15px', fontWeight: 'bold' ,marginLeft: '5px' }}>Compartir</span>
+                
+              </button>
+
+
+              {showShareModal && (
+                <Modal onClose={() => setShowShareModal(false)}>
+                  {showPopupShare && (
+                    <SharePopup shareData={shareData} onClose={() => setShowPopupShare(false)} />
+                  )}
+                </Modal>
+              )}
+              {console.log('shareData DetalleLibro: ' + shareData.title)}
+              {console.log('shareData DetalleLibro: ' + shareData.description)}
             </div>
             <CaracteristicaLibro id={id} />
-            <Resenia id={id}/>
-            <ReseniaLista id={id}/>
+            <Resenia id={id} />
+            <ReseniaLista id={id} />
           </div>
           <div>
             <Politicas />

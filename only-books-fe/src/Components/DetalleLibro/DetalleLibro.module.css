@@ -15,9 +15,9 @@
     align-items: center;
     background-color: #75bed6;
     border-radius: 10px;
-    background-image: url('../../img/detail.jpg'); 
-    background-size: cover; 
-    background-position: center; 
+    background-image: url('../../img/detail.jpg');
+    background-size: cover;
+    background-position: center;
 }
 
 .btnVer {
@@ -51,10 +51,10 @@
 
 .mainimg {
     width: 25vw;
-    
+
     /* object-fit: cover; */
     /* display: block; */
-    
+
 
 }
 
@@ -91,8 +91,10 @@
     justify-content: space-between;
     align-items: center;
     margin: 20px 0;
-    background-color: #75bed6; /* Agregar un fondo para destacar la sección */
-    padding: 20px; /* Añadir espacio interno para mejorar la separación */
+    background-color: #75bed6;
+    /* Agregar un fondo para destacar la sección */
+    padding: 20px;
+    /* Añadir espacio interno para mejorar la separación */
     border-radius: 10px;
 }
 
@@ -102,7 +104,7 @@
     align-items: flex-start;
     width: 70%;
     padding-left: 5rem;
-    
+
 }
 
 .btnAtras {
@@ -122,13 +124,14 @@
 }
 
 /*alinear boton cerrar*/
-.popup{
+.popup {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-.closeBtn{
+
+.closeBtn {
 
     background-color: #F89344;
     color: white;
@@ -139,3 +142,26 @@
     border-radius: 10%;
     margin: 20px;
 }
+
+
+.customButton {
+    background-color: #539dc2;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.customButton:hover {
+    background-color: #2a5c7a;
+}
+
+.shareIcon {
+    font-size: 22px;
+    margin-right: 5px;
+}
+
