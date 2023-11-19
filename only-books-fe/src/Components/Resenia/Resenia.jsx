@@ -2,14 +2,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-regular-svg-icons";
 import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
 import style from "./Resenia.module.css";
-import { useState } from "react";
+import { GlobalContext } from "../../Context/globalContext";
+import { useState, useContext } from "react";
 
 function Resenia({ id }) {
+
   const API_URL= import.meta.env.VITE_API_URL
   const token = sessionStorage.getItem("token");
   const user = JSON.parse(sessionStorage.getItem("userData"));
+
   const userId = user ? user.id : null;
   const bookId = id;
+
+  const { fetchObtenerResenias } = useContext(GlobalContext);
+
   const [estrella, setEstrella] = useState(0);
   const estrellas = [1, 2, 3, 4, 5];
 
@@ -77,8 +83,14 @@ function Resenia({ id }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    fetchEnviarResenia()
-
+    setFormData({
+        ...formData,
+        comentario:"",
+        puntuacion:0,
+    })
+    setEstrella(0)
+    await fetchEnviarResenia()
+    await fetchObtenerResenias(bookId)
     console.log(formData);
   };
 

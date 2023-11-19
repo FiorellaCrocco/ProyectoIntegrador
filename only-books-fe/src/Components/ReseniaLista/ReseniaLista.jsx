@@ -1,39 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { GlobalContext } from "../../Context/globalContext";
 
 function ReseniaLista({ id }) {
-  const API_URL = import.meta.env.VITE_API_URL;
-  const token = sessionStorage.getItem("token");
+    console.log("Reenderizando ReseniaLista")
   const bookId = id;
 
-  const [listaResenias, setListaResenias] = useState([]);
-
-  const fetchObtenerResenias = async () => {
-    const url = `${API_URL}resenia/book/${bookId}`;
-    console.log("FETCH GET RESENIA")
-
-    const settings = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    try {
-      const response = await fetch(url, settings);
-      const data = await response.json();
-      
-      setListaResenias(data);
-    } catch (error) {
-      console.error("ERROR: ", error);
-    }
-  };
+  const { fetchObtenerResenias, listaResenias } = useContext(GlobalContext);
 
   useEffect(() => {
-    fetchObtenerResenias();
-  }, []);
+    fetchObtenerResenias(bookId)
+  }, [bookId]);
 
-  const renderResenias=(listaResenias)=>{
-    return listaResenias.map(resenia=>(
+  const renderResenias=(listaMap)=>{
+    return listaMap.map(resenia=>(
             <li key={resenia.id}>
                 <h3>{resenia.user.name} {resenia.user.lastname}</h3>
                 <span>{resenia.fechaResenia.split('T')[0]}</span>
@@ -46,7 +25,7 @@ function ReseniaLista({ id }) {
   return (
     <section>
       <h2>Lista de reseñas:</h2>
-      {renderResenias(listaResenias)}
+      {listaResenias.length>0?renderResenias(listaResenias):<p>No hay reseñas disponibles</p>}
     </section>
   );
 }
