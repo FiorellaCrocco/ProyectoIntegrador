@@ -40,7 +40,7 @@ function App() {
           <Route path='/registrarse' Component={RegisterPage}/>
           <Route path='/perfil' Component={Perfil}/>
           <Route path='/login' Component={LoginPage}/>
-          <Route path= '/favoritos' Component={token ? ListaFavoritos : LoginPage}/>
+          <Route path= '/favoritos' Component={ListaFavoritos}/>
         </Routes>
       </div>
       <Footer />
