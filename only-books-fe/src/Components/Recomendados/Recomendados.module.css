@@ -80,6 +80,10 @@ p {
     .listaPaginada {
         grid-template-columns: repeat(2, minmax(100px, 1fr));
     }
+
+    .book img {
+        width: 200px;
+    }
 }
 
 /* Media query for screens smaller than 480px */

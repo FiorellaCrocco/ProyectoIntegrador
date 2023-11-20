@@ -6,7 +6,7 @@ import './LibrosPaginados.css';
 function LibrosPaginados({ libros, isLoading, librosFiltrados, librosReservados, totalLibros }) {
     const librosPorPagina = 10;
     const [pagina, setPagina] = useState(1);
-    const [listaFavoritos, setListaFavoritos]=useState([])
+    const [listaFavoritos, setListaFavoritos] = useState([])
 
     const token = sessionStorage.getItem("token");
     const user = JSON.parse(sessionStorage.getItem("userData"));
@@ -16,45 +16,45 @@ function LibrosPaginados({ libros, isLoading, librosFiltrados, librosReservados,
 
     const fetchDataMostrar = async () => {
         try {
-          const url = `${API_URL}user/mostrarFav/${userId}`;
-          const set = {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          };
-          const response = await fetch(url, set);
-          const data = await response.json(); // Parsear el cuerpo de la respuesta
-      
-          if (response.ok) {
-            //console.log("Lista de libros favoritos:", data);
-            // Aquí puedes realizar la lógica basada en la lista de libros favoritos
-            // Por ejemplo, puedes establecer el estado basándote en si la lista no está vacía
-            
-            setListaFavoritos(data);
-            console.log(data)
-          } else {
-            throw new Error("Error al realizar la operación");
-          }
+            const url = `${API_URL}user/mostrarFav/${userId}`;
+            const set = {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            };
+            const response = await fetch(url, set);
+            const data = await response.json(); // Parsear el cuerpo de la respuesta
+
+            if (response.ok) {
+                //console.log("Lista de libros favoritos:", data);
+                // Aquí puedes realizar la lógica basada en la lista de libros favoritos
+                // Por ejemplo, puedes establecer el estado basándote en si la lista no está vacía
+
+                setListaFavoritos(data);
+                console.log(data)
+            } else {
+                throw new Error("Error al realizar la operación");
+            }
         } catch (error) {
-          console.error("Error:", error);
+            console.error("Error:", error);
         }
-      };
+    };
 
-      const actualizarListaFav=()=>{
+    const actualizarListaFav = () => {
         fetchDataMostrar()
-      }
+    }
 
-      useEffect(()=>{
-        if(userId){
+    useEffect(() => {
+        if (userId) {
             fetchDataMostrar()
         }
-      },[userId])
+    }, [userId])
 
-      useEffect(()=>{
+    useEffect(() => {
         renderCards();
-      },[listaFavoritos])
+    }, [listaFavoritos])
 
 
 
@@ -66,7 +66,7 @@ function LibrosPaginados({ libros, isLoading, librosFiltrados, librosReservados,
     const endIndex = startIndex + librosPorPagina;
     const librosSinReserva = libros.filter(libro => !librosReservados.includes(libro.id))
 
-    let librosBusqueda=librosSinReserva;
+    let librosBusqueda = librosSinReserva;
 
     if (librosFiltrados.length > 0) {
         librosBusqueda = librosSinReserva.filter(libro => librosFiltrados.some(filtrado => filtrado.id == libro.id))
@@ -95,14 +95,14 @@ function LibrosPaginados({ libros, isLoading, librosFiltrados, librosReservados,
     };
 
     const renderCards = () => {
-        
+
         return currentItem.map((item) => {
-            if(listaFavoritos.some((favorito)=>favorito.id==item.id)){
-               return <Card key={item.id} {...item} isFavorite={true} actualizarListaFav={actualizarListaFav} />
-            }else{
-               return <Card key={item.id} {...item} isFavorite={false} actualizarListaFav={actualizarListaFav} />
+            if (listaFavoritos.some((favorito) => favorito.id == item.id)) {
+                return <Card key={item.id} {...item} isFavorite={true} actualizarListaFav={actualizarListaFav} />
+            } else {
+                return <Card key={item.id} {...item} isFavorite={false} actualizarListaFav={actualizarListaFav} />
             }
-        }   
+        }
         );
     };
 

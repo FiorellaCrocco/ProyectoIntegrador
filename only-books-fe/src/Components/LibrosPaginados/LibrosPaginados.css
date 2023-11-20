@@ -63,10 +63,41 @@
     color: black;
 }
 
-@media (max-width: 614px) {
+
+@media (max-width: 1350px) {
+    
     .listaPaginada {
         display: grid;
-        grid-template-columns: repeat(2, minmax(100px, 1fr));
+        grid-template-columns: repeat(4, minmax(80px, 1fr));
+        gap: 10px;
+    }
+}
+
+@media (max-width: 1050px) {
+    
+    .listaPaginada {
+        grid-template-columns: repeat(3, minmax(80px, 1fr));
+        
+    }
+}
+
+@media (max-width: 800px) {
+    
+    .listaPaginada {
+        grid-template-columns: repeat(2, minmax(80px, 1fr));
+        
+    }
+}
+
+
+@media (max-width: 614px) {
+
+    
+
+    .listaPaginada {
+        display: grid;
+        grid-template-columns: repeat(1, minmax(60px, 1fr));
+        max-width: 50%;
         gap: 10px;
     }
 

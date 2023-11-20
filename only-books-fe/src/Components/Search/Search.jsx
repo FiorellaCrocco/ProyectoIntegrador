@@ -78,7 +78,7 @@ const Search = () => {
           alt={category.titulo}
           onClick={() => handleCategoryChange(category.titulo)}
         />
-        <label value={category.titulo}>{category.titulo}</label>
+        <label className='asdasd' value={category.titulo}>{category.titulo}</label>
       </div>
     ));
   };
@@ -134,7 +134,7 @@ const Search = () => {
       <Buscador obtenerDatos={obtenerDatos} obtenerDatosFilt={obtenerDatosFilt} listaLibros={listaLibros}></Buscador>
       <div className="search-container">
         <div className="input-select">
-          <div>
+          <div className="columnCategorias">
             <div>
               <h2 className="category-title">Categorias</h2>
             </div>
