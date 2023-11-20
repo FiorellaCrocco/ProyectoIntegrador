@@ -6,8 +6,7 @@ import { GlobalContext } from "../../Context/globalContext";
 import { useState, useContext } from "react";
 
 function Resenia({ id }) {
-
-  const API_URL= import.meta.env.VITE_API_URL
+  const API_URL = import.meta.env.VITE_API_URL;
   const token = sessionStorage.getItem("token");
   const user = JSON.parse(sessionStorage.getItem("userData"));
 
@@ -28,7 +27,7 @@ function Resenia({ id }) {
     },
     comentario: "",
     puntuacion: 0,
-    fechaResenia: ""
+    fechaResenia: "",
   });
   const handleEstrella = (star) => {
     setEstrella(star);
@@ -51,55 +50,94 @@ function Resenia({ id }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    const fecha = new Date(Date.now())
+    const fecha = new Date(Date.now());
     const fechaFormat = fecha.toISOString();
     setFormData({
       ...formData,
       [name]: value,
-      fechaResenia:fechaFormat
-
+      fechaResenia: fechaFormat,
     });
   };
 
-  const fetchEnviarResenia= async()=>{
-    const url = `${API_URL}resenia/agregar`;
-    const settings ={
-        method: "POST",
-        headers:{
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify(formData)
-    }
+  const fetchEnviarResenia = async () => {
 
-    try{
-        const response = await fetch(url, settings)
-        const data = await response.text();
-        console.log("Se creo la reseña con id: "+ data)
-    } catch(error){
-        console.error("ERROR: ",error)
+    const url = `${API_URL}resenia/agregar`;
+    const settings = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(formData),
+    };
+
+    try {
+      const response = await fetch(url, settings);
+      const data = await response.text();
+      console.log("Se creo la reseña con id: " + data);
+    } catch (error) {
+      console.error("ERROR: ", error);
     }
-  }
+  };
+
+  const verificarUsuario = async() => {
+    const url = `${API_URL}bookRent/user/${userId}`;
+    const settings = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    try {
+      const response = await fetch(url, settings);
+      console.log("Obteniendo respuesta")
+      const listaReservas = await response.json();
+      console.log("VerificarUsuario")
+      console.log(listaReservas)
+
+      const lista = listaReservas.map((reserva)=>{
+        if(reserva.book.id == bookId)
+        return true
+      })
+      const tieneReserva = lista.some(booleanos => booleanos ===true)
+      console.log("Dentro verificar Usuario")
+      console.log(tieneReserva)
+      return tieneReserva
+
+    }catch(error){
+      console.error("ERROR: ", error)
+    }
+    
+
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setFormData({
-        ...formData,
-        comentario:"",
-        puntuacion:0,
-    })
-    setEstrella(0)
-    await fetchEnviarResenia()
-    await fetchObtenerResenias(bookId)
+      ...formData,
+      comentario: "",
+      puntuacion: 0,
+    });
+    setEstrella(0);
+
+    const resultado = await verificarUsuario();
+    console.log("HANDLE SUBMIT")
+    console.log(resultado)
+    if(resultado){
+      await fetchEnviarResenia();
+      await fetchObtenerResenias(bookId);
+    }else{
+      console.log("No puedes hacer una resenia para este libro")
+    }
     console.log(formData);
   };
 
   return (
     <section>
       <h2>Reseña del libro</h2>
-      <form
-        onSubmit={handleSubmit}
-      >
+      <form onSubmit={handleSubmit}>
         <label htmlFor="comentario">Comentario:</label>
         <textarea
           id="comentario"
