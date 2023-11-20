@@ -79,6 +79,7 @@ export const LoginPage = () => {
 							logged: true
 						},
 					});
+					window.location.reload()
 				}
 			} else if (response.status === 403) {
 				setLoginError("Credenciales incorrectas. Inténtelo de nuevo.");
