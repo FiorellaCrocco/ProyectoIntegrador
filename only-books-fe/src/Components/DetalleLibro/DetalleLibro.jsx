@@ -34,7 +34,7 @@ function DetalleLibro({ id }) {
   const [shareData, setShareData] = useState({
     title: "",
     description: "",
-    imageUrl: "",
+    image: "",
     link: `https://onlybooks.isanerd.club/detail/${id}`,
   });
 
@@ -83,7 +83,7 @@ function DetalleLibro({ id }) {
       setShareData({
         title: libroData.title,
         description: libroData.description,
-        imageUrl: libroData.listImgUrl[0],
+        image: libroData.listImgUrl[0],
         link: `https://onlybooks.isanerd.club/detail/${id}`,
       });
     };

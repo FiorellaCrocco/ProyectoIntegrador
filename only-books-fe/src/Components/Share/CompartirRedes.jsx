@@ -5,11 +5,43 @@ import { ShareSocial } from 'react-share-social';
 const CompartirRedes = ({ shareData }) => {
     const style = {
         root: {
+            display:'flex',
+            flexDirection:'column',
+            alingItem:'center',
             background: 'linear-gradient(45deg, #539dc2 30%, #2a5c7a 90%)',
             borderRadius: 3,
             border: 0,
-            boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+            boxShadow: '0 3px 5px 2px rgba(0, 0, 0, .3)',
             color: '#182b39',
+            maxWidth:'500px',
+            textAlign: 'center', 
+            padding:'10px 10px 10px',
+        },
+        copyContainer: {
+            border: '1px solid blue',
+            background: 'rgb(0,0,0,0.7)',
+            display:'flex',
+            alingItem:'center'
+
+        },
+        title: {
+            color: 'aquamarine',
+            fontStyle: 'italic',
+        },
+    };
+
+    const styleShare={
+        root: {
+            background: 'transparent',
+            borderRadius: 3,
+            border: 0,
+            boxShadow: '0 3px 5px 2px rgba(0, 0, 0, .3)',
+            color: '#182b39',
+            textAlign: 'center', 
+            paddingTop:'0px',
+            alingItem:'center',
+            maxWidth:'500px',
+            
         },
         copyContainer: {
             border: '1px solid blue',
@@ -19,7 +51,15 @@ const CompartirRedes = ({ shareData }) => {
             color: 'aquamarine',
             fontStyle: 'italic',
         },
-    };
+
+    }
+    const styleIMG = {
+        height: 'auto',
+        width:'150px'
+    }
+    const styleDesc = {
+        width:'auto'
+    }
 
 
 
@@ -62,15 +102,18 @@ const CompartirRedes = ({ shareData }) => {
                 <meta property="og:image" content={shareData.imageUrl} />
                 <meta property="og:url" content={shareData.link} />
             </Helmet>
+            <div>
+            <h3>{shareData.title}</h3>
+            <img style={styleIMG} src={shareData.image} alt="" />
+            <h4 style={styleDesc}>{shareData.description}</h4>
+            </div>
 
             <ShareSocial
                 url={shareData.link}
                 socialTypes={['facebook', 'linkedin', 'reddit', 'twitter', 'whatsapp', 'telegram']}
                 onSocialButtonClicked={data => console.log(data)}
                 description={shareData.description}
-                image={shareData.imageUrl}
-                title={shareData.title}
-                style={style}
+                style={styleShare}
             />
         </div>
     );
