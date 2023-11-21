@@ -30,7 +30,12 @@ function DetalleLibro({ id }) {
   const { fetchBookById } = useContext(GlobalContext);
   const [libro, setLibro] = useState(null);
   const [values, setValues] = useState([]);
-
+  const [fechasReservadas, setFechas] = useState([]);
+  const [reservaLibro, setReservaLibro] = useState([])
+  const [endDate, setEndDate] = useState("")
+  const [startDate, setStartDate] = useState("")
+  const [noDisponible, setNoDisponible] = useState(false)
+  
   const [shareData, setShareData] = useState({
     title: "",
     description: "",
@@ -45,7 +50,6 @@ function DetalleLibro({ id }) {
 
   const toggleGalleryModal = () => {
     setShowGalleryModal(!showGalleryModal);
-    // setModal(!modal);
     setShowPopup(!showPopup);
   };
 
@@ -55,26 +59,12 @@ function DetalleLibro({ id }) {
   };
 
   const avanzarImagen = () => {
-    if (imagenActual === libro.listImgUrl.length - 1) {
-      setImagenActual(0);
-    } else {
-      setImagenActual(imagenActual + 1);
-    }
+    setImagenActual((imagenActual + 1) % libro.listImgUrl.length);
   };
 
   const retrocederImagen = () => {
-    if (imagenActual === 0) {
-      setImagenActual(libro.listImgUrl.length - 1);
-    } else {
-      setImagenActual(imagenActual - 1);
-    }
+    setImagenActual((imagenActual - 1 + libro.listImgUrl.length) % libro.listImgUrl.length);
   };
-
-  if (modal) {
-    document.body.classList.add("active-modal");
-  } else {
-    document.body.classList.remove("active-modal");
-  }
 
   useEffect(() => {
     const getLibro = async () => {
@@ -90,24 +80,19 @@ function DetalleLibro({ id }) {
     getLibro();
   }, [id, fetchBookById]);
 
-  const [fechasReservadas, setFechas] = useState([]);
-  const [reservaLibro, setReservaLibro] = useState([])
-  const [endDate, setEndDate] = useState("")
-  const [startDate, setStartDate] = useState("")
-  const [noDisponible, setNoDisponible] = useState(false)
 
   const obtenerFechas = (datos) => {
     setFechas(datos);
   };
 
   const obtenerReservaLibro = (datos) => {
-    setReservaLibro(datos)
-  }
+    setReservaLibro(datos);
+  };
 
   const HandleReserva = (reserva) => {
     if (reserva.length !== 0) {
-      setEndDate(reserva[0].returnDate)
-      setStartDate(reserva[0].startDate)
+      setEndDate(reserva[0].returnDate);
+      setStartDate(reserva[0].startDate);
     }
   }
 
@@ -143,6 +128,7 @@ if(noDisponible){
     }
     return false
   }
+
 
   const handleShareClick = () => {
     setShowPopupShare(true);

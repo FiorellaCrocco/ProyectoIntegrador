@@ -3,6 +3,33 @@ import { Helmet } from 'react-helmet';
 import { ShareSocial } from 'react-share-social';
 
 const CompartirRedes = ({ shareData }) => {
+    useEffect(() => {
+      const head = document.head;
+  
+      const existingMetaTags = head.querySelectorAll("[property^='og:']");
+      existingMetaTags.forEach((tag) => head.removeChild(tag));
+  
+      const ogTitle = document.createElement("meta");
+      ogTitle.setAttribute("property", "og:title");
+      ogTitle.setAttribute("content", shareData.title);
+      head.appendChild(ogTitle);
+  
+      const ogDescription = document.createElement("meta");
+      ogDescription.setAttribute("property", "og:description");
+      ogDescription.setAttribute("content", shareData.description);
+      head.appendChild(ogDescription);
+  
+      const ogImage = document.createElement("meta");
+      ogImage.setAttribute("property", "og:image");
+      ogImage.setAttribute("content", shareData.image);
+      head.appendChild(ogImage);
+  
+      const ogUrl = document.createElement("meta");
+      ogUrl.setAttribute("property", "og:url");
+      ogUrl.setAttribute("content", shareData.link);
+      head.appendChild(ogUrl);
+    }, [shareData]);
+
     const style = {
         root: {
             display:'flex',
@@ -62,33 +89,7 @@ const CompartirRedes = ({ shareData }) => {
     }
 
 
-
-    useEffect(() => {
-        const head = document.head;
-
-        const existingMetaTags = head.querySelectorAll("[property^='og:']");
-        existingMetaTags.forEach((tag) => head.removeChild(tag));
-
-        const ogTitle = document.createElement("meta");
-        ogTitle.setAttribute("property", "og:title");
-        ogTitle.setAttribute("content", shareData.title);
-        head.appendChild(ogTitle);
-
-        const ogDescription = document.createElement("meta");
-        ogDescription.setAttribute("property", "og:description");
-        ogDescription.setAttribute("content", shareData.description);
-        head.appendChild(ogDescription);
-
-        const ogImage = document.createElement("meta");
-        ogImage.setAttribute("property", "og:image");
-        ogImage.setAttribute("content", shareData.imageUrl);
-        head.appendChild(ogImage);
-
-        const ogUrl = document.createElement("meta");
-        ogUrl.setAttribute("property", "og:url");
-        ogUrl.setAttribute("content", shareData.link);
-        head.appendChild(ogUrl);
-    }, []);
+    
 
     return (
         <div style={style.root}>
