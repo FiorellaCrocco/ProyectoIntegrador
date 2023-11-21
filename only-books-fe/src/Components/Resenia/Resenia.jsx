@@ -4,6 +4,7 @@ import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
 import style from "./Resenia.module.css";
 import { GlobalContext } from "../../Context/globalContext";
 import { useState, useContext } from "react";
+import Swal from 'sweetalert2'
 
 function Resenia({ id }) {
   const API_URL = import.meta.env.VITE_API_URL;
@@ -126,10 +127,29 @@ function Resenia({ id }) {
     console.log("HANDLE SUBMIT")
     console.log(resultado)
     if(resultado){
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        text: 'Reseña publicada con éxito',
+        showConfirmButton: false,
+        timer: 3500
+      });
+      
       await fetchEnviarResenia();
       await fetchObtenerResenias(bookId);
+      
     }else{
-      console.log("No puedes hacer una resenia para este libro")
+      console.log("No puedes hacer una reseña para este libro")
+      Swal.fire({
+        position: "top-end",
+        text: 'No puedes hacer una reseña para este libro, sin un alquiler previo',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 2000
+      });
+
+
+
     }
     console.log(formData);
   };
