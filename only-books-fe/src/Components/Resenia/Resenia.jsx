@@ -135,10 +135,14 @@ function Resenia({ id }) {
   };
 
   return (
-    <section>
-      <h2>Reseña del libro</h2>
+    <section className={style.reseniaSection}>
+      <h2 className={style.title}>Enviar reseña</h2>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="comentario">Comentario:</label>
+        <div>
+          <label htmlFor="comentario">Comentario:</label>
+          <div>
+
+          
         <textarea
           id="comentario"
           name="comentario"
@@ -146,11 +150,16 @@ function Resenia({ id }) {
           cols={50}
           rows={4}
           onChange={handleChange}
-        ></textarea>
+        ></textarea></div>
+        </div>
+        
+        <div>
 
+        
         <label htmlFor="valoracion">Valoracion:</label>
         <div>
           <ul className={style.listaStars}>{renderEstrellas(estrellas)}</ul>
+        </div>
         </div>
         <button>Enviar Reseña</button>
       </form>

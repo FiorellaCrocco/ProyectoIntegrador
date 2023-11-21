@@ -53,10 +53,9 @@ function Buscador({ obtenerDatos, listaLibros, obtenerDatosFilt }) {
 
   return (
     <>
-      <section>
-        <div>
+      <section className="buscador-section">
           <form onSubmit={(e) => handleSubmit(e)}>
-            <h2>Buscador de libros:</h2>
+            <h2 className="buscador-title">Buscador de libros:</h2>
             <div className="busquedaContainer">
               <div className="busquedaTituloContainer">
                 <label>Busqueda por título:</label>
@@ -84,6 +83,7 @@ function Buscador({ obtenerDatos, listaLibros, obtenerDatosFilt }) {
 
               <div className="busquedaFechaContainer">
                 <label>Busqueda por fecha disponible</label>
+                <div className="fecha-botonContainer">
                 <Calendar
                   placeholder="Seleccione la fecha de alquiler"
                   format="YYYY-MM-DD"
@@ -95,10 +95,10 @@ function Buscador({ obtenerDatos, listaLibros, obtenerDatosFilt }) {
                 />
 
                 <button>Buscar</button>
+                </div>
               </div>
             </div>
           </form>
-        </div>
       </section>
     </>
   );

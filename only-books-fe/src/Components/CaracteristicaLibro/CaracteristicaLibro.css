@@ -4,11 +4,15 @@
 } */
 
 .caract{
+    color: rgb(87, 87, 87);
+    font-size: 24px;
     text-align: center;
     margin: 1px;
+    
 }
 
 .listaCarac{
+    color: black;
     display: flex;
     flex-direction: row;
     align-items: end;

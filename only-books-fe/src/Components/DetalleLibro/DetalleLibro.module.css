@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: #9cc6dd;
+    background-color: #F3F3F3;
     padding-bottom: 30px;
     margin-top: 10px;
     padding-top: 40px;
@@ -91,11 +91,14 @@
     justify-content: space-between;
     align-items: center;
     margin: 20px 0;
-    background-color: #75bed6;
+    background-color: #F3F3F3;
     /* Agregar un fondo para destacar la sección */
     padding: 20px;
     /* Añadir espacio interno para mejorar la separación */
     border-radius: 10px;
+}
+.sectionDetalles h1, .sectionDetalles p{
+    color: #615D5D;
 }
 
 .titles {

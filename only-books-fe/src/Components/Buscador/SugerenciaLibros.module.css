@@ -6,6 +6,10 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 10px;
   }
+  .inputBusqueda{
+    height: 25px;
+    width: 250px;
+  }
   
   .sugerenciaLibros ul {
     list-style: none;

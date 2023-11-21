@@ -1,15 +1,43 @@
+
+.buscador-section{
+  background-color: #eeeeee;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+.buscador-title{
+  color: #ff9e71;
+  font-size: 32px;
+}
+
 .busquedaContainer{
     display: flex;
+    gap: 20px;
 }
 .busquedaTituloContainer, .busquedaFechaContainer{
     display: flex;
     flex-direction: column;
     position: relative;
 }
+.busquedaContainer label{
+  color: #ff9e71;
+}
 
 .inputBusqueda{
     height: 25px;
     width: 250px;
+    border: none;
+    -webkit-box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
+-moz-box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
+box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
+}
+.busquedaFechaContainer>div>div>input{
+  height: 25px;
+  width: 250px;
+  border: none;
+  border-radius: 0px;
+  -webkit-box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
+-moz-box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
+box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
 }
   
   .selected-option {
@@ -21,7 +49,7 @@
   
   .options-list {
     position: absolute;
-    top: 40px;
+    top: 47px;
     z-index: 2;
     width: 250px;
     display: flex;
@@ -47,7 +75,29 @@
     cursor: pointer;
   }
   
-
+  .fecha-botonContainer{
+    display: flex;
+    gap: 10px;
+  }
+  .fecha-botonContainer>button{
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    align-self: center;
+    border-radius: 10%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    background: #F89344;
+    color: white;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    font-size: 1em;
+    font-weight: 600;
+  }
+  .fecha-botonContainer>button:hover {
+    box-sizing: border-box;
+    background-color: #327297;
+    border: 1px white solid;
+}
   
   .custom-select:hover .options-list {
     display: block;

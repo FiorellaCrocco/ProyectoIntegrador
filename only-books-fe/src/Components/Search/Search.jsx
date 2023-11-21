@@ -135,12 +135,8 @@ const Search = () => {
       <div className="search-container">
         <div className="input-select">
           <div className="columnCategorias">
-            <div>
-              <h2 className="category-title">Categorias</h2>
-            </div>
-            <div className="category-select">{renderCategoryOptions()}</div>
-            <div>
-              <button
+            <div className="category-title-button">
+              <h2 className="category-title">Categorias</h2><button
                 className="clearCategorybtn"
                 onClick={() => {
                   setSelectedCategory([]);
@@ -148,6 +144,10 @@ const Search = () => {
               >
                 X
               </button>
+            </div>
+            <div className="category-select">{renderCategoryOptions()}</div>
+            <div>
+              
             </div>
           </div>
         </div>
