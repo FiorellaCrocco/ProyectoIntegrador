@@ -94,6 +94,7 @@ function DetalleLibro({ id }) {
   const [reservaLibro, setReservaLibro] = useState([])
   const [endDate, setEndDate] = useState("")
   const [startDate, setStartDate] = useState("")
+  const [noDisponible, setNoDisponible] = useState(false)
 
   const obtenerFechas = (datos) => {
     setFechas(datos);
@@ -114,7 +115,34 @@ function DetalleLibro({ id }) {
     HandleReserva(reservaLibro)
   }, [reservaLibro])
 
+  useEffect(()=>{
+    console.log(values)
+    console.log(fechasReservadas)
+    setNoDisponible(validarFechaReservada(values[0],values[1],fechasReservadas))
 
+  },[values])
+
+  useEffect(()=>{
+if(noDisponible){
+      Swal.fire({
+        position: "top-end",
+        text: "Ya existe reserva en esa fecha, seleccione una nueva",
+        icon: "error",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    }
+  },[noDisponible])
+
+
+  const validarFechaReservada=(inicio, fin, fechasReservadas)=>{
+    for(let i=0; i<fechasReservadas.length;i++){
+      if(fechasReservadas[i]>=inicio&&fechasReservadas[i]<=fin){
+        return true
+      }
+    }
+    return false
+  }
 
   const handleShareClick = () => {
     setShowPopupShare(true);
@@ -217,7 +245,7 @@ function DetalleLibro({ id }) {
                         text: "Ya existe reserva en esa fecha, seleccione una nueva",
                         icon: "error",
                         showConfirmButton: false,
-                        timer: 2000,
+                        timer: 3000,
                       });
                     }
                   }
@@ -226,7 +254,7 @@ function DetalleLibro({ id }) {
                 return props;
               }}
             />
-            <GenerateDates startDate={startDate} endDate={endDate} obtenerFechas={obtenerFechas} />
+            <GenerateDates startDate={startDate} endDate={endDate} reservas={reservaLibro} obtenerFechas={obtenerFechas} />
             <div className={styles.sectionDetalles}>
               <div className={styles.titles}>
                 <h1 className={styles.bookh1}>{libro.title}</h1>
