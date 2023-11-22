@@ -202,10 +202,21 @@ body {
 
 }
 
+.eye-icon {
+	position: absolute;
+	top: 50%;
+	right: 1rem;
+	transform: translate(-20%, -40%);
+	cursor: pointer;
+	color: #6491e4;
+	font-size: 1.5rem;
+}
+
+
 @media (max-width: 614px) {
-	.wrapper{
+	.wrapper {
 		width: 340px;
 		padding: 40px;
 	}
-	
+
 }

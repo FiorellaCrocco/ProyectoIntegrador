@@ -3,15 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from './Hook/UseForm';
 import './log&register.css';
 import { useAccount } from '../../Context/accountContext';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 export const LoginPage = () => {
-	const API_URL= import.meta.env.VITE_API_URL
+	const API_URL = import.meta.env.VITE_API_URL
 
 	const url = `${API_URL}auth/login`
-//	const url = "https://onlybooks.isanerd.club/api/auth/login";
+	//	const url = "https://onlybooks.isanerd.club/api/auth/login";
 	const navigate = useNavigate();
 	const [loginError, setLoginError] = useState(null);
 	const [isTyping, setIsTyping] = useState(false);
+	const [showPassword, setShowPassword] = useState(false);
 
 	const { email, password, onInputChange, onResetForm } = useForm({
 		email: '',
@@ -54,7 +56,7 @@ export const LoginPage = () => {
 					},
 				}
 				const url = `${API_URL}user/perfil/${userEmail}`
-			//	const url = `https://onlybooks.isanerd.club/api/user/perfil/${userEmail}`;
+				//	const url = `https://onlybooks.isanerd.club/api/user/perfil/${userEmail}`;
 				const profileDataResponse = await fetch(url, settings)
 
 
@@ -91,6 +93,15 @@ export const LoginPage = () => {
 		onResetForm();
 	};
 
+	function passwordChangeHandler() {
+		setShowPassword(!showPassword)
+		// if(password.type === 'password') {
+		// 	password.type = 'text';
+		// } else {
+		// 	password.type = 'password';
+		// }
+	}
+
 	return (
 		<div className='login-container'>
 			<div className='wrapper'>
@@ -116,7 +127,7 @@ export const LoginPage = () => {
 					</div>
 					<div className='input-group'>
 						<input
-							type='password'
+							type={showPassword ? 'text' : 'password'}
 							name='password'
 							id='password'
 							className="input"
@@ -130,6 +141,9 @@ export const LoginPage = () => {
 							placeholder=' '
 						/>
 						<label className="label" htmlFor='password'>Contraseña</label>
+						<div className='eye-icon' onClick={() => passwordChangeHandler()}>
+							{showPassword ? <FaEyeSlash /> : <FaEye />}
+						</div>
 					</div>
 					{!isTyping && loginError && <p className="error-message">{loginError}</p>}
 					<button className='btn-lr'>Iniciar Sesion</button>
