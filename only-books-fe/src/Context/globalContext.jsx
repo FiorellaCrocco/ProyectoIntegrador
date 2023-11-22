@@ -12,18 +12,18 @@ export const BookProvider = ({ children }) => {
   const [rentBook, setRentBook] = useState([])
   const [token, setToken] = useState(sessionStorage.getItem('token') || '');
 
- const API_URL= import.meta.env.VITE_API_URL
+  const API_URL = import.meta.env.VITE_API_URL
 
 
-const url = `${API_URL}book/listarexpress`;
-//    const url = "https://onlybooks.isanerd.club/api/book/listarexpress";
- const urlCategorias = `${API_URL}categoria/listar`;
-//   const urlCategorias = "https://onlybooks.isanerd.club/api/categoria/listar";
-const urlCaracteristicas = `${API_URL}caracteristica/listar`;
-//   const urlCaracteristicas = "https://onlybooks.isanerd.club/api/caracteristica/listar";
-const urlFiltro= `${API_URL}bookRent/listar`
-//   const urlCaracteristicas = "https://onlybooks.isanerd.club/api/bookRent/listar";
-const urlBookId= `${API_URL}book/`
+  const url = `${API_URL}book/listarexpress`;
+  //    const url = "https://onlybooks.isanerd.club/api/book/listarexpress";
+  const urlCategorias = `${API_URL}categoria/listar`;
+  //   const urlCategorias = "https://onlybooks.isanerd.club/api/categoria/listar";
+  const urlCaracteristicas = `${API_URL}caracteristica/listar`;
+  //   const urlCaracteristicas = "https://onlybooks.isanerd.club/api/caracteristica/listar";
+  const urlFiltro = `${API_URL}bookRent/listar`
+  //   const urlCaracteristicas = "https://onlybooks.isanerd.club/api/bookRent/listar";
+  const urlBookId = `${API_URL}book/`
 
 
   const fetchData = async () => {
@@ -64,7 +64,7 @@ const urlBookId= `${API_URL}book/`
       const data = await response.json();
       setListaCaracteristicas(data);
     } catch (error) {
-      
+
       console.error("Error al cargar las caracteristicas:", error);
     }
   };
@@ -72,8 +72,8 @@ const urlBookId= `${API_URL}book/`
 
   const fetchBookById = async (id) => {
     try {
-       const response = await fetch(`${urlBookId}${id}`);
-    //  const response = await fetch(`https://onlybooks.isanerd.club/api/book/${id}`);
+      const response = await fetch(`${urlBookId}${id}`);
+      //  const response = await fetch(`https://onlybooks.isanerd.club/api/book/${id}`);
       if (!response.ok) {
         throw new Error("No se pudo obtener el libro.");
       }
@@ -84,7 +84,7 @@ const urlBookId= `${API_URL}book/`
       return null;
     }
   };
-  
+
 
   const fetchObtenerResenias = async (bookId) => {
     const url = `${API_URL}resenia/book/${bookId}`;
@@ -119,7 +119,7 @@ const urlBookId= `${API_URL}book/`
 
 
 
-  const fetchFiltroRent= async()=>{
+  const fetchFiltroRent = async () => {
     const settings = {
       method: 'GET',
       headers: {
@@ -128,22 +128,22 @@ const urlBookId= `${API_URL}book/`
       }
     };
     try {
-      const response = await fetch(urlFiltro,settings);
+      const response = await fetch(urlFiltro, settings);
       if (!response.ok) {
         throw new Error("No se pudo obtener la lista de RentBooks");
       }
       const data = await response.json();
       setRentBook(data);
-      console.log(data)
+      // console.log(data)
       return data;
     } catch (error) {
       console.error("Error al cargar la lista de RentBooks:", error);
     }
   }
 
-//  const actualizarCaracteristicas = async () => {
-//  await fetchCaracteristicas();
-//};
+  //  const actualizarCaracteristicas = async () => {
+  //  await fetchCaracteristicas();
+  //};
 
   useEffect(() => {
     fetchData();
@@ -163,7 +163,7 @@ const urlBookId= `${API_URL}book/`
 
 
   return (
-    <GlobalContext.Provider value={{ listaCategorias, listaLibros, isLoading, listaResenias, actualizarListaLibros, actualizarCategorias, fetchBookById, logout, fetchCaracteristicas, listaCaracteristicas, fetchFiltroRent, rentBook,fetchData, fetchObtenerResenias }}>
+    <GlobalContext.Provider value={{ listaCategorias, listaLibros, isLoading, listaResenias, actualizarListaLibros, actualizarCategorias, fetchBookById, logout, fetchCaracteristicas, listaCaracteristicas, fetchFiltroRent, rentBook, fetchData, fetchObtenerResenias }}>
       {children}
     </GlobalContext.Provider>
   );

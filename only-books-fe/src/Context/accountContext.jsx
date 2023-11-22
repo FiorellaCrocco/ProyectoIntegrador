@@ -21,7 +21,7 @@ export const AccountProvider = ({ children }) => {
 
         // const storedUserData = JSON.parse(sessionStorage.getItem('userData'));
         const storedUserData = JSON.parse(sessionStorage.getItem('userData'));
-        console.log('storedUserData: ' + storedUserData);
+        // console.log('storedUserData: ' + storedUserData);
         if (storedUserData) {
             updateUserData(storedUserData);
             setIsAuthenticated(true);
