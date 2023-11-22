@@ -1,26 +1,35 @@
-/* Estilos para AgregarCategoria */
+.tituloNewCat{
+    border-radius: 10px;
+    box-shadow: 11px 09px 10px #00000061;
+    background-color: #cae0ed;
+    color: #182b39;
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding: 20px;
+    width: 500px;
+    text-align: center;
+}
 
 .agregar-categoria {
+    width: 500px;
+    height: 40vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: rgb(84, 157, 194);
+    color: #182b39;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    background: #cae0ed;;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
-    color: #EFFAFF;
+    box-shadow: 11px 09px 10px #00000061;
 }
 
 .agregar-categoria-div{
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-.agregar-categoria h2 {
-    color: #EFFAFF;
-    font-size: 18px;
-    margin-bottom: 10px;
 }
 
 .agregar-categoria form {
@@ -29,7 +38,7 @@
 }
 
 .agregar-categoria label {
-    color: #EFFAFF;
+    color: #182b39;
     font-weight: bold;
     margin-bottom: 5px;
 }
@@ -37,31 +46,9 @@
 .agregar-categoria input,
 .agregar-categoria textarea {
     all: unset;
-    color: #EFFAFF;
+    color: #182b39;;
     padding: 8px;
     border: 1px solid #9cc6dd;
     border-radius: 10px;
     margin-bottom: 10px;
-}
-
-.agregar-categoria button[type="submit"] {
-    background-color: #fff;
-    /* Cambia el color de fondo a verde brillante */
-    color: #F89344;
-    /* Cambia el color del texto a blanco */
-    border: 1px solid #fff;
-    /* Cambia el borde al mismo color de fondo */
-    border-radius: 10px;
-    padding: 10px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.25s;
-    /* Agrega una transición al cambio de color de fondo */
-
-    /* Agrega un efecto de brillo al pasar el mouse */
-    &:hover {
-        background-color: #327297;
-        color: #fff;
-        /* Cambia el color de fondo al pasar el mouse */
-    }
 }

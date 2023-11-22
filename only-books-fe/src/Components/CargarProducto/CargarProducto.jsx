@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
 import "./CargarProducto.css";
 import { GlobalContext } from "../../Context/globalContext";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
 function CargarProducto() {
-  const API_URL= import.meta.env.VITE_API_URL
+  const API_URL = import.meta.env.VITE_API_URL;
   const {
     actualizarListaLibros,
     listaCategorias,
@@ -74,7 +74,7 @@ function CargarProducto() {
     e.preventDefault();
 
     const url = `${API_URL}book/agregar`;
-  //   const url = "https://onlybooks.isanerd.club/api/book/agregar";
+    //   const url = "https://onlybooks.isanerd.club/api/book/agregar";
     const settings = {
       method: "POST",
       headers: {
@@ -95,8 +95,8 @@ function CargarProducto() {
       for (const caracteristica of selectedCaracteristica) {
         await fetchCaracteristica(data, caracteristica.id);
       }
-       // Mensaje de éxito
-       Swal.fire({
+      // Mensaje de éxito
+      Swal.fire({
         text: "Libro cargado con éxito",
         icon: "success",
       });
@@ -129,7 +129,7 @@ function CargarProducto() {
       },
     };
     const url = `${API_URL}book/${bookId}/categoria/${categoriaId}`;
-  //   const url = `https://onlybooks.isanerd.club/api/book/${bookId}/categoria/${categoriaId}`;
+    //   const url = `https://onlybooks.isanerd.club/api/book/${bookId}/categoria/${categoriaId}`;
     try {
       const response = await fetch(url, settings);
       const data = await response.text();
@@ -147,8 +147,8 @@ function CargarProducto() {
         Authorization: `Bearer ${token}`,
       },
     };
-   const url = `${API_URL}book/${bookId}/caracteristica/${caracteristicaId}`;
-   //    const url = `https://onlybooks.isanerd.club/api/book/${bookId}/caracteristica/${caracteristicaId}`;
+    const url = `${API_URL}book/${bookId}/caracteristica/${caracteristicaId}`;
+    //    const url = `https://onlybooks.isanerd.club/api/book/${bookId}/caracteristica/${caracteristicaId}`;
     try {
       const response = await fetch(url, settings);
       const data = await response.text();
@@ -157,7 +157,6 @@ function CargarProducto() {
       console.error("ERROR:", error);
     }
   }
-
 
   const renderCategoryOptions = () => {
     const categorias = listaCategorias;
@@ -211,74 +210,74 @@ function CargarProducto() {
 
   return (
     <div>
-      <h2 className="titulo">Cargar Libro</h2>
-    <div className="Container">
-      <form className="formulario" onSubmit={handleSubmit}>
-        <div className="div">
-          <label className="labels" htmlFor="title">
-            Título:
-          </label>
-          <input
-            className="input"
-            type="text"
-            id="title"
-            name="title"
-            value={formData.title}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="div">
-          <label className="labels" htmlFor="author">
-            Autor:
-          </label>
-          <input
-            className="input"
-            type="text"
-            id="author"
-            name="author"
-            value={formData.author}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="div">
-          <label className="labels" htmlFor="description">
-            Descripción:
-          </label>
-          <textarea
-            className="input"
-            id="description"
-            name="description"
-            value={formData.description}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="div">
-          <label className="labels" htmlFor="isbn">
-            ISBN:
-          </label>
-          <input
-            className="input"
-            type="text"
-            id="isbn"
-            name="isbn"
-            value={formData.isbn}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="div">
-          <label className="labels" htmlFor="publication_year">
-            Año de Publicación:
-          </label>
-          <input
-            className="input"
-            type="date"
-            id="publication_year"
-            name="publication_year"
-            value={formData.publication_year}
-            onChange={handleInputChange}
-          />
-        </div>
-        {/* <div className="div">
+      <h2 className="titulo">Crear Libro</h2>
+      <div className="Container">
+        <form className="formulario" onSubmit={handleSubmit}>
+          <div className="div">
+            <label className="labels" htmlFor="title">
+              Título:
+            </label>
+            <input
+              className="input"
+              type="text"
+              id="title"
+              name="title"
+              value={formData.title}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="div">
+            <label className="labels" htmlFor="author">
+              Autor:
+            </label>
+            <input
+              className="input"
+              type="text"
+              id="author"
+              name="author"
+              value={formData.author}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="div">
+            <label className="labels" htmlFor="description">
+              Descripción:
+            </label>
+            <textarea
+              className="input"
+              id="description"
+              name="description"
+              value={formData.description}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="div">
+            <label className="labels" htmlFor="isbn">
+              ISBN:
+            </label>
+            <input
+              className="input"
+              type="text"
+              id="isbn"
+              name="isbn"
+              value={formData.isbn}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="div">
+            <label className="labels" htmlFor="publication_year">
+              Año de Publicación:
+            </label>
+            <input
+              className="input"
+              type="date"
+              id="publication_year"
+              name="publication_year"
+              value={formData.publication_year}
+              onChange={handleInputChange}
+            />
+          </div>
+          {/* <div className="div">
           <label className="labels" htmlFor="qualification">
             Calificación:
           </label>
@@ -291,54 +290,54 @@ function CargarProducto() {
             onChange={handleInputChange}
           />
         </div> */}
-        <div className="div">
-          <label className="labels" htmlFor="price">
-            Precio:
-          </label>
-          <input
-            className="input"
-            type="number"
-            id="price"
-            name="price"
-            value={formData.price}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="ccSelect">
-          <div className="divSelect">
-            <label className="labels" htmlFor="categorias">
-              Categorías:
+          <div className="div">
+            <label className="labels" htmlFor="price">
+              Precio:
             </label>
-            <>{renderCategoryOptions()}</>
+            <input
+              className="input"
+              type="number"
+              id="price"
+              name="price"
+              value={formData.price}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="ccSelect">
+            <div className="divSelect">
+              <label className="labels" htmlFor="categorias">
+                Categorías:
+              </label>
+              <>{renderCategoryOptions()}</>
+            </div>
+
+            <div className="divSelect">
+              <label className="labels" htmlFor="caracteristicas">
+                Características:
+              </label>
+              <>{renderCaracteristicasOptions()}</>
+            </div>
           </div>
 
-          <div className="divSelect">
-            <label className="labels" htmlFor="caracteristicas">
-              Características:
+          <div className="div">
+            <label className="labels" htmlFor="image">
+              Imagen:
             </label>
-            <>{renderCaracteristicasOptions()}</>
+            <input
+              className="input"
+              type="file"
+              multiple
+              id="image"
+              name="image"
+              accept="image/*"
+              onChange={handleImageChange}
+            />
           </div>
-        </div>
-
-        <div className="div">
-          <label className="labels" htmlFor="image">
-            Imagen:
-          </label>
-          <input
-            className="input"
-            type="file"
-            multiple
-            id="image"
-            name="image"
-            accept="image/*"
-            onChange={handleImageChange}
-          />
-        </div>
-        <button className="FormBtn" type="submit">
-          Guardar Libro
-        </button>
-      </form>
-    </div>
+          <button className="FormBtn" type="submit">
+            Guardar Libro
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
