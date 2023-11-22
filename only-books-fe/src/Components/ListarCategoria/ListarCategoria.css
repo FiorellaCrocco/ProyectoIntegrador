@@ -1,54 +1,3 @@
-/* Estilos para ListarCategoria */
-/*
-.categorias-list {
-    width: 500px;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    color: #182b39;
-    padding-top: 25px;
-    padding-bottom: 25px;
-    background: #cae0ed;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 11px 09px 10px #00000061;
-    overflow-y: scroll;
-    
-}
-
-.vertical-list {
-    display: flex;
-    flex-direction: column;
-    color: #cae0ed;
-}
-
-.categorias-list h2 {
-    color: #244356;
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-.categorias-list ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.categorias-list li {
-    font-size: 16px;
-    margin: 5px 0;
-    border-bottom: 1px solid #ddd;
-    padding: 5px 0;
-}
-
-.categorias-list li:last-child {
-    border-bottom: none;
-}
-
-.categorias-list ul li {
-    display: block;
-     Esto asegura que los elementos de la lista se muestren uno debajo del otro (verticalmente) 
-}*/
-
 .tituloListCat {
     border-radius: 10px;
     box-shadow: 11px 09px 10px #00000061;
@@ -76,13 +25,13 @@
     overflow-y: scroll;
 }
 
-.btnEditUserCat{
+.btnEditCat{
     margin-right: 20px;
     background-color: #28a745; 
     color: #fff;
     border: 1px solid #28a745;
     transition: background-color 0.25s;
-    width: 151px;
+    width: 100px;
     &:hover {
         background-color: #4caf50; /* Cambia el color de fondo al pasar el mouse */
     }

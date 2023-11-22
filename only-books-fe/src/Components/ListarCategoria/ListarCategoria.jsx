@@ -62,7 +62,7 @@ const ListarCategoria = () => {
 
   return (
     <div>
-      <h2 className="tituloListCat">Listado de Categorías:</h2>
+      <h2 className="tituloListCat">Listado de Categorías</h2>
         <ul className="listaContCat">
           {listaCategorias.map((categoria) => (
             <li className="listId" key={categoria.id}>
@@ -72,7 +72,7 @@ const ListarCategoria = () => {
               <Button
                   variant="outlined"
                   color="error"
-                  className="btnEditUserCat"
+                  className="btnEditCat"
                   onClick={() => eliminarCategoria(categoria.id)}
                   >
                   Eliminar

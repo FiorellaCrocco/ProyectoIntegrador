@@ -210,7 +210,7 @@ function CargarProducto() {
 
   return (
     <div>
-      <h2 className="titulo">Cargar Libro</h2>
+      <h2 className="titulo">Crear Libro</h2>
       <div className="Container">
         <form className="formulario" onSubmit={handleSubmit}>
           <div className="div">

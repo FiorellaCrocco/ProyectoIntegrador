@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 
 function AgregarCategoria() {
   const token = sessionStorage.getItem("token");
-  const URL_API= import.meta.env.VITE_API_URL
+  const URL_API = import.meta.env.VITE_API_URL;
 
   const { actualizarCategorias } = useContext(GlobalContext);
   const formRef = useRef(null);
@@ -55,8 +55,8 @@ function AgregarCategoria() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-     const url = `${URL_API}categoria/agregar`;
-  //  const url = "https://onlybooks.isanerd.club/api/categoria/agregar";
+    const url = `${URL_API}categoria/agregar`;
+    //  const url = "https://onlybooks.isanerd.club/api/categoria/agregar";
     const config = {
       method: "POST",
       headers: {
@@ -94,37 +94,39 @@ function AgregarCategoria() {
   }
 
   return (
-    <div className="agregar-categoria">
-      <h2>Crear Nueva Categoría</h2>
-      <form onSubmit={handleSubmit} ref={formRef}>
-        <div className="agregar-categoria-div">
-          <label>Título:</label>
-          <input
-            type="text"
-            name="titulo"
-            value={categoria.titulo}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="agregar-categoria-div">
-          <label>Descripción:</label>
-          <textarea
-            name="descripcion"
-            value={categoria.descripcion}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="agregar-categoria-div">
-          <label>Imagen:</label>
-          <input
-            className="input"
-            type="file"
-            name="imagen"
-            onChange={handleImageChange}
-          />
-        </div>
-        <button type="submit">Guardar Categoría</button>
-      </form>
+    <div>
+      <h2 className="tituloNewCat">Crear Categoría</h2>
+      <div className="agregar-categoria">
+        <form onSubmit={handleSubmit} ref={formRef}>
+          <div className="agregar-categoria-div">
+            <label>Título:</label>
+            <input
+              type="text"
+              name="titulo"
+              value={categoria.titulo}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="agregar-categoria-div">
+            <label>Descripción:</label>
+            <textarea
+              name="descripcion"
+              value={categoria.descripcion}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="agregar-categoria-div">
+            <label>Imagen:</label>
+            <input
+              className="input"
+              type="file"
+              name="imagen"
+              onChange={handleImageChange}
+            />
+          </div>
+          <button type="submit" className="FormBtn">Guardar Categoría</button>
+        </form>
+      </div>
     </div>
   );
 }
