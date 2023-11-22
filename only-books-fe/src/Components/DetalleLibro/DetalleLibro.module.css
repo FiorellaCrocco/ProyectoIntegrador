@@ -185,4 +185,5 @@
     -webkit-box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
     -moz-box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
     box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
+    cursor: pointer;
 }
