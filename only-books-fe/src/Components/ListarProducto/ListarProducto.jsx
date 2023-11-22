@@ -9,6 +9,7 @@ import Swal from 'sweetalert2'
 const ListarProducto = () => {
   const { listaLibros, actualizarListaLibros,fetchBookById } = useContext(GlobalContext);
   const [productos, setProductos] = useState([]);
+  const API_URL= import.meta.env.VITE_API_URL
 
   //Para la  funcionalidad de EDITAR
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -74,8 +75,8 @@ const ListarProducto = () => {
           'Authorization': `Bearer ${token}`,
         },
       }
-      const url = `http://localhost:8080/book/eliminar/${id}`;
-    //    const url = `https://onlybooks.isanerd.club/api/book/eliminar/${id}`;
+       const url = `${API_URL}book/eliminar/${id}`;
+   //    const url = `https://onlybooks.isanerd.club/api/book/eliminar/${id}`;
     try{
       await fetchData(url, settings);
       await actualizarListaLibros();

@@ -1,14 +1,17 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState, memo } from "react";
 import { GlobalContext } from "../../Context/globalContext";
 import { Link } from "react-router-dom";
 import "../LibrosPaginados/LibrosPaginados.css";
 import style from "./Recomendados.module.css";
 import '../Loading/Loading.css'
+// import Subnavbar from "../Subnavbar/Subnavbar";
 
-const Recomendados = () => {
-  const { listaLibros, isLoading } = useContext(GlobalContext);
+const Recomendados = memo(( {libros} ) => {
 
-  // console.log(listaLibros);
+  const { isLoading } = useContext(GlobalContext);
+  const [librosAleatorios, setLibrosAleatorios] = useState([]);
+
+
   const selectLibrosAleatorios = (libros, cantidad) => {
     const librosSeleccionados = [];
     while (librosSeleccionados.length < cantidad) {
@@ -20,21 +23,19 @@ const Recomendados = () => {
     return librosSeleccionados;
   };
 
-  if (isLoading) {
-    return <div className="loader"></div>;
+useEffect(() => {
+  if (!isLoading && libros && libros.length > 0) {
+    setLibrosAleatorios(selectLibrosAleatorios(libros, 3));
   }
-
-  if (!listaLibros || listaLibros.length === 0) {
-    return <div>No se encontraron libros.</div>;
-  }
-
-  const librosAleatorios = selectLibrosAleatorios(listaLibros, 3);
+}, [libros, isLoading]);
 
   return (
-    <>
+    <div>
+
       <section className={style.listaContainer}>
+        {/* <Subnavbar /> */}
         <h1 className={style.recomendacion}>Recomendados</h1>
-				{isLoading?<div className="loader"></div>:<></>}
+        {isLoading ? <div className="loader"></div> : <></>}
         <ul className={style.listaPaginada}>
           {librosAleatorios.map((libro) => {
             return (
@@ -49,8 +50,8 @@ const Recomendados = () => {
           })}
         </ul>
       </section>
-    </>
+    </div>
   );
-};
+});
 
 export default Recomendados;

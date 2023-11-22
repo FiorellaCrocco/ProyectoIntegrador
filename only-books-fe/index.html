@@ -1,21 +1,68 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <!-- <link rel="icon" type="image/svg+xml" href="/img/icon.svg" />  -->
-    <link rel="icon" type="image/svg+xml" href="/src/img/icon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OnlyBoooks</title>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- <link rel="icon" type="image/svg+xml" href="/img/icon.svg" />  -->
+  <link rel="icon" type="image/svg+xml" href="/src/img/icon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta property="fb:app_id" content="24494504296830325" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content='101 Dalmatas' />
+  <meta property="og:description" content='La historia sigue a Pongo y Perdita, dos dálmatas que deben rescatar a sus cachorros, secuestrados por Cruella de Vil para hacer abrigos de piel de dálmata.' />
+  <meta property="og:image"
+    content='https://onlybooksbucket.s3.amazonaws.com/Productos/Infantiles/101+Dalmatas+Disney+1.jpg' />
+  <meta property="og:url"
+    content='https://onlybooksbucket.s3.amazonaws.com/Productos/Infantiles/101+Dalmatas+Disney+1.jpg' />
+
+  <title>OnlyBooks</title>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script type="text/javascript">
-      // Inicializa EmailJS con tu clave pública
-      (function () {
-          emailjs.init("KEttemTMTZI7rbx-f");
-      })();
+    // Inicializa EmailJS con tu clave pública
+    (function () {
+      emailjs.init("KEttemTMTZI7rbx-f");
+    })();
   </script>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script>
+    window.fbAsyncInit = function () {
+      FB.init({
+        appId: '24494504296830325',
+        xfbml: true,
+        version: 'v18.0'
+      });
+      FB.AppEvents.logPageView();
+    };
+
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) { return; }
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+  <script>window.twttr = (function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0],
+      t = window.twttr || {};
+    if (d.getElementById(id)) return t;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "https://platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+
+    t._e = [];
+    t.ready = function (f) {
+      t._e.push(f);
+    };
+
+    return t;
+  }(document, "script", "twitter-wjs"));</script>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
 </html>

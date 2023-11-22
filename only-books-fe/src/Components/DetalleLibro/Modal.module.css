@@ -9,13 +9,16 @@ body.active-modal {
     font-size: 18px;
 }
 
-.modal, .overlay {
+.overlay, .modal{
     width: 100vw;
     height: 100vh;
-    top: 0;
+    padding-bottom: 200px;
+    /*
+    top: 100px;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: 0px;*/
+    z-index: 10;
     position: fixed;
 }
 
@@ -33,10 +36,12 @@ body.active-modal {
     border-radius: 3px;
     max-width: 600px;
     min-width: 300px;
+    z-index: 20;
 }
 .carrusel{
     display: flex;
     flex-direction: row;
+    padding-left: 20px;
 }
 .imagenCarrusel{
     width: 450px;
@@ -71,7 +76,7 @@ body.active-modal {
 .closemodal {
     position: absolute;
     margin-top: 10px;
-    margin-right:8px;
+    margin-right:100px;
     width: 70px;
     top: 10px;
     right: 10px;

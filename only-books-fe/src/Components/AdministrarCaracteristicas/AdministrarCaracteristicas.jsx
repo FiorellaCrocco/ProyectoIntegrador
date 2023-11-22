@@ -9,6 +9,7 @@ const AdministrarCaracteristicas = () => {
   const [editPopupOpen, setEditPopupOpen] = useState(false);
   const [caracteristicaEdit, setCaracteristicaEdit ] = useState({ id: 0, title: "", icono: "" });
   const[actualizar, setActualizar] = useState(false)
+  const API_URL= import.meta.env.VITE_API_URL
 
   async function eliminarCaracteristica(id) {
     const confirmacion = await Swal.fire({
@@ -21,8 +22,8 @@ const AdministrarCaracteristicas = () => {
     });
 
     if (confirmacion.isConfirmed) {
-    const url = `http://localhost:8080/caracteristica/eliminar/${id}`;
-    // const url = `https://onlybooks.isanerd.club/api/caracteristica/eliminar/${id}`;
+  const url = `${API_URL}caracteristica/eliminar/${id}`;
+   //    const url = `https://onlybooks.isanerd.club/api/caracteristica/eliminar/${id}`;
     const token = sessionStorage.getItem('token');
     const config = {
       method: 'DELETE',
@@ -66,8 +67,8 @@ const AdministrarCaracteristicas = () => {
   }
 
   async function actualizarCaracteristica() {
-    const url = `http://localhost:8080/caracteristica/modificar`;
-    // const url = `https://onlybooks.isanerd.club/api/caracteristica/modificar`;
+    const url = `${API_URL}caracteristica/modificar`;
+  //   const url = `https://onlybooks.isanerd.club/api/caracteristica/modificar`;
     const token = sessionStorage.getItem('token');
     const config = {
       method: 'PUT',
@@ -123,9 +124,10 @@ const AdministrarCaracteristicas = () => {
               >
                 Eliminar
               </button>
-              <button className='btnEdit' onClick={() => abrirPopupEdicion(caracteristica)}>
+              <button className='btnEditCaracteristica' onClick={() => abrirPopupEdicion(caracteristica)}>
                 Editar
               </button>
+              
             </div>
           </li>
         ))}
@@ -139,12 +141,12 @@ const AdministrarCaracteristicas = () => {
             value={caracteristicaEdit.title}
             onChange={(e) => setCaracteristicaEdit({ ...caracteristicaEdit, title: e.target.value })}
           />
-          <label>Icono:</label>
+        {/*   <label>Icono:</label>
           <input
             type="text"
             value={caracteristicaEdit.icono}
             onChange={(e) => setCaracteristicaEdit({ ...caracteristicaEdit, icono: e.target.value })}
-          />
+          /> */}
           <button onClick={actualizarCaracteristica}>Guardar</button>
           <button onClick={cerrarPopupEdicion}>Cancelar</button>
           {/* Puedes agregar aquí los campos de edición y lógica de actualización */}

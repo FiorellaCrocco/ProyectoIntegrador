@@ -9,11 +9,12 @@ const ListarUsuarios = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [editOpen, setEditOpen] = useState(false);
   const token = sessionStorage.getItem("token");
+  const API_URL= import.meta.env.VITE_API_URL
 
-  const urlListar = "http://localhost:8080/user/listar";
-  // const urlListar = "https://onlybooks.isanerd.club/api/user/listar";
-  const urlModificar = "http://localhost:8080/user/modificar";
-  // const urlModificar = "https://onlybooks.isanerd.club/api/user/modificar";
+  const urlListar = `${API_URL}user/listar`;
+//   const urlListar = "https://onlybooks.isanerd.club/api/user/listar";
+   const urlModificar = `${API_URL}user/modificar`;
+//  const urlModificar = "https://onlybooks.isanerd.club/api/user/modificar";
 
   const fetchDataList = async () => {
     try {
@@ -89,8 +90,8 @@ const ListarUsuarios = () => {
               Authorization: `Bearer ${token}`,
             },
           };
-          const url = `http://localhost:8080/user/eliminar/${id}`;
-          // const url = `https://onlybooks.isanerd.club/api/user/eliminar/${id}`;
+          const url = `${API_URL}user/eliminar/${id}`;
+        //   const url = `https://onlybooks.isanerd.club/api/user/eliminar/${id}`;
           const response = await fetch(url, settings);
   
           if (!response.ok) {

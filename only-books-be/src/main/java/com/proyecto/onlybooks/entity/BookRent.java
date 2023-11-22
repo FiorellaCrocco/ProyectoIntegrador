@@ -1,6 +1,8 @@
 package com.proyecto.onlybooks.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -25,6 +27,7 @@ public class BookRent {
     // Muchos BookRent puede tener un User.
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private User user;
 
     // Muchos BookRent puede tener un Book.
@@ -32,12 +35,8 @@ public class BookRent {
     @JoinColumn(name = "book_id")
     private Book book;
 
-    @NotNull
-    @NotBlank
     private Date startDate;
 
-    @NotNull
-    @NotBlank
     private Date returnDate;
 
 }

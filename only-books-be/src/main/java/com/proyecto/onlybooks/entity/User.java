@@ -1,6 +1,8 @@
 package com.proyecto.onlybooks.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -58,13 +60,25 @@ public class User implements UserDetails {
     private Rol rol;
 
     // Un User puede tener muchos BookRent
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<BookRent> bookRents;
+
+    // Un User puede tener muchos Resenias
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Resenia> resenias;
 
     // Un User tienen una Subscripion.
     @OneToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="subscription_id")
     private Subscription  subscription;
+
+    @ManyToMany(cascade = {CascadeType.ALL, CascadeType.REMOVE})
+    @JoinTable(name = "users_booksFavorite",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id"))
+    private List<Book> booksFavs;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

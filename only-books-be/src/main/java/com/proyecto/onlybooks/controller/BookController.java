@@ -111,7 +111,7 @@ public class BookController {
                 Image image = new Image();
                 image.setUrl("https://onlybooksbucket.s3.amazonaws.com/" + key);
                 image.setBook(newBook);
-                //iImageService.guardar(image);
+                iImageService.guardar(image);
                 images.add(image);
 
 
@@ -123,8 +123,9 @@ public class BookController {
         }
         // Crear un nuevo libro con la lista de entidades Image
         newBook.setImagesBase64(null);
-        newBook.setImages(images);
 
+        newBook.setImages(images);
+        newBook.setImgUrl(newBook.getImages().get(0).getUrl());
         // Guardar el libro en la base de datos
         bookService.guardar(newBook);
 

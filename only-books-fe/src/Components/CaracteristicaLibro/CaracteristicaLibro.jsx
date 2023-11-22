@@ -23,7 +23,6 @@ const CaracteristicaLibro = ({ id }) => {
   return (
     <div className='divAmplio'>
       <h4 className='caract'>Caracteristicas</h4>
-      {console.log(bookData)}
       {isLoading ? (
         <p>Cargando información...</p>
       ) : bookData && bookData.caracteristicas ? (

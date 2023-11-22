@@ -18,8 +18,9 @@ const EditarProducto = ({ product, onUpdateList }) => {
   const [editOpen, setEditOpen] = useState(false);
   const [editCaracteristicaOpen, setEditCaracteristicaOpen] = useState(false);
   const [lanzarFetch, setLanzarFetch] = useState(false);
+  const API_URL= import.meta.env.VITE_API_URL
 
-  const updateProductUrl = `http://localhost:8080/book/modificar`;
+  const updateProductUrl = `${API_URL}book/modificar`;
   // const updateProductUrl = "https://onlybooks.isanerd.club/api/book/modificar"
 
   const token = sessionStorage.getItem("token");
@@ -110,7 +111,7 @@ const EditarProducto = ({ product, onUpdateList }) => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const url = `http://localhost:8080/book/${bookId}/categoria/${categoriaId}`;
+    const url = `${API_URL}book/${bookId}/categoria/${categoriaId}`;
     // const url = `https://onlybooks.isanerd.club/api/book/${bookId}/categoria/${categoriaId}`;
     try {
       const response = await fetch(url, settings);
@@ -129,8 +130,8 @@ const EditarProducto = ({ product, onUpdateList }) => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const url = `http://localhost:8080/book/${bookId}/caracteristica/${caracteristicaId}`;
-    // const url = `hhttps://onlybooks.isanerd.club/api/book/${bookId}/caracteristica/${caracteristicaId}`;
+    const url = `${API_URL}book/${bookId}/caracteristica/${caracteristicaId}`;
+    // const url = `https://onlybooks.isanerd.club/api/book/${bookId}/caracteristica/${caracteristicaId}`;
     try {
       const response = await fetch(url, settings);
       const data = await response.text();
@@ -150,8 +151,11 @@ const EditarProducto = ({ product, onUpdateList }) => {
       categorias: [],
       caracteristicas:[]
     });
-    lanzarFetch == true ? setLanzarFetch(false) : setLanzarFetch(true);
+    setLanzarFetch(true)
+    
   };
+
+
   useEffect(() => {
     const fetchData = async () => {
       const settings = {
@@ -203,8 +207,10 @@ const EditarProducto = ({ product, onUpdateList }) => {
         });
       }
     };
-
-    fetchData();
+    if(lanzarFetch){
+      fetchData();
+      setLanzarFetch(false)
+    }
   }, [lanzarFetch]);
 
   return (

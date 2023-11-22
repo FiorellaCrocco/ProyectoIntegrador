@@ -1,5 +1,6 @@
 package com.proyecto.onlybooks.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -44,9 +45,18 @@ public class Book {
 
     private Date publication_year;
 
-    private Integer qualification;
+    private Double qualification;
+    private Integer cantResenias;
 
     private Double price;
+    private String imgUrl;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @JoinTable(name = "users_booksFavorite",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id"))
+    @JsonIgnore
+    private List<Book> booksFavs;
 
     //Un libro puede tener muchas Categorias
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -62,8 +72,13 @@ public class Book {
             inverseJoinColumns = @JoinColumn(name = "caracteristica_id"))
     private List<Caracteristica> caracteristicas;
 
+    @OneToMany(fetch=FetchType.LAZY, mappedBy = "book")
+    @JsonIgnore
+    private List<Resenia> resenias;
+
     // Un Book puede tener muchos BookRent, pero cada BookRent tiene un Book.
     @OneToMany( fetch=FetchType.LAZY, mappedBy = "book")
+    @JsonIgnore
     private List<BookRent> rentedByUsers;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "book", cascade = CascadeType.ALL)
@@ -71,7 +86,7 @@ public class Book {
 
     private List<String> imagesBase64;
 
-    public Book(String title, String author, String description, String isbn, Date publication_year, Integer qualification, Double price) {
+    public Book(String title, String author, String description, String isbn, Date publication_year, Double qualification, Double price) {
         this.title = title;
         this.author = author;
         this.description = description;

@@ -1,0 +1,158 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*border: 1px solid #ddd;*/
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4;
+    width: 300px;
+    /* height: min-content; */
+    height: min-content;
+    /* height: 90%; */
+    padding: 25px;
+    margin: 0 5px;
+    background-color: #fff;
+    border-radius: 8px;
+ /*   box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);*/
+}
+
+.card .card-img {
+    width: 100%;
+    /* height: 200px; */
+    text-align: center;
+}
+.card-info{
+    font-size: 15px;
+    color: rgb(70, 70, 70);
+    font-weight: 550;
+    margin-bottom: 10px;
+}
+.card-star{
+    color: rgb(251, 205, 56);
+}
+.card .card-img img {
+    height: 200px;
+    margin: 0 15px 0;
+    filter: drop-shadow(0 8px 8px #cdd5e2);
+    transition: 0.2s;
+}
+
+.card:hover .card-img img {
+    height: 180px;
+}
+
+.card .card-title h3 {
+    color: #1b2430;
+    font-size: 25px;
+    letter-spacing: -0.5px;
+}
+
+.card .card-title p {
+    color: #b3bac3;
+    font-size: 18px;
+    margin-top: -4px;
+    letter-spacing: -0.5px;
+}
+
+.card .card-details {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+}
+
+.card .card-details span {
+    color: #b3bac3;
+    font-size: 16px;
+}
+
+.card .card-details p {
+    color: #1b2430;
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: -2px;
+}
+
+.card button {
+    width: 100%;
+    height: 40px;
+    color: #fff;
+    background-color: #1b2430;
+    border-radius: 3px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.card button:hover {
+    background-color: #aa0000;
+}
+
+.body-cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.buttonFavContainer{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 13px;
+}
+
+.FavCardCorazon{
+    font-size: 31px;
+}
+
+
+
+@media (max-width: 1400px) {
+
+    .body-cards {
+        width: auto;
+    }
+
+    .card {
+        width: 80%;
+        /* margin: 0px 0; */
+    }
+
+    .card .card-img img {
+        height: 150px;
+    }
+
+    .card:hover .card-img img {
+        height: 130px;
+    }
+}
+
+@media (max-width: 768px) {
+    .card {
+        width: 70%;
+        margin: 10px 0;
+    }
+
+    .card .card-img img {
+        height: 150px;
+    }
+
+    .card:hover .card-img img {
+        height: 130px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card .card-img img {
+        height: 120px;
+    }
+
+    .card:hover .card-img img {
+        height: 100px;
+    }
+}

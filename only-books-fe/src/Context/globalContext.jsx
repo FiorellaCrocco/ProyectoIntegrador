@@ -7,16 +7,24 @@ export const BookProvider = ({ children }) => {
   const [listaLibros, setListaLibros] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [listaCategorias, setListaCategorias] = useState([]);
+  const [listaResenias, setListaResenias] = useState([])
   const [listaCaracteristicas, setListaCaracteristicas] = useState([]);
+  const [rentBook, setRentBook] = useState([])
   const [token, setToken] = useState(sessionStorage.getItem('token') || '');
 
+ const API_URL= import.meta.env.VITE_API_URL
 
- const url = "http://localhost:8080/book/listarexpress";
-//   const url = "https://onlybooks.isanerd.club/api/book/listarexpress";
-  const urlCategorias = "http://localhost:8080/categoria/listar";
-//  const urlCategorias = "https://onlybooks.isanerd.club/api/categoria/listar";
- const urlCaracteristicas = "http://localhost:8080/caracteristica/listar";
-//  const urlCaracteristicas = "https://onlybooks.isanerd.club/api/caracteristica/listar";
+
+const url = `${API_URL}book/listarexpress`;
+//    const url = "https://onlybooks.isanerd.club/api/book/listarexpress";
+ const urlCategorias = `${API_URL}categoria/listar`;
+//   const urlCategorias = "https://onlybooks.isanerd.club/api/categoria/listar";
+const urlCaracteristicas = `${API_URL}caracteristica/listar`;
+//   const urlCaracteristicas = "https://onlybooks.isanerd.club/api/caracteristica/listar";
+const urlFiltro= `${API_URL}bookRent/listar`
+//   const urlCaracteristicas = "https://onlybooks.isanerd.club/api/bookRent/listar";
+const urlBookId= `${API_URL}book/`
+
 
   const fetchData = async () => {
     try {
@@ -27,6 +35,7 @@ export const BookProvider = ({ children }) => {
       const data = await response.json();
       setListaLibros(data);
       setIsLoading(false);
+      return data
     } catch (error) {
       console.error("Error al cargar la lista de libros:", error);
       setIsLoading(false);
@@ -63,7 +72,8 @@ export const BookProvider = ({ children }) => {
 
   const fetchBookById = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8080/book/${id}`);
+       const response = await fetch(`${urlBookId}${id}`);
+    //  const response = await fetch(`https://onlybooks.isanerd.club/api/book/${id}`);
       if (!response.ok) {
         throw new Error("No se pudo obtener el libro.");
       }
@@ -72,6 +82,28 @@ export const BookProvider = ({ children }) => {
     } catch (error) {
       console.error("Error al cargar el libro:", error);
       return null;
+    }
+  };
+  
+
+  const fetchObtenerResenias = async (bookId) => {
+    const url = `${API_URL}resenia/book/${bookId}`;
+    console.log("FETCH GET RESENIA")
+
+    const settings = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    try {
+      const response = await fetch(url, settings);
+      const data = await response.json();
+      setListaResenias(data);
+      return data
+    } catch (error) {
+      console.error("ERROR: ", error);
     }
   };
 
@@ -85,6 +117,30 @@ export const BookProvider = ({ children }) => {
     await fetchCategorias();
   };
 
+
+
+  const fetchFiltroRent= async()=>{
+    const settings = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
+    };
+    try {
+      const response = await fetch(urlFiltro,settings);
+      if (!response.ok) {
+        throw new Error("No se pudo obtener la lista de RentBooks");
+      }
+      const data = await response.json();
+      setRentBook(data);
+      console.log(data)
+      return data;
+    } catch (error) {
+      console.error("Error al cargar la lista de RentBooks:", error);
+    }
+  }
+
 //  const actualizarCaracteristicas = async () => {
 //  await fetchCaracteristicas();
 //};
@@ -93,6 +149,7 @@ export const BookProvider = ({ children }) => {
     fetchData();
     fetchCategorias();
     fetchCaracteristicas();
+    fetchFiltroRent()
   }, []);
 
 
@@ -106,7 +163,7 @@ export const BookProvider = ({ children }) => {
 
 
   return (
-    <GlobalContext.Provider value={{ listaCategorias, listaLibros, isLoading, actualizarListaLibros, actualizarCategorias, fetchBookById, logout, fetchCaracteristicas, listaCaracteristicas }}>
+    <GlobalContext.Provider value={{ listaCategorias, listaLibros, isLoading, listaResenias, actualizarListaLibros, actualizarCategorias, fetchBookById, logout, fetchCaracteristicas, listaCaracteristicas, fetchFiltroRent, rentBook,fetchData, fetchObtenerResenias }}>
       {children}
     </GlobalContext.Provider>
   );

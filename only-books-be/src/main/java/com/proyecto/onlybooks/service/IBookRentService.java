@@ -8,10 +8,10 @@ import java.util.List;
 
 public interface IBookRentService {
 
-        Long guardar(BookRent bookRent);
-        List<BookRentDTO> mostrarTodos();
-        BookRentDTO buscarPorId(Long id) throws ResourceNotFoundException;
-        void modificar(BookRent bookRent);
+        Long guardar(BookRent bookRent) throws ResourceNotFoundException;
+        List<BookRent> mostrarTodos();
+        BookRent buscarPorId(Long id) throws ResourceNotFoundException;
+        void modificar(BookRent bookRent) throws ResourceNotFoundException;
         void eliminar(Long id) throws ResourceNotFoundException;
 
 }
