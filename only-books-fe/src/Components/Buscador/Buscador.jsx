@@ -96,6 +96,7 @@ function Buscador({ obtenerDatos, listaLibros, obtenerDatosFilt }) {
 
                 <button>Buscar</button>
                 </div>
+                
               </div>
             </div>
           </form>

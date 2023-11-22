@@ -203,9 +203,11 @@ if(noDisponible){
                 </div>
               )}
             </div>
-            <label>Ver Disponibilidad:</label>
+            <label className={styles.dispo}>Ver Disponibilidad:</label>
             <VerReservas id={id} obtenerReservaLibro={obtenerReservaLibro}></VerReservas>
-            <Calendar
+            <div className={styles.calendarioBtn}>
+              <Calendar
+              
               placeholder="Seleccione la fecha de alquiler"
               format="YYYY-MM-DD"
               value={values}
@@ -240,6 +242,8 @@ if(noDisponible){
                 return props;
               }}
             />
+            </div>
+
             <GenerateDates startDate={startDate} endDate={endDate} reservas={reservaLibro} obtenerFechas={obtenerFechas} />
             <div className={styles.sectionDetalles}>
               <div className={styles.titles}>

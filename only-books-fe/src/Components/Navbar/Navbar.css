@@ -181,6 +181,9 @@
 } 
 
 @media (max-width: 499px) {
+    .subResponsive{
+        display: none;
+    }
     .lema {
         font-size: 9px;
         height: 100%;
