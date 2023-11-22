@@ -81,7 +81,7 @@ function Resenia({ id }) {
     }
   };
 
-  const verificarUsuario = async() => {
+  const verificarUsuario = async () => {
     const url = `${API_URL}bookRent/user/${userId}`;
     const settings = {
       method: "GET",
@@ -98,19 +98,19 @@ function Resenia({ id }) {
       console.log("VerificarUsuario")
       console.log(listaReservas)
 
-      const lista = listaReservas.map((reserva)=>{
-        if(reserva.book.id == bookId)
-        return true
+      const lista = listaReservas.map((reserva) => {
+        if (reserva.book.id == bookId)
+          return true
       })
-      const tieneReserva = lista.some(booleanos => booleanos ===true)
+      const tieneReserva = lista.some(booleanos => booleanos === true)
       console.log("Dentro verificar Usuario")
       console.log(tieneReserva)
       return tieneReserva
 
-    }catch(error){
+    } catch (error) {
       console.error("ERROR: ", error)
     }
-    
+
 
   };
 
@@ -126,7 +126,7 @@ function Resenia({ id }) {
     const resultado = await verificarUsuario();
     console.log("HANDLE SUBMIT")
     console.log(resultado)
-    if(resultado){
+    if (resultado) {
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -134,11 +134,11 @@ function Resenia({ id }) {
         showConfirmButton: false,
         timer: 3500
       });
-      
+
       await fetchEnviarResenia();
       await fetchObtenerResenias(bookId);
-      
-    }else{
+
+    } else {
       console.log("No puedes hacer una reseña para este libro")
       Swal.fire({
         position: "top-end",
@@ -157,31 +157,29 @@ function Resenia({ id }) {
   return (
     <section className={style.reseniaSection}>
       <h2 className={style.title}>Enviar reseña</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={style.formContainerResponsive}>
         <div>
           <label htmlFor="comentario">Comentario:</label>
           <div>
+            <textarea
+              id="comentario"
+              name="comentario"
+              value={formData.comentario}
+              cols={50}
+              rows={4}
+              onChange={handleChange}
+            ></textarea></div>
+        </div>
 
-          
-        <textarea
-          id="comentario"
-          name="comentario"
-          value={formData.comentario}
-          cols={50}
-          rows={4}
-          onChange={handleChange}
-        ></textarea></div>
-        </div>
-        
         <div>
+          <label htmlFor="valoracion">Valoracion:</label>
+          <div>
+            <ul className={style.listaStars}>{renderEstrellas(estrellas)}</ul>
+          </div>
+        </div>
 
-        
-        <label htmlFor="valoracion">Valoracion:</label>
-        <div>
-          <ul className={style.listaStars}>{renderEstrellas(estrellas)}</ul>
-        </div>
-        </div>
         <button>Enviar Reseña</button>
+
       </form>
     </section>
   );

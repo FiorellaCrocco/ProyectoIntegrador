@@ -245,23 +245,26 @@ if(noDisponible){
             </div>
 
             <GenerateDates startDate={startDate} endDate={endDate} reservas={reservaLibro} obtenerFechas={obtenerFechas} />
+
             <div className={styles.sectionDetalles}>
+
               <div className={styles.titles}>
                 <h1 className={styles.bookh1}>{libro.title}</h1>
                 <p className={styles.bookp}>{libro.author}</p>
                 <p className={styles.bookp}>{libro.description}</p>
               </div>
+
               <button
                 className={styles.btnAtras}
                 onClick={() => window.history.back()}
               >
                 Volver
               </button>
+
               {/* <CompartirRedes shareData={shareData} /> */}
               <button className={styles.customButton} onClick={toggleShareModal}>
                 <FaShare className={styles.shareIcon} />
                 <span style={{ fontSize: '15px', fontWeight: 'bold' ,marginLeft: '5px' }}>Compartir</span>
-                
               </button>
 
 
@@ -272,9 +275,11 @@ if(noDisponible){
                   )}
                 </Modal>
               )}
-              {console.log('shareData DetalleLibro: ' + shareData.title)}
-              {console.log('shareData DetalleLibro: ' + shareData.description)}
+              {/* {console.log('shareData DetalleLibro: ' + shareData.title)}
+              {console.log('shareData DetalleLibro: ' + shareData.description)} */}
             </div>
+
+
             <CaracteristicaLibro id={id} />
             <Resenia id={id} />
             <ReseniaLista id={id} />

@@ -95,11 +95,6 @@ export const LoginPage = () => {
 
 	function passwordChangeHandler() {
 		setShowPassword(!showPassword)
-		// if(password.type === 'password') {
-		// 	password.type = 'text';
-		// } else {
-		// 	password.type = 'password';
-		// }
 	}
 
 	return (

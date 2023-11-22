@@ -56,7 +56,6 @@ const CompartirRedes = ({ shareData }) => {
             fontStyle: 'italic',
         },
     };
-
     const styleShare={
         root: {
             background: 'transparent',
