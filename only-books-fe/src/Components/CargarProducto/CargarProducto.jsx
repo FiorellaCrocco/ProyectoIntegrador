@@ -210,8 +210,9 @@ function CargarProducto() {
   };
 
   return (
+    <div>
+      <h2 className="titulo">Cargar Libro</h2>
     <div className="Container">
-      <h1 className="titulo">Cargar Libro</h1>
       <form className="formulario" onSubmit={handleSubmit}>
         <div className="div">
           <label className="labels" htmlFor="title">
@@ -266,7 +267,7 @@ function CargarProducto() {
         </div>
         <div className="div">
           <label className="labels" htmlFor="publication_year">
-            Año de Publicación (formato: YYYY-MM-DD):
+            Año de Publicación:
           </label>
           <input
             className="input"
@@ -277,7 +278,7 @@ function CargarProducto() {
             onChange={handleInputChange}
           />
         </div>
-        <div className="div">
+        {/* <div className="div">
           <label className="labels" htmlFor="qualification">
             Calificación:
           </label>
@@ -289,7 +290,7 @@ function CargarProducto() {
             value={formData.qualification}
             onChange={handleInputChange}
           />
-        </div>
+        </div> */}
         <div className="div">
           <label className="labels" htmlFor="price">
             Precio:
@@ -337,6 +338,7 @@ function CargarProducto() {
           Guardar Libro
         </button>
       </form>
+    </div>
     </div>
   );
 }

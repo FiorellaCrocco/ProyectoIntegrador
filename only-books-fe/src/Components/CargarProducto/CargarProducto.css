@@ -1,16 +1,18 @@
 .Container {
-    width: 40%;
+    width: 500px;
+    height: 100vh;
+    display: flex;
     flex-direction: column;
-    font-weight: 700;
+    color: #182b39;
+   font-weight: 700;
     align-items: center;
-    padding-top: 10px;
-    /* padding-bottom: 200px; */
-    /* background-color: transparent */
+    padding-top: 25px;
+    padding-bottom: 25px;
     background: #cae0ed;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
-
+    box-shadow: 11px 09px 10px #00000061;
+    overflow-y: scroll;
 }
 .divSelect{
     width: 50%;
@@ -47,16 +49,15 @@
 }
 
 .titulo {
+    border-radius: 10px;
+    box-shadow: 11px 09px 10px #00000061;
+    background-color: #cae0ed;
+    color: #182b39;
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding: 20px;
+    width: 500px;
     text-align: center;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #4eb5c2;
-    color: #152e37;
-    border: 1px solid transparent;
-    border-radius: 8px;
-    border-color: #152e37;
-
-
 }
 
 .input {

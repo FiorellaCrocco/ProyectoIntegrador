@@ -68,7 +68,7 @@ const ListarCategoria = () => {
       
     return (
         <div className="listCaract">
-            <h2>Lista de Categorías:</h2>
+            <h2>Listado de Categorías:</h2>
             <ul className="elementsCaract">
                 {listaCategorias.map((categoria) => (
                     <li className='listId' key={categoria.id}>
