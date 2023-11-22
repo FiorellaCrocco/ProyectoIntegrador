@@ -132,7 +132,7 @@ const ListarProducto = () => {
           </DialogContent>
           <DialogActions>
             <Button onClick={handleEditClose} color="primary">
-              Cerrar
+              Cancelar
             </Button>
           </DialogActions>
         </Dialog>

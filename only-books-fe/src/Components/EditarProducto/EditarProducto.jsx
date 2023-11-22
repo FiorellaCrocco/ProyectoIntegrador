@@ -3,7 +3,7 @@ import React, { useEffect, useState, useContext, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { Dialog, DialogContent, DialogActions } from "@mui/material";
-import "./EditarProducto";
+import "./EditarProducto.css";
 import { GlobalContext } from "../../Context/globalContext";
 import Swal from 'sweetalert2'
 
@@ -216,7 +216,7 @@ const EditarProducto = ({ product, onUpdateList }) => {
   return (
     <div>
       {product && (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="edit-form-product">
           <div className="form-group">
             <label htmlFor="title">Título:</label>
             <input
