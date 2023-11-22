@@ -1,9 +1,7 @@
-.listaProductosAdmin{
-  width: 80%;
-}
+
 
 .listaContainerAdmin {
-  width: 100%;
+  width: 900px;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -14,14 +12,14 @@
   background: #cae0ed;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
+  box-shadow: 11px 09px 10px #00000061;
   overflow-y: scroll;
 }
 
 .lista {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  
   align-items: center;
   gap: 20px;
   padding-top: 5px;
@@ -30,7 +28,7 @@
 }
 
 .tituloListaAdmin {
-  width: 100%;
+  width: 900px;
   padding: 20px;
   margin-top: 0;
   margin-bottom: 0;
@@ -38,11 +36,13 @@
   color: #182b39;
   text-align: center;
   border-radius: 10px;
-  box-shadow: 0 15px 35px rgba(16, 91, 230, 0.93);
+  box-shadow: 11px 09px 10px #00000061;
 }
 
 .id {
   font-weight: bold;
+ 
+  min-width: 50px;
 }
 
 .btnEdit {
@@ -62,6 +62,14 @@
   display: flex;
   width: 200px;
   justify-content: space-between;
+  gap:inherit;
+  
+}
 
+
+.nombre {
+  
+  min-width: 595px;
 
 }
+

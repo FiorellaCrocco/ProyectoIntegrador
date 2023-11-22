@@ -97,7 +97,7 @@ const ListarProducto = () => {
   }
 
   return (
-    <div className="listaProductosAdmin">
+    <div >
       <h2 className="tituloListaAdmin">Listado de productos</h2>
       <ul className="listaContainerAdmin">
         {productos.map((libro) => (
