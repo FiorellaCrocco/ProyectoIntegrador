@@ -53,7 +53,7 @@ const ListaFavoritos = () => {
   const renderList = () => {
   return (
     <div className="listado">
-      <h2>Tus Libros Favoritos:</h2>
+      <h2 className="h2">Tus Libros Favoritos:</h2>
       <ul className="cardFavs">
         {librosFavoritos.map((bookId) => (
           <li key={bookId.id}>
@@ -87,7 +87,7 @@ const ListaFavoritos = () => {
         ))}
       </ul>
     </div>*/
-    <div>{renderList()}</div>
+    <div className="render">{renderList()}</div>
   );
 };
 
