@@ -142,7 +142,7 @@ const AdministrarCaracteristicas = () => {
         <div className="editPopup">
           <h3>Editar Característica</h3>
           <label>Título:</label>
-          <input
+          <input className="inputTitCaract"
             type="text"
             value={caracteristicaEdit.title}
             onChange={(e) => setCaracteristicaEdit({ ...caracteristicaEdit, title: e.target.value })}
@@ -153,8 +153,23 @@ const AdministrarCaracteristicas = () => {
             value={caracteristicaEdit.icono}
             onChange={(e) => setCaracteristicaEdit({ ...caracteristicaEdit, icono: e.target.value })}
           /> */}
-          <button onClick={actualizarCaracteristica}>Guardar</button>
-          <button onClick={cerrarPopupEdicion}>Cancelar</button>
+          <div className='admin-btn-containerCaract'>
+          <Button
+                variant="outlined"
+                color="error"
+                className='btnDeleteCaracteristica' onClick={cerrarPopupEdicion}>Cancelar
+                
+           </Button>
+           <Button
+                variant="outlined"
+                color="success"
+              className='btnEdit' onClick={actualizarCaracteristica}>Guardar
+              
+          </Button>
+          </div>
+
+
+
           {/* Puedes agregar aquí los campos de edición y lógica de actualización */}
         </div>
       )}
