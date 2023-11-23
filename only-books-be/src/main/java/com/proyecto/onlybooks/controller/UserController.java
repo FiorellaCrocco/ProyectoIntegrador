@@ -1,6 +1,7 @@
 package com.proyecto.onlybooks.controller;
 
 import com.proyecto.onlybooks.dto.UserDTO;
+import com.proyecto.onlybooks.dto.UserSummary;
 import com.proyecto.onlybooks.entity.Book;
 import com.proyecto.onlybooks.entity.BookRent;
 import com.proyecto.onlybooks.entity.User;
@@ -92,6 +93,17 @@ public class UserController {
         ResponseEntity<?> response = null;
         response = ResponseEntity.status(HttpStatus.OK).body("Libro eliminado de favoritos con exito");
         return response;
+    }
+
+    @GetMapping("/listaexpress")
+    public List<UserSummary> listarUserExpress(){
+        List<UserSummary> lista =null;
+        try{
+            lista=userService.listarUserExpress();
+        }catch(ResourceNotFoundException e){
+            System.out.println(e);
+        }
+        return lista;
     }
 
 }
