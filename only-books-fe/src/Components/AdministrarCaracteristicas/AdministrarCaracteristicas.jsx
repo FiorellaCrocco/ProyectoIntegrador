@@ -3,6 +3,7 @@ import './AdministrarCaracteristicas.css'
 import { GlobalContext } from "../../Context/globalContext";
 import CrearCaracteristica from "../AdministrarCaracteristicas/CrearCaracteristica";
 import Swal from 'sweetalert2'
+import Button from "@mui/material/Button";
 
 const AdministrarCaracteristicas = () => {
   const { listaCaracteristicas,fetchCaracteristicas } = useContext(GlobalContext);
@@ -110,23 +111,28 @@ const AdministrarCaracteristicas = () => {
 
 
   return (
-    <div className="listCaract">
-      <h2>Listado de Caracteristicas: </h2>
+    <div >
+      <h2 className="tituloListCar">Listado de Caracteristicas</h2>
       <ul className="elementsCaract">
         {listaCaracteristicas.map((caracteristica) => (
           <li className='listId' key={caracteristica.id}>
-            <div>{caracteristica.id}</div>
+            <div className='idAdminCaract'>{caracteristica.id}</div>
             <div className='listaTitle'>{caracteristica.title}</div>
-            <div className='btnContainer'>
-              <button
-                className='btnDelete'
+            <div className='admin-btn-container'>
+            <Button
+                variant="outlined"
+                color="error"
+                className='btnDeleteCaracteristica'
                 onClick={() => eliminarCaracteristica(caracteristica.id)}
               >
                 Eliminar
-              </button>
-              <button className='btnEditCaracteristica' onClick={() => abrirPopupEdicion(caracteristica)}>
+                </Button>
+                <Button
+                variant="outlined"
+                color="success"
+              className='btnEdit' onClick={() => abrirPopupEdicion(caracteristica)}>
                 Editar
-              </button>
+                </Button>
               
             </div>
           </li>
@@ -136,7 +142,7 @@ const AdministrarCaracteristicas = () => {
         <div className="editPopup">
           <h3>Editar Característica</h3>
           <label>Título:</label>
-          <input
+          <input className="inputTitCaract"
             type="text"
             value={caracteristicaEdit.title}
             onChange={(e) => setCaracteristicaEdit({ ...caracteristicaEdit, title: e.target.value })}
@@ -147,8 +153,23 @@ const AdministrarCaracteristicas = () => {
             value={caracteristicaEdit.icono}
             onChange={(e) => setCaracteristicaEdit({ ...caracteristicaEdit, icono: e.target.value })}
           /> */}
-          <button onClick={actualizarCaracteristica}>Guardar</button>
-          <button onClick={cerrarPopupEdicion}>Cancelar</button>
+          <div className='admin-btn-containerCaract'>
+          <Button
+                variant="outlined"
+                color="error"
+                className='btnDeleteCaracteristica' onClick={cerrarPopupEdicion}>Cancelar
+                
+           </Button>
+           <Button
+                variant="outlined"
+                color="success"
+              className='btnEdit' onClick={actualizarCaracteristica}>Guardar
+              
+          </Button>
+          </div>
+
+
+
           {/* Puedes agregar aquí los campos de edición y lógica de actualización */}
         </div>
       )}

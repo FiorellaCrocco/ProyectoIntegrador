@@ -17,7 +17,7 @@ function CrearCaracteristica() {
     useContext(GlobalContext);
 
   const handlePopUp = (e) => {
-    editPopupOpen==true?setEditPopupOpen(false):setEditPopupOpen(true)
+    editPopupOpen == true ? setEditPopupOpen(false) : setEditPopupOpen(true);
   };
   function cerrarPopupCrear() {
     setEditPopupOpen(false);
@@ -109,7 +109,7 @@ function CrearCaracteristica() {
           <h3>Crear Caracteristica</h3>
 
           <label>Título</label>
-          <input
+          <input className="inputTitCaract"
             type="text"
             name="title"
             value={caracteristica.title}
@@ -117,22 +117,32 @@ function CrearCaracteristica() {
           />
           <label>Icono</label>
           <input
-            className="input"
+            className="inputCaract"
             type="file"
             name="icono"
             //accept="image/*"  // Esto limita la selección a archivos de imagen
             //value={caracteristica.icono}
             onChange={handleImageChange}
           />
-          <button onClick={handleSubmit} type="submit">Crear Caracteristica</button>
+          <button className="FormBtn" onClick={handleSubmit} type="submit">
+            Crear Caracteristica
+          </button>
         </div>
       )}
-      <button  className="btnEditCaracteristica" onClick={() => handlePopUp()} type="submit">
-        {
-          editPopupOpen?"Cerrar":"Agregar Caracteristica"
-        }
-        
-      </button>
+      {editPopupOpen ? (
+        <button
+          className="FormBtnCerrar"
+          onClick={() => handlePopUp()}
+          type="submit"
+        >
+          Cerrar
+        </button>
+      ) : (
+        <button className="FormBtn" onClick={() => handlePopUp()} type="submit">
+          
+          Agregar Caracteristica
+        </button>
+      )}
     </>
   );
 }
