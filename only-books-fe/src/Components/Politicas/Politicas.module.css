@@ -32,6 +32,10 @@
 
 .titulopolitica {
     margin: 0px;
+    text-decoration: underline;
+}
+.tituloh4 {
+    margin: 0px;
 }
 
 /* @media (max-width: 768px) {
