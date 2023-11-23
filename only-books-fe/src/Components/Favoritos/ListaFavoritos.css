@@ -5,13 +5,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 70vh;
     /* background-color: ; */
 }
 
-.render{
-    height: 69.1vh;
-}
 .h2{
+    color: #ff9e71;
     font-size: 40px;
 }
 
@@ -25,7 +24,7 @@
     grid-template-columns: repeat(6, minmax(100px, 1fr));
     gap: 10px;
     padding: 20px;
-    background-color: #CAE0ED;
+    background-color: #eeeeee;
 }
 @media (max-width: 1466px){
     .cardFavs{
