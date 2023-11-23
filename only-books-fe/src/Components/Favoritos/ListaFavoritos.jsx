@@ -54,7 +54,9 @@ const ListaFavoritos = () => {
   return (
     <div className="listado">
       <h2 className="h2">Tus Libros Favoritos:</h2>
-      <ul className="cardFavs">
+      {
+        librosFavoritos.length==0?<p>No tienes libros como favorito</p>:
+        <ul className="cardFavs">
         {librosFavoritos.map((bookId) => (
           <li key={bookId.id}>
             <Card
@@ -66,6 +68,8 @@ const ListaFavoritos = () => {
           </li>
         ))}
       </ul>
+      }
+      
     </div>
   );
   }
