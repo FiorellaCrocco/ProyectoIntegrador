@@ -127,7 +127,10 @@ function CrearCaracteristica() {
           <button onClick={handleSubmit} type="submit">Crear Caracteristica</button>
         </div>
       )}
-      <button  className="btnEditCaracteristica" onClick={() => handlePopUp()} type="submit">
+      <button  
+        
+      
+      className="FormBtn" onClick={() => handlePopUp()} type="submit">
         {
           editPopupOpen?"Cerrar":"Agregar Caracteristica"
         }
