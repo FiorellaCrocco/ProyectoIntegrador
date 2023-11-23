@@ -126,7 +126,8 @@ function LibrosPaginados({ libros, isLoading, librosFiltrados, librosReservados,
 
     return (
         <div className="listaContainer">
-            {isLoading ? <div className="loader"></div> : null}
+            
+            {isLoading ? <div className="custom-loader"></div> : null}
             <h4 className="cantLibros">Cantidad de libros: {currentItem.length}/{totalLibros}</h4>
             <ul className="listaPaginada">{renderCards()}</ul>
             <div className="btn-container">

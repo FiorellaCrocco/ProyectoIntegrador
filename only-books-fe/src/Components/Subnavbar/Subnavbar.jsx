@@ -12,7 +12,7 @@ const Subnavbar = () => {
 
     return (
         <div className="subnavbar">
-            <Link to="/">Inicio</Link>
+            <Link to="/" onClick={window.location.reload}>Inicio</Link>
             <Link to="/suscripciones">Subscripciones</Link>
             <Link to="/reservas">Mis reservas</Link>
             {/* <Link to="/favoritos">Mis favoritos</Link> */}

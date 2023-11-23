@@ -12,6 +12,7 @@ export const BookProvider = ({ children }) => {
   const [rentBook, setRentBook] = useState([])
   const [token, setToken] = useState(sessionStorage.getItem('token') || '');
 
+
   const API_URL = import.meta.env.VITE_API_URL
 
 
@@ -85,6 +86,37 @@ export const BookProvider = ({ children }) => {
     }
   };
 
+  const fetchListaFavoritos = async () => {
+    try {
+      const userData = JSON.parse(sessionStorage.getItem('userData'))
+      console.log(userData)
+      if (userData) {
+        const userId =userData.id;
+        const token = sessionStorage.getItem("token");
+
+        const url = `${API_URL}user/mostrarFav/${userId}`;
+        const set = {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        };
+        const response = await fetch(url, set);
+        const data = await response.json();
+
+        if (response.ok) {
+          console.log("Lista de libros favoritos:", data);
+          return(data)
+        } else {
+          throw new Error("Error al realizar la operación");
+        }
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
 
   const fetchObtenerResenias = async (bookId) => {
     const url = `${API_URL}resenia/book/${bookId}`;
@@ -152,8 +184,6 @@ export const BookProvider = ({ children }) => {
     fetchFiltroRent()
   }, []);
 
-
-
   const logout = () => {
     setToken('');
     sessionStorage.removeItem('token');
@@ -163,7 +193,7 @@ export const BookProvider = ({ children }) => {
 
 
   return (
-    <GlobalContext.Provider value={{ listaCategorias, listaLibros, isLoading, listaResenias, actualizarListaLibros, actualizarCategorias, fetchBookById, logout, fetchCaracteristicas, listaCaracteristicas, fetchFiltroRent, rentBook, fetchData, fetchObtenerResenias }}>
+    <GlobalContext.Provider value={{ listaCategorias, listaLibros, isLoading, listaResenias, actualizarListaLibros, actualizarCategorias, fetchBookById, logout, fetchCaracteristicas, listaCaracteristicas, fetchFiltroRent, rentBook, fetchData, fetchObtenerResenias, fetchListaFavoritos }}>
       {children}
     </GlobalContext.Provider>
   );

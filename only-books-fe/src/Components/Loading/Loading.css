@@ -1,4 +1,4 @@
-.loader{
+/*.loader{
     margin: 50px;
     justify-content: center;
     width: 150px;
@@ -26,7 +26,7 @@
 .loader::after{
     width: 85%;
     height: 85%;
-    background-color: lightblue;
+    background-color: #eeeeee;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
@@ -37,4 +37,15 @@
     to{
         transform: rotate(360deg);
     }
-}
+}*/
+
+.custom-loader {
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:conic-gradient(#0000 10%,rgb(42, 92, 229));
+    mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+    -webkit-mask:radial-gradient(farthest-side,#0000 calc(100% - 8px),#000 0);
+    animation:s3 1s infinite linear;
+  }
+  @keyframes s3 {to{transform: rotate(1turn)}}
