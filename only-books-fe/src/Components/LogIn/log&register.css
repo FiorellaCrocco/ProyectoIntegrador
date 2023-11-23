@@ -88,7 +88,7 @@ form {
 
 body {
 	font-family: Inter, sans-serif;
-	background-color: #9cc6dd;
+	background-color: #eeeeee;
 }
 
 .input-group {
@@ -208,7 +208,7 @@ body {
 	right: 1rem;
 	transform: translate(-20%, -40%);
 	cursor: pointer;
-	color: #6491e4;
+	color: black;
 	font-size: 1.5rem;
 }
 

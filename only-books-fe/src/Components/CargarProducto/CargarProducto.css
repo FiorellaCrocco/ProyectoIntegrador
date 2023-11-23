@@ -17,17 +17,25 @@
 .divSelect{
     width: 50%;
     text-align: center;
+
+}
+.divSelect>div{
+    margin: 5px;
+    padding: 3px;
+}
+.divSelect>div:hover{
+    background-color: #84bddc;
+    cursor: pointer;
 }
 .divSelect>label{
     font-size: 20px;
-
 }
 .divSelect>div>label{
+    cursor: pointer;
     color: rgb(59, 59, 59);
 }
 
 .ccSelect{
-    
     display: flex;
     gap: 20px;
 }

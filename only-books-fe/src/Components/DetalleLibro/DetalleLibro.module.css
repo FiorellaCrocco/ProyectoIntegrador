@@ -8,6 +8,12 @@
     /* margin-top: 10px; */
     padding-top: 55px;
 }
+.detailContainerEmpty{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
 
 .bookcontainer {
     display: flex;
@@ -63,6 +69,8 @@
     margin: 20px 0;
     font-size: 32px;
     text-align: left;
+    display: inline;
+
 }
 
 .bookp {
@@ -107,8 +115,11 @@
     align-items: flex-start;
     width: 70%;
     padding-left: 5rem;
-
 }
+.favIcon{
+    font-size: 26px;
+}
+
 
 .btnAtras {
     background-color: #F89344;
@@ -196,3 +207,4 @@
         padding-left: 0;
     }
 }
+
