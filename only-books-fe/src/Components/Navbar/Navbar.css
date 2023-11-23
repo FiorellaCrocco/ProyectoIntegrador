@@ -144,7 +144,11 @@
     transition: transform 150ms ease-out, opacity 150ms ease-out;
   }
 
-
+@media (max-width: 650px) {
+        .btn-create, .btn-login{
+        font-size: 10px;
+    }
+}
 /* Media Queries */
 @media (max-width: 614px) {
     .header-container {
@@ -180,6 +184,13 @@
     }
 } 
 
+@media (max-width: 510px){
+        .btn-create, .btn-login{
+        font-size: 55%;
+    }
+
+}
+
 @media (max-width: 499px) {
     .subResponsive{
         display: none;
@@ -206,6 +217,11 @@
 
 }
 
+@media (max-width: 415px){
+    .subResponsive{
+        height: px;
+    }
+}
 
 @media (max-width: 320px) {
     .lema {
