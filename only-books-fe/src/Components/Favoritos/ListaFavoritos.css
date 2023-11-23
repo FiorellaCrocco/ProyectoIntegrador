@@ -8,6 +8,13 @@
     /* background-color: ; */
 }
 
+.render{
+    height: 69.1vh;
+}
+.h2{
+    font-size: 40px;
+}
+
 .cardFavs{
     /* margin: 0%;
     flex-wrap: wrap;
