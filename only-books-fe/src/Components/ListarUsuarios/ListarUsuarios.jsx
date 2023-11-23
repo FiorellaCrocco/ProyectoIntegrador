@@ -11,7 +11,7 @@ const ListarUsuarios = () => {
   const token = sessionStorage.getItem("token");
   const API_URL= import.meta.env.VITE_API_URL
 
-  const urlListar = `${API_URL}user/listar`;
+  const urlListar = `${API_URL}user/listaexpress`;
 //   const urlListar = "https://onlybooks.isanerd.club/api/user/listar";
    const urlModificar = `${API_URL}user/modificar`;
 //  const urlModificar = "https://onlybooks.isanerd.club/api/user/modificar";
