@@ -62,6 +62,7 @@
     height: 140px;
     margin: 5px;
     gap: 10px;
+    margin-bottom: 40px;
 }
 
 .category-square>img {
