@@ -106,36 +106,63 @@ width: 30px;
     
 }
 .editPopup{
-    margin-top: 20px;
+    width: 550px;  
+    height:fit-content;
     display: flex;
     flex-direction: column;
-    color: #244356;
-    font-weight: 700;
-    align-items: center;
+    color: #182b39;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    background: #cae0ed;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 11px 09px 10px #00000061;
+    overflow-y: scroll;
+    gap:inherit;
 }
-.editPopup>input{
+
+.inputCaract {
+    width: 455px;
+    height: 50px;
+    background-color: #cae0ed;
+    margin-top: 5px;
+    border: 2px #9cc6dd solid;
+    border-radius: 8px;
+    padding-top: 20px;
+    padding-left: 70px;
+
+}
+
+.inputTitCaract{
     padding-left: 10px;
-    color: white;
-    width: 70%;
-    background-color:#549dc2;
-    border: 2px white solid;
+    color:  #182b39;
+    background: #cae0ed;
+    border: 2px #9cc6dd solid;
     border-radius: 8px;
     font-weight: 500;
-
+    height: 30px;
+    
 }
-.editPopup>button{
-        /* background-color: transparent; */
-        background: linear-gradient(to right, #418cb1, #327297);
-        font-size: 0.9rem;
-        color: #e7f1f7;
-        padding: 5px 33px;
-        margin-top: 5px;
-        border: 2px solid #9cc6dd;
-        border-radius: 10px;
-        position: relative;
+.FormBtnCerrar{
+    margin-top: 10px;
+    background-color: #F89344;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    color: #EFFAFF;
+    cursor: pointer;
+    padding: 10px 15px;
+    margin-left: 10px;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    transition: border-color 0.25s; 
+    }
+.FormBtnCerrar:hover {
+    background: #ffc9a0;
 }
 
-.editPopup>button:hover {
+.FormBtn:hover {
 	background: #9cc6dd;
 }
 .btnEditCaracteristica{
