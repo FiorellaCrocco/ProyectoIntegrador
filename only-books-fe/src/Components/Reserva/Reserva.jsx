@@ -6,6 +6,7 @@ import Card from "../Card/Card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
+import CaracteristicaLibro from "../CaracteristicaLibro/CaracteristicaLibro";
 
 const Reserva = () => {
   //const { userData } = useAccount();
@@ -65,10 +66,12 @@ const Reserva = () => {
             Swal.fire({
               text: "Se reservo el libro correctamente!",
               icon: "success",
+              icon: "success",
             });
           } else {
             Swal.fire({
               text: "ERROR: no se pudo reservar el libro, intente mas tardeo",
+              icon: "error",
               icon: "error",
             });
           }
@@ -220,8 +223,25 @@ const Reserva = () => {
               <div>
                 <h5>{libro.author}</h5>
                 <p>{libro.description}</p>
-              </div>
-              <div className="card-details">
+                <h3 className="card-title">Categorias</h3>
+              <ul>
+                
+                {libro.categorias.map((categoria) => (
+                  <li key={categoria.id}>{categoria.titulo}</li>
+                ))}
+              </ul>
+              <CaracteristicaLibro id={libro.id} />
+              <ul>
+                {libro.caracteristicas.map((caracteristica) => (
+                  <li key={caracteristica.id}>{caracteristica.titulo}</li>
+                ))}
+              </ul>    
+
+
+
+            </div>
+  
+            <div className="card-details">
                 <div className="price">
                   <span>Precio</span>
                   <p>${libro.price}</p>
