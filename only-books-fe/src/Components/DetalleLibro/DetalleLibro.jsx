@@ -45,7 +45,6 @@ function DetalleLibro({ id }) {
 
   const userData = JSON.parse(sessionStorage.getItem('userData'))
 
-
   const [shareData, setShareData] = useState({
     title: "",
     description: "",
@@ -119,7 +118,6 @@ function DetalleLibro({ id }) {
       setStartDate(reserva[0].startDate);
     }
   };
-
   useEffect(() => {
     HandleReserva(reservaLibro);
   }, [reservaLibro]);

@@ -17,10 +17,10 @@ const Reserva = () => {
   console.log(userId);
   const location = useLocation();
   const { libro } = location.state || {};
-const {values} = {};
+  const { values } = location.state || {};
 
   console.log(libro);
-
+  console.log(values);
   const onInputChange = (e) => {
     const { value } = e.target;
     setPais(value);
@@ -176,7 +176,7 @@ const {values} = {};
             placeholder=" "
           />
         </div>
-            {console.log(values)}
+        {console.log(values)}
         <div>
           <label htmlFor="periodoAlq">Periodo de Alquiler</label>
           <input
