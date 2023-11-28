@@ -18,6 +18,9 @@ import Resenia from "../Resenia/Resenia";
 import ReseniaLista from "../ReseniaLista/ReseniaLista";
 import Modal from "./ModalShare";
 import Favoritos from "../Favoritos/Favoritos"
+import Reserva from "../Reserva/Reserva";
+import { useNavigate } from "react-router-dom";
+//import { useHistory } from "react-router-dom";
 
 function DetalleLibro({ id }) {
   const [showGalleryModal, setShowGalleryModal] = useState(false);
@@ -35,6 +38,8 @@ function DetalleLibro({ id }) {
   const [endDate, setEndDate] = useState("");
   const [startDate, setStartDate] = useState("");
   const [noDisponible, setNoDisponible] = useState(false);
+  const navigate = useNavigate();
+  //const history = useHistory();
 
   const [shareData, setShareData] = useState({
     title: "",
@@ -148,6 +153,21 @@ function DetalleLibro({ id }) {
     setModal(true);
   };
 
+  const handleReservar = (e) => {
+    e.preventDefault();
+    console.log(libro);
+
+     navigate('/reservar', {
+       replace: true,
+       state: {
+         libro: libro,
+         logged: true
+       },
+     });
+
+    console.log("adentro handle");
+  }
+  
   return (
     <div>
       {libro != null ? (
@@ -258,6 +278,7 @@ function DetalleLibro({ id }) {
                 }}
               />
             </div>
+            <button type="submit" onClick={handleReservar}>Reservar</button>
 
             <GenerateDates
               startDate={startDate}
