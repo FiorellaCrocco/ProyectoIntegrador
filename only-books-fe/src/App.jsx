@@ -12,6 +12,7 @@ import RestrictedNotAdmin from './Components/RestrictedPageResponsive/Restricted
 import LoginPage from './Components/LogIn/LoginPage';
 import RegisterPage from './Components/LogIn/RegisterPage'
 import ListaFavoritos from './Components/Favoritos/ListaFavoritos';
+import Historial from './Components/Historial/Historial';
 
 
 
@@ -41,6 +42,7 @@ function App() {
           <Route path='/perfil' Component={Perfil}/>
           <Route path='/login' Component={LoginPage}/>
           <Route path= '/favoritos' Component={ListaFavoritos}/>
+          <Route path= '/historial' Component={Historial}/>
         </Routes>
       </div>
       <Footer />
