@@ -43,11 +43,8 @@ function DetalleLibro({ id }) {
   const navigate = useNavigate();
   const location = useLocation();
 
-<<<<<<< HEAD
-=======
-  const userData = JSON.parse(sessionStorage.getItem("userData"));
 
->>>>>>> 54308daec1d1a62e7b3c6aab507cb9afed9278ba
+  const userData = JSON.parse(sessionStorage.getItem("userData"));
   const [shareData, setShareData] = useState({
     title: "",
     description: "",
