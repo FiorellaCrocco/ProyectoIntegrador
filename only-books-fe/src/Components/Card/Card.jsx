@@ -22,7 +22,7 @@ function Card({
   const handleClick=()=>{
     navigate(`/detail/${id}`,{state:{
       inicio: fechaInicio,
-      fin: fechaFin
+      fechaFin: fechaFin
 
     }})
   }

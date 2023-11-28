@@ -166,13 +166,17 @@ function DetalleLibro({ id }) {
   const handleReservar = (e) => {
     e.preventDefault();
     console.log(libro);
+    const inicio = values.toString().split(",")[0]
+    const fin = values.toString().split(",")[1]
+
     if (userData) {
       navigate("/reservar", {
         replace: true,
         state: {
           libro: libro,
-          values: values,
           logged: true,
+          inicio: inicio,
+          fin: fin
         },
       });
     } else {
@@ -255,6 +259,8 @@ function DetalleLibro({ id }) {
                 </div>
               )}
             </div>
+
+            <div className={styles.reservaContainer}>
             <label className={styles.dispo}>Ver Disponibilidad:</label>
             <VerReservas
               id={id}
@@ -296,9 +302,10 @@ function DetalleLibro({ id }) {
                   return props;
                 }}
               />
-              <button type="submit" onClick={handleReservar}>
+              <button className={styles.reservaButton} type="submit" onClick={handleReservar}>
                 Reservar
               </button>
+              </div>
             </div>
 
             <GenerateDates

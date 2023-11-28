@@ -7,20 +7,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
 
 const Reserva = () => {
-  const { userData } = useAccount();
+  //const { userData } = useAccount();
   const user = JSON.parse(sessionStorage.getItem("userData"));
   const userId = user ? user.id : null;
-  const [pais, setPais] = useState(null);
+  const [pais, setPais] = useState("");
   const [periodo, setPeriodo] = useState(null);
   const [loginError, setLoginError] = useState("");
 
-  console.log(userId);
   const location = useLocation();
   const { libro } = location.state || {};
-const {values} = location.state || {};
+  const { inicio } = location.state || {};
+  const { fin } = location.state || {};
 
-  console.log(libro);
-  console.log(values);
+
 
   const onInputChange = (e) => {
     const { value } = e.target;
@@ -177,7 +176,6 @@ const {values} = location.state || {};
             placeholder=" "
           />
         </div>
-            {console.log(values)}
         <div>
           <label htmlFor="periodoAlq">Periodo de Alquiler</label>
           <input
@@ -185,7 +183,7 @@ const {values} = location.state || {};
             name="periodoAlq"
             id="periodoAlq"
             className="input"
-            value={values}
+            value={inicio + " , " + fin}
             onChange={(e) => {
               onInputChange(e);
             }}
@@ -196,7 +194,7 @@ const {values} = location.state || {};
           />
         </div>
 
-        <div className>
+        <div>
           <div className="card">
             <div className="card-info">
               <FontAwesomeIcon icon={faStarSolid} className="card-star" />
