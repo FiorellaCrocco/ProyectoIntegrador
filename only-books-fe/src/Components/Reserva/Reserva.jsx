@@ -1,19 +1,23 @@
-
 import styles from "./Reserva.module.css";
 import { useLocation } from "react-router-dom";
 import { useAccount } from "../../Context/accountContext";
 import { useState } from "react";
+import Card from "../Card/Card";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
 
 const Reserva = () => {
   const { userData } = useAccount();
   const user = JSON.parse(sessionStorage.getItem("userData"));
   const userId = user ? user.id : null;
   const [pais, setPais] = useState(null);
-  const [loginError, setLoginError] = useState(""); 
+  const [periodo, setPeriodo] = useState(null);
+  const [loginError, setLoginError] = useState("");
 
   console.log(userId);
   const location = useLocation();
   const { libro } = location.state || {};
+const {values} = {};
 
   console.log(libro);
 
@@ -22,13 +26,10 @@ const Reserva = () => {
     setPais(value);
   };
 
-
-
-
   const onReserva = async (e) => {
     e.preventDefault();
     setLoginError(null);
-    
+
     try {
       const response = await fetch(url, settings);
       console.log("response: " + response);
@@ -98,7 +99,6 @@ const Reserva = () => {
             value={user.name}
             onChange={(e) => {
               onInputChange(e);
-              
             }}
             disabled
             required
@@ -117,7 +117,6 @@ const Reserva = () => {
             value={user.lastname}
             onChange={(e) => {
               onInputChange(e);
-              
             }}
             disabled
             required
@@ -136,7 +135,6 @@ const Reserva = () => {
             value={user.email}
             onChange={(e) => {
               onInputChange(e);
-              
             }}
             disabled
             required
@@ -155,7 +153,6 @@ const Reserva = () => {
             value={user.dni}
             onChange={(e) => {
               onInputChange(e);
-              
             }}
             disabled
             required
@@ -174,47 +171,59 @@ const Reserva = () => {
             value={pais}
             onChange={(e) => {
               onInputChange(e);
-              
             }}
-            
-           
+            autoComplete="off"
+            placeholder=" "
+          />
+        </div>
+            {console.log(values)}
+        <div>
+          <label htmlFor="periodoAlq">Periodo de Alquiler</label>
+          <input
+            type="periodoAlq"
+            name="periodoAlq"
+            id="periodoAlq"
+            className="input"
+            value={values}
+            onChange={(e) => {
+              onInputChange(e);
+            }}
+            disabled
+            required
             autoComplete="off"
             placeholder=" "
           />
         </div>
 
-
-        <button className="btn-lr">Reservar</button>
-      </form>
-
-      <div className={styles.detailcontainer}>
-        <div className={styles.bookcontainer}>
-          <div className={styles.section}>
-            <div className={styles.book}>
-              {
-                <img
-                  className={styles.mainimg}
-                  src={libro.listImgUrl[0]}
-                  alt={libro.title}
-                />
-              }
-
-              <div className={styles.sectionDetalles}>
-                <div className={styles.titles}>
-                  <div>
-                    <h1 className={styles.bookh1}>{libro.title}</h1>{" "}
-                  </div>
-                  <p className={styles.bookp}>{libro.author}</p>
-                  <p className={styles.bookp}>{libro.description}</p>
-                </div>
+        <div className>
+          <div className="card">
+            <div className="card-info">
+              <FontAwesomeIcon icon={faStarSolid} className="card-star" />
+              {libro.qualification}({libro.cantResenias})
+            </div>
+            <div className="card-img">
+              <img src={libro.imgUrl} alt={libro.title} />
+            </div>
+            <div className="card-title">
+              <h3>{libro.title}</h3>
+            </div>
+            <div>
+              <h5>{libro.author}</h5>
+              <p>{libro.description}</p>
+            </div>
+            <div className="card-details">
+              <div className="price">
+                <span>Precio</span>
+                <p>${libro.price}</p>
               </div>
             </div>
           </div>
         </div>
-      </div>
+
+        <button className="btn-lr">Reservar</button>
+      </form>
     </>
   );
 };
 
 export default Reserva;
-

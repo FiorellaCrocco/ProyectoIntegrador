@@ -176,6 +176,7 @@ function DetalleLibro({ id }) {
        replace: true,
        state: {
          libro: libro,
+         values: values,
          logged: true
        },
      });
@@ -292,9 +293,9 @@ function DetalleLibro({ id }) {
                   return props;
                 }}
               />
-              <button onClick={handleReservaClick}>Reservar</button>
+              <button type="submit" onClick={handleReservar}>Reservar</button>
             </div>
-            <button type="submit" onClick={handleReservar}>Reservar</button>
+            
 
             <GenerateDates
               startDate={startDate}
