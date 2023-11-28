@@ -21,6 +21,11 @@ const Search = () => {
   const [listaRentBook, setListaRentBook] = useState([]);
   const [librosDisponibles, setLibrosDisponibles] = useState([]);
   const [librosReservados, setLibrosReservados] = useState([]);
+  // const [fechaSeleccionada, setFechaSeleccionada] = useState([])
+
+  // const obtenerFechas=(fechas)=>{
+  //   setFechaSeleccionada(fechas)
+  //   }
 
   const selectLibrosAleatorios = (libros, cantidad) => {
     const librosSeleccionados = [];
@@ -131,7 +136,7 @@ const Search = () => {
   return (
     <div>
       <Recomendados libros={listaLibros}></Recomendados>
-      <Buscador obtenerDatos={obtenerDatos} obtenerDatosFilt={obtenerDatosFilt} listaLibros={listaLibros}></Buscador>
+      <Buscador obtenerDatos={obtenerDatos} obtenerDatosFilt={obtenerDatosFilt} listaLibros={listaLibros} ></Buscador>
       <div className="search-container">
         <div className="input-select">
           <div className="columnCategorias">

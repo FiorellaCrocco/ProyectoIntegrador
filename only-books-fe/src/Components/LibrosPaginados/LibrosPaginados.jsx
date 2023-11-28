@@ -3,7 +3,7 @@ import { GlobalContext } from "../../Context/globalContext";
 import Card from "../Card/Card.jsx"; // Importa el componente Card
 import './LibrosPaginados.css';
 
-function LibrosPaginados({ libros, isLoading, librosFiltrados, librosReservados, totalLibros }) {
+function LibrosPaginados({ libros, isLoading, librosFiltrados, librosReservados, totalLibros, fechaInicio, fechaFin }) {
     const librosPorPagina = 10;
     const [pagina, setPagina] = useState(1);
     const [listaFavoritos, setListaFavoritos] = useState([])
@@ -98,9 +98,9 @@ function LibrosPaginados({ libros, isLoading, librosFiltrados, librosReservados,
 
         return currentItem.map((item) => {
             if (listaFavoritos.some((favorito) => favorito.id == item.id)) {
-                return <Card key={item.id} {...item} isFavorite={true} actualizarListaFav={actualizarListaFav} />
+                return <Card key={item.id} {...item} isFavorite={true} actualizarListaFav={actualizarListaFav} fechaInicio={fechaInicio} fechaFin={fechaFin} />
             } else {
-                return <Card key={item.id} {...item} isFavorite={false} actualizarListaFav={actualizarListaFav} />
+                return <Card key={item.id} {...item} isFavorite={false} actualizarListaFav={actualizarListaFav} fechaInicio={fechaInicio} fechaFin={fechaFin}/>
             }
         }
         );
