@@ -3,7 +3,7 @@ import Calendar from "react-multi-date-picker";
 import SugerenciaLibros from "./SugerenciaLibros";
 import "./Buscador.css";
 
-function Buscador({ obtenerDatos, listaLibros, obtenerDatosFilt }) {
+function Buscador({ obtenerDatos, listaLibros, obtenerDatosFilt}) {
   const [values, setValues] = useState([]);
   const [fechaInicio, setFechaInicio] = useState("");
   const [fechaFin, setFechaFin] = useState("");

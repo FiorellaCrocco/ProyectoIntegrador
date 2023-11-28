@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DateObject from 'react-date-object';
 
-const GenerateDates = ({ startDate, endDate, reservas, obtenerFechas}) => {
+const GenerateDates = ({ reservas, obtenerFechas}) => {
  const [dates, setDates] = useState([]);
  console.log(reservas)
  

@@ -14,6 +14,9 @@ import RegisterPage from './Components/LogIn/RegisterPage'
 import ListaFavoritos from './Components/Favoritos/ListaFavoritos';
 import Historial from './Components/Historial/Historial';
 
+import Reserva from './Components/Reserva/Reserva'
+
+
 
 
 function App() {
@@ -41,8 +44,14 @@ function App() {
           <Route path='/registrarse' Component={RegisterPage}/>
           <Route path='/perfil' Component={Perfil}/>
           <Route path='/login' Component={LoginPage}/>
+          {/* <Route path='/loginReserva'element={<LoginPage msg="Es necesario iniciar sesion para reservar un libro"></LoginPage>}></Route> */}
           <Route path= '/favoritos' Component={ListaFavoritos}/>
           <Route path= '/historial' Component={Historial}/>
+
+          <Route path= '/reservar' Component={Reserva}/>
+
+          
+
         </Routes>
       </div>
       <Footer />

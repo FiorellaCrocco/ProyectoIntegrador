@@ -17,7 +17,11 @@ import GenerateDates from "./GenerateDates";
 import Resenia from "../Resenia/Resenia";
 import ReseniaLista from "../ReseniaLista/ReseniaLista";
 import Modal from "./ModalShare";
-import Favoritos from "../Favoritos/Favoritos"
+import Favoritos from "../Favoritos/Favoritos";
+
+import Reserva from "../Reserva/Reserva";
+
+import { useNavigate, useLocation } from "react-router-dom";
 
 function DetalleLibro({ id }) {
   const [showGalleryModal, setShowGalleryModal] = useState(false);
@@ -35,6 +39,11 @@ function DetalleLibro({ id }) {
   const [endDate, setEndDate] = useState("");
   const [startDate, setStartDate] = useState("");
   const [noDisponible, setNoDisponible] = useState(false);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const userData = JSON.parse(sessionStorage.getItem("userData"));
 
   const [shareData, setShareData] = useState({
     title: "",
@@ -67,6 +76,12 @@ function DetalleLibro({ id }) {
       (imagenActual - 1 + libro.listImgUrl.length) % libro.listImgUrl.length
     );
   };
+
+  useEffect(()=>{
+    if(location.state!=null){
+      setValues([location.state.inicio,location.state.fin])
+    }
+  },[])
 
   useEffect(() => {
     const getLibro = async () => {
@@ -148,6 +163,34 @@ function DetalleLibro({ id }) {
     setModal(true);
   };
 
+  const handleReservar = (e) => {
+    e.preventDefault();
+    console.log(libro);
+    const inicio = values.toString().split(",")[0]
+    const fin = values.toString().split(",")[1]
+
+    if (userData) {
+      navigate("/reservar", {
+        replace: true,
+        state: {
+          libro: libro,
+          logged: true,
+          inicio: inicio,
+          fin: fin
+        },
+      });
+    } else {
+      navigate("/login", {
+        state: {
+          key: "loginReserva",
+          msg: "Es necesario iniciar sesion para reservar un libro",
+        },
+      });
+    }
+
+    console.log("adentro handle");
+  };
+
   return (
     <div>
       {libro != null ? (
@@ -216,6 +259,8 @@ function DetalleLibro({ id }) {
                 </div>
               )}
             </div>
+
+            <div className={styles.reservaContainer}>
             <label className={styles.dispo}>Ver Disponibilidad:</label>
             <VerReservas
               id={id}
@@ -257,6 +302,10 @@ function DetalleLibro({ id }) {
                   return props;
                 }}
               />
+              <button className={styles.reservaButton} type="submit" onClick={handleReservar}>
+                Reservar
+              </button>
+              </div>
             </div>
 
             <GenerateDates
@@ -271,13 +320,12 @@ function DetalleLibro({ id }) {
                 <div>
                   <h1 className={styles.bookh1}>{libro.title}</h1>{" "}
                   <span className={styles.favIcon}>
-
-                  
-                  <Favoritos
-                  variable={id}
-                  isFavorite={isFavorite}
-                  actualizarListaFav={fetchListaFavoritos}
-                  ></Favoritos></span>
+                    <Favoritos
+                      variable={id}
+                      isFavorite={isFavorite}
+                      actualizarListaFav={fetchListaFavoritos}
+                    ></Favoritos>
+                  </span>
                 </div>
                 <p className={styles.bookp}>{libro.author}</p>
                 <p className={styles.bookp}>{libro.description}</p>
@@ -330,10 +378,10 @@ function DetalleLibro({ id }) {
           </div>
         </>
       ) : (
-        <><div className={styles.detailContainerEmpty}>
-        <div className="custom-loader"></div>
-
-        </div>
+        <>
+          <div className={styles.detailContainerEmpty}>
+            <div className="custom-loader"></div>
+          </div>
         </>
       )}
     </div>
