@@ -20,7 +20,11 @@ function Card({
   const navigate = useNavigate();
 
   const handleClick=()=>{
-    navigate(`/detail/${id}`)
+    navigate(`/detail/${id}`,{state:{
+      inicio: fechaInicio,
+      fin: fechaFin
+
+    }})
   }
 
   return (
