@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Card from "../Card/Card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
+import Swal from 'sweetalert2'
 
 const Reserva = () => {
   //const { userData } = useAccount();
@@ -59,9 +60,15 @@ const Reserva = () => {
           const response = await fetch(url, settings);
           if (response.status == 200) {
             //Mail de la reserva
-            alert("Se reservo el libro correctamente");
+            Swal.fire({
+              text: "Se reservo el libro correctamente!",
+              icon: "success"
+            });
           } else {
-            alert("ERROR: no se pudo reservar el libro, intente mas tarde");
+            Swal.fire({
+              text: "ERROR: no se pudo reservar el libro, intente mas tardeo",
+              icon: "error"
+            });
           }
         } catch (error) {
           console.log("Error: ", error);
