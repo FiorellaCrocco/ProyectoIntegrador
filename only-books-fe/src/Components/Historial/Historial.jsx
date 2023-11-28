@@ -1,31 +1,68 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import './Historial.css';
 
 const Historial = () => {
-// Reemplaza {id} con tu ID de usuario
-const userId = "tu_id_de_usuario";
+  const user = JSON.parse(sessionStorage.getItem("userData"));
+  const userId = user ? user.id : null;
+  const API_URL = import.meta.env.VITE_API_URL
+  const url = `${API_URL}bookRent/user/${userId}`;
+  const token = sessionStorage.getItem("token");
+  const [reservas, setReservas] = useState([])
 
-// Construye la URL con el ID de usuario
-const url = `https://onlybooks.isanerd.club/bookRent/user/${userId}`;
+  const settings = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
 
-// Realiza la solicitud fetch
-fetch(url)
-  .then(response => {
-    // Verifica si la respuesta es exitosa (código de estado 200)
-    if (!response.ok) {
-      throw new Error(`Error al realizar la solicitud: ${response.status}`);
+  const obtenerReservas = async () => {
+    try {
+      const response = await fetch(url, settings);
+      console.log("Obteniendo respuesta")
+      const listaReservas = await response.json();
+      console.log("VerificarUsuario")
+      console.log(listaReservas)
+
+
+      return listaReservas;
+
+    } catch (error) {
+      console.error("ERROR: ", error)
     }
-    
-    // Parsea la respuesta como JSON
-    return response.json();
-  })
-  .then(data => {
-    // Maneja los datos obtenidos
-    console.log("Lista de libros reservados:", data);
-    // Aquí puedes realizar otras operaciones con la lista de libros reservados
-  })
-  .catch(error => {
-    console.error("Error en la solicitud:", error);
-  });
-}
 
-export default Historial
+  }
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const listaReservas = await obtenerReservas();
+      setReservas(listaReservas);
+      console.log(listaReservas);
+    };
+
+    fetchData();
+  }, []);
+
+  return (
+    <div>
+      <h1>Mi historial de reservas</h1>
+      {reservas.length !== 0 ? (
+        <ul>
+          {reservas.map((reserva) => (
+            <li key={reserva.id}>
+              <p>{reserva.book.title}</p>
+              <p>{reserva.startDate.split("T")[0]}</p>
+              <p>{reserva.returnDate.split("T")[0]}</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No se encuentran reservas</p>
+      )}
+    </div>
+  );
+};
+
+export default Historial;

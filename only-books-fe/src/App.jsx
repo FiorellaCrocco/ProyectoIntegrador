@@ -47,7 +47,6 @@ function App() {
           {/* <Route path='/loginReserva'element={<LoginPage msg="Es necesario iniciar sesion para reservar un libro"></LoginPage>}></Route> */}
           <Route path= '/favoritos' Component={ListaFavoritos}/>
           <Route path= '/historial' Component={Historial}/>
-
           <Route path= '/reservar' Component={Reserva}/>
 
           
