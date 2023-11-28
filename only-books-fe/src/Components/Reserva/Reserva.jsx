@@ -21,6 +21,7 @@ const Reserva = () => {
   const { libro } = location.state || {};
   const { inicio } = location.state || {};
   const { fin } = location.state || {};
+  const [desactivar, setDesactivar] = useState(false)
 
   console.log(libro);
 
@@ -42,6 +43,7 @@ const Reserva = () => {
       startDate: inicio,
       returnDate: fin,
     });
+    setDesactivar(true);
   };
 
   useEffect(() => {
@@ -213,7 +215,7 @@ const Reserva = () => {
           </div>
         </div>
 
-        <button className="btn-lr">Reservar</button>
+        <button className="btn-lr" disabled={desactivar}>Reservar</button>
       </form>
     </>
   );
