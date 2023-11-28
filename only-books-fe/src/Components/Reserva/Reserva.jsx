@@ -2,11 +2,14 @@
 import styles from "./Reserva.module.css";
 import { useLocation } from "react-router-dom";
 import { useAccount } from "../../Context/accountContext";
+import { useState } from "react";
 
 const Reserva = () => {
   const { userData } = useAccount();
   const user = JSON.parse(sessionStorage.getItem("userData"));
   const userId = user ? user.id : null;
+  const [pais, setPais] = useState(null);
+  const [loginError, setLoginError] = useState(""); 
 
   console.log(userId);
   const location = useLocation();
@@ -14,11 +17,18 @@ const Reserva = () => {
 
   console.log(libro);
 
+  const onInputChange = (e) => {
+    const { value } = e.target;
+    setPais(value);
+  };
+
+
+
+
   const onReserva = async (e) => {
     e.preventDefault();
     setLoginError(null);
-    setIsTyping(false);
-
+    
     try {
       const response = await fetch(url, settings);
       console.log("response: " + response);
@@ -88,8 +98,9 @@ const Reserva = () => {
             value={user.name}
             onChange={(e) => {
               onInputChange(e);
-              setIsTyping(true);
+              
             }}
+            disabled
             required
             autoComplete="off"
             placeholder=" "
@@ -106,8 +117,9 @@ const Reserva = () => {
             value={user.lastname}
             onChange={(e) => {
               onInputChange(e);
-              setIsTyping(true);
+              
             }}
+            disabled
             required
             autoComplete="off"
             placeholder=" "
@@ -124,13 +136,53 @@ const Reserva = () => {
             value={user.email}
             onChange={(e) => {
               onInputChange(e);
-              setIsTyping(true);
+              
             }}
+            disabled
             required
             autoComplete="off"
             placeholder=" "
           />
         </div>
+
+        <div>
+          <label htmlFor="dni">DNI</label>
+          <input
+            type="dni"
+            name="dni"
+            id="dni"
+            className="input"
+            value={user.dni}
+            onChange={(e) => {
+              onInputChange(e);
+              
+            }}
+            disabled
+            required
+            autoComplete="off"
+            placeholder=" "
+          />
+        </div>
+
+        <div>
+          <label htmlFor="paisR">Pais de Residencia</label>
+          <input
+            type="paisR"
+            name="paisR"
+            id="paisR"
+            className="input"
+            value={pais}
+            onChange={(e) => {
+              onInputChange(e);
+              
+            }}
+            
+           
+            autoComplete="off"
+            placeholder=" "
+          />
+        </div>
+
 
         <button className="btn-lr">Reservar</button>
       </form>
