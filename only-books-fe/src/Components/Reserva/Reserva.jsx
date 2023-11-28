@@ -19,7 +19,7 @@ const Reserva = () => {
   const { inicio } = location.state || {};
   const { fin } = location.state || {};
 
-
+  console.log(libro)
 
   const onInputChange = (e) => {
     const { value } = e.target;
