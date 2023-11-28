@@ -18,6 +18,7 @@ import Resenia from "../Resenia/Resenia";
 import ReseniaLista from "../ReseniaLista/ReseniaLista";
 import Modal from "./ModalShare";
 import Favoritos from "../Favoritos/Favoritos"
+import { useNavigate } from "react-router-dom";
 
 function DetalleLibro({ id }) {
   const [showGalleryModal, setShowGalleryModal] = useState(false);
@@ -35,6 +36,9 @@ function DetalleLibro({ id }) {
   const [endDate, setEndDate] = useState("");
   const [startDate, setStartDate] = useState("");
   const [noDisponible, setNoDisponible] = useState(false);
+  const navigate = useNavigate()
+
+  const userData = JSON.parse(sessionStorage.getItem('userData'))
 
   const [shareData, setShareData] = useState({
     title: "",
@@ -121,6 +125,16 @@ function DetalleLibro({ id }) {
       validarFechaReservada(values[0], values[1], fechasReservadas)
     );
   }, [values]);
+
+  const handleReservaClick=()=>{
+    if(userData){
+      navigate("/reserva")
+    }else{
+      navigate("/login", {state:{key:"loginReserva", msg:"Es necesario iniciar sesion para reservar un libro"}})
+    }
+  }
+
+
 
   useEffect(() => {
     if (noDisponible) {
@@ -257,6 +271,7 @@ function DetalleLibro({ id }) {
                   return props;
                 }}
               />
+              <button onClick={handleReservaClick}>Reservar</button>
             </div>
 
             <GenerateDates

@@ -12,6 +12,7 @@ import RestrictedNotAdmin from './Components/RestrictedPageResponsive/Restricted
 import LoginPage from './Components/LogIn/LoginPage';
 import RegisterPage from './Components/LogIn/RegisterPage'
 import ListaFavoritos from './Components/Favoritos/ListaFavoritos';
+import Reserva from './Components/Reserva/Reserva'
 
 
 
@@ -40,7 +41,10 @@ function App() {
           <Route path='/registrarse' Component={RegisterPage}/>
           <Route path='/perfil' Component={Perfil}/>
           <Route path='/login' Component={LoginPage}/>
+          {/* <Route path='/loginReserva'element={<LoginPage msg="Es necesario iniciar sesion para reservar un libro"></LoginPage>}></Route> */}
           <Route path= '/favoritos' Component={ListaFavoritos}/>
+          <Route path='/reserva' element={<Reserva/>}/>
+          
         </Routes>
       </div>
       <Footer />
