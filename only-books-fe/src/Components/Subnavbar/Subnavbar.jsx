@@ -23,6 +23,12 @@ const Subnavbar = () => {
                 <Link to="/login">Mis favoritos</Link>
             )}
 
+            {isLoggedIn ? (
+                <Link to="/historial">Mi Historial</Link>
+            ): null
+        }
+
+
 
             {isAdmin ? (
                 <Link to="/administrador">Administrador</Link>
