@@ -137,6 +137,29 @@
     background-color: #cf7937;
 }
 
+.reservaContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+.reservaButton{
+    background-color: #F89344;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10%;
+    transition: background-color 0.3s;
+    margin-left: 20px;
+    cursor: pointer;
+}
+.reservaButton:hover {
+    background-color: #cf7937;
+}
+
 /*alinear boton cerrar*/
 .popup {
     display: flex;
@@ -146,7 +169,6 @@
 }
 
 .closeBtn {
-
     background-color: #F89344;
     color: white;
     font-size: 18px;

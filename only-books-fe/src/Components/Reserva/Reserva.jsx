@@ -1,23 +1,25 @@
 import styles from "./Reserva.module.css";
 import { useLocation } from "react-router-dom";
 import { useAccount } from "../../Context/accountContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "../Card/Card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
 
 const Reserva = () => {
-  const { userData } = useAccount();
+  //const { userData } = useAccount();
   const user = JSON.parse(sessionStorage.getItem("userData"));
   const userId = user ? user.id : null;
-  const [pais, setPais] = useState(null);
-  const [periodo, setPeriodo] = useState(null);
-  const [loginError, setLoginError] = useState("");
+  const [pais, setPais] = useState("");
+  const [formData, setFormData] = useState(null);
 
-  console.log(userId);
+  const URL_API = import.meta.env.VITE_API_URL;
+  const token = sessionStorage.getItem("token");
+
   const location = useLocation();
   const { libro } = location.state || {};
-  const { values } = location.state || {};
+  const { inicio } = location.state || {};
+  const { fin } = location.state || {};
 
   console.log(libro);
   console.log(values);
@@ -27,62 +29,47 @@ const Reserva = () => {
   };
 
   const onReserva = async (e) => {
+    console.log(userId);
     e.preventDefault();
-    setLoginError(null);
+    setFormData({
+      user: {
+        id: userId,
+      },
+      book: {
+        id: libro.id,
+      },
+      startDate: inicio,
+      returnDate: fin,
+    });
+  };
 
-    try {
-      const response = await fetch(url, settings);
-      console.log("response: " + response);
-      if (response.status === 200) {
-        // Autenticación exitosa, obtener el token del cuerpo de la respuesta
-        const data = await response.json();
-        const { token } = data;
-        sessionStorage.setItem("token", token);
-        const userEmail = email; // Obtener el correo electrónico del formulario
-
+  useEffect(() => {
+    if (formData != null) {
+      const fetchBookRent = async () => {
+        const url = `${URL_API}bookRent/agregar`;
         const settings = {
-          method: "GET",
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
+          body: JSON.stringify(formData),
         };
-        const url = `${API_URL}user/perfil/${userEmail}`;
-        //	const url = `https://onlybooks.isanerd.club/api/user/perfil/${userEmail}`;
-        const profileDataResponse = await fetch(url, settings);
-
-        if (profileDataResponse.status === 200) {
-          const profileData = await profileDataResponse.json();
-          sessionStorage.setItem("userData", JSON.stringify(profileData));
-          updateUserData(profileData);
-          console.log("profileData: " + profileData);
-
-          // Aquí puedes hacer lo que necesites con los datos del perfil
-          // Por ejemplo, almacenarlos en el estado local del componente
-
-          const { name, email, profileImage } = profileData;
-          console.log("Nombre: ", name);
-          console.log("Correo electrónico: ", email);
-
-          navigate("/", {
-            replace: true,
-            state: {
-              logged: true,
-            },
-          });
-          window.location.reload();
+        try {
+          const response = await fetch(url, settings);
+          if (response.status == 200) {
+            //Mail de la reserva
+            alert("Se reservo el libro correctamente");
+          } else {
+            alert("ERROR: no se pudo reservar el libro, intente mas tarde");
+          }
+        } catch (error) {
+          console.log("Error: ", error);
         }
-      } else if (response.status === 403) {
-        setLoginError("Credenciales incorrectas. Inténtelo de nuevo.");
-      }
-    } catch (error) {
-      console.log(error);
-      setLoginError(
-        "Ocurrió un error al iniciar sesión. Inténtelo de nuevo más tarde."
-      );
+      };
+      fetchBookRent();
     }
-    onResetForm();
-  };
+  }, [formData]);
 
   return (
     <>
@@ -176,7 +163,7 @@ const Reserva = () => {
             placeholder=" "
           />
         </div>
-        {console.log(values)}
+            {console.log(values)}
         <div>
           <label htmlFor="periodoAlq">Periodo de Alquiler</label>
           <input
@@ -184,7 +171,7 @@ const Reserva = () => {
             name="periodoAlq"
             id="periodoAlq"
             className="input"
-            value={values}
+            value={inicio + " , " + fin}
             onChange={(e) => {
               onInputChange(e);
             }}
@@ -195,7 +182,7 @@ const Reserva = () => {
           />
         </div>
 
-        <div className>
+        <div>
           <div className="card">
             <div className="card-info">
               <FontAwesomeIcon icon={faStarSolid} className="card-star" />

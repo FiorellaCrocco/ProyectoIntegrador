@@ -4,6 +4,7 @@ import { useForm } from "./Hook/UseForm";
 import "./log&register.css";
 import { useAccount } from "../../Context/accountContext";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Link } from 'react-router-dom'
 
 export const LoginPage = () => {
   const API_URL = import.meta.env.VITE_API_URL;
@@ -155,6 +156,7 @@ export const LoginPage = () => {
             <p className="error-message">{loginError}</p>
           )}
           <button className="btn-lr">Iniciar Sesion</button>
+          <p>No tienes cuenta? <Link to="/registrarse">Registrate aqui!</Link></p>
         </form>
       </div>
     </div>
