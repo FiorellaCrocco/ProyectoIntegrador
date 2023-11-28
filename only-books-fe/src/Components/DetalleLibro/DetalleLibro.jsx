@@ -293,9 +293,9 @@ function DetalleLibro({ id }) {
                   return props;
                 }}
               />
-              <button type="submit" onClick={handleReservar}>Reservar</button>
+               <button type="submit" onClick={handleReservar}>Reservar</button>
             </div>
-            
+           
 
             <GenerateDates
               startDate={startDate}

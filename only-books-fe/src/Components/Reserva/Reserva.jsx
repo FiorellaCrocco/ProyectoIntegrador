@@ -17,9 +17,10 @@ const Reserva = () => {
   console.log(userId);
   const location = useLocation();
   const { libro } = location.state || {};
-const {values} = {};
+const {values} = location.state || {};
 
   console.log(libro);
+  console.log(values);
 
   const onInputChange = (e) => {
     const { value } = e.target;
