@@ -81,6 +81,9 @@ const Reserva = () => {
     }
   }, [formData]);
 
+  console.log(libro.caracteristicas);
+  console.log(libro.categorias);
+
   return (
     <>
       <form className={styles.form} onSubmit={onReserva}>
@@ -104,8 +107,9 @@ const Reserva = () => {
                 disabled
                 required
                 autoComplete="off"
-                placeholder=" "
+                placeholder=""
               />
+              <span className={styles.requiredIndicator}>*</span>
             </div>
 
             <div>
@@ -126,6 +130,7 @@ const Reserva = () => {
                 autoComplete="off"
                 placeholder=" "
               />
+              <span className={styles.requiredIndicator}>*</span>
             </div>
 
             <div>
@@ -146,6 +151,7 @@ const Reserva = () => {
                 autoComplete="off"
                 placeholder=" "
               />
+              <span className={styles.requiredIndicator}>*</span>
             </div>
 
             <div>
@@ -166,6 +172,7 @@ const Reserva = () => {
                 autoComplete="off"
                 placeholder=" "
               />
+              <span className={styles.requiredIndicator}>*</span>
             </div>
 
             <div>
@@ -203,44 +210,49 @@ const Reserva = () => {
                 autoComplete="off"
                 placeholder=" "
               />
+              <span className={styles.requiredIndicator}>*</span>
             </div>
+            <span className={styles.obligatorio}>
+              * Los siguiente campos son obligatorios
+            </span>
           </div>
 
           <div>
-            <div className="card">
+            <div className={styles.card}>
               <div className="card-info">
                 <FontAwesomeIcon icon={faStarSolid} className="card-star" />
                 {libro.qualification}({libro.cantResenias})
               </div>
-              <div className="card-img">
-                <img src={libro.imgUrl} alt={libro.title} />
+              <div className={styles.imgUrl}>
+                <img
+                  className={styles.img}
+                  src={libro.imgUrl}
+                  alt={libro.title}
+                />
               </div>
-              <div className="card-title">
+              <div className={styles.title}>
                 <h3>{libro.title}</h3>
               </div>
               <div>
-                <h5>{libro.author}</h5>
-                <p>{libro.description}</p>
-                <h3 className="card-title">Categorias</h3>
-              <ul>
-                
-                {libro.categorias.map((categoria) => (
-                  <li key={categoria.id}>{categoria.titulo}</li>
-                ))}
-              </ul>
-              <CaracteristicaLibro id={libro.id} />
-              <ul>
-                {libro.caracteristicas.map((caracteristica) => (
-                  <li key={caracteristica.id}>{caracteristica.titulo}</li>
-                ))}
-              </ul>    
+                <h5 className={styles.author}>{libro.author}</h5>
+                <p className={styles.description}>{libro.description}</p>
+                <h3 className={styles.titleCategorias}>Categorias</h3>
+                <ul className={styles.categorias}>
+                  {libro.categorias.map((categoria) => (
+                    <li key={categoria.id}>{categoria.titulo}</li>
+                  ))}
+                </ul>
+                {/*<CaracteristicaLibro id={libro.id} />*/}
+                <h3 className={styles.titleCaracteristicas}>Caracteristicas</h3>
+                <ul className={styles.caracteristicas}>
+                  {libro.caracteristicas.map((caracteristica) => (
+                    <li key={caracteristica.id}>{caracteristica.title}</li>
+                  ))}
+                </ul>
+              </div>
 
-
-
-            </div>
-  
-            <div className="card-details">
-                <div className="price">
+              <div>
+                <div className={styles.price}>
                   <span>Precio</span>
                   <p>${libro.price}</p>
                 </div>
