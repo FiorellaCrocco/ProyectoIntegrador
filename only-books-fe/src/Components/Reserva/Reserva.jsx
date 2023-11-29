@@ -66,12 +66,10 @@ const Reserva = () => {
             Swal.fire({
               text: "Se reservo el libro correctamente!",
               icon: "success",
-              icon: "success",
             });
           } else {
             Swal.fire({
               text: "ERROR: no se pudo reservar el libro, intente mas tardeo",
-              icon: "error",
               icon: "error",
             });
           }

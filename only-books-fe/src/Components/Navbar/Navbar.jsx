@@ -41,7 +41,7 @@ const Navbar = () => {
                     </div>
                 )}
             </div>
-            <Subnavbar className="subResponsive" />
+            {/* <Subnavbar className="subResponsive" /> */}
         </header>
     );
 };
