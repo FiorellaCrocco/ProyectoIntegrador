@@ -15,6 +15,7 @@ import ListaFavoritos from './Components/Favoritos/ListaFavoritos';
 import Historial from './Components/Historial/Historial';
 
 import Reserva from './Components/Reserva/Reserva'
+import WhatsApp from './Components/WhatsApp/WhatsApp';
 
 
 
@@ -47,12 +48,11 @@ function App() {
           {/* <Route path='/loginReserva'element={<LoginPage msg="Es necesario iniciar sesion para reservar un libro"></LoginPage>}></Route> */}
           <Route path= '/favoritos' Component={ListaFavoritos}/>
           <Route path= '/historial' Component={Historial}/>
-          <Route path= '/reservar' Component={Reserva}/>
-
-          
-
+          <Route path= '/reservar' Component={Reserva}/> 
         </Routes>
+
       </div>
+      <WhatsApp></WhatsApp>
       <Footer />
     </div>
   )

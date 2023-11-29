@@ -1,0 +1,21 @@
+
+.imagenContainer{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 30px;
+    z-index: 3;
+}
+
+.logo {
+    width: 90px;
+    height: auto;
+    transition: 0.3s;
+    
+}
+
+.logo:hover {
+    
+    width: 110px;
+
+}
