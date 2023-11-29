@@ -1,11 +1,10 @@
 .form {
-  margin-top: 50px;
+  margin-top: 20px;
   margin-bottom: 50px;
 }
 
 .all {
   display: flex;
-  margin-top: 20px;
 }
 .title {
   color: #1b2430;
@@ -40,7 +39,7 @@
   transition: color 0.5s;
 }
 
-.author{
+.author {
   color: #1b2430;
   text-align: center;
   font-size: 20px;
@@ -48,14 +47,14 @@
   margin-bottom: 10px;
 }
 
-.description{
+.description {
   color: #1b2430;
   text-align: center;
   font-size: 20px;
   margin-top: 0px;
 }
 
-.titleCategorias{
+.titleCategorias {
   color: #1b2430;
   text-align: center;
 }
@@ -66,12 +65,12 @@
   margin-right: 40px;
 }
 
-.titleCaracteristicas{
+.titleCaracteristicas {
   color: #1b2430;
   text-align: center;
 }
 
-.caracteristicas{
+.caracteristicas {
   color: #1b2430;
   justify-content: center;
   margin-right: 40px;
@@ -97,16 +96,16 @@
   margin-right: 150px;
 }
 
-.price{
+.price {
   color: #1b2430;
 }
 
-.price span{
+.price span {
   color: #1b2430;
   font-weight: bold;
 }
 
-.price p{
+.price p {
   color: #1b2430;
   font-weight: bold;
   margin-left: 10px;
@@ -128,7 +127,7 @@
   margin: auto;
 }
 
-.requiredIndicator{
+.requiredIndicator {
   top: 50%;
   right: 10px;
   transform: translateY(-50%);
@@ -136,6 +135,6 @@
   font-size: 1.5em;
 }
 
-.obligatorio{
+.obligatorio {
   color: #1b2430;
 }
