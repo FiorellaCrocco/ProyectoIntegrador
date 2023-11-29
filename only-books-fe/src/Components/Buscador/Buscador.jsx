@@ -82,7 +82,7 @@ function Buscador({ obtenerDatos, listaLibros, obtenerDatosFilt}) {
               </div>
 
               <div className="busquedaFechaContainer">
-                <label>Busqueda por fecha disponible</label>
+                <label>Busqueda por fecha disponible:</label>
                 <div className="fecha-botonContainer">
                 <Calendar
                   placeholder="Seleccione la fecha de alquiler"
