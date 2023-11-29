@@ -13,6 +13,8 @@ import LoginPage from './Components/LogIn/LoginPage';
 import RegisterPage from './Components/LogIn/RegisterPage'
 import ListaFavoritos from './Components/Favoritos/ListaFavoritos';
 import Historial from './Components/Historial/Historial';
+import Subnavbar from "./Components/Subnavbar/Subnavbar";
+
 
 import Reserva from './Components/Reserva/Reserva'
 import WhatsApp from './Components/WhatsApp/WhatsApp';
@@ -31,6 +33,7 @@ function App() {
   return (
     <div className="app">
       <Navbar />
+      <Subnavbar className="subResponsive" />
       <div className="content-container">
         <Routes>
           <Route path='/' Component={Home} />
