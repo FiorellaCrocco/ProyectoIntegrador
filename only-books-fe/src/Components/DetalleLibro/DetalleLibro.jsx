@@ -163,6 +163,8 @@ function DetalleLibro({ id }) {
   };
 
   const handleReservar = (e) => {
+    console.log(values);
+    if (values.length>0) {
     e.preventDefault();
     console.log(libro);
     const inicio = values.toString().split(",")[0]
@@ -188,7 +190,19 @@ function DetalleLibro({ id }) {
     }
 
     console.log("adentro handle");
-  };
+  }
+  else{
+    Swal.fire({
+      position: "top-end",
+      text: "Debe seleccionar un periodo de reserva",
+      icon: "error",
+      showConfirmButton: false,
+      timer: 3000,
+    });
+
+  }
+
+};
 
   return (
     <div>
