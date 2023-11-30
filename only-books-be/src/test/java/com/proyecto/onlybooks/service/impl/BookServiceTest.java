@@ -1,4 +1,4 @@
-//package com.proyecto.onlybooks.service.impl;
+/*package com.proyecto.onlybooks.service.impl;
 
 import com.proyecto.onlybooks.dto.BookDTO;
 import com.proyecto.onlybooks.entity.Book;
@@ -6,23 +6,23 @@ import com.proyecto.onlybooks.entity.Image;
 import com.proyecto.onlybooks.exceptions.ResourceNotFoundException;
 import com.proyecto.onlybooks.repository.IBookRepository;
 import com.proyecto.onlybooks.service.IBookService;
-import org.hibernate.internal.util.collections.IdentityMap;
-
+import org.hibernate.internal.util.collections.IdentityMap;*/
+/*
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
-
+import org.springframework.transaction.annotation.Transactional;*/
+/*
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
-import static com.proyecto.onlybooks.entity.Gender.SUSPENSO;
-import static org.junit.jupiter.api.Assertions.*;
-
-//@SpringBootTest
-//public class BookServiceTest {
+import java.util.List;*/
 /*
+import static com.proyecto.onlybooks.entity.Gender.SUSPENSO;
+import static org.junit.jupiter.api.Assertions.*;*/
+/*
+@SpringBootTest
+public class BookServiceTest {
+
 
     @Autowired
     IBookService iBookService;
@@ -154,33 +154,34 @@ import static org.junit.jupiter.api.Assertions.*;
         assertThrows(ResourceNotFoundException.class, () -> iBookService.buscarPorId(bookId));
 
     }
-*/
 
-    //  @Test
-    //  @Transactional
-    //  void buscarListaImagenes() throws Exception {
-    //     Image image1 = new Image();
 
-    //   List<String> imagenesList= new ArrayList<>();
-    //   imagenesList.add("imagen2");
-    //   imagenesList.add("iamgen1");
+      @Test
+      @Transactional
+      void buscarListaImagenes() throws Exception {
+         Image image1 = new Image();
 
-    // Book book = new Book();
+      List<String> imagenesList= new ArrayList<>();
+       imagenesList.add("imagen2");
+       imagenesList.add("iamgen1");
 
-    //   book.setTitle("Titulo");
-    //   book.setAuthor("Autor");
-    //   book.setDescription("Descripcion");
-    //   book.setIsbn("ISBN");
-    //  book.setPublication_year(new Date(25-10-25));
-    //   book.setQualification(5);
-    //   book.setGender(SUSPENSO);
-    //  book.setPrice(5.0);
-    //  image1.setBook(book);
-    //  Long bookId = iBookService.guardar(book);
+    Book book = new Book();
 
-    //   iBookRepository.buscarImages(bookId);
+       book.setTitle("Titulo");
+       book.setAuthor("Autor");
+       book.setDescription("Descripcion");
+       book.setIsbn("ISBN");
+      book.setPublication_year(new Date(25-10-25));
+       book.setQualification(5);
+       book.setGender(SUSPENSO);
+      book.setPrice(5.0);
+      image1.setBook(book);
+      Long bookId = iBookService.guardar(book);
 
-    //   assertNotNull(imagenesList);
+       iBookRepository.buscarImages(bookId);
 
-    // }
-//}
+       assertNotNull(imagenesList);
+
+     }
+     }
+ */
