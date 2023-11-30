@@ -37,6 +37,7 @@
   /* z-index: -1; */
   overflow: hidden;
   transition: color 0.5s;
+  cursor: pointer;
 }
 
 .author {
