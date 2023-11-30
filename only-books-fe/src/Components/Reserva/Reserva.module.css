@@ -21,6 +21,10 @@
   margin-top: 2.5em;
 }
 
+.imput {
+  margin-right: 150px;
+}
+
 .label {
   color: #1b2430;
 }
@@ -92,10 +96,6 @@
   border-radius: 8px;
 }
 
-.imput {
-  margin-right: 150px;
-}
-
 .price {
   color: #1b2430;
 }
@@ -137,4 +137,57 @@
 
 .obligatorio {
   color: #1b2430;
+}
+
+@media (max-width: 1440px) {
+  .card {
+    margin-left: 0px;
+  }
+}
+
+@media (max-width: 1240px) {
+  .card {
+    margin-left: 0px;
+    margin-right: 0px;
+    width: 450px;
+  }
+  .imput {
+    margin-right: 50px;
+  }
+}
+
+@media (max-width: 970px) {
+  .imput {
+    margin-right: 0px;
+  }
+}
+
+@media (max-width: 920px) {
+  .imput {
+    margin-right: 0px;
+  }
+  .card {
+    width: 350px;
+  }
+}
+
+@media (max-width: 820px) {
+  .all {
+    display: initial;
+  }
+  .card {
+    width: auto;
+    margin-top: 50px;
+    margin-left: 60px;
+    margin-right: 60px;
+  }
+  .imput {
+    text-align: center;
+  }
+}
+@media (max-width: 685px) {
+  .card {
+    margin-left: 60px;
+    margin-right: 60px;
+  }
 }
