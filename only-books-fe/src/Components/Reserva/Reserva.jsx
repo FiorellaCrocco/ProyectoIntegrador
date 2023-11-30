@@ -108,6 +108,7 @@ const Reserva = () => {
         try {
           const response = await fetch(url, settings);
           if (response.status == 200) {
+            
             sendConfirmationEmail();
             Swal.fire({
               text: "Se reservo el libro correctamente!",
