@@ -129,8 +129,8 @@ function DetalleLibro({ id }) {
   }, [reservaLibro]);
 
   useEffect(() => {
-    console.log(values);
-    console.log(fechasReservadas);
+    // console.log(values);
+    // console.log(fechasReservadas);
     setNoDisponible(
       validarFechaReservada(values[0], values[1], fechasReservadas)
     );
