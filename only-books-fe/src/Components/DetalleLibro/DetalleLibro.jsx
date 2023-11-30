@@ -201,8 +201,11 @@ function DetalleLibro({ id }) {
     });
 
   }
-
 };
+
+const clearCalendar= ()=>{
+  setValues([])
+}
 
   return (
     <div>
@@ -281,6 +284,7 @@ function DetalleLibro({ id }) {
             ></VerReservas>
             <div className={styles.calendarioBtn}>
               <Calendar
+                editable={false}
                 placeholder="Seleccione la fecha de alquiler"
                 format="YYYY-MM-DD"
                 value={values}
@@ -318,6 +322,7 @@ function DetalleLibro({ id }) {
               <button className={styles.reservaButton} type="submit" onClick={handleReservar}>
                 Reservar
               </button>
+              <button className={styles.borrarButton} onClick={clearCalendar}>Borrar</button>
               </div>
             </div>
 
