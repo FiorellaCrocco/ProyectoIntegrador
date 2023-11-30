@@ -89,7 +89,7 @@ export const BookProvider = ({ children }) => {
   const fetchListaFavoritos = async () => {
     try {
       const userData = JSON.parse(sessionStorage.getItem('userData'))
-      console.log(userData)
+      // console.log(userData)
       if (userData) {
         const userId =userData.id;
         const token = sessionStorage.getItem("token");
@@ -120,7 +120,7 @@ export const BookProvider = ({ children }) => {
 
   const fetchObtenerResenias = async (bookId) => {
     const url = `${API_URL}resenia/book/${bookId}`;
-    console.log("FETCH GET RESENIA")
+    // console.log("FETCH GET RESENIA")
 
     const settings = {
       method: "GET",

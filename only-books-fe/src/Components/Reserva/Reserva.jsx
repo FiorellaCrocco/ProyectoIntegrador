@@ -7,6 +7,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import CaracteristicaLibro from "../CaracteristicaLibro/CaracteristicaLibro";
+import emailjs from '@emailjs/browser';
+import { format } from 'date-fns';
+import { es } from 'date-fns/locale';
 
 const Reserva = () => {
   //const { userData } = useAccount();
@@ -14,6 +17,9 @@ const Reserva = () => {
   const userId = user ? user.id : null;
   const [pais, setPais] = useState("");
   const [formData, setFormData] = useState(null);
+  const EMAILJS_serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID2;
+	const EMAILJS_templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID2;
+	const EMAILJS_userId = import.meta.env.VITE_EMAILJS_USER_ID;
 
   const URL_API = import.meta.env.VITE_API_URL;
   const token = sessionStorage.getItem("token");
@@ -47,6 +53,46 @@ const Reserva = () => {
     setDesactivar(true);
   };
 
+
+  const sendConfirmationEmail = async () => {
+		try {
+
+      const formattedStartDate = format(new Date(inicio), "EEEE dd 'de' MMMM yyyy", { locale: es });
+      const formattedEndDate = format(new Date(fin), "EEEE dd 'de' MMMM yyyy", { locale: es });
+
+			const templateParams = {
+				to_email: user.email,
+				name: user.name,
+				email: user.email, 
+        libro: libro.title,
+				message: `
+        Libro reservado: ${libro.title} 
+
+        Periodo de Reserva 
+        -Inicio: ${formattedStartDate}.
+        -Fin: ${formattedEndDate}.
+
+        Contacto del Proveedor 
+        -Whatsapp: +${59899434334}
+        -Email: Kikeneitor@gmail.com
+
+        ¡Reserva Existosa! `,
+			};
+			console.log("Send email: " + email)
+			const response = await emailjs.send(
+				EMAILJS_serviceId,
+				EMAILJS_templateId,
+				templateParams,
+				EMAILJS_userId
+			);
+			if (response.status === 200) {
+				console.log('Correo electrónico de confirmación enviado con éxito.');
+			}
+		} catch (error) {
+			console.error('Error al enviar el correo electrónico de confirmación:', error);
+		}
+	};
+
   useEffect(() => {
     if (formData != null) {
       const fetchBookRent = async () => {
@@ -62,14 +108,15 @@ const Reserva = () => {
         try {
           const response = await fetch(url, settings);
           if (response.status == 200) {
-            //Mail de la reserva
+            
+            sendConfirmationEmail();
             Swal.fire({
               text: "Se reservo el libro correctamente!",
               icon: "success",
             });
           } else {
             Swal.fire({
-              text: "ERROR: no se pudo reservar el libro, intente mas tardeo",
+              text: "ERROR: no se pudo reservar el libro, intente mas tarde.",
               icon: "error",
             });
           }
@@ -81,8 +128,8 @@ const Reserva = () => {
     }
   }, [formData]);
 
-  console.log(libro.caracteristicas);
-  console.log(libro.categorias);
+  // console.log(libro.caracteristicas);
+  // console.log(libro.categorias);
 
   return (
     <>

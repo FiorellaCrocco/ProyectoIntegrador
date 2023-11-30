@@ -52,10 +52,9 @@ export const RegisterPage = () => {
 	}
 
 	const onResendConfirmationEmail = () => {
-		setEmailSentText('Mail Enviado!!'); // Cambia el texto del botón
+		setEmailSentText('Mail Enviado!!'); 
 		sendConfirmationEmail();
 
-		// Borra el texto después de 4 segundos
 		setTimeout(() => {
 			setEmailSentText('');
 		}, 4000);
@@ -217,7 +216,7 @@ export const RegisterPage = () => {
 						<div className="success-message">
 							Cuenta creada exitosamente. Un correo se ha enviado a su dirección. Si no lo recibe y desea reenviarlo, haga click aquí.
 							<button type='button' className="resend-email-button" onClick={onResendConfirmationEmail}>
-								{emailSentText || 'Reenviar Email'} {/* Mostrar 'Mail Enviado!!' o 'Reenviar Email' */}
+								{emailSentText || 'Reenviar Email'} 
 							</button>
 						</div>
 					) : null}
