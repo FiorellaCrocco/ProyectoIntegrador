@@ -42,6 +42,8 @@ function DetalleLibro({ id }) {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const today = new Date().getDate()
+  console.log(today)
 
 
   const userData = JSON.parse(sessionStorage.getItem("userData"));
@@ -164,7 +166,7 @@ function DetalleLibro({ id }) {
 
   const handleReservar = (e) => {
     console.log(values);
-    if (values.length>1) {
+    if (values.length>1 && values[0]!='') {
     e.preventDefault();
     console.log(libro);
     const inicio = values.toString().split(",")[0]
@@ -201,8 +203,11 @@ function DetalleLibro({ id }) {
     });
 
   }
-
 };
+
+const clearCalendar= ()=>{
+  setValues([])
+}
 
   return (
     <div>
@@ -281,6 +286,7 @@ function DetalleLibro({ id }) {
             ></VerReservas>
             <div className={styles.calendarioBtn}>
               <Calendar
+                editable={false}
                 placeholder="Seleccione la fecha de alquiler"
                 format="YYYY-MM-DD"
                 value={values}
@@ -318,6 +324,7 @@ function DetalleLibro({ id }) {
               <button className={styles.reservaButton} type="submit" onClick={handleReservar}>
                 Reservar
               </button>
+              <button className={styles.borrarButton} onClick={clearCalendar}>Borrar</button>
               </div>
             </div>
 

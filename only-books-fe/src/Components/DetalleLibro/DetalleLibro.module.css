@@ -159,6 +159,21 @@
 .reservaButton:hover {
     background-color: #cf7937;
 }
+.borrarButton{
+    background-color: #f85344;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10%;
+    transition: background-color 0.3s;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.borrarButton:hover {
+    background-color: rgb(194, 53, 51);
+}
 
 /*alinear boton cerrar*/
 .popup {
