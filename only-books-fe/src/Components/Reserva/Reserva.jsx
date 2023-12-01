@@ -308,9 +308,9 @@ const Reserva = () => {
           </div>
         </div>
 
-        <button className={styles.btn} disabled={desactivar}>
-          Reservar
-        </button>
+        <button className={`${styles.btn} ${desactivar ? styles['btn-disabled'] : ''}`} disabled={desactivar}>
+      Reservar
+    </button>
       </form>
     </>
   );
