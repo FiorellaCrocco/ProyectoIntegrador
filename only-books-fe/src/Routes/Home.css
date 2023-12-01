@@ -6,3 +6,6 @@
     width: 100%;
     background-color: lightblue;
 }
+.home>div{
+    min-width: 100%;
+}

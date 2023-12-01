@@ -14,10 +14,10 @@
 
 .welcome-admin {
     display: flex;
-    /* flex-direction: column; */
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 80px 0px 20px 0px;
+    margin: 50px 0px 20px 0px;
     /* width: 30vw; */
     min-width: 200px;
     /* min-height: 100px; */
@@ -52,7 +52,7 @@
     width: 20vw;
     max-width: 20vw;
     height: 150vh;
-    min-width: 200px;
+    min-width: 250px;
     background: linear-gradient(#97c6e6, white);
     margin-top: -40px;
 
@@ -79,7 +79,7 @@
     font-weight: 700;
     line-height: 33px;
     letter-spacing: 0.009999999776482582px;
-    text-align: center;
+    text-align: right;
     color: #152e37;
     ;
 }

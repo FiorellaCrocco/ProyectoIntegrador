@@ -6,10 +6,9 @@ import Swal from "sweetalert2";
 function CargarProducto() {
   const API_URL = import.meta.env.VITE_API_URL;
   const {
-    actualizarListaLibros,
+    fetchData,
     listaCategorias,
     listaCaracteristicas,
-    actualizarCategorias,
   } = useContext(GlobalContext);
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [selectedCaracteristica, setSelectedCaracteristica] = useState([]);
@@ -72,51 +71,63 @@ function CargarProducto() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const listaLibros = await fetchData()
+    const librosFormateados = listaLibros.map((book) =>
+      book.title.toLowerCase()
+    );
+    const tituloNuevo = formData.title.toLowerCase();
 
-    const url = `${API_URL}book/agregar`;
-    //   const url = "https://onlybooks.isanerd.club/api/book/agregar";
-    const settings = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(formData),
-    };
-
-    try {
-      const response = await fetch(url, settings);
-      const data = await response.text();
-      console.log(data);
-
-      for (const category of selectedCategory) {
-        await fetchCategoria(data, category.id);
-      }
-      for (const caracteristica of selectedCaracteristica) {
-        await fetchCaracteristica(data, caracteristica.id);
-      }
-      // Mensaje de éxito
+    if (librosFormateados.includes(tituloNuevo)) {
       Swal.fire({
-        text: "Libro cargado con éxito",
-        icon: "success",
+        text: "Error: el titulo del libro ya existe.",
+        icon: "error",
       });
-      // Limpiar los campos del formulario
-      setFormData({
-        id: 0,
-        title: "",
-        author: "",
-        description: "",
-        isbn: "",
-        publication_year: "2023-11-03",
-        qualification: 0,
-        price: 0,
-        imagesBase64: [],
-      });
+    } else {
+      const url = `${API_URL}book/agregar`;
+      //   const url = "https://onlybooks.isanerd.club/api/book/agregar";
+      const settings = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(formData),
+      };
 
-      // Actualizar la lista de libros después de la carga exitosa
-      await actualizarListaLibros();
-    } catch (error) {
-      console.log(error);
+      try {
+        const response = await fetch(url, settings);
+        const data = await response.text();
+        console.log(data);
+
+        for (const category of selectedCategory) {
+          await fetchCategoria(data, category.id);
+        }
+        for (const caracteristica of selectedCaracteristica) {
+          await fetchCaracteristica(data, caracteristica.id);
+        }
+        // Mensaje de éxito
+        Swal.fire({
+          text: "Libro cargado con éxito",
+          icon: "success",
+        });
+        // Limpiar los campos del formulario
+        setFormData({
+          id: 0,
+          title: "",
+          author: "",
+          description: "",
+          isbn: "",
+          publication_year: "2023-11-03",
+          qualification: 0,
+          price: 0,
+          imagesBase64: [],
+        });
+
+        // Actualizar la lista de libros después de la carga exitosa
+        await fetchData();
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
