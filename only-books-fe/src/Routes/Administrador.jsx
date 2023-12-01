@@ -10,6 +10,7 @@ import ArrowRightOutlinedIcon from '@mui/icons-material/ArrowRightOutlined';
 import ListarCategoria from '../Components/ListarCategoria/ListarCategoria';
 import AdministrarCaracteristicas from '../Components/AdministrarCaracteristicas/AdministrarCaracteristicas';
 import ListarUsuarios from '../Components/ListarUsuarios/ListarUsuarios'
+import AdministrarReservas from '../Components/AdministrarReservas/AdministrarReservas'
 
 
 const Administrador = () => {
@@ -72,6 +73,11 @@ const Administrador = () => {
           <Button onClick={() => handleOpen(<ListarUsuarios/>)}>
             <div className="add-feature">
               <h3>Listar Usuarios {<ArrowRightOutlinedIcon fontSize="large" />}</h3>
+            </div>
+          </Button>
+          <Button onClick={() => handleOpen(<AdministrarReservas/>)}>
+            <div className="add-feature">
+              <h3>Administrar Reservas {<ArrowRightOutlinedIcon fontSize="large" />}</h3>
             </div>
           </Button>
         </div>
