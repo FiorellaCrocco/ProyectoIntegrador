@@ -57,11 +57,12 @@
 .imgHistorial{
     margin-right: 12px;
     margin-top: 10px;
-    width: 50px;
+    width: 80px;
     
 
 }
-.titleReservaHistorial{
+
+.titleReserva{
     width: 100px;
 }
 /* 
@@ -85,6 +86,16 @@
     width: 50%;
 }
 
-/* .fechaFin{
-    
-} */
+.fechaInicio{
+    margin-left: 25px;
+}
+
+.fechaFin{
+    width: 152px;
+} 
+
+.titleReservaHistorial{
+    width: 110px;
+    margin-bottom: 19px;
+    text-align: center;
+}
