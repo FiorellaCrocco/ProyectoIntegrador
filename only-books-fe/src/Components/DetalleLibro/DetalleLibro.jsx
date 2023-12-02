@@ -394,7 +394,7 @@ function DetalleLibro({ id }) {
             </div>
             {libro.categorias ? (
               <div>
-                <h4 className={styles.categ}>Categorías</h4>
+                <h4 className={styles.categ}>Categorias</h4>
                 <ul className={styles.listaCateg}>
                   {libro.categorias.map((categoria, index) => (
                     <li className={styles.listaIcon} key={index}>
