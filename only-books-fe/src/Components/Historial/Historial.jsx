@@ -46,29 +46,34 @@ const Historial = () => {
   }, []);
 
   return (
-    <div className='historial'>
-      <h1 className='titleHistorial'>Mi historial de reservas: </h1>
-      <div className='listadoGeneralH'>
-
+    <div className="historial">
+      <h1 className="titleHistorial">Mi historial de reservas: </h1>
+      <div className="listadoGeneralH">
         {reservas.length !== 0 ? (
-          <ul className='listadoUl'>
-            <div className='titulosHistorial'>
-              <p className='titleReservaHistorial'>Titulo:</p>
-              <div className='fechasHistorialTitulos'>
-                <p className='tituloFechaH'>Fecha de inicio:</p>
-                <p className='tituloFechaF'>Fecha de finalizacion:</p>
+          <ul className="listadoUl">
+            <div className="titulosHistorial">
+              <p className="titleReserva">Titulo:</p>
+              <div className="fechasHistorialTitulos">
+                <p className="tituloFechaH">Fecha de inicio:</p>
+                <p className="tituloFechaF">Fecha de finalizacion:</p>
               </div>
             </div>
 
             {reservas.map((reserva) => (
-              <li className='listadoHistorial' key={reserva.id}>
-                <div className='tituloImgHistorial'>
-                  <img className='imgHistorial' src={reserva.book.imgUrl} alt={reserva.book.title}></img>
-                  <p className='titleReservaHistorial'> {reserva.book.title}</p>
+              <li className="listadoHistorial" key={reserva.id}>
+                <div className="tituloImgHistorial">
+                  <img
+                    className="imgHistorial"
+                    src={reserva.book.imgUrl}
+                    alt={reserva.book.title}
+                  ></img>
+                  <p className="titleReservaHistorial"> {reserva.book.title}</p>
                 </div>
-                <div className='fechasHistorial'>
-                  <p>{reserva.startDate.split("T")[0]}</p>
-                  <p className='fechaFin'>{reserva.returnDate.split("T")[0]}</p>
+                <div className="fechasHistorial">
+                  <p className="fechaInicio">{reserva.startDate.split("T")[0]}</p>
+                  <p className="fechaFin">
+                    {reserva.returnDate.split("T")[0]}
+                  </p>
                 </div>
               </li>
             ))}
