@@ -16,7 +16,10 @@ import com.proyecto.onlybooks.service.IUserService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,6 +55,17 @@ public class BookRentService implements IBookRentService {
         Book book = objectMapper.convertValue(b, Book.class);
         bookRent.setBook(book);
         bookRent.setUser(usuario);
+
+        LocalDate fechaInicio =bookRent.getStartDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate fechaFin = bookRent.getReturnDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        fechaInicio=fechaInicio.plusDays(1);
+        fechaFin=fechaFin.plusDays(1);
+        Date inicioFormateado = Date.from(fechaInicio.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date finFormateado = Date.from(fechaFin.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        bookRent.setStartDate(inicioFormateado);
+        bookRent.setReturnDate(finFormateado);
+
         iBookRentRepository.save(bookRent);
         return bookRent.getId();
     }

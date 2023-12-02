@@ -11,7 +11,7 @@ const ListarUsuarios = () => {
   const token = sessionStorage.getItem("token");
   const API_URL= import.meta.env.VITE_API_URL
 
-  const urlListar = `${API_URL}user/listar`;
+  const urlListar = `${API_URL}user/listaexpress`;
 //   const urlListar = "https://onlybooks.isanerd.club/api/user/listar";
    const urlModificar = `${API_URL}user/modificar`;
 //  const urlModificar = "https://onlybooks.isanerd.club/api/user/modificar";
@@ -120,19 +120,19 @@ const ListarUsuarios = () => {
   }, []);
 
   return (
-    <div className="listaProductosAdmin">
-      <h2 className="tituloListaAdmin">Listado de usuarios</h2>
-      <ul className="listaContainerAdmin">
+    <div >
+      <h2 className="tituloListaAdminUser">Listado de usuarios</h2>
+      <ul className="listaContainerAdminUser">
         {usuarios.map((usuario) => (
-          <li className="lista" key={usuario.id}>
-            <div className="id">{usuario.id}</div>
-            <div className="nombre">{usuario.email}</div>
-            <div className="nombre">{usuario.rol}</div>
-            <div className="admin-btn-container">
+          <li className="listaUser" key={usuario.id}>
+            <div className="idUser">{usuario.id}</div>
+            <div className="nombreUser">{usuario.email}</div>
+            <div className="rolUser">{usuario.rol}</div>
+            <div className="admin-btn-containerUser">
               <Button
                 variant="outlined"
                 color="error"
-                className="btnEdit"
+                className="btnEditUser"
                 onClick={() => handleDelete(usuario.id)}
               >
                 Eliminar
@@ -140,7 +140,7 @@ const ListarUsuarios = () => {
               <Button
                 variant="outlined"
                 color="success"
-                className="btnEdit"
+                className="btnEditUser"
                 onClick={() => handleEditRole(usuario)}
               >
                 Cambiar Rol

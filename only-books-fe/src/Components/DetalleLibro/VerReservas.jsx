@@ -29,12 +29,12 @@ function VerReservas({id, obtenerReservaLibro}){
 
     useEffect(()=>{
         fetchDisponibilidad()
-        console.log("Reenderizando 1")
+        // console.log("Reenderizando 1")
 
     },[])
 
     useEffect(()=>{
-        console.log("reenderizando 2")
+        // console.log("reenderizando 2")
         obtenerReservaLibro(reservas)
     },[reservas])
 

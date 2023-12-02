@@ -3,11 +3,11 @@ import React, { useEffect, useState, useContext, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { Dialog, DialogContent, DialogActions } from "@mui/material";
-import "./EditarProducto";
+import "./EditarProducto.css";
 import { GlobalContext } from "../../Context/globalContext";
 import Swal from 'sweetalert2'
 
-const EditarProducto = ({ product, onUpdateList }) => {
+const EditarProducto = ({ product, onUpdateList, onClose }) => {
   const { listaCategorias, listaCaracteristicas, actualizarCategorias } =
     useContext(GlobalContext);
   const [formData, setFormData] = useState(product);
@@ -146,6 +146,7 @@ const EditarProducto = ({ product, onUpdateList }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    onClose()
     await setFormData({
       ...formData,
       categorias: [],
@@ -166,7 +167,11 @@ const EditarProducto = ({ product, onUpdateList }) => {
         },
         body: JSON.stringify(formData),
       };
-
+      Swal.fire({
+        title: "Editando libro...",
+        icon: "info",
+        showLoaderOnConfirm: true,
+        preConfirm: async () => {
       try {
         const response = await fetch(updateProductUrl, settings);
         if (response.ok) {
@@ -205,7 +210,9 @@ const EditarProducto = ({ product, onUpdateList }) => {
           showConfirmButton: false,
           timer: 1500
         });
-      }
+      }},
+      allowOutsideClick: () => !Swal.isLoading(),
+    });
     };
     if(lanzarFetch){
       fetchData();
@@ -216,7 +223,7 @@ const EditarProducto = ({ product, onUpdateList }) => {
   return (
     <div>
       {product && (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="edit-form-product">
           <div className="form-group">
             <label htmlFor="title">Título:</label>
             <input

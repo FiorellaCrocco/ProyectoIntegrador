@@ -3,6 +3,7 @@ package com.proyecto.onlybooks.service.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.proyecto.onlybooks.dto.UserDTO;
+import com.proyecto.onlybooks.dto.UserSummary;
 import com.proyecto.onlybooks.entity.Book;
 import com.proyecto.onlybooks.entity.User;
 import com.proyecto.onlybooks.exceptions.ResourceNotFoundException;
@@ -136,6 +137,13 @@ public class UserService implements IUserService {
             logger.error("No se pudo eliminar el libro a favoritos.");
             throw new ResourceNotFoundException("No se pudo eliminar el libro a favoritos.");
         }
+    }
+
+    @Override
+    public List<UserSummary> listarUserExpress() throws ResourceNotFoundException{
+        List<UserSummary> lista = iUserRepository.findUserSummary();
+
+        return lista;
     }
 
 

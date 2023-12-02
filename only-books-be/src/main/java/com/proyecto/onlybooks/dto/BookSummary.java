@@ -20,11 +20,13 @@ public class BookSummary {
     private Integer cantResenias;
     private List<Categoria> categorias;
 
-    public BookSummary(Long id, String title, Double price, Double qualification, Integer cantResenias) {
+    public BookSummary(Long id, String title, Double price, String imgUrl, Double qualification, Integer cantResenias) {
         this.id = id;
         this.title = title;
         this.price = price;
+        this.imgUrl=imgUrl;
         this.qualification=qualification;
         this.cantResenias=cantResenias;
+
     }
 }

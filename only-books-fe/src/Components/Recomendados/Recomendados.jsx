@@ -35,7 +35,7 @@ useEffect(() => {
       <section className={style.listaContainer}>
         {/* <Subnavbar /> */}
         <h1 className={style.recomendacion}>Recomendados</h1>
-        {isLoading ? <div className="loader"></div> : <></>}
+        {isLoading ? <div className="custom-loader"></div> : <></>}
         <ul className={style.listaPaginada}>
           {librosAleatorios.map((libro) => {
             return (
@@ -44,7 +44,6 @@ useEffect(() => {
                   <img src={libro.imgUrl} alt={libro.title} />
                 </Link>
                 <p className={style.title}>{libro.title}</p>
-                <p className={style.price}>${libro.price}</p>
               </li>
             );
           })}

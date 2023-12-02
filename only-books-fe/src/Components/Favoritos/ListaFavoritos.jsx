@@ -4,6 +4,7 @@ import { useAccount } from "../../Context/accountContext";
 import { GlobalContext } from "../../Context/globalContext";
 import Card from "../Card/Card";
 import './ListaFavoritos.css'
+import Swal from "sweetalert2";
 
 const ListaFavoritos = () => {
   const { userData } = useAccount();
@@ -17,6 +18,13 @@ const ListaFavoritos = () => {
   }, [userData]); // Se ejecutará cada vez que userData cambie
 
   const fetchDataMostrar = async () => {
+    Swal.fire({
+      title: "Buscando libros favoritos...",
+      icon: "info",
+      showConfirmButton:false,
+      showLoaderOnConfirm: true,
+      allowOutsideClick: () => !Swal.isLoading(),
+    });
     try {
       if (userData) {
         const userId = userData.id;
@@ -44,6 +52,7 @@ const ListaFavoritos = () => {
     } catch (error) {
       console.error("Error:", error);
     }
+    Swal.close()
   };
     
   const actualizarListaFav = () => {
@@ -53,8 +62,10 @@ const ListaFavoritos = () => {
   const renderList = () => {
   return (
     <div className="listado">
-      <h2>Tus Libros Favoritos:</h2>
-      <ul className="cardFavs">
+      <h2 className="h2">Tus Libros Favoritos:</h2>
+      {
+        librosFavoritos.length==0?<p>No tienes libros como favorito</p>:
+        <ul className="cardFavs">
         {librosFavoritos.map((bookId) => (
           <li key={bookId.id}>
             <Card
@@ -66,6 +77,8 @@ const ListaFavoritos = () => {
           </li>
         ))}
       </ul>
+      }
+      
     </div>
   );
   }
@@ -87,7 +100,7 @@ const ListaFavoritos = () => {
         ))}
       </ul>
     </div>*/
-    <div>{renderList()}</div>
+    <div className="render">{renderList()}</div>
   );
 };
 

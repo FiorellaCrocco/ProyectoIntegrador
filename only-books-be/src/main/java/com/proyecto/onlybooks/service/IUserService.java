@@ -1,6 +1,8 @@
 package com.proyecto.onlybooks.service;
 
+import com.proyecto.onlybooks.dto.BookSummary;
 import com.proyecto.onlybooks.dto.UserDTO;
+import com.proyecto.onlybooks.dto.UserSummary;
 import com.proyecto.onlybooks.entity.Book;
 import com.proyecto.onlybooks.entity.User;
 import com.proyecto.onlybooks.exceptions.ResourceNotFoundException;
@@ -18,4 +20,6 @@ public interface IUserService {
     UserDTO buscarPorEmail(String email) throws ResourceNotFoundException;
     List<Book> listarFavoritos( Long id) throws ResourceNotFoundException;
     void eliminarFavorito(Long userId, Long bookId) throws ResourceNotFoundException;
+    List<UserSummary> listarUserExpress() throws ResourceNotFoundException;
+
 }

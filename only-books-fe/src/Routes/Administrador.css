@@ -14,10 +14,10 @@
 
 .welcome-admin {
     display: flex;
-    /* flex-direction: column; */
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 20px 0px;
+    margin: 50px 0px 20px 0px;
     /* width: 30vw; */
     min-width: 200px;
     /* min-height: 100px; */
@@ -49,11 +49,13 @@
 .buttons-container {
     display: flex;
     flex-direction: column;
-    width: 30vw;
+    width: 20vw;
     max-width: 20vw;
-    height: 120vh;
-    min-width: 200px;
+    height: 150vh;
+    min-width: 250px;
     background: linear-gradient(#97c6e6, white);
+    margin-top: -40px;
+
 }
 
 .buttons-container button {
@@ -77,7 +79,7 @@
     font-weight: 700;
     line-height: 33px;
     letter-spacing: 0.009999999776482582px;
-    text-align: center;
+    text-align: right;
     color: #152e37;
     ;
 }
@@ -109,7 +111,7 @@
 .add-product,
 .add-feature,
 .add-category {
-    margin-left: 30px;
+    margin-left:auto ;
 
 }
 
@@ -117,6 +119,9 @@
 .add-feature h3,
 .add-category h3 {
     display: flex;
+    
+}
 
-
+.MuiSvgIcon-root{
+    margin-top: -5px;
 }

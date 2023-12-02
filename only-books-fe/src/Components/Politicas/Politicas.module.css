@@ -1,37 +1,109 @@
 .politicascontainer {
-   text-align: center;
-    justify-content: center;
-    
-    
+    text-align: center;
     background-color: #51aee0;
     padding-top: 30px;
     margin-top: 10px;
 }
 
-
 .politicascontainercolum {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: start;
-    
     background-color: #51aee0;
     padding-bottom: 10px;
     margin-top: 10px;
 }
 
 .politicascontainercolum1 {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: justify;
     flex-direction: column;
     background-color: #51aee0;
-    padding: 10px 10px 0px 10px;
+    padding: 10px;
     margin-top: 10px;
+  /*  max-height: 800px; */
+    overflow-y: auto;
 }
 
-.titulopolitica{
-    
+.titulopolitica {
     margin: 0px;
 }
+.tituloh4 {
+    margin: 0px;
+    cursor: pointer;
+    transition: 0.1s;
+}
+.tituloh4:hover{
+    color: rgb(197, 197, 197);
+}
+.politicaModalContainer{
+    background-color: rgba(0, 0, 0, 0.9);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+}
+.politicaModalBody{
+    padding: 20px 40px 10px 40px;
+    background-color: white;
+    width: 50%;
+    min-width: 300px;
+    color: rgb(48, 48, 48);
+    border-radius: 10px ;
+    position: relative;
+}
+.politicaModalBody>h4{
+    margin-left: 20px;
+}
+.politicaCloseModal{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border: none;
+    color: white;
+    background-color: rgb(232, 35, 35);
+    border-radius: 3px;
+    cursor: pointer;
 
+}
+.politicaContent{
+    font-size: 12px;
+}
+
+/* @media (max-width: 768px) {
+    .politicascontainercolum1 {
+        margin-top: 30px; 
+    }
+    .titulopolitica {
+        font-size: 1.5rem; 
+        margin-bottom: 10px; 
+    }
+} */
+
+
+@media (max-width: 768px) {
+    .politicascontainercolum1 {
+        flex-basis: calc(33.33% - 20px); /* 33.33% con un margen de 10px entre columnas */
+    }
+
+    @media (max-width: 480px) {
+        .politicascontainercolum1 {
+            flex-basis: calc(50% - 20px); /* 50% con un margen de 10px entre columnas */
+        }
+    }
+
+    @media (max-width: 360px) {
+        .politicascontainercolum1 {
+            flex-basis: calc(100% - 20px); /* 100% con un margen de 10px entre columnas */
+        }
+
+        
+    }
+}

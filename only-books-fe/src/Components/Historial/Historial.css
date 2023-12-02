@@ -1,0 +1,101 @@
+.historial {
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 70%; 
+    margin: auto;
+    /* height: 100%; */
+}
+
+.titleHistorial {
+    font-size: 41px;
+    color: #F89344;
+}
+
+.listadoGeneralH {
+    font-size: 20px;
+    margin-bottom: 20px;
+    width: 100%; 
+    align-self: start;
+}
+
+.listadoUl {
+    padding: 0%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+
+.titulosHistorial {
+
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+.tituloFechaH{
+    
+    width: 250px;
+}
+
+.listadoHistorial {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+.tituloImgHistorial{
+    display: flex;
+    align-items: center; /* Alinea la imagen y el título verticalmente */
+    width: 50%;
+}
+.imgHistorial{
+    margin-right: 12px;
+    margin-top: 10px;
+    width: 80px;
+    
+
+}
+
+.titleReserva{
+    width: 100px;
+}
+/* 
+.tituloFechaH {
+    
+}
+
+.tituloFechaF{
+    
+} */
+
+.fechasHistorial{
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+}
+
+.fechasHistorialTitulos{
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+}
+
+.fechaInicio{
+    margin-left: 25px;
+}
+
+.fechaFin{
+    width: 152px;
+} 
+
+.titleReservaHistorial{
+    width: 110px;
+    margin-bottom: 19px;
+    text-align: center;
+}

@@ -199,9 +199,10 @@ public class BookService implements IBookService {
         List<BookSummary> lista = iBookRepository.findLibroSummary();
         for(BookSummary b : lista){
             b.setCategorias(iBookRepository.buscarCategoriaByBookId(b.getId()));
+            /*
             List<String> listaImagenes = iBookRepository.buscarImages(b.getId());
             String imagen = listaImagenes.stream().findFirst().orElse(null);
-            b.setImgUrl(imagen);
+            b.setImgUrl(imagen);*/
         }
         return lista;
     }

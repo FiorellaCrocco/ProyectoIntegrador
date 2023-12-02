@@ -12,6 +12,13 @@ import RestrictedNotAdmin from './Components/RestrictedPageResponsive/Restricted
 import LoginPage from './Components/LogIn/LoginPage';
 import RegisterPage from './Components/LogIn/RegisterPage'
 import ListaFavoritos from './Components/Favoritos/ListaFavoritos';
+import Historial from './Components/Historial/Historial';
+import Subnavbar from "./Components/Subnavbar/Subnavbar";
+
+
+import Reserva from './Components/Reserva/Reserva'
+import WhatsApp from './Components/WhatsApp/WhatsApp';
+
 
 
 
@@ -26,6 +33,7 @@ function App() {
   return (
     <div className="app">
       <Navbar />
+      <Subnavbar className="subResponsive" />
       <div className="content-container">
         <Routes>
           <Route path='/' Component={Home} />
@@ -40,9 +48,14 @@ function App() {
           <Route path='/registrarse' Component={RegisterPage}/>
           <Route path='/perfil' Component={Perfil}/>
           <Route path='/login' Component={LoginPage}/>
+          {/* <Route path='/loginReserva'element={<LoginPage msg="Es necesario iniciar sesion para reservar un libro"></LoginPage>}></Route> */}
           <Route path= '/favoritos' Component={ListaFavoritos}/>
+          <Route path= '/historial' Component={Historial}/>
+          <Route path= '/reservar' Component={Reserva}/> 
         </Routes>
+
       </div>
+      <WhatsApp></WhatsApp>
       <Footer />
     </div>
   )

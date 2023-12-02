@@ -31,11 +31,14 @@ const ListarProducto = () => {
   };
 
   const handleUpdateList = async () => {
-    // Actualizar la lista de productos
-    await actualizarListaLibros();
+      // Actualizar la lista de productos
+      await actualizarListaLibros();
+      // Mostrar el Swal de éxito
+      Swal.fire({
+        text: 'Lista actualizada con éxito',
+        icon: 'success',
+      });
   };
-
-
   ////////////////////////////////////////////////////////////////
 
   useEffect(() => {
@@ -77,7 +80,13 @@ const ListarProducto = () => {
       }
        const url = `${API_URL}book/eliminar/${id}`;
    //    const url = `https://onlybooks.isanerd.club/api/book/eliminar/${id}`;
-    try{
+    
+   Swal.fire({
+    title: "Eliminando libro...",
+    icon: "info",
+    showLoaderOnConfirm: true,
+    preConfirm: async () => {
+   try{
       await fetchData(url, settings);
       await actualizarListaLibros();
       setProductos(updatedProductos)
@@ -92,12 +101,14 @@ const ListarProducto = () => {
         text: 'Error al eliminar el libro',
         icon: 'error',
       });
-    }
+    }},
+    allowOutsideClick: () => !Swal.isLoading(),
+  });
     }
   }
 
   return (
-    <div className="listaProductosAdmin">
+    <div >
       <h2 className="tituloListaAdmin">Listado de productos</h2>
       <ul className="listaContainerAdmin">
         {productos.map((libro) => (
@@ -128,11 +139,11 @@ const ListarProducto = () => {
 
         <Dialog open={editOpen} onClose={handleEditClose} maxWidth="md" fullWidth>
           <DialogContent>
-            {selectedProduct && <EditarProducto product={selectedProduct} onUpdateList={handleUpdateList} />}
+            {selectedProduct && <EditarProducto product={selectedProduct} onUpdateList={handleUpdateList} onClose={handleEditClose}/>}
           </DialogContent>
           <DialogActions>
             <Button onClick={handleEditClose} color="primary">
-              Cerrar
+              Cancelar
             </Button>
           </DialogActions>
         </Dialog>

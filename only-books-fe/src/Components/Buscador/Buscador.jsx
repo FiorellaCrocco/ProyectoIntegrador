@@ -3,7 +3,7 @@ import Calendar from "react-multi-date-picker";
 import SugerenciaLibros from "./SugerenciaLibros";
 import "./Buscador.css";
 
-function Buscador({ obtenerDatos, listaLibros, obtenerDatosFilt }) {
+function Buscador({ obtenerDatos, listaLibros, obtenerDatosFilt}) {
   const [values, setValues] = useState([]);
   const [fechaInicio, setFechaInicio] = useState("");
   const [fechaFin, setFechaFin] = useState("");
@@ -82,7 +82,7 @@ function Buscador({ obtenerDatos, listaLibros, obtenerDatosFilt }) {
               </div>
 
               <div className="busquedaFechaContainer">
-                <label>Busqueda por fecha disponible</label>
+                <label>Busqueda por fecha disponible:</label>
                 <div className="fecha-botonContainer">
                 <Calendar
                   placeholder="Seleccione la fecha de alquiler"
