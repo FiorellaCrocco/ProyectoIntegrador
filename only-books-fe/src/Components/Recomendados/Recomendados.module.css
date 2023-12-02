@@ -48,11 +48,14 @@ li {
     margin: 0;
     overflow:visible;
     margin-top: 10px;
+    text-shadow: 3px -2px 1px #F89344;
+    font-weight: 700;
 }
 
-p {
+.p {
     padding-top: 5px;
     margin-bottom: 2px;
+    
 }
 
 .price {
