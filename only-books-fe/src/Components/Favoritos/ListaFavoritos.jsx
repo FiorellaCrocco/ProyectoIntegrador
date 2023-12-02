@@ -4,6 +4,7 @@ import { useAccount } from "../../Context/accountContext";
 import { GlobalContext } from "../../Context/globalContext";
 import Card from "../Card/Card";
 import './ListaFavoritos.css'
+import Swal from "sweetalert2";
 
 const ListaFavoritos = () => {
   const { userData } = useAccount();
@@ -17,6 +18,13 @@ const ListaFavoritos = () => {
   }, [userData]); // Se ejecutará cada vez que userData cambie
 
   const fetchDataMostrar = async () => {
+    Swal.fire({
+      title: "Buscando libros favoritos...",
+      icon: "info",
+      showConfirmButton:false,
+      showLoaderOnConfirm: true,
+      allowOutsideClick: () => !Swal.isLoading(),
+    });
     try {
       if (userData) {
         const userId = userData.id;
@@ -44,6 +52,7 @@ const ListaFavoritos = () => {
     } catch (error) {
       console.error("Error:", error);
     }
+    Swal.close()
   };
     
   const actualizarListaFav = () => {

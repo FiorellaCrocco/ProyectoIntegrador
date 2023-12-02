@@ -98,6 +98,7 @@ function DetalleLibro({ id }) {
       });
     };
     getLibro();
+    window.scrollTo(0, 0);
   }, [id, fetchBookById]);
 
   useEffect(() => {

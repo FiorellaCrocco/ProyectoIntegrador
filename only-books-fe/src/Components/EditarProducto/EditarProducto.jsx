@@ -7,7 +7,7 @@ import "./EditarProducto.css";
 import { GlobalContext } from "../../Context/globalContext";
 import Swal from 'sweetalert2'
 
-const EditarProducto = ({ product, onUpdateList }) => {
+const EditarProducto = ({ product, onUpdateList, onClose }) => {
   const { listaCategorias, listaCaracteristicas, actualizarCategorias } =
     useContext(GlobalContext);
   const [formData, setFormData] = useState(product);
@@ -146,6 +146,7 @@ const EditarProducto = ({ product, onUpdateList }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    onClose()
     await setFormData({
       ...formData,
       categorias: [],
@@ -166,7 +167,11 @@ const EditarProducto = ({ product, onUpdateList }) => {
         },
         body: JSON.stringify(formData),
       };
-
+      Swal.fire({
+        title: "Editando libro...",
+        icon: "info",
+        showLoaderOnConfirm: true,
+        preConfirm: async () => {
       try {
         const response = await fetch(updateProductUrl, settings);
         if (response.ok) {
@@ -205,7 +210,9 @@ const EditarProducto = ({ product, onUpdateList }) => {
           showConfirmButton: false,
           timer: 1500
         });
-      }
+      }},
+      allowOutsideClick: () => !Swal.isLoading(),
+    });
     };
     if(lanzarFetch){
       fetchData();

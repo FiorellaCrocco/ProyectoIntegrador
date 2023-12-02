@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Historial.css';
+import Swal from "sweetalert2";
 
 const Historial = () => {
   const user = JSON.parse(sessionStorage.getItem("userData"));
@@ -8,6 +9,7 @@ const Historial = () => {
   const url = `${API_URL}bookRent/user/${userId}`;
   const token = sessionStorage.getItem("token");
   const [reservas, setReservas] = useState([])
+  const [mensaje, setMensaje] = useState("")
 
   const settings = {
     method: "GET",
@@ -19,11 +21,22 @@ const Historial = () => {
 
   const obtenerReservas = async () => {
     try {
+      Swal.fire({
+        title: "Buscando reservas...",
+        icon: "info",
+        showConfirmButton:false,
+        showLoaderOnConfirm: true,
+        allowOutsideClick: () => !Swal.isLoading(),
+      });
       const response = await fetch(url, settings);
       console.log("Obteniendo respuesta")
       const listaReservas = await response.json();
       console.log("VerificarUsuario")
       console.log(listaReservas)
+      if(listaReservas.length==0){
+        setMensaje("No se encuentran reservas")
+      }
+      Swal.close();
 
 
       return listaReservas;
@@ -74,7 +87,7 @@ const Historial = () => {
             ))}
           </ul>
         ) : (
-          <p>No se encuentran reservas</p>
+          <p>{mensaje}</p>
         )}
       </div>
     </div>

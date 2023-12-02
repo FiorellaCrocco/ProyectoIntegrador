@@ -30,7 +30,7 @@ const Administrador = () => {
     setSelectedItem(null);
     setOpen(false);
   };
-
+  window.scrollTo(0, 0);
 
   return (
     <div className="panel">

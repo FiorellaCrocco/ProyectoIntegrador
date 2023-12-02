@@ -5,11 +5,8 @@ import Swal from "sweetalert2";
 
 function CargarProducto() {
   const API_URL = import.meta.env.VITE_API_URL;
-  const {
-    fetchData,
-    listaCategorias,
-    listaCaracteristicas,
-  } = useContext(GlobalContext);
+  const { fetchData, listaCategorias, listaCaracteristicas } =
+    useContext(GlobalContext);
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [selectedCaracteristica, setSelectedCaracteristica] = useState([]);
 
@@ -71,7 +68,7 @@ function CargarProducto() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const listaLibros = await fetchData()
+    const listaLibros = await fetchData();
     const librosFormateados = listaLibros.map((book) =>
       book.title.toLowerCase()
     );
@@ -94,201 +91,209 @@ function CargarProducto() {
         body: JSON.stringify(formData),
       };
 
+      Swal.fire({
+        title: "Agregando libro...",
+        icon: "info",
+        showLoaderOnConfirm: true,
+        preConfirm: async () => {
+          try {
+            const response = await fetch(url, settings);
+            const data = await response.text();
+            console.log(data);
+
+            for (const category of selectedCategory) {
+              await fetchCategoria(data, category.id);
+            }
+            for (const caracteristica of selectedCaracteristica) {
+              await fetchCaracteristica(data, caracteristica.id);
+            }
+            // Mensaje de éxito
+            Swal.fire({
+              text: "Libro cargado con éxito",
+              icon: "success",
+            });
+            // Limpiar los campos del formulario
+            setFormData({
+              id: 0,
+              title: "",
+              author: "",
+              description: "",
+              isbn: "",
+              publication_year: "2023-11-03",
+              qualification: 0,
+              price: 0,
+              imagesBase64: [],
+            });
+
+            // Actualizar la lista de libros después de la carga exitosa
+            await fetchData();
+          } catch (error) {
+            console.log(error);
+          }
+        },
+        allowOutsideClick: () => !Swal.isLoading(),
+      })
+    }
+  }
+    async function fetchCategoria(bookId, categoriaId) {
+      const settings = {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const url = `${API_URL}book/${bookId}/categoria/${categoriaId}`;
+      //   const url = `https://onlybooks.isanerd.club/api/book/${bookId}/categoria/${categoriaId}`;
       try {
         const response = await fetch(url, settings);
         const data = await response.text();
         console.log(data);
-
-        for (const category of selectedCategory) {
-          await fetchCategoria(data, category.id);
-        }
-        for (const caracteristica of selectedCaracteristica) {
-          await fetchCaracteristica(data, caracteristica.id);
-        }
-        // Mensaje de éxito
-        Swal.fire({
-          text: "Libro cargado con éxito",
-          icon: "success",
-        });
-        // Limpiar los campos del formulario
-        setFormData({
-          id: 0,
-          title: "",
-          author: "",
-          description: "",
-          isbn: "",
-          publication_year: "2023-11-03",
-          qualification: 0,
-          price: 0,
-          imagesBase64: [],
-        });
-
-        // Actualizar la lista de libros después de la carga exitosa
-        await fetchData();
       } catch (error) {
-        console.log(error);
+        console.error("ERROR:", error);
       }
     }
-  };
 
-  async function fetchCategoria(bookId, categoriaId) {
-    const settings = {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
+    async function fetchCaracteristica(bookId, caracteristicaId) {
+      const settings = {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const url = `${API_URL}book/${bookId}/caracteristica/${caracteristicaId}`;
+      //    const url = `https://onlybooks.isanerd.club/api/book/${bookId}/caracteristica/${caracteristicaId}`;
+      try {
+        const response = await fetch(url, settings);
+        const data = await response.text();
+        console.log(data);
+      } catch (error) {
+        console.error("ERROR:", error);
+      }
+    }
+
+    const renderCategoryOptions = () => {
+      const categorias = listaCategorias;
+      return categorias.map((category, index) => (
+        <div
+          key={index}
+          className={`${selectedCategory.includes(category) ? "selected" : ""}`}
+          onClick={() => handleCategoryChange(category)}
+        >
+          <label value={category}>{category.titulo}</label>
+        </div>
+      ));
     };
-    const url = `${API_URL}book/${bookId}/categoria/${categoriaId}`;
-    //   const url = `https://onlybooks.isanerd.club/api/book/${bookId}/categoria/${categoriaId}`;
-    try {
-      const response = await fetch(url, settings);
-      const data = await response.text();
-      console.log(data);
-    } catch (error) {
-      console.error("ERROR:", error);
-    }
-  }
 
-  async function fetchCaracteristica(bookId, caracteristicaId) {
-    const settings = {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
+    const renderCaracteristicasOptions = () => {
+      const caracteristicas = listaCaracteristicas;
+      return caracteristicas.map((caracteristica, index) => (
+        <div
+          key={index}
+          className={`${
+            selectedCaracteristica.includes(caracteristica) ? "selected" : ""
+          }`}
+          onClick={() => handleCaracteristicaChange(caracteristica)}
+        >
+          <label value={caracteristica}>
+            {caracteristica.title.toUpperCase()}
+          </label>
+        </div>
+      ));
     };
-    const url = `${API_URL}book/${bookId}/caracteristica/${caracteristicaId}`;
-    //    const url = `https://onlybooks.isanerd.club/api/book/${bookId}/caracteristica/${caracteristicaId}`;
-    try {
-      const response = await fetch(url, settings);
-      const data = await response.text();
-      console.log(data);
-    } catch (error) {
-      console.error("ERROR:", error);
-    }
-  }
 
-  const renderCategoryOptions = () => {
-    const categorias = listaCategorias;
-    return categorias.map((category, index) => (
-      <div
-        key={index}
-        className={`${selectedCategory.includes(category) ? "selected" : ""}`}
-        onClick={() => handleCategoryChange(category)}
-      >
-        <label value={category}>{category.titulo}</label>
-      </div>
-    ));
-  };
+    const handleCategoryChange = (category) => {
+      if (selectedCategory.includes(category)) {
+        setSelectedCategory(
+          selectedCategory.filter((c) => c.titulo !== category.titulo)
+        );
+      } else {
+        setSelectedCategory([...selectedCategory, category]);
+      }
+    };
 
-  const renderCaracteristicasOptions = () => {
-    const caracteristicas = listaCaracteristicas;
-    return caracteristicas.map((caracteristica, index) => (
-      <div
-        key={index}
-        className={`${
-          selectedCaracteristica.includes(caracteristica) ? "selected" : ""
-        }`}
-        onClick={() => handleCaracteristicaChange(caracteristica)}
-      >
-        <label value={caracteristica}>
-          {caracteristica.title.toUpperCase()}
-        </label>
-      </div>
-    ));
-  };
+    const handleCaracteristicaChange = (caracteristica) => {
+      if (selectedCaracteristica.includes(caracteristica)) {
+        setSelectedCaracteristica(
+          selectedCaracteristica.filter((c) => c.title !== caracteristica.title)
+        );
+      } else {
+        setSelectedCaracteristica([...selectedCaracteristica, caracteristica]);
+      }
+    };
+    window.scrollTo(0,0)
 
-  const handleCategoryChange = (category) => {
-    if (selectedCategory.includes(category)) {
-      setSelectedCategory(
-        selectedCategory.filter((c) => c.titulo !== category.titulo)
-      );
-    } else {
-      setSelectedCategory([...selectedCategory, category]);
-    }
-  };
-
-  const handleCaracteristicaChange = (caracteristica) => {
-    if (selectedCaracteristica.includes(caracteristica)) {
-      setSelectedCaracteristica(
-        selectedCaracteristica.filter((c) => c.title !== caracteristica.title)
-      );
-    } else {
-      setSelectedCaracteristica([...selectedCaracteristica, caracteristica]);
-    }
-  };
-
-  return (
-    <div>
-      <h2 className="titulo">Crear Libro</h2>
-      <div className="Container">
-        <form className="formulario" onSubmit={handleSubmit}>
-          <div className="div">
-            <label className="labels" htmlFor="title">
-              Título:
-            </label>
-            <input
-              className="input"
-              type="text"
-              id="title"
-              name="title"
-              value={formData.title}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="div">
-            <label className="labels" htmlFor="author">
-              Autor:
-            </label>
-            <input
-              className="input"
-              type="text"
-              id="author"
-              name="author"
-              value={formData.author}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="div">
-            <label className="labels" htmlFor="description">
-              Descripción:
-            </label>
-            <textarea
-              className="input"
-              id="description"
-              name="description"
-              value={formData.description}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="div">
-            <label className="labels" htmlFor="isbn">
-              ISBN:
-            </label>
-            <input
-              className="input"
-              type="text"
-              id="isbn"
-              name="isbn"
-              value={formData.isbn}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="div">
-            <label className="labels" htmlFor="publication_year">
-              Año de Publicación:
-            </label>
-            <input
-              className="input"
-              type="date"
-              id="publication_year"
-              name="publication_year"
-              value={formData.publication_year}
-              onChange={handleInputChange}
-            />
-          </div>
-          {/* <div className="div">
+    return (
+      <div>
+        <h2 className="titulo">Crear Libro</h2>
+        <div className="Container">
+          <form className="formulario" onSubmit={handleSubmit}>
+            <div className="div">
+              <label className="labels" htmlFor="title">
+                Título:
+              </label>
+              <input
+                className="input"
+                type="text"
+                id="title"
+                name="title"
+                value={formData.title}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="div">
+              <label className="labels" htmlFor="author">
+                Autor:
+              </label>
+              <input
+                className="input"
+                type="text"
+                id="author"
+                name="author"
+                value={formData.author}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="div">
+              <label className="labels" htmlFor="description">
+                Descripción:
+              </label>
+              <textarea
+                className="input"
+                id="description"
+                name="description"
+                value={formData.description}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="div">
+              <label className="labels" htmlFor="isbn">
+                ISBN:
+              </label>
+              <input
+                className="input"
+                type="text"
+                id="isbn"
+                name="isbn"
+                value={formData.isbn}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="div">
+              <label className="labels" htmlFor="publication_year">
+                Año de Publicación:
+              </label>
+              <input
+                className="input"
+                type="date"
+                id="publication_year"
+                name="publication_year"
+                value={formData.publication_year}
+                onChange={handleInputChange}
+              />
+            </div>
+            {/* <div className="div">
           <label className="labels" htmlFor="qualification">
             Calificación:
           </label>
@@ -301,56 +306,55 @@ function CargarProducto() {
             onChange={handleInputChange}
           />
         </div> */}
-          <div className="div">
-            <label className="labels" htmlFor="price">
-              Precio:
-            </label>
-            <input
-              className="input"
-              type="number"
-              id="price"
-              name="price"
-              value={formData.price}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="ccSelect">
-            <div className="divSelect">
-              <label className="labels" htmlFor="categorias">
-                Categorías:
+            <div className="div">
+              <label className="labels" htmlFor="price">
+                Precio:
               </label>
-              <>{renderCategoryOptions()}</>
+              <input
+                className="input"
+                type="number"
+                id="price"
+                name="price"
+                value={formData.price}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="ccSelect">
+              <div className="divSelect">
+                <label className="labels" htmlFor="categorias">
+                  Categorías:
+                </label>
+                <>{renderCategoryOptions()}</>
+              </div>
+
+              <div className="divSelect">
+                <label className="labels" htmlFor="caracteristicas">
+                  Características:
+                </label>
+                <>{renderCaracteristicasOptions()}</>
+              </div>
             </div>
 
-            <div className="divSelect">
-              <label className="labels" htmlFor="caracteristicas">
-                Características:
+            <div className="div">
+              <label className="labels" htmlFor="image">
+                Imagen:
               </label>
-              <>{renderCaracteristicasOptions()}</>
+              <input
+                className="input"
+                type="file"
+                multiple
+                id="image"
+                name="image"
+                accept="image/*"
+                onChange={handleImageChange}
+              />
             </div>
-          </div>
-
-          <div className="div">
-            <label className="labels" htmlFor="image">
-              Imagen:
-            </label>
-            <input
-              className="input"
-              type="file"
-              multiple
-              id="image"
-              name="image"
-              accept="image/*"
-              onChange={handleImageChange}
-            />
-          </div>
-          <button className="FormBtn" type="submit">
-            Guardar Libro
-          </button>
-        </form>
+            <button className="FormBtn" type="submit">
+              Guardar Libro
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
-  );
+    );
 }
-
 export default CargarProducto;

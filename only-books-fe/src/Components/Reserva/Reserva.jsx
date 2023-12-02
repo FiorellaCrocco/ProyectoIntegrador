@@ -13,6 +13,7 @@ import { es } from 'date-fns/locale';
 
 const Reserva = () => {
   //const { userData } = useAccount();
+  window.scrollTo(0,0)
   const user = JSON.parse(sessionStorage.getItem("userData"));
   const userId = user ? user.id : null;
   const [pais, setPais] = useState("");
