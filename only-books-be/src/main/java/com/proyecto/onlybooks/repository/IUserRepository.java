@@ -25,7 +25,7 @@ public interface IUserRepository extends JpaRepository<User,Long> {
     @Query("SELECT u FROM User u JOIN u.booksFavs b WHERE b.id = :bookId")
     List<User> buscarBooksFavoritos(@Param("bookId") Long bookId);
 
-    @Query("SELECT new com.proyecto.onlybooks.dto.UserSummary(u.id, u.name, u.lastname, u.dni, u.email, u.rol) FROM User u ")
+    @Query("SELECT new com.proyecto.onlybooks.dto.UserSummary(u.id, u.name, u.lastname, u.password, u.dni, u.email, u.rol) FROM User u ")
     List<UserSummary> findUserSummary();
 
 }
