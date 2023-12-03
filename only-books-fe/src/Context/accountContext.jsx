@@ -7,29 +7,31 @@ const AccountContext = createContext();
 export const AccountProvider = ({ children }) => {
     const [userData, setUserData] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     const updateUserData = (data) => {
         setUserData(data);
+        setIsAuthenticated(true);
+        setIsAdmin(data?.rol === 'ADMIN');
     };
 
     const clearUserData = () => {
         setUserData(null);
         setIsAuthenticated(false);
+        setIsAdmin(false);
     };
 
     useEffect(() => {
 
-        // const storedUserData = JSON.parse(sessionStorage.getItem('userData'));
         const storedUserData = JSON.parse(sessionStorage.getItem('userData'));
         // console.log('storedUserData: ' + storedUserData);
         if (storedUserData) {
             updateUserData(storedUserData);
-            setIsAuthenticated(true);
         }
     }, []); 
 
     return (
-        <AccountContext.Provider value={{ userData, updateUserData, clearUserData, isAuthenticated, setIsAuthenticated }}>
+        <AccountContext.Provider value={{ userData, updateUserData, clearUserData, isAuthenticated, setIsAuthenticated, isAdmin }}>
             {children}
         </AccountContext.Provider>
     );
