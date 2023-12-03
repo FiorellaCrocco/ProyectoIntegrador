@@ -61,6 +61,7 @@ const ListaFavoritos = () => {
   
   const renderList = () => {
   return (
+    <div className="contentContFav">
     <div className="listado">
       <h2 className="h2">Tus Libros Favoritos:</h2>
       {
@@ -79,6 +80,7 @@ const ListaFavoritos = () => {
       </ul>
       }
       
+    </div>
     </div>
   );
   }
