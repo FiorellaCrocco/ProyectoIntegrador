@@ -1,0 +1,66 @@
+.tituloListRes {
+    border-radius: 10px;
+    box-shadow: 11px 09px 10px #00000061;
+    background-color: #cae0ed;
+    color: #182b39;
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding: 20px;
+    width: 70vw;
+    text-align: center;
+
+    color: #244356;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.elementsCaractR {
+    width: 70vw;  
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: #182b39;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    background: #cae0ed;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 11px 09px 10px #00000061;
+    overflow-y: scroll;
+    gap:inherit;
+
+    list-style-type: none;
+    
+}
+
+.listIdR{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 5px 0; 
+
+    font-size: 16px;  
+    padding: 5px 0;
+}
+
+.listaTitleR{
+    width: 300px;
+}
+
+.listIdR div:first-child {
+    padding: 0px 3rem 0px 1.5rem;
+    width: 30vw;
+}
+
+.fecha{
+    text-align: center;
+}
+
+.TA{
+    font-size: large;
+    
+}
