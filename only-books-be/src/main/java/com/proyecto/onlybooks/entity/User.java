@@ -50,9 +50,6 @@ public class User implements UserDetails {
     @NotBlank
     private String email;
 
-    // La contraseña debe tener al menos una letra mayúscula, una minúscula, un número, min 8 caracteres.
-    @NotNull
-    @NotBlank
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$", message = "La contraseña no cumple con los requisitos.")
     private String password;
 
