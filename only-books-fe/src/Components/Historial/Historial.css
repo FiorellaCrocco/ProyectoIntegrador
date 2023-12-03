@@ -37,8 +37,8 @@
     justify-content: space-between;
     width: 100%;
 }
-.tituloFechaH{
-    
+
+.tituloFechaH{ 
     width: 250px;
 }
 
@@ -49,19 +49,19 @@
     width: 100%;
     align-items: center;
 }
+
 .tituloImgHistorial{
     display: flex;
     align-items: center; /* Alinea la imagen y el título verticalmente */
-    width: 50%;
+    width: 50vw;
 }
+
 .imgHistorial{
     margin-right: 12px;
-    margin-top: 10px;
-    width: 50px;
-    
-
+    width: 80px;
 }
-.titleReservaHistorial{
+
+.titleReserva{
     width: 100px;
 }
 
@@ -76,7 +76,7 @@
 .fechasHistorial{
     display: flex;
     justify-content: space-between;
-    width: 50%;
+    width: 50vw;
 }
 
 .fechasHistorialTitulos{
@@ -85,6 +85,21 @@
     width: 50%;
 }
 
-/* .fechaFin{
-    
-} */
+.fechaInicio{
+    margin-left: 2.5rem;
+}
+
+.fechaFin{
+   margin-right: 5rem;
+} 
+
+.titleReservaHistorial{
+    width: 20vw;
+    margin-bottom: auto;
+    text-align: left;
+    margin-top: auto;
+}
+
+.rootRes{
+    height: 72.7vh;
+}

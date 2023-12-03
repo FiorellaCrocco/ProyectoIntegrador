@@ -181,7 +181,7 @@ export const BookProvider = ({ children }) => {
     fetchData();
     fetchCategorias();
     fetchCaracteristicas();
-    fetchFiltroRent()
+    //fetchFiltroRent()
   }, []);
 
   const logout = () => {

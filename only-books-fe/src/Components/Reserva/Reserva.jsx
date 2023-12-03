@@ -13,6 +13,7 @@ import { es } from 'date-fns/locale';
 
 const Reserva = () => {
   //const { userData } = useAccount();
+  window.scrollTo(0,0)
   const user = JSON.parse(sessionStorage.getItem("userData"));
   const userId = user ? user.id : null;
   const [pais, setPais] = useState("");
@@ -308,9 +309,9 @@ const Reserva = () => {
           </div>
         </div>
 
-        <button className={styles.btn} disabled={desactivar}>
-          Reservar
-        </button>
+        <button className={`${styles.btn} ${desactivar ? styles['btn-disabled'] : ''}`} disabled={desactivar}>
+      Reservar
+    </button>
       </form>
     </>
   );

@@ -31,6 +31,8 @@
 
 .titulopolitica {
     margin: 0px;
+    text-decoration: underline;
+    font-size: xx-large;
 }
 .tituloh4 {
     margin: 0px;

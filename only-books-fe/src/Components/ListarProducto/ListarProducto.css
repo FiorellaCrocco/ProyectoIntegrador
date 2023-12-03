@@ -1,7 +1,7 @@
 
 
 .listaContainerAdmin {
-  width: 900px;
+  max-width: 900px;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -28,7 +28,7 @@
 }
 
 .tituloListaAdmin {
-  width: 900px;
+  max-width: 900px;
   padding: 20px;
   margin-top: 0;
   margin-bottom: 0;
@@ -68,8 +68,13 @@
 
 
 .nombre {
+  width: 500px;
   
-  min-width: 595px;
-
+}
+@media (max-width: 1200px) {
+  .nombre{
+    width: 200px;
+  }
+  
 }
 

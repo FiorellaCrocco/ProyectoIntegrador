@@ -54,7 +54,7 @@ nav a {
 
 .wrapper {
 	width: 400px;
-	background: rgb(84, 157, 194);
+	background: #549dc2;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -107,8 +107,17 @@ body {
 	border-radius: 10px;
 	transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
 	margin: 0.5rem;
-
+	background-color: #549dc2;
 }
+
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover, 
+.input:-webkit-autofill:focus, 
+.input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px #549dc2 inset;
+}
+ 
+
 
 .label {
 	position: absolute;

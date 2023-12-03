@@ -44,7 +44,6 @@ useEffect(() => {
                   <img src={libro.imgUrl} alt={libro.title} />
                 </Link>
                 <p className={style.title}>{libro.title}</p>
-                <p className={style.price}>${libro.price}</p>
               </li>
             );
           })}

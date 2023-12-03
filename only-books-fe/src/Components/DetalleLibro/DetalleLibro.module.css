@@ -227,13 +227,38 @@
 
 .calendarioBtn input{
     height: 25px;
-    width: 240px;
+    width: 250px;
     border: none;
     border-radius: 0px;
     -webkit-box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
     -moz-box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
     box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
     cursor: pointer;
+}
+
+.categ {
+    color: rgb(87, 87, 87);
+    font-size: 24px;
+    text-align: center;
+}
+
+.listaCateg {
+    color: black;
+    display: flex;
+    flex-direction: row;
+    padding-left: 0;
+    justify-content: center;
+}
+
+.listaCateg .listaIcon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.listaCateg .listaIcon > p {
+    margin-top: 0;
+    color: black;
 }
 
 @media (max-width: 600px) {
