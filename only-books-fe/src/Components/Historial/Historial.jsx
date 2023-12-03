@@ -59,16 +59,17 @@ const Historial = () => {
   }, []);
 
   return (
+    <div className='rootRes'>
     <div className="historial">
       <h1 className="titleHistorial">Mi historial de reservas: </h1>
       <div className="listadoGeneralH">
         {reservas.length !== 0 ? (
           <ul className="listadoUl">
             <div className="titulosHistorial">
-              <p className="titleReserva">Titulo:</p>
+              <p className="titleReserva">TITULO</p>
               <div className="fechasHistorialTitulos">
-                <p className="tituloFechaH">Fecha de inicio:</p>
-                <p className="tituloFechaF">Fecha de finalizacion:</p>
+                <p className="tituloFechaH">FECHA DE INICIO</p>
+                <p className="tituloFechaF">FECHA DE FINALIZACION</p>
               </div>
             </div>
 
@@ -95,6 +96,7 @@ const Historial = () => {
           <p>{mensaje}</p>
         )}
       </div>
+    </div>
     </div>
   );
 };
