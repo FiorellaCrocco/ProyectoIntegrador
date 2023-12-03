@@ -42,9 +42,8 @@ function DetalleLibro({ id }) {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const today = new Date().getDate()
-  console.log(today)
-
+  const today = new Date().getDate();
+  console.log(today);
 
   const userData = JSON.parse(sessionStorage.getItem("userData"));
   const [shareData, setShareData] = useState({
@@ -79,11 +78,11 @@ function DetalleLibro({ id }) {
     );
   };
 
-  useEffect(()=>{
-    if(location.state!=null){
-      setValues([location.state.inicio,location.state.fin])
+  useEffect(() => {
+    if (location.state != null) {
+      setValues([location.state.inicio, location.state.fin]);
     }
-  },[])
+  }, []);
 
   useEffect(() => {
     const getLibro = async () => {
@@ -167,48 +166,46 @@ function DetalleLibro({ id }) {
 
   const handleReservar = (e) => {
     console.log(values);
-    if (values.length>1 && values[0]!='') {
-    e.preventDefault();
-    console.log(libro);
-    const inicio = values.toString().split(",")[0]
-    const fin = values.toString().split(",")[1]
+    if (values.length > 1 && values[0] != "") {
+      e.preventDefault();
+      console.log(libro);
+      const inicio = values.toString().split(",")[0];
+      const fin = values.toString().split(",")[1];
 
-    if (userData) {
-      navigate("/reservar", {
-        replace: true,
-        state: {
-          libro: libro,
-          logged: true,
-          inicio: inicio,
-          fin: fin
-        },
-      });
+      if (userData) {
+        navigate("/reservar", {
+          replace: true,
+          state: {
+            libro: libro,
+            logged: true,
+            inicio: inicio,
+            fin: fin,
+          },
+        });
+      } else {
+        navigate("/login", {
+          state: {
+            key: "loginReserva",
+            msg: "Es necesario iniciar sesion para reservar un libro",
+          },
+        });
+      }
+
+      console.log("adentro handle");
     } else {
-      navigate("/login", {
-        state: {
-          key: "loginReserva",
-          msg: "Es necesario iniciar sesion para reservar un libro",
-        },
+      Swal.fire({
+        position: "top-end",
+        text: "Debe seleccionar un periodo de reserva",
+        icon: "error",
+        showConfirmButton: false,
+        timer: 3000,
       });
     }
+  };
 
-    console.log("adentro handle");
-  }
-  else{
-    Swal.fire({
-      position: "top-end",
-      text: "Debe seleccionar un periodo de reserva",
-      icon: "error",
-      showConfirmButton: false,
-      timer: 3000,
-    });
-
-  }
-};
-
-const clearCalendar= ()=>{
-  setValues([])
-}
+  const clearCalendar = () => {
+    setValues([]);
+  };
 
   return (
     <div>
@@ -280,52 +277,58 @@ const clearCalendar= ()=>{
             </div>
 
             <div className={styles.reservaContainer}>
-            <label className={styles.dispo}>Ver Disponibilidad:</label>
-            <VerReservas
-              id={id}
-              obtenerReservaLibro={obtenerReservaLibro}
-            ></VerReservas>
-            <div className={styles.calendarioBtn}>
-              <Calendar
-                editable={false}
-                placeholder="Seleccione la fecha de alquiler"
-                format="YYYY-MM-DD"
-                value={values}
-                onChange={setValues}
-                range
-                highlightToday={false}
-                numberOfMonths={2}
-                mapDays={({ date, isSameDate }) => {
-                  let props = {};
-                  fechasReservadas.map((fecha) => {
-                    if (isSameDate(fecha, date)) {
-                      props.disabled = true;
-                      props.style = {
-                        ...props.style,
-                        color: "#666",
-                        backgroundColor: "#ccc",
-                        fontWeight: "bold",
-                        border: "2px solid #777",
-                      };
-                      props.onClick = () => {
-                        Swal.fire({
-                          position: "top-end",
-                          text: "Ya existe reserva en esa fecha, seleccione una nueva",
-                          icon: "error",
-                          showConfirmButton: false,
-                          timer: 3000,
-                        });
-                      };
-                    }
-                  });
+              <label className={styles.dispo}>Ver Disponibilidad:</label>
+              <VerReservas
+                id={id}
+                obtenerReservaLibro={obtenerReservaLibro}
+              ></VerReservas>
+              <div className={styles.calendarioBtn}>
+                <Calendar
+                  editable={false}
+                  placeholder="Seleccione la fecha de alquiler"
+                  format="YYYY-MM-DD"
+                  value={values}
+                  onChange={setValues}
+                  range
+                  highlightToday={false}
+                  numberOfMonths={2}
+                  mapDays={({ date, isSameDate }) => {
+                    let props = {};
+                    fechasReservadas.map((fecha) => {
+                      if (isSameDate(fecha, date)) {
+                        props.disabled = true;
+                        props.style = {
+                          ...props.style,
+                          color: "#666",
+                          backgroundColor: "#ccc",
+                          fontWeight: "bold",
+                          border: "2px solid #777",
+                        };
+                        props.onClick = () => {
+                          Swal.fire({
+                            position: "top-end",
+                            text: "Ya existe reserva en esa fecha, seleccione una nueva",
+                            icon: "error",
+                            showConfirmButton: false,
+                            timer: 3000,
+                          });
+                        };
+                      }
+                    });
 
-                  return props;
-                }}
-              />
-              <button className={styles.reservaButton} type="submit" onClick={handleReservar}>
-                Reservar
-              </button>
-              <button className={styles.borrarButton} onClick={clearCalendar}>Borrar</button>
+                    return props;
+                  }}
+                />
+                <button
+                  className={styles.reservaButton}
+                  type="submit"
+                  onClick={handleReservar}
+                >
+                  Reservar
+                </button>
+                <button className={styles.borrarButton} onClick={clearCalendar}>
+                  Borrar
+                </button>
               </div>
             </div>
 
@@ -389,8 +392,21 @@ const clearCalendar= ()=>{
               {/* {console.log('shareData DetalleLibro: ' + shareData.title)}
               {console.log('shareData DetalleLibro: ' + shareData.description)} */}
             </div>
+            {libro.categorias ? (
+              <div>
+                <h4 className={styles.categ}>Categorias</h4>
+                <ul className={styles.listaCateg}>
+                  {libro.categorias.map((categoria, index) => (
+                    <li className={styles.listaIcon} key={index}>
+                      <p className={styles.pCat}>{categoria.titulo}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
 
             <CaracteristicaLibro id={id} />
+
             <Resenia id={id} />
             <ReseniaLista id={id} />
           </div>
