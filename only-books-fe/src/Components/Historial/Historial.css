@@ -64,14 +64,14 @@
 .titleReservaHistorial{
     width: 100px;
 }
-/* 
+
 .tituloFechaH {
-    
+    width: 25%;
 }
 
 .tituloFechaF{
-    
-} */
+    width: 25%;
+} 
 
 .fechasHistorial{
     display: flex;
