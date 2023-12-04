@@ -72,9 +72,9 @@ const Historial = () => {
                 <p className="tituloFechaF">FECHA DE FINALIZACION</p>
               </div>
             </div>
-
+          <div className='contenedorAlt'>
             {reservas.map((reserva) => (
-              <li className="listadoHistorial" key={reserva.id}>
+              <li className="listadoHistorial " key={reserva.id}>
                 <div className="tituloImgHistorial">
                   <img
                     className="imgHistorial"
@@ -91,6 +91,7 @@ const Historial = () => {
                 </div>
               </li>
             ))}
+            </div>
           </ul>
         ) : (
           <p>{mensaje}</p>
