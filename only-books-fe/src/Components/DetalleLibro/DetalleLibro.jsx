@@ -60,6 +60,7 @@ function DetalleLibro({ id }) {
 
   const toggleGalleryModal = () => {
     setShowGalleryModal(!showGalleryModal);
+    document.body.style.overflow = showGalleryModal?'auto':'hidden'
     setShowPopup(!showPopup);
   };
 
@@ -239,13 +240,9 @@ function DetalleLibro({ id }) {
 
               {showGalleryModal && (
                 <div className={stylesM.modal}>
-                  <div onClick={toggleModal} className={stylesM.overlay}></div>
+                  {/* <div onClick={toggleModal} className={stylesM.overlay}></div> */}
                   <div className={stylesM.modalcontent}>
-                    <div
-                      className={
-                        stylesM.carrusel
-                      } /*className={styles.carrusel}*/
-                    >
+                    <div className={stylesM.carrusel}>
                       <button
                         className={stylesM.btnBack}
                         onClick={retrocederImagen}
