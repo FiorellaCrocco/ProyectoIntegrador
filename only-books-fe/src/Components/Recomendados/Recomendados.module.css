@@ -78,6 +78,13 @@ p:last-child{
     margin: 0 auto;
 }
 
+.book img:hover {
+    width: 290px;
+    
+}
+
+
+
 .listaContainer {
     position: relative;
     width: 100%;

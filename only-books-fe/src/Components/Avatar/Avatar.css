@@ -1,3 +1,10 @@
 .avatar{
     cursor: pointer;
 }
+
+.avatar:hover {
+    height: 50px;
+    width: 50px;
+    box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
+   
+}
