@@ -61,6 +61,7 @@
     color: rgb(48, 48, 48);
     border-radius: 10px ;
     position: relative;
+    line-height: 1.7;
 }
 .politicaModalBody>h4{
     margin-left: 20px;
