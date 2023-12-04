@@ -9,7 +9,7 @@ const Subnavbar = () => {
     return (
         <div className="subnavbar">
             <Link to="/">Inicio</Link>
-            <Link to="/suscripciones">Subscripciones</Link>
+           {/*  <Link to="/suscripciones">Subscripciones</Link> */}
 
             {isAuthenticated ? (
                 <Link to="/favoritos">Mis favoritos</Link>
