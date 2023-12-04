@@ -22,6 +22,7 @@ import Favoritos from "../Favoritos/Favoritos";
 import Reserva from "../Reserva/Reserva";
 
 import { useNavigate, useLocation } from "react-router-dom";
+import { min } from "date-fns";
 
 function DetalleLibro({ id }) {
   const [showGalleryModal, setShowGalleryModal] = useState(false);
@@ -33,7 +34,7 @@ function DetalleLibro({ id }) {
   const { fetchBookById, fetchListaFavoritos } = useContext(GlobalContext);
   const [libro, setLibro] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
-  const [values, setValues] = useState([]);
+  const [values, setValues] = useState(Date.now);
   const [fechasReservadas, setFechas] = useState([]);
   const [reservaLibro, setReservaLibro] = useState([]);
   const [endDate, setEndDate] = useState("");
@@ -43,7 +44,20 @@ function DetalleLibro({ id }) {
   const navigate = useNavigate();
   const location = useLocation();
   const today = new Date().getDate();
+  const minYear = new Date().getYear()+1900;
+  const minMonth = new Date().getMonth();
+  const minDate = minYear+"-"+minMonth+"-"+today
+
+  const fechaActual = new Date();
+  const año = fechaActual.getFullYear();
+  const mes = (fechaActual.getMonth() + 1).toString().padStart(2, "0");
+  const día = fechaActual.getDate().toString().padStart(2, "0");
+  
+  const fechaFormateada = `${año}-${mes}-${día}`;
+  console.log(fechaFormateada);
+
   console.log(today);
+
 
   const userData = JSON.parse(sessionStorage.getItem("userData"));
   const [shareData, setShareData] = useState({
@@ -289,6 +303,7 @@ function DetalleLibro({ id }) {
                   range
                   highlightToday={false}
                   numberOfMonths={2}
+                  minDate={fechaFormateada}
                   mapDays={({ date, isSameDate }) => {
                     let props = {};
                     fechasReservadas.map((fecha) => {
