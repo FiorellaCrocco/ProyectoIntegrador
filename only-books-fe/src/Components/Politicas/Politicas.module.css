@@ -96,17 +96,15 @@
         flex-basis: calc(33.33% - 20px); /* 33.33% con un margen de 10px entre columnas */
     }
 
-    @media (max-width: 480px) {
-        .politicascontainercolum1 {
-            flex-basis: calc(50% - 20px); /* 50% con un margen de 10px entre columnas */
-        }
-    }
-
-    @media (max-width: 360px) {
+    @media (max-width: 620px) {
         .politicascontainercolum1 {
             flex-basis: calc(100% - 20px); /* 100% con un margen de 10px entre columnas */
         }
-
-        
     }
+
+    /* @media (max-width: 360px) {
+        .politicascontainercolum1 {
+            flex-basis: calc(100% - 20px); /* 100% con un margen de 10px entre columnas 
+        } 
+    } */
 }

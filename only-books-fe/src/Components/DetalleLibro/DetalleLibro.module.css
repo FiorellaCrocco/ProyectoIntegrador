@@ -260,13 +260,56 @@
     margin-top: 0;
     color: black;
 }
-
-@media (max-width: 600px) {
+@media (max-width: 720px){
+    .bookcontainer{
+        width: 60%;
+        padding: 30px;
+    }
+    .galeria{
+        display: none;
+    }
+    .btnVer{  
+    font-size: 14px;
+    padding: 8px;
+    margin: 10px;
+    }
     .sectionDetalles{
         flex-direction: column;
     }
     .titles{
+        padding: 0;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .sectionDetalles{
+        flex-direction: column;
+        margin: 0;
+    }
+    .titles{
         padding-left: 0;
     }
+    .categ{
+        margin: 5px;
+    }
+    .listaCateg{
+        flex-direction: column;
+        align-items: center;
+    }
+}
+@media (max-width: 550px){
+    .calendarioBtn{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .reservaButton, .borrarButton{
+        padding: 5px 5px;
+        margin: 10px 0 0 0;
+        width: 110px;
+        border-radius: 5px;
+    }
+
 }
 
