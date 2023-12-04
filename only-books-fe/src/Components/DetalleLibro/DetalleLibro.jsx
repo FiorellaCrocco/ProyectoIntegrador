@@ -34,7 +34,7 @@ function DetalleLibro({ id }) {
   const { fetchBookById, fetchListaFavoritos } = useContext(GlobalContext);
   const [libro, setLibro] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
-  const [values, setValues] = useState(Date.now);
+  const [values, setValues] = useState([]);
   const [fechasReservadas, setFechas] = useState([]);
   const [reservaLibro, setReservaLibro] = useState([]);
   const [endDate, setEndDate] = useState("");
@@ -44,9 +44,9 @@ function DetalleLibro({ id }) {
   const navigate = useNavigate();
   const location = useLocation();
   const today = new Date().getDate();
-  const minYear = new Date().getYear()+1900;
-  const minMonth = new Date().getMonth();
-  const minDate = minYear+"-"+minMonth+"-"+today
+ // const minYear = new Date().getYear()+1900;
+ // const minMonth = new Date().getMonth();
+ // const minDate = minYear+"-"+minMonth+"-"+today
 
   const fechaActual = new Date();
   const año = fechaActual.getFullYear();
