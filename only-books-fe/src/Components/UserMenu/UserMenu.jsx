@@ -55,7 +55,7 @@ const UserMenu = () => {
             {showMenu && (
                 <div className="custom-dropdown" ref={menuRef}>
                     <Link to="/perfil" className="custom-dropdown-item">Mi perfil</Link>
-                    <Link to="/" className="custom-dropdown-item">Mis Reservas</Link>
+                    <Link to="/historial" className="custom-dropdown-item">Mis Reservas</Link>
                     <div className="custom-dropdown-item  custom-logout" onClick={onLogout}>Cerrar sesión</div>
                     
                 </div>
