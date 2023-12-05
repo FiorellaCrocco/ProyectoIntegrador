@@ -18,6 +18,8 @@ import Resenia from "../Resenia/Resenia";
 import ReseniaLista from "../ReseniaLista/ReseniaLista";
 import Modal from "./ModalShare";
 import Favoritos from "../Favoritos/Favoritos";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
 
 import Reserva from "../Reserva/Reserva";
 
@@ -44,20 +46,19 @@ function DetalleLibro({ id }) {
   const navigate = useNavigate();
   const location = useLocation();
   const today = new Date().getDate();
- // const minYear = new Date().getYear()+1900;
- // const minMonth = new Date().getMonth();
- // const minDate = minYear+"-"+minMonth+"-"+today
+  // const minYear = new Date().getYear()+1900;
+  // const minMonth = new Date().getMonth();
+  // const minDate = minYear+"-"+minMonth+"-"+today
 
   const fechaActual = new Date();
   const año = fechaActual.getFullYear();
   const mes = (fechaActual.getMonth() + 1).toString().padStart(2, "0");
   const día = fechaActual.getDate().toString().padStart(2, "0");
-  
+
   const fechaFormateada = `${año}-${mes}-${día}`;
   console.log(fechaFormateada);
 
   console.log(today);
-
 
   const userData = JSON.parse(sessionStorage.getItem("userData"));
   const [shareData, setShareData] = useState({
@@ -74,7 +75,7 @@ function DetalleLibro({ id }) {
 
   const toggleGalleryModal = () => {
     setShowGalleryModal(!showGalleryModal);
-    document.body.style.overflow = showGalleryModal?'auto':'hidden'
+    document.body.style.overflow = showGalleryModal ? "auto" : "hidden";
     setShowPopup(!showPopup);
   };
 
@@ -353,8 +354,10 @@ function DetalleLibro({ id }) {
 
             <div className={styles.sectionDetalles}>
               <div className={styles.titles}>
-                <div>
+                <div className={styles.tituloContainer}>
                   <h1 className={styles.bookh1}>{libro.title}</h1>{" "}
+                  <FontAwesomeIcon icon={faStarSolid} className="card-star" />
+                  <span className={styles.qualificationInfo}>{libro.qualification}/5</span>
                   <span className={styles.favIcon}>
                     <Favoritos
                       variable={id}

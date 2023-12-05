@@ -11,21 +11,15 @@ const Search = () => {
     listaLibros,
     isLoading,
     listaCategorias,
-    fetchFiltroRent,
     rentBook,
-    fetchData,
+    isLoadingRent,
   } = useContext(GlobalContext);
   const [listaAleatoria, setListaAleatoria] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [listaRentBook, setListaRentBook] = useState([]);
   const [librosDisponibles, setLibrosDisponibles] = useState([]);
   const [librosReservados, setLibrosReservados] = useState([]);
-  // const [fechaSeleccionada, setFechaSeleccionada] = useState([])
 
-  // const obtenerFechas=(fechas)=>{
-  //   setFechaSeleccionada(fechas)
-  //   }
 
   const selectLibrosAleatorios = (libros, cantidad) => {
     const librosSeleccionados = [];
@@ -107,9 +101,7 @@ const Search = () => {
   }, [listaLibros]);
 
   useEffect(() => {
-    const data = rentBook;
-    setListaRentBook(data);
-    // console.log(listaRentBook);
+    const listaRentBook= rentBook
     if (!listaRentBook.length == 0 && fechaInicio!=="") {
       listaRentBook.map((renta) => {
         const returnDate = new Date(renta.returnDate.split("T")[0]);
@@ -121,12 +113,9 @@ const Search = () => {
         if (
           new Date(fechaInicio2) < startDate &&
           new Date(fechaFin2) < startDate
-        ) {
-          console.log("Renta valida, previa a la reserva existente");
+          ) {
         } else if (new Date(fechaInicio2) > returnDate) {
-          console.log("Renta valida, posterior a la reserva existente.");
         } else {
-          console.log(renta.book.id);
           setLibrosReservados((prevLista) => [...prevLista, renta.book.id]);
         }
       });
@@ -136,7 +125,9 @@ const Search = () => {
   return (
     <div>
       <Recomendados libros={listaLibros}></Recomendados>
-      <Buscador obtenerDatos={obtenerDatos} obtenerDatosFilt={obtenerDatosFilt} listaLibros={listaLibros} ></Buscador>
+      {
+        isLoadingRent? <div className="loader-container"><div className="custom-loader loader-rent"></div></div>: <Buscador obtenerDatos={obtenerDatos} obtenerDatosFilt={obtenerDatosFilt} listaLibros={listaLibros} ></Buscador>
+      }
       <div className="search-container">
         <div className="input-select">
           <div className="columnCategorias">
@@ -166,6 +157,7 @@ const Search = () => {
           fechaFin={fechaFin}
           librosReservados={librosReservados}
           librosFiltrados={librosFiltrados}
+          librosDisponibles={librosDisponibles}
         ></LibrosPaginados>
       </div>
     </div>

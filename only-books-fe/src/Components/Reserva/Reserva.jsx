@@ -7,9 +7,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import CaracteristicaLibro from "../CaracteristicaLibro/CaracteristicaLibro";
-import emailjs from "@emailjs/browser";
-import { format } from "date-fns";
-import { es } from "date-fns/locale";
+import emailjs from '@emailjs/browser';
+import { format } from 'date-fns';
+import { es } from 'date-fns/locale';
 
 const Reserva = () => {
   //const { userData } = useAccount();
@@ -55,15 +55,11 @@ const Reserva = () => {
   };
 
   const sendConfirmationEmail = async () => {
-    try {
-      const formattedStartDate = format(
-        new Date(inicio),
-        "EEEE dd 'de' MMMM yyyy",
-        { locale: es }
-      );
-      const formattedEndDate = format(new Date(fin), "EEEE dd 'de' MMMM yyyy", {
-        locale: es,
-      });
+		try {
+      const fechaInicioMenosUnDia = addDays(new Date(inicio), 1);
+      const fechaFinMenosUnDia = addDays(new Date(fin), 1);
+      const formattedStartDate = format(fechaInicioMenosUnDia, "EEEE dd 'de' MMMM yyyy", { locale: es });
+      const formattedEndDate = format(fechaFinMenosUnDia, "EEEE dd 'de' MMMM yyyy", { locale: es });
 
       const templateParams = {
         to_email: user.email,

@@ -36,6 +36,12 @@
     margin-right: 2rem;
     overflow-y: scroll;
 }
+.favRed{
+    color:red;
+}
+.favGray{
+    color:gray;
+}
 @media (max-width: 1466px){
     .cardFavs{
         grid-template-columns: repeat(5, minmax(100px, 1fr));
