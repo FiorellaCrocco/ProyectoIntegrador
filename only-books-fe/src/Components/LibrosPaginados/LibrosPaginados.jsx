@@ -132,7 +132,7 @@ function LibrosPaginados({ libros, isLoading, librosFiltrados, librosReservados,
             <ul className="listaPaginada">{renderCards()}</ul>
             <div className="btn-container">
                 <button
-                    className="btn-anterior"
+                    className= {pagina === 1 ? "btn-anterior disable":"btn-anterior" }
                     onClick={prevPage}
                     disabled={pagina === 1}
                 >
@@ -140,9 +140,10 @@ function LibrosPaginados({ libros, isLoading, librosFiltrados, librosReservados,
                 </button>
                 {renderPageButtons()}
                 <button
-                    className="btn-siguiente"
+                    className={pagina=== totalPaginas ? "btn-siguiente disable" :"btn-siguiente"}
                     onClick={nextPage}
                     disabled={pagina === totalPaginas}
+                    
                 >
                     Siguiente
                 </button>

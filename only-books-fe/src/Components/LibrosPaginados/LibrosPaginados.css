@@ -61,6 +61,16 @@
     color: black;
 }
 
+.disable{
+    background-color: #86bad8;
+    color: #e4c6b0;
+}
+
+.disable:hover{
+    background-color:#86bad8;
+    cursor: default;
+}
+
 
 @media (max-width: 1350px) {
     
