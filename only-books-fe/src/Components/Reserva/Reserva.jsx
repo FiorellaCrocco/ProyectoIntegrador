@@ -8,7 +8,7 @@ import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import CaracteristicaLibro from "../CaracteristicaLibro/CaracteristicaLibro";
 import emailjs from '@emailjs/browser';
-import { format } from 'date-fns';
+import { format, addDays } from 'date-fns';
 import { es } from 'date-fns/locale';
 
 const Reserva = () => {
@@ -57,8 +57,8 @@ const Reserva = () => {
 
   const sendConfirmationEmail = async () => {
 		try {
-      const fechaInicioMenosUnDia = subDays(new Date(inicio), 1);
-      const fechaFinMenosUnDia = subDays(new Date(fin), 1);
+      const fechaInicioMenosUnDia = addDays(new Date(inicio), 1);
+      const fechaFinMenosUnDia = addDays(new Date(fin), 1);
       const formattedStartDate = format(fechaInicioMenosUnDia, "EEEE dd 'de' MMMM yyyy", { locale: es });
       const formattedEndDate = format(fechaFinMenosUnDia, "EEEE dd 'de' MMMM yyyy", { locale: es });
 
@@ -94,6 +94,8 @@ const Reserva = () => {
 			console.error('Error al enviar el correo electrónico de confirmación:', error);
 		}
 	};
+  console.log(inicio)
+  console.log(fin)
 
   useEffect(() => {
     if (formData != null) {
