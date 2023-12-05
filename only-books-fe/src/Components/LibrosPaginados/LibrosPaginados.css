@@ -62,12 +62,12 @@
 }
 
 .disable{
-    background-color: #86bad8;
-    color: #e4c6b0;
+    background-color: #ccdde7;
+    color: #d1b19a;
 }
 
 .disable:hover{
-    background-color:#86bad8;
+    background-color:#ccdde7;
     cursor: default;
 }
 
