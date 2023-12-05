@@ -34,7 +34,6 @@ const UserMenu = () => {
     };
     
     const handleAvatarClick = (event) => {
-        // Toggle the menu and prevent the click event from propagating
         toggleMenu();
         event.stopPropagation();
     };
@@ -58,7 +57,7 @@ const UserMenu = () => {
                     <Link to="/perfil" className="custom-dropdown-item">Mi perfil</Link>
                     <Link to="/" className="custom-dropdown-item">Mis Reservas</Link>
                     <div className="custom-dropdown-item  custom-logout" onClick={onLogout}>Cerrar sesión</div>
-                    {/* Agrega otros elementos personalizables aquí */}
+                    
                 </div>
             )}
         </div>
