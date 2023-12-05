@@ -1,5 +1,5 @@
 import styles from "./Reserva.module.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAccount } from "../../Context/accountContext";
 import { useEffect, useState } from "react";
 import Card from "../Card/Card";
@@ -7,29 +7,29 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import CaracteristicaLibro from "../CaracteristicaLibro/CaracteristicaLibro";
-import emailjs from '@emailjs/browser';
-import { format } from 'date-fns';
-import { es } from 'date-fns/locale';
+import emailjs from "@emailjs/browser";
+import { format } from "date-fns";
+import { es } from "date-fns/locale";
 
 const Reserva = () => {
   //const { userData } = useAccount();
-  window.scrollTo(0,0)
+  window.scrollTo(0, 0);
   const user = JSON.parse(sessionStorage.getItem("userData"));
   const userId = user ? user.id : null;
   const [pais, setPais] = useState("");
   const [formData, setFormData] = useState(null);
   const EMAILJS_serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID2;
-	const EMAILJS_templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID2;
-	const EMAILJS_userId = import.meta.env.VITE_EMAILJS_USER_ID;
+  const EMAILJS_templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID2;
+  const EMAILJS_userId = import.meta.env.VITE_EMAILJS_USER_ID;
 
   const URL_API = import.meta.env.VITE_API_URL;
   const token = sessionStorage.getItem("token");
-
+  const navigate = useNavigate();
   const location = useLocation();
   const { libro } = location.state || {};
   const { inicio } = location.state || {};
   const { fin } = location.state || {};
-  const [desactivar, setDesactivar] = useState(false)
+  const [desactivar, setDesactivar] = useState(false);
 
   console.log(libro);
 
@@ -54,19 +54,23 @@ const Reserva = () => {
     setDesactivar(true);
   };
 
-
   const sendConfirmationEmail = async () => {
-		try {
+    try {
+      const formattedStartDate = format(
+        new Date(inicio),
+        "EEEE dd 'de' MMMM yyyy",
+        { locale: es }
+      );
+      const formattedEndDate = format(new Date(fin), "EEEE dd 'de' MMMM yyyy", {
+        locale: es,
+      });
 
-      const formattedStartDate = format(new Date(inicio), "EEEE dd 'de' MMMM yyyy", { locale: es });
-      const formattedEndDate = format(new Date(fin), "EEEE dd 'de' MMMM yyyy", { locale: es });
-
-			const templateParams = {
-				to_email: user.email,
-				name: user.name,
-				email: user.email, 
+      const templateParams = {
+        to_email: user.email,
+        name: user.name,
+        email: user.email,
         libro: libro.title,
-				message: `
+        message: `
         Libro reservado: ${libro.title} 
 
         Periodo de Reserva 
@@ -78,21 +82,24 @@ const Reserva = () => {
         -Email: Kikeneitor@gmail.com
 
         ¡Reserva Existosa! `,
-			};
-			console.log("Send email: " + email)
-			const response = await emailjs.send(
-				EMAILJS_serviceId,
-				EMAILJS_templateId,
-				templateParams,
-				EMAILJS_userId
-			);
-			if (response.status === 200) {
-				console.log('Correo electrónico de confirmación enviado con éxito.');
-			}
-		} catch (error) {
-			console.error('Error al enviar el correo electrónico de confirmación:', error);
-		}
-	};
+      };
+      console.log("Send email: " + email);
+      const response = await emailjs.send(
+        EMAILJS_serviceId,
+        EMAILJS_templateId,
+        templateParams,
+        EMAILJS_userId
+      );
+      if (response.status === 200) {
+        console.log("Correo electrónico de confirmación enviado con éxito.");
+      }
+    } catch (error) {
+      console.error(
+        "Error al enviar el correo electrónico de confirmación:",
+        error
+      );
+    }
+  };
 
   useEffect(() => {
     if (formData != null) {
@@ -109,11 +116,12 @@ const Reserva = () => {
         try {
           const response = await fetch(url, settings);
           if (response.status == 200) {
-            
             sendConfirmationEmail();
             Swal.fire({
               text: "Se reservo el libro correctamente!",
               icon: "success",
+            }).then(() => {
+              navigate("/");
             });
           } else {
             Swal.fire({
@@ -309,9 +317,14 @@ const Reserva = () => {
           </div>
         </div>
 
-        <button className={`${styles.btn} ${desactivar ? styles['btn-disabled'] : ''}`} disabled={desactivar}>
-      Reservar
-    </button>
+        <button
+          className={`${styles.btn} ${
+            desactivar ? styles["btn-disabled"] : ""
+          }`}
+          disabled={desactivar}
+        >
+          Reservar
+        </button>
       </form>
     </>
   );
