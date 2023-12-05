@@ -57,9 +57,10 @@ const Reserva = () => {
 
   const sendConfirmationEmail = async () => {
 		try {
-
-      const formattedStartDate = format(new Date(inicio), "EEEE dd 'de' MMMM yyyy", { locale: es });
-      const formattedEndDate = format(new Date(fin), "EEEE dd 'de' MMMM yyyy", { locale: es });
+      const fechaInicioMenosUnDia = subDays(new Date(inicio), 1);
+      const fechaFinMenosUnDia = subDays(new Date(fin), 1);
+      const formattedStartDate = format(fechaInicioMenosUnDia, "EEEE dd 'de' MMMM yyyy", { locale: es });
+      const formattedEndDate = format(fechaFinMenosUnDia, "EEEE dd 'de' MMMM yyyy", { locale: es });
 
 			const templateParams = {
 				to_email: user.email,

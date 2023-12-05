@@ -126,6 +126,14 @@ function AdministrarReservas() {
     window.scrollTo(0, 0);
   }, [scroll]);
 
+  function formatearFecha(fecha) {
+    // Divide la cadena de fecha en componentes (AAAA, MM, DD)
+    const [anio, mes, dia] = fecha.split("-");
+  
+    // Retorna la fecha formateada en el formato deseado
+    return `${dia}-${mes}-${anio}`;
+  }
+
   return (
     <div>
       <h2 className="tituloListRes">Listado de Reservas</h2>
@@ -145,8 +153,8 @@ function AdministrarReservas() {
             <div className="listaTitleR">
               {reserva.user.name} {reserva.user.lastname}
             </div>
-            <div className="listaTitleR fecha">{reserva.startDate.split("T")[0]}</div>
-            <div className="listaTitleR fecha">{reserva.returnDate.split("T")[0]}</div>
+            <div className="listaTitleR fecha">{formatearFecha(reserva.startDate.split("T")[0])}</div>
+            <div className="listaTitleR fecha">{formatearFecha(reserva.returnDate.split("T")[0])}</div>
             <div className="admin-btn-container">
               <Button
                 variant="outlined"
