@@ -120,6 +120,23 @@
 .favIcon{
     font-size: 26px;
 }
+.tituloContainer{
+    display: flex;
+    align-items: center;
+}
+.tituloContainer>h1:first-child{
+    margin-right: 15px;
+}
+.tituloContainer>span:last-child{
+    margin-left: 15px;
+}
+.qualificationInfo{
+    margin-left: 5px;
+    margin-top: 3px;
+    font-size: 20px;
+    color: #615D5D;
+    font-weight: 600;
+}
 
 
 .btnAtras {
