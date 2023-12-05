@@ -64,7 +64,8 @@ function LibrosPaginados({ libros, isLoading, librosFiltrados, librosReservados,
 
     const startIndex = (pagina - 1) * librosPorPagina;
     const endIndex = startIndex + librosPorPagina;
-    const librosSinReserva = libros.filter(libro => !librosReservados.includes(libro.id))
+    const listaReservados = librosReservados;
+    const librosSinReserva = libros.filter(libro => !listaReservados.includes(libro.id))
 
     let librosBusqueda = librosSinReserva;
 
