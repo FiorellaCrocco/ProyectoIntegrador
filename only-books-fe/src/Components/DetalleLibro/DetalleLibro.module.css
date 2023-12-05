@@ -270,7 +270,7 @@
 .listaCateg .listaIcon {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: baseline;
 }
 
 .listaCateg .listaIcon > p {

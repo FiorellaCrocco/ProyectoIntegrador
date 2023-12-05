@@ -9,9 +9,10 @@
     left: 1;
     z-index: 1;
     background-color: #539dc2;
-    border: 1px solid #fe4411;
+    border: 1px solid #f5f4f2;
     padding: 10px;
     min-width: 150px;
+    border-radius: 10%;
 }
 
 .custom-dropdown-item {
@@ -20,6 +21,12 @@
     text-decoration: none;
     color: #333;
     cursor: pointer;
+    transition: 0.4s;
+}
+
+.custom-dropdown-item:hover{
+    scale: 1.2;
+    color: rgb(12, 102, 161);
 }
 
 .custom-logout {
@@ -32,4 +39,5 @@
 }
 .custom-logout:hover {
     color: #0056b3; 
+    scale: 1.2;
 }
