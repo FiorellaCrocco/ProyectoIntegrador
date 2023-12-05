@@ -64,7 +64,8 @@ function LibrosPaginados({ libros, isLoading, librosFiltrados, librosReservados,
 
     const startIndex = (pagina - 1) * librosPorPagina;
     const endIndex = startIndex + librosPorPagina;
-    const librosSinReserva = libros.filter(libro => !librosReservados.includes(libro.id))
+    const listaReservados = librosReservados;
+    const librosSinReserva = libros.filter(libro => !listaReservados.includes(libro.id))
 
     let librosBusqueda = librosSinReserva;
 
@@ -132,7 +133,7 @@ function LibrosPaginados({ libros, isLoading, librosFiltrados, librosReservados,
             <ul className="listaPaginada">{renderCards()}</ul>
             <div className="btn-container">
                 <button
-                    className="btn-anterior"
+                    className= {pagina === 1 ? "btn-anterior disable":"btn-anterior" }
                     onClick={prevPage}
                     disabled={pagina === 1}
                 >
@@ -140,9 +141,10 @@ function LibrosPaginados({ libros, isLoading, librosFiltrados, librosReservados,
                 </button>
                 {renderPageButtons()}
                 <button
-                    className="btn-siguiente"
+                    className={pagina=== totalPaginas ? "btn-siguiente disable" :"btn-siguiente"}
                     onClick={nextPage}
                     disabled={pagina === totalPaginas}
+                    
                 >
                     Siguiente
                 </button>

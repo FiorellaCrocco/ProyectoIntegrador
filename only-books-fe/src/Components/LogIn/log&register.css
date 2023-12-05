@@ -221,6 +221,19 @@ body {
 	font-size: 1.5rem;
 }
 
+p:last-child{
+	margin-top: 2rem;
+}
+
+p>a{
+	color: #e7f1f7;
+	font-weight: 700;
+}
+
+p>a:hover{
+	color: #10658f;
+	font-weight: 700;
+}
 
 @media (max-width: 614px) {
 	.wrapper {

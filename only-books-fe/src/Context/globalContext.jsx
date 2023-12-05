@@ -6,6 +6,7 @@ export const BookProvider = ({ children }) => {
 
   const [listaLibros, setListaLibros] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingRent, setIsLoadingRent] = useState(true)
   const [listaCategorias, setListaCategorias] = useState([]);
   const [listaResenias, setListaResenias] = useState([])
   const [listaCaracteristicas, setListaCaracteristicas] = useState([]);
@@ -152,6 +153,7 @@ export const BookProvider = ({ children }) => {
 
 
   const fetchFiltroRent = async () => {
+    setIsLoadingRent(true)
     const settings = {
       method: 'GET',
       headers: {
@@ -166,9 +168,11 @@ export const BookProvider = ({ children }) => {
       }
       const data = await response.json();
       setRentBook(data);
+      setIsLoadingRent(false)
       // console.log(data)
       return data;
     } catch (error) {
+      setIsLoadingRent(false)
       console.error("Error al cargar la lista de RentBooks:", error);
     }
   }
@@ -181,6 +185,7 @@ export const BookProvider = ({ children }) => {
     fetchData();
     fetchCategorias();
     fetchCaracteristicas();
+    fetchFiltroRent();
     //fetchFiltroRent()
   }, []);
 
@@ -193,7 +198,7 @@ export const BookProvider = ({ children }) => {
 
 
   return (
-    <GlobalContext.Provider value={{ listaCategorias, listaLibros, isLoading, listaResenias, actualizarListaLibros, actualizarCategorias, fetchBookById, logout, fetchCaracteristicas, listaCaracteristicas, fetchFiltroRent, rentBook, fetchData, fetchObtenerResenias, fetchListaFavoritos }}>
+    <GlobalContext.Provider value={{ listaCategorias, listaLibros, isLoading,isLoadingRent, listaResenias, actualizarListaLibros, actualizarCategorias, fetchBookById, logout, fetchCaracteristicas, listaCaracteristicas, fetchFiltroRent, rentBook, fetchData, fetchObtenerResenias, fetchListaFavoritos }}>
       {children}
     </GlobalContext.Provider>
   );
