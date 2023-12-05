@@ -1,5 +1,5 @@
 import styles from "./Reserva.module.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAccount } from "../../Context/accountContext";
 import { useEffect, useState } from "react";
 import Card from "../Card/Card";
@@ -30,6 +30,7 @@ const Reserva = () => {
   const { inicio } = location.state || {};
   const { fin } = location.state || {};
   const [desactivar, setDesactivar] = useState(false)
+  const navigate = useNavigate();
 
   console.log(libro);
 
@@ -231,7 +232,7 @@ const Reserva = () => {
                 type="paisR"
                 name="paisR"
                 id="paisR"
-                className={styles.input}
+                className={styles.inputResidencia}
                 value={pais}
                 onChange={(e) => {
                   onInputChange(e);
@@ -308,11 +309,19 @@ const Reserva = () => {
             </div>
           </div>
         </div>
-
-        <button className={`${styles.btn} ${desactivar ? styles['btn-disabled'] : ''}`} disabled={desactivar}>
-      Reservar
-    </button>
+        <div className={styles.botones}>
+          <button className={`${styles.btn} ${desactivar ? styles['btn-disabled'] : ''}`} disabled={desactivar}>
+            Reservar
+          </button>
+          <div>
+            <button className={styles.btnVolver} onClick={() => navigate(`/detail/${libro.id}`)}>
+              Volver
+            </button>
+        </div>
+        </div>
+      
       </form>
+
     </>
   );
 };
