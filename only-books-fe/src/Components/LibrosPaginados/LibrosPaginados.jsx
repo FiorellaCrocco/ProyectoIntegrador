@@ -54,13 +54,12 @@ function LibrosPaginados({ libros, isLoading, librosFiltrados, librosReservados,
 
     useEffect(() => {
         renderCards();
-    }, [listaFavoritos])
-
-
+        setPagina(1)
+    }, [listaFavoritos,librosReservados,userId])
 
 
     // Calculo el total de paginas
-    const totalPaginas = Math.ceil(libros.length / librosPorPagina);
+    
 
     const startIndex = (pagina - 1) * librosPorPagina;
     const endIndex = startIndex + librosPorPagina;
@@ -74,7 +73,7 @@ function LibrosPaginados({ libros, isLoading, librosFiltrados, librosReservados,
     } else {
         librosBusqueda = librosSinReserva;
     }
-
+    const totalPaginas = Math.ceil(librosBusqueda.length / librosPorPagina);
     const currentItem = librosBusqueda.slice(startIndex, endIndex);
 
     const nextPage = () => {

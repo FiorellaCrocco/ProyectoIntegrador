@@ -375,7 +375,7 @@ function DetalleLibro({ id }) {
 
               <button
                 className={styles.btnAtras}
-                onClick={() => window.history.back()}
+                onClick={() =>  navigate("/")}
               >
                 Volver
               </button>
