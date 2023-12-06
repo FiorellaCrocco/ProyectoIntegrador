@@ -31,6 +31,7 @@ const Historial = () => {
       const response = await fetch(url, settings);
       console.log("Obteniendo respuesta")
       const listaReservas = await response.json();
+      const reservasOrdenadas= ordenarLibros(listaReservas)
       console.log("VerificarUsuario")
       console.log(listaReservas)
       if(listaReservas.length==0){
@@ -39,7 +40,7 @@ const Historial = () => {
       Swal.close();
 
 
-      return listaReservas;
+      return reservasOrdenadas;
 
     } catch (error) {
       console.error("ERROR: ", error)
@@ -57,6 +58,21 @@ const Historial = () => {
 
     fetchData();
   }, []);
+  const ordenarLibros = (reservas) => {
+    reservas.sort((a, b) => {
+      const titleA = a.book.title.toUpperCase();
+      const titleB = b.book.title.toUpperCase();
+
+      if (titleA < titleB) {
+        return -1;
+      }
+      if (titleA > titleB) {
+        return 1;
+      }
+      return 0;
+    });
+    return reservas;
+  };
 
   return (
     <div className='rootRes'>
