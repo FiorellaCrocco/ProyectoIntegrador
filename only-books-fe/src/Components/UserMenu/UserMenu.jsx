@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef, useEffect } from 'react';
 import Avatar from '../Avatar/Avatar';
 import { GlobalContext } from "../../Context/globalContext";
 import { useAccount } from "../../Context/accountContext";
@@ -12,11 +12,11 @@ const UserMenu = () => {
     const { userData, clearUserData } = useAccount();
     const navigate = useNavigate();
     const name = userData && userData.name ? userData.name + ' ' + userData.lastname : "Usuario Desconocido";
-
+    const menuRef = useRef(null);
 
     
     const toggleMenu = () => {
-        setShowMenu(!showMenu);
+        setShowMenu(prevState => !prevState);
     };
 
     const onLogout = () => {
@@ -27,18 +27,37 @@ const UserMenu = () => {
         });
     };
 
+    const handleClickOutside = (event) => {
+        if (menuRef.current && !menuRef.current.contains(event.target)) {
+            setShowMenu(false);
+        }
+    };
+    
+    const handleAvatarClick = (event) => {
+        toggleMenu();
+        event.stopPropagation();
+    };
+
+    useEffect(() => {
+        document.addEventListener('click', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, []);
+
     return (
-        <div className="user-menu">
-            <div className="avatar-container" onClick={toggleMenu}>
+        <div className="user-menu avatar-container-open">
+            <div className="avatar-container " onClick={handleAvatarClick}>
             
                 <Avatar name={name} />
             </div>
             {showMenu && (
-                <div className="custom-dropdown">
+                <div className="custom-dropdown" ref={menuRef}>
                     <Link to="/perfil" className="custom-dropdown-item">Mi perfil</Link>
-                    <Link to="/" className="custom-dropdown-item">Mis Reservas</Link>
+                    <Link to="/historial" className="custom-dropdown-item">Mis Reservas</Link>
                     <div className="custom-dropdown-item  custom-logout" onClick={onLogout}>Cerrar sesión</div>
-                    {/* Agrega otros elementos personalizables aquí */}
+                    
                 </div>
             )}
         </div>

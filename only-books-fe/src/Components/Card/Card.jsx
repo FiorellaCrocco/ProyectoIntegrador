@@ -4,6 +4,10 @@ import "./Card.css";
 import Favoritos from "../Favoritos/Favoritos";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
+import { faComment as faCommentSolid} from "@fortawesome/free-solid-svg-icons"
+
+
+
 
 function Card({
   id,
@@ -26,17 +30,16 @@ function Card({
 
     }})
   }
+  const handleFavClick = (event) => {
+    event.stopPropagation();
+  };
 
   return (
     <div className="body-cards" >
-      <div className="card">
-        <div className="card-info">
-          <FontAwesomeIcon icon={faStarSolid} className="card-star" />
-          {qualification}({cantResenias})
-        </div>
+      <div className="card" onClick={handleClick}>
         <div className="card-img">
           {/* <Link to={`/detail/${id}`}> */}
-            <img src={imgUrl} alt={title} onClick={handleClick}/>
+            <img src={imgUrl} alt={title} />
           {/* </Link> */}
         </div>
         <div className="card-title">
@@ -49,8 +52,14 @@ function Card({
           </div>
         </div>
         <div className="buttonFavContainer">
-          <button className="buttonComprar">Alquilar</button>
-          <div className="FavCardCorazon">
+          {/* <button className="buttonComprar">Alquilar</button> */}
+          <div className="card-info">
+          <FontAwesomeIcon icon={faStarSolid} className="card-star" />
+          <span>{qualification}/5</span>
+          <FontAwesomeIcon icon={faCommentSolid} className="card-comment"/>
+          <span>{cantResenias}</span>
+        </div>
+          <div className="FavCardCorazon" id="favIcon" onClick={handleFavClick}>
             <Favoritos
               variable={id}
               isFavorite={isFavorite}

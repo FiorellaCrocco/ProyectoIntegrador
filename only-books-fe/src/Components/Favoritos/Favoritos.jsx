@@ -77,10 +77,12 @@ const Favoritos = (props) => {
 
 
   return (
+
     <FontAwesomeIcon
       icon={favorito ? solidHeart : farHeart}
       onClick={handleToggleFavorito}
-      style={{ cursor: "pointer", color: favorito? "red" : "gray" }}
+      className={ favorito? "favRed":"favGray"}
+      // style={{ color: favorito? "red" : "gray" }}
     />
   );
 };

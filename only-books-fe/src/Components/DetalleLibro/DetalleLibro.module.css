@@ -35,6 +35,7 @@
     border: none;
     border-radius: 10%;
     margin: 20px;
+    box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
 }
 
 .btnVer:hover {
@@ -119,6 +120,23 @@
 .favIcon{
     font-size: 26px;
 }
+.tituloContainer{
+    display: flex;
+    align-items: center;
+}
+.tituloContainer>div>h1:first-child{
+    margin-right: 15px;
+}
+.tituloContainer>div>span:last-child{
+    margin-left: 15px;
+}
+.qualificationInfo{
+    margin-left: 5px;
+    margin-top: 3px;
+    font-size: 20px;
+    color: #615D5D;
+    font-weight: 600;
+}
 
 
 .btnAtras {
@@ -131,10 +149,12 @@
     border-radius: 10%;
     margin: 20px;
     transition: background-color 0.3s;
+    box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
 }
 
 .btnAtras:hover {
     background-color: #cf7937;
+    cursor: pointer;
 }
 
 .reservaContainer{
@@ -155,9 +175,11 @@
     transition: background-color 0.3s;
     margin-left: 20px;
     cursor: pointer;
+    box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
 }
 .reservaButton:hover {
     background-color: #cf7937;
+   
 }
 .borrarButton{
     background-color: #f85344;
@@ -170,6 +192,7 @@
     transition: background-color 0.3s;
     margin-left: 10px;
     cursor: pointer;
+    box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
 }
 .borrarButton:hover {
     background-color: rgb(194, 53, 51);
@@ -192,6 +215,7 @@
     border: none;
     border-radius: 10%;
     margin: 20px;
+    box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
 }
 
 
@@ -205,6 +229,7 @@
     display: flex;
     align-items: center;
     transition: background-color 0.3s;
+    box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
 }
 
 .customButton:hover {
@@ -247,25 +272,86 @@
     display: flex;
     flex-direction: row;
     padding-left: 0;
+    justify-content: center;
 }
 
 .listaCateg .listaIcon {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: baseline;
 }
 
 .listaCateg .listaIcon > p {
     margin-top: 0;
     color: black;
 }
-
-@media (max-width: 600px) {
+@media (max-width: 720px){
+    .bookcontainer{
+        width: 60%;
+        padding: 30px;
+    }
+    .galeria{
+        display: none;
+    }
+    .btnVer{  
+    font-size: 14px;
+    padding: 8px;
+    margin: 10px;
+    }
     .sectionDetalles{
         flex-direction: column;
     }
     .titles{
-        padding-left: 0;
+        padding: 0;
     }
 }
+
+@media (max-width: 600px) {
+
+    .sectionDetalles{
+        flex-direction: column;
+        margin: 0;
+    }
+    .titles{
+        padding-left: 0;
+    }
+    .categ{
+        margin: 5px;
+    }
+    .listaCateg{
+        flex-direction: column;
+        align-items: center;
+    }
+}
+@media (max-width: 550px){
+    .calendarioBtn{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .reservaButton, .borrarButton{
+        padding: 5px 5px;
+        margin: 10px 0 0 0;
+        width: 110px;
+        border-radius: 5px;
+    }
+}
+
+@media (max-width: 370px){
+    .tituloContainer{
+        flex-direction: column;
+    }
+    /* .tituloContainer>div>span:last-child{
+        margin-left: 15px;
+    }
+    .qualificationInfo{
+        margin-left: 5px;
+        margin-top: 3px;
+        font-size: 20px;
+        color: #615D5D;
+        font-weight: 600;
+    } */
+    
+}
+
 

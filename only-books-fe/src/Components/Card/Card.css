@@ -10,10 +10,10 @@
     /* height: min-content; */
     height: min-content;
     /* height: 90%; */
-    padding: 25px;
     margin: 0 5px;
     background-color: #fff;
     border-radius: 8px;
+    cursor: pointer;
  /*   box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);*/
 }
 
@@ -24,13 +24,22 @@
     cursor: pointer;
 }
 .card-info{
-    font-size: 15px;
+    display: flex;
     color: rgb(70, 70, 70);
     font-weight: 550;
-    margin-bottom: 10px;
+    align-items: center;
+}
+.card-info>span{
+    margin-left: 5px;
+    margin-right: 20px;
 }
 .card-star{
     color: rgb(251, 205, 56);
+    font-size: 24px;
+}
+.card-comment{
+    color: rgb(148, 148, 148);
+    font-size: 24px;
 }
 .card .card-img img {
     height: 200px;
@@ -113,12 +122,18 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 13px;
 }
 
 .FavCardCorazon{
     font-size: 31px;
 }
+.favGray:hover{
+    color:red;
+}
+.favRed:hover{
+    color:rgb(180, 25, 25)
+}
+
 
 
 

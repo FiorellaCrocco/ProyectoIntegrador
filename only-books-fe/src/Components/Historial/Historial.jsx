@@ -31,6 +31,7 @@ const Historial = () => {
       const response = await fetch(url, settings);
       console.log("Obteniendo respuesta")
       const listaReservas = await response.json();
+      const reservasOrdenadas= ordenarLibros(listaReservas)
       console.log("VerificarUsuario")
       console.log(listaReservas)
       if(listaReservas.length==0){
@@ -39,7 +40,7 @@ const Historial = () => {
       Swal.close();
 
 
-      return listaReservas;
+      return reservasOrdenadas;
 
     } catch (error) {
       console.error("ERROR: ", error)
@@ -57,23 +58,39 @@ const Historial = () => {
 
     fetchData();
   }, []);
+  const ordenarLibros = (reservas) => {
+    reservas.sort((a, b) => {
+      const titleA = a.book.title.toUpperCase();
+      const titleB = b.book.title.toUpperCase();
+
+      if (titleA < titleB) {
+        return -1;
+      }
+      if (titleA > titleB) {
+        return 1;
+      }
+      return 0;
+    });
+    return reservas;
+  };
 
   return (
+    <div className='rootRes'>
     <div className="historial">
       <h1 className="titleHistorial">Mi historial de reservas: </h1>
       <div className="listadoGeneralH">
         {reservas.length !== 0 ? (
           <ul className="listadoUl">
             <div className="titulosHistorial">
-              <p className="titleReserva">Titulo:</p>
-              <div className="fechasHistorialTitulos">
-                <p className="tituloFechaH">Fecha de inicio:</p>
-                <p className="tituloFechaF">Fecha de finalizacion:</p>
-              </div>
+              <p className="titleReserva">TITULO</p>
+              {/* <div className="fechasHistorialTitulos"> */}
+                <p className="tituloFechaH">FECHA DE INICIO</p>
+                <p className="tituloFechaF">FECHA DE FINALIZACION</p>
+              {/* </div> */}
             </div>
-
+          <div className='contenedorAlt'>
             {reservas.map((reserva) => (
-              <li className="listadoHistorial" key={reserva.id}>
+              <li className="listadoHistorial " key={reserva.id}>
                 <div className="tituloImgHistorial">
                   <img
                     className="imgHistorial"
@@ -82,19 +99,21 @@ const Historial = () => {
                   ></img>
                   <p className="titleReservaHistorial"> {reserva.book.title}</p>
                 </div>
-                <div className="fechasHistorial">
+                {/* <div className="fechasHistorial"> */}
                   <p className="fechaInicio">{reserva.startDate.split("T")[0]}</p>
                   <p className="fechaFin">
                     {reserva.returnDate.split("T")[0]}
                   </p>
-                </div>
+                {/* </div> */}
               </li>
             ))}
+            </div>
           </ul>
         ) : (
           <p>{mensaje}</p>
         )}
       </div>
+    </div>
     </div>
   );
 };

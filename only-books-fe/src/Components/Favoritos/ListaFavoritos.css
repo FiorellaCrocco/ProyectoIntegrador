@@ -1,17 +1,18 @@
+.contentContFav{
+    height: auto;
+}
+
 .listado{
-    margin-top: 5%;
-    margin-bottom: 3%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 70vh;
-    /* background-color: ; */
 }
 
 .h2{
     color: #ff9e71;
     font-size: 40px;
+    margin: 5px;
 }
 .listado>p{
     margin: 0;
@@ -25,15 +26,28 @@
     align-content: center;
     justify-content: center;
     flex-grow: 50%; */
+    padding: 0;
     display: grid;
     grid-template-columns: repeat(6, minmax(100px, 1fr));
     gap: 10px;
-    padding: 20px;
     background-color: #eeeeee;
+    height:auto;
+    margin-left: 2rem;
+    margin-right: 2rem;
+   /* overflow-y: scroll;*/
+}
+.favRed{
+    color:red;
+}
+.favGray{
+    color:gray;
 }
 @media (max-width: 1466px){
     .cardFavs{
         grid-template-columns: repeat(5, minmax(100px, 1fr));
+    }
+    h2{
+        margin: 2px;
     }
 }
 @media (max-width: 1200px){
@@ -55,6 +69,16 @@
 
 
 @media (max-width: 600px){
+    .card{
+        width: 80%;
+    }
+    .listado{
+        justify-content: flex-start;
+    }
+    .h2{
+        margin: 1.5px;
+        font-size: 30px;
+    }
     .cardFavs{
         grid-template-columns: repeat(1, minmax(100px, 1fr));
     }

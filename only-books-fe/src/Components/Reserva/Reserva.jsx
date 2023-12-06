@@ -1,5 +1,5 @@
 import styles from "./Reserva.module.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAccount } from "../../Context/accountContext";
 import { useEffect, useState } from "react";
 import Card from "../Card/Card";
@@ -8,23 +8,23 @@ import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import CaracteristicaLibro from "../CaracteristicaLibro/CaracteristicaLibro";
 import emailjs from '@emailjs/browser';
-import { format } from 'date-fns';
+import { format, addDays} from 'date-fns';
 import { es } from 'date-fns/locale';
 
 const Reserva = () => {
   //const { userData } = useAccount();
-  window.scrollTo(0,0)
+  window.scrollTo(0, 0);
   const user = JSON.parse(sessionStorage.getItem("userData"));
   const userId = user ? user.id : null;
   const [pais, setPais] = useState("");
   const [formData, setFormData] = useState(null);
   const EMAILJS_serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID2;
-	const EMAILJS_templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID2;
-	const EMAILJS_userId = import.meta.env.VITE_EMAILJS_USER_ID;
+  const EMAILJS_templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID2;
+  const EMAILJS_userId = import.meta.env.VITE_EMAILJS_USER_ID;
 
   const URL_API = import.meta.env.VITE_API_URL;
   const token = sessionStorage.getItem("token");
-
+  const navigate = useNavigate();
   const location = useLocation();
   const { libro } = location.state || {};
   const { inicio } = location.state || {};
@@ -54,19 +54,19 @@ const Reserva = () => {
     setDesactivar(true);
   };
 
-
   const sendConfirmationEmail = async () => {
 		try {
+      const fechaInicioMenosUnDia = addDays(new Date(inicio), 1);
+      const fechaFinMenosUnDia = addDays(new Date(fin), 1);
+      const formattedStartDate = format(fechaInicioMenosUnDia, "EEEE dd 'de' MMMM yyyy", { locale: es });
+      const formattedEndDate = format(fechaFinMenosUnDia, "EEEE dd 'de' MMMM yyyy", { locale: es });
 
-      const formattedStartDate = format(new Date(inicio), "EEEE dd 'de' MMMM yyyy", { locale: es });
-      const formattedEndDate = format(new Date(fin), "EEEE dd 'de' MMMM yyyy", { locale: es });
-
-			const templateParams = {
-				to_email: user.email,
-				name: user.name,
-				email: user.email, 
+      const templateParams = {
+        to_email: user.email,
+        name: user.name,
+        email: user.email,
         libro: libro.title,
-				message: `
+        message: `
         Libro reservado: ${libro.title} 
 
         Periodo de Reserva 
@@ -78,21 +78,24 @@ const Reserva = () => {
         -Email: Kikeneitor@gmail.com
 
         ¡Reserva Existosa! `,
-			};
-			console.log("Send email: " + email)
-			const response = await emailjs.send(
-				EMAILJS_serviceId,
-				EMAILJS_templateId,
-				templateParams,
-				EMAILJS_userId
-			);
-			if (response.status === 200) {
-				console.log('Correo electrónico de confirmación enviado con éxito.');
-			}
-		} catch (error) {
-			console.error('Error al enviar el correo electrónico de confirmación:', error);
-		}
-	};
+      };
+      console.log("Send email: " + email);
+      const response = await emailjs.send(
+        EMAILJS_serviceId,
+        EMAILJS_templateId,
+        templateParams,
+        EMAILJS_userId
+      );
+      if (response.status === 200) {
+        console.log("Correo electrónico de confirmación enviado con éxito.");
+      }
+    } catch (error) {
+      console.error(
+        "Error al enviar el correo electrónico de confirmación:",
+        error
+      );
+    }
+  };
 
   useEffect(() => {
     if (formData != null) {
@@ -109,11 +112,12 @@ const Reserva = () => {
         try {
           const response = await fetch(url, settings);
           if (response.status == 200) {
-            
             sendConfirmationEmail();
             Swal.fire({
               text: "Se reservo el libro correctamente!",
               icon: "success",
+            }).then(() => {
+              navigate("/");
             });
           } else {
             Swal.fire({
@@ -129,6 +133,12 @@ const Reserva = () => {
     }
   }, [formData]);
 
+    const toPascalCase = (inputString) => {
+      const words = inputString.split(' ');
+      const pascalCaseWords = words.map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase());
+      return pascalCaseWords.join(' ');
+    };
+  
   // console.log(libro.caracteristicas);
   // console.log(libro.categorias);
 
@@ -231,7 +241,7 @@ const Reserva = () => {
                 type="paisR"
                 name="paisR"
                 id="paisR"
-                className={styles.input}
+                className={styles.inputResidencia}
                 value={pais}
                 onChange={(e) => {
                   onInputChange(e);
@@ -287,14 +297,14 @@ const Reserva = () => {
                 <h3 className={styles.titleCategorias}>Categorias</h3>
                 <ul className={styles.categorias}>
                   {libro.categorias.map((categoria) => (
-                    <li key={categoria.id}>{categoria.titulo}</li>
+                    <li key={categoria.id} className={styles.cuerpo}>{toPascalCase(categoria.titulo)}</li>
                   ))}
                 </ul>
                 {/*<CaracteristicaLibro id={libro.id} />*/}
                 <h3 className={styles.titleCaracteristicas}>Caracteristicas</h3>
                 <ul className={styles.caracteristicas}>
                   {libro.caracteristicas.map((caracteristica) => (
-                    <li key={caracteristica.id}>{caracteristica.title}</li>
+                    <li key={caracteristica.id} className={styles.cuerpo}>{caracteristica.title}</li>
                   ))}
                 </ul>
               </div>
@@ -308,11 +318,22 @@ const Reserva = () => {
             </div>
           </div>
         </div>
+        <div className={styles.botones}>
+          <div>
+            <button className={`${styles.btn} ${desactivar ? styles['btn-disabled'] : ''}`} disabled={desactivar}>
+            Reservar
+          </button>
+          </div>
+          
+          <div>
+            <button className={styles.btnAtras} onClick={() => navigate(`/detail/${libro.id}`)}>
+              Volver
+            </button>
+        </div>
+        </div>
 
-        <button className={`${styles.btn} ${desactivar ? styles['btn-disabled'] : ''}`} disabled={desactivar}>
-      Reservar
-    </button>
       </form>
+
     </>
   );
 };

@@ -3,18 +3,17 @@ import { useState, useEffect, createContext } from "react";
 export const GlobalContext = createContext();
 
 export const BookProvider = ({ children }) => {
-
   const [listaLibros, setListaLibros] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingRent, setIsLoadingRent] = useState(true);
   const [listaCategorias, setListaCategorias] = useState([]);
-  const [listaResenias, setListaResenias] = useState([])
+  const [listaResenias, setListaResenias] = useState([]);
   const [listaCaracteristicas, setListaCaracteristicas] = useState([]);
-  const [rentBook, setRentBook] = useState([])
-  const [token, setToken] = useState(sessionStorage.getItem('token') || '');
+  const [rentBook, setRentBook] = useState([]);
+  const [token, setToken] = useState(sessionStorage.getItem("token") || "");
+  const [filtrosSeleccionados, setFiltrosSeleccionados] = useState([]);
 
-
-  const API_URL = import.meta.env.VITE_API_URL
-
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const url = `${API_URL}book/listarexpress`;
   //    const url = "https://onlybooks.isanerd.club/api/book/listarexpress";
@@ -22,10 +21,23 @@ export const BookProvider = ({ children }) => {
   //   const urlCategorias = "https://onlybooks.isanerd.club/api/categoria/listar";
   const urlCaracteristicas = `${API_URL}caracteristica/listar`;
   //   const urlCaracteristicas = "https://onlybooks.isanerd.club/api/caracteristica/listar";
-  const urlFiltro = `${API_URL}bookRent/listar`
+  const urlFiltro = `${API_URL}bookRent/listar`;
   //   const urlCaracteristicas = "https://onlybooks.isanerd.club/api/bookRent/listar";
-  const urlBookId = `${API_URL}book/`
+  const urlBookId = `${API_URL}book/`;
 
+  const guardarFiltros = (filtro) => {
+    if (filtro == "") {
+      setFiltrosSeleccionados([]);
+    } else {
+      if (filtrosSeleccionados.includes(filtro)) {
+        setFiltrosSeleccionados(
+          filtrosSeleccionados.filter((e) => e !== filtro)
+        );
+      } else {
+        setFiltrosSeleccionados([...filtrosSeleccionados, filtro]);
+      }
+    }
+  };
 
   const fetchData = async () => {
     try {
@@ -36,7 +48,7 @@ export const BookProvider = ({ children }) => {
       const data = await response.json();
       setListaLibros(data);
       setIsLoading(false);
-      return data
+      return data;
     } catch (error) {
       console.error("Error al cargar la lista de libros:", error);
       setIsLoading(false);
@@ -65,11 +77,9 @@ export const BookProvider = ({ children }) => {
       const data = await response.json();
       setListaCaracteristicas(data);
     } catch (error) {
-
       console.error("Error al cargar las caracteristicas:", error);
     }
   };
-
 
   const fetchBookById = async (id) => {
     try {
@@ -88,10 +98,10 @@ export const BookProvider = ({ children }) => {
 
   const fetchListaFavoritos = async () => {
     try {
-      const userData = JSON.parse(sessionStorage.getItem('userData'))
+      const userData = JSON.parse(sessionStorage.getItem("userData"));
       // console.log(userData)
       if (userData) {
-        const userId =userData.id;
+        const userId = userData.id;
         const token = sessionStorage.getItem("token");
 
         const url = `${API_URL}user/mostrarFav/${userId}`;
@@ -107,7 +117,7 @@ export const BookProvider = ({ children }) => {
 
         if (response.ok) {
           console.log("Lista de libros favoritos:", data);
-          return(data)
+          return data;
         } else {
           throw new Error("Error al realizar la operación");
         }
@@ -116,7 +126,6 @@ export const BookProvider = ({ children }) => {
       console.error("Error:", error);
     }
   };
-
 
   const fetchObtenerResenias = async (bookId) => {
     const url = `${API_URL}resenia/book/${bookId}`;
@@ -133,7 +142,7 @@ export const BookProvider = ({ children }) => {
       const response = await fetch(url, settings);
       const data = await response.json();
       setListaResenias(data);
-      return data
+      return data;
     } catch (error) {
       console.error("ERROR: ", error);
     }
@@ -149,15 +158,14 @@ export const BookProvider = ({ children }) => {
     await fetchCategorias();
   };
 
-
-
   const fetchFiltroRent = async () => {
+    setIsLoadingRent(true);
     const settings = {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-      }
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     };
     try {
       const response = await fetch(urlFiltro, settings);
@@ -166,12 +174,14 @@ export const BookProvider = ({ children }) => {
       }
       const data = await response.json();
       setRentBook(data);
+      setIsLoadingRent(false);
       // console.log(data)
       return data;
     } catch (error) {
+      setIsLoadingRent(false);
       console.error("Error al cargar la lista de RentBooks:", error);
     }
-  }
+  };
 
   //  const actualizarCaracteristicas = async () => {
   //  await fetchCaracteristicas();
@@ -181,19 +191,39 @@ export const BookProvider = ({ children }) => {
     fetchData();
     fetchCategorias();
     fetchCaracteristicas();
+    fetchFiltroRent();
     //fetchFiltroRent()
   }, []);
 
   const logout = () => {
-    setToken('');
-    sessionStorage.removeItem('token');
-    sessionStorage.removeItem('userData');
-
+    setToken("");
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("userData");
   };
 
-
   return (
-    <GlobalContext.Provider value={{ listaCategorias, listaLibros, isLoading, listaResenias, actualizarListaLibros, actualizarCategorias, fetchBookById, logout, fetchCaracteristicas, listaCaracteristicas, fetchFiltroRent, rentBook, fetchData, fetchObtenerResenias, fetchListaFavoritos }}>
+    <GlobalContext.Provider
+      value={{
+        listaCategorias,
+        listaLibros,
+        isLoading,
+        isLoadingRent,
+        listaResenias,
+        actualizarListaLibros,
+        actualizarCategorias,
+        fetchBookById,
+        logout,
+        fetchCaracteristicas,
+        listaCaracteristicas,
+        fetchFiltroRent,
+        rentBook,
+        fetchData,
+        fetchObtenerResenias,
+        fetchListaFavoritos,
+        guardarFiltros,
+        filtrosSeleccionados,
+      }}
+    >
       {children}
     </GlobalContext.Provider>
   );

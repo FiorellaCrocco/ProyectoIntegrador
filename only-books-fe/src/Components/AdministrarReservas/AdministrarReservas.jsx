@@ -126,18 +126,35 @@ function AdministrarReservas() {
     window.scrollTo(0, 0);
   }, [scroll]);
 
+  function formatearFecha(fecha) {
+    // Divide la cadena de fecha en componentes (AAAA, MM, DD)
+    const [anio, mes, dia] = fecha.split("-");
+  
+    // Retorna la fecha formateada en el formato deseado
+    return `${dia}-${mes}-${anio}`;
+  }
+
   return (
     <div>
-      <h2 className="tituloListCar">Listado de Reservas</h2>
-      <ul className="elementsCaract">
+      <h2 className="tituloListRes">Listado de Reservas</h2>
+      <ul className="elementsCaractR">
+      <li className="listIdR">
+            <div className="listaTitleR TA">TITULO</div>
+            <div className="listaTitleR TA">
+              USUARIO
+            </div>
+            <div className="listaTitleR fecha TA" >FECHA DE INICIO</div>
+            <div className="listaTitleR fecha TA">FECHA DE FIN</div>
+            <div className="admin-btn-container" />
+              </li>
         {listaReservas.map((reserva) => (
-          <li className="listId" key={reserva.id}>
-            <div className="listaTitle">{reserva.book.title}</div>
-            <div className="listaTitle">
+          <li className="listIdR" key={reserva.id}>
+            <div className="listaTitleR">{reserva.book.title}</div>
+            <div className="listaTitleR">
               {reserva.user.name} {reserva.user.lastname}
             </div>
-            <div className="listaTitle">{reserva.startDate.split("T")[0]}</div>
-            <div className="listaTitle">{reserva.returnDate.split("T")[0]}</div>
+            <div className="listaTitleR fecha">{formatearFecha(reserva.startDate.split("T")[0])}</div>
+            <div className="listaTitleR fecha">{formatearFecha(reserva.returnDate.split("T")[0])}</div>
             <div className="admin-btn-container">
               <Button
                 variant="outlined"

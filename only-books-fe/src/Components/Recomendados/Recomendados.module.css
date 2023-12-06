@@ -67,9 +67,10 @@ li {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
     
 }
-p:last-child{
+
+/* p:last-child{
     margin-top: auto;
-}
+} */
 
 .book img {
     width: 300px;
@@ -77,6 +78,7 @@ p:last-child{
     display: block;
     margin: 0 auto;
 }
+
 
 .listaContainer {
     position: relative;

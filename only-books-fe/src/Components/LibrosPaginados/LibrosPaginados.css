@@ -61,6 +61,16 @@
     color: black;
 }
 
+.disable{
+    background-color: #ccdde7;
+    color: #d1b19a;
+}
+
+.disable:hover{
+    background-color:#ccdde7;
+    cursor: default;
+}
+
 
 @media (max-width: 1350px) {
     
@@ -95,7 +105,6 @@
     .listaPaginada {
         display: grid;
         grid-template-columns: repeat(1, minmax(60px, 1fr));
-        max-width: 50%;
         gap: 10px;
     }
 

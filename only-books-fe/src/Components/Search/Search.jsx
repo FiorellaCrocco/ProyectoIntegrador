@@ -11,21 +11,17 @@ const Search = () => {
     listaLibros,
     isLoading,
     listaCategorias,
-    fetchFiltroRent,
     rentBook,
-    fetchData,
+    isLoadingRent,
+    guardarFiltros,
+    filtrosSeleccionados,
   } = useContext(GlobalContext);
   const [listaAleatoria, setListaAleatoria] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [listaRentBook, setListaRentBook] = useState([]);
   const [librosDisponibles, setLibrosDisponibles] = useState([]);
   const [librosReservados, setLibrosReservados] = useState([]);
-  // const [fechaSeleccionada, setFechaSeleccionada] = useState([])
 
-  // const obtenerFechas=(fechas)=>{
-  //   setFechaSeleccionada(fechas)
-  //   }
 
   const selectLibrosAleatorios = (libros, cantidad) => {
     const librosSeleccionados = [];
@@ -56,32 +52,32 @@ const Search = () => {
 
   useEffect(() => {
     const listaFiltrada = listaAleatoria.filter((product) => {
-      if (selectedCategory.length === 0 || selectedCategory === "") {
+      if (filtrosSeleccionados.length === 0 || filtrosSeleccionados === "") {
         return true;
       } else {
         return (
           product.categorias &&
           product.categorias.some((categoria) =>
-            selectedCategory.includes(categoria.titulo)
+          filtrosSeleccionados.includes(categoria.titulo)
           )
         );
       }
     });
     setFilteredProducts(listaFiltrada);
-  }, [selectedCategory, listaAleatoria]);
+  }, [filtrosSeleccionados, listaAleatoria]);
 
   const renderCategoryOptions = () => {
     const categorias = listaCategorias;
     return categorias.map((category, index) => (
       <div
         key={index}
-        className={`category-square  ${selectedCategory.includes(category.titulo) ? "selected" : ""
+        className={`category-square  ${filtrosSeleccionados.includes(category.titulo) ? "selected" : ""
           }`}
       >
         <img
           src={category.imagen}
           alt={category.titulo}
-          onClick={() => handleCategoryChange(category.titulo)}
+          onClick={() => guardarFiltros(category.titulo)}
         />
         <label className='asdasd' value={category.titulo}>{category.titulo}</label>
       </div>
@@ -107,9 +103,7 @@ const Search = () => {
   }, [listaLibros]);
 
   useEffect(() => {
-    const data = rentBook;
-    setListaRentBook(data);
-    // console.log(listaRentBook);
+    const listaRentBook= rentBook
     if (!listaRentBook.length == 0 && fechaInicio!=="") {
       listaRentBook.map((renta) => {
         const returnDate = new Date(renta.returnDate.split("T")[0]);
@@ -121,12 +115,9 @@ const Search = () => {
         if (
           new Date(fechaInicio2) < startDate &&
           new Date(fechaFin2) < startDate
-        ) {
-          console.log("Renta valida, previa a la reserva existente");
+          ) {
         } else if (new Date(fechaInicio2) > returnDate) {
-          console.log("Renta valida, posterior a la reserva existente.");
         } else {
-          console.log(renta.book.id);
           setLibrosReservados((prevLista) => [...prevLista, renta.book.id]);
         }
       });
@@ -136,7 +127,9 @@ const Search = () => {
   return (
     <div>
       <Recomendados libros={listaLibros}></Recomendados>
-      <Buscador obtenerDatos={obtenerDatos} obtenerDatosFilt={obtenerDatosFilt} listaLibros={listaLibros} ></Buscador>
+      {
+        isLoadingRent? <div className="loader-container"><div className="custom-loader loader-rent"></div></div>: <Buscador obtenerDatos={obtenerDatos} obtenerDatosFilt={obtenerDatosFilt} listaLibros={listaLibros} ></Buscador>
+      }
       <div className="search-container">
         <div className="input-select">
           <div className="columnCategorias">
@@ -144,7 +137,7 @@ const Search = () => {
               <h2 className="category-title">Categorias</h2><button
                 className="clearCategorybtn"
                 onClick={() => {
-                  setSelectedCategory([]);
+                  guardarFiltros("");
                 }}
               >
                 X
@@ -166,6 +159,7 @@ const Search = () => {
           fechaFin={fechaFin}
           librosReservados={librosReservados}
           librosFiltrados={librosFiltrados}
+          librosDisponibles={librosDisponibles}
         ></LibrosPaginados>
       </div>
     </div>

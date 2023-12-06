@@ -18,10 +18,13 @@ import Resenia from "../Resenia/Resenia";
 import ReseniaLista from "../ReseniaLista/ReseniaLista";
 import Modal from "./ModalShare";
 import Favoritos from "../Favoritos/Favoritos";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
 
 import Reserva from "../Reserva/Reserva";
 
 import { useNavigate, useLocation } from "react-router-dom";
+import { min } from "date-fns";
 
 function DetalleLibro({ id }) {
   const [showGalleryModal, setShowGalleryModal] = useState(false);
@@ -43,6 +46,18 @@ function DetalleLibro({ id }) {
   const navigate = useNavigate();
   const location = useLocation();
   const today = new Date().getDate();
+  // const minYear = new Date().getYear()+1900;
+  // const minMonth = new Date().getMonth();
+  // const minDate = minYear+"-"+minMonth+"-"+today
+
+  const fechaActual = new Date();
+  const año = fechaActual.getFullYear();
+  const mes = (fechaActual.getMonth() + 1).toString().padStart(2, "0");
+  const día = fechaActual.getDate().toString().padStart(2, "0");
+
+  const fechaFormateada = `${año}-${mes}-${día}`;
+  console.log(fechaFormateada);
+
   console.log(today);
 
   const userData = JSON.parse(sessionStorage.getItem("userData"));
@@ -60,6 +75,7 @@ function DetalleLibro({ id }) {
 
   const toggleGalleryModal = () => {
     setShowGalleryModal(!showGalleryModal);
+    document.body.style.overflow = showGalleryModal ? "auto" : "hidden";
     setShowPopup(!showPopup);
   };
 
@@ -239,13 +255,9 @@ function DetalleLibro({ id }) {
 
               {showGalleryModal && (
                 <div className={stylesM.modal}>
-                  <div onClick={toggleModal} className={stylesM.overlay}></div>
+                  {/* <div onClick={toggleModal} className={stylesM.overlay}></div> */}
                   <div className={stylesM.modalcontent}>
-                    <div
-                      className={
-                        stylesM.carrusel
-                      } /*className={styles.carrusel}*/
-                    >
+                    <div className={stylesM.carrusel}>
                       <button
                         className={stylesM.btnBack}
                         onClick={retrocederImagen}
@@ -292,6 +304,7 @@ function DetalleLibro({ id }) {
                   range
                   highlightToday={false}
                   numberOfMonths={2}
+                  minDate={fechaFormateada}
                   mapDays={({ date, isSameDate }) => {
                     let props = {};
                     fechasReservadas.map((fecha) => {
@@ -341,15 +354,20 @@ function DetalleLibro({ id }) {
 
             <div className={styles.sectionDetalles}>
               <div className={styles.titles}>
-                <div>
-                  <h1 className={styles.bookh1}>{libro.title}</h1>{" "}
+                <div className={styles.tituloContainer}>
+                  <h1 className={styles.bookh1}>{libro.title}</h1>
+                  <div className={styles.iconosContainer}>
+
+                  <FontAwesomeIcon icon={faStarSolid} className="card-star" />
+                  <span className={styles.qualificationInfo}>{libro.qualification}/5</span>
                   <span className={styles.favIcon}>
                     <Favoritos
                       variable={id}
                       isFavorite={isFavorite}
                       actualizarListaFav={fetchListaFavoritos}
-                    ></Favoritos>
+                      ></Favoritos>
                   </span>
+                      </div>
                 </div>
                 <p className={styles.bookp}>{libro.author}</p>
                 <p className={styles.bookp}>{libro.description}</p>

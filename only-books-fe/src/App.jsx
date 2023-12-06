@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import Navbar from './Components/Navbar/Navbar';
@@ -18,6 +18,7 @@ import Subnavbar from "./Components/Subnavbar/Subnavbar";
 
 import Reserva from './Components/Reserva/Reserva'
 import WhatsApp from './Components/WhatsApp/WhatsApp';
+import { useAccount } from './Context/accountContext';
 
 
 
@@ -28,7 +29,11 @@ function App() {
   
   const userDataString = sessionStorage.getItem('userData');
   const userData = userDataString ? JSON.parse(userDataString) : null;
-  const isAdmin = userData?.rol === 'ADMIN';
+  const { isAdmin } = useAccount();
+
+  useEffect(()=>{
+    console.log("isAdmin: ", isAdmin);
+  },[isAdmin])
 
   return (
     <div className="app">
