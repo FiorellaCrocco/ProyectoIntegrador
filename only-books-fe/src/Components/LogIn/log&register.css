@@ -74,7 +74,7 @@ nav a {
 	flex-direction: column;
 	padding-top: 30px;
 	padding-bottom: 30px;
-	height: 70vh;
+	height: 80vh;
 	background-color: #EFFAFF;
 }
 .login-containerL {
@@ -84,7 +84,7 @@ nav a {
 	flex-direction: column;
 	padding-top: 30px;
 	padding-bottom: 30px;
-	height: 70vh;
+	height: 80vh;
 	background-color: #EFFAFF;
 }
 
@@ -253,14 +253,14 @@ p>a:hover{
 	margin-top: 30px
 }
 @media(width<2000px) {
-	.login-container {
+	/* .login-container {
 		height: auto;
-	}
+	} */
 	.login-containerL {
 		min-height: auto;
 	}
 }
-@media(width<614px) {
+@media(width<650px) {
 	
 	.wrapper {
 		/* overflow: scroll; */
