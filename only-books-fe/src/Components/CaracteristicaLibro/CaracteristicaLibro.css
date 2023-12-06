@@ -15,7 +15,7 @@
     color: black;
     display: flex;
     flex-direction: row;
-    align-items: end;
+    align-items: baseline;
 }
 
 .listaIcon{
@@ -25,12 +25,13 @@
 }
 
 .listaIcon>p{
-    margin-top: 0px;
+    margin-top: 2rem;
     margin-left: 8px;
 }
 
 .imgIcono{
     max-width: 25px;
+    margin-top: 1rem;
 }
 
 @media (max-width: 600px) {
