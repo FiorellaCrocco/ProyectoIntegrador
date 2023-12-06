@@ -297,14 +297,14 @@ const Reserva = () => {
                 <h3 className={styles.titleCategorias}>Categorias</h3>
                 <ul className={styles.categorias}>
                   {libro.categorias.map((categoria) => (
-                    <li key={categoria.id}>{toPascalCase(categoria.titulo)}</li>
+                    <li key={categoria.id} className={styles.cuerpo}>{toPascalCase(categoria.titulo)}</li>
                   ))}
                 </ul>
                 {/*<CaracteristicaLibro id={libro.id} />*/}
                 <h3 className={styles.titleCaracteristicas}>Caracteristicas</h3>
                 <ul className={styles.caracteristicas}>
                   {libro.caracteristicas.map((caracteristica) => (
-                    <li key={caracteristica.id}>{caracteristica.title}</li>
+                    <li key={caracteristica.id} className={styles.cuerpo}>{caracteristica.title}</li>
                   ))}
                 </ul>
               </div>
@@ -319,11 +319,14 @@ const Reserva = () => {
           </div>
         </div>
         <div className={styles.botones}>
-          <button className={`${styles.btn} ${desactivar ? styles['btn-disabled'] : ''}`} disabled={desactivar}>
+          <div>
+            <button className={`${styles.btn} ${desactivar ? styles['btn-disabled'] : ''}`} disabled={desactivar}>
             Reservar
           </button>
+          </div>
+          
           <div>
-            <button className={styles.btnVolver} onClick={() => navigate(`/detail/${libro.id}`)}>
+            <button className={styles.btnAtras} onClick={() => navigate(`/detail/${libro.id}`)}>
               Volver
             </button>
         </div>

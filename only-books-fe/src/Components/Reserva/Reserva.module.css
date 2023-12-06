@@ -6,8 +6,9 @@
 .all {
   display: flex;
 }
-.title {
+.title{
   color: #1b2430;
+  font-size: larger;
 }
 
 .input {
@@ -46,50 +47,35 @@
   margin-top: 20px;
   width: 25%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .btn {
-  /* background-color: transparent; */
-  background: linear-gradient(to right, #418cb1, #327297);
-  font-size: 0.9rem;
+  background-color: #f85344;
   color: #e7f1f7;
   padding: 12px 33px;
   margin-top: 10px;
-  border: 2px solid #9cc6dd;
-  border-radius: 18px;
   position: relative;
-  /* z-index: -1; */
+  font-size: 18px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10%;
+  margin: 20px;
   overflow: hidden;
   transition: color 0.5s;
   cursor: pointer;
-  
+  box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
 }
-.btnVolver {
-  /* background-color: transparent; */
-  background: linear-gradient(to right, #418cb1, #327297);
-  font-size: 0.9rem;
-  color: #e7f1f7;
-  padding: 12px 33px;
-  margin-top: 10px;
-  border: 2px solid #9cc6dd;
-  border-radius: 18px;
-  /* position: relative;
-  left: 550px;
-  bottom: 103px; */
-  /* z-index: -1; */
-  overflow: hidden;
-  transition: color 0.5s;
+
+.btn:hover {
+  background-color: rgb(194, 53, 51);
   cursor: pointer;
-  
 }
-
-
 
 .btn-disabled {
-  /* background-color: transparent; */
   background: linear-gradient(to right, #418cb1, #327297);
   font-size: 0.9rem;
-  color: #e7f1f7;
+ /* color: #e7f1f7;
   padding: 12px 33px;
   margin-top: 10px;
   border: 2px solid #9cc6dd;
@@ -99,14 +85,9 @@
   overflow: hidden;
   transition: color 0.5s;
   cursor: pointer;
-  opacity: 0.5; /* Ejemplo: reducir la opacidad */
-  cursor: not-allowed; /* Ejemplo: cambiar el cursor */
-  /* ... */
+  opacity: 0.5; 
+  cursor: not-allowed; 
 }
-
-
-
-
 
 
 
@@ -165,7 +146,7 @@
 
 .price {
   color: #1b2430;
-  
+  text-align: center;
 }
 
 .price span {
@@ -182,7 +163,7 @@
 
 .imgUrl {
   height: 300px;
-  margin: 0 15px 0;
+  margin: 10px 15px 0;
   overflow-clip-margin: content-box;
   overflow: hidden;
 }
@@ -206,6 +187,29 @@
 
 .obligatorio {
   color: red;
+}
+
+.cuerpo{
+  font-weight: 500;
+  font-size: larger;
+}
+
+.btnAtras {
+  background-color: #F89344;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10%;
+  margin: 20px;
+  transition: background-color 0.3s;
+  box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
+}
+
+.btnAtras:hover {
+  background-color: #cf7937;
+  cursor: pointer;
 }
 
 @media (max-width: 1440px) {

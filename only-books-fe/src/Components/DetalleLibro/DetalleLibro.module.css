@@ -154,6 +154,7 @@
 
 .btnAtras:hover {
     background-color: #cf7937;
+    cursor: pointer;
 }
 
 .reservaContainer{
