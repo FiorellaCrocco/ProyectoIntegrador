@@ -77,6 +77,16 @@ nav a {
 	height: 70vh;
 	background-color: #EFFAFF;
 }
+.login-containerL {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	height: 70vh;
+	background-color: #EFFAFF;
+}
 
 form {
 	display: flex;
@@ -242,9 +252,12 @@ p>a:hover{
 .wrapper>form>button{
 	margin-top: 30px
 }
-@media(width<1800px) {
+@media(width<2000px) {
 	.login-container {
 		height: auto;
+	}
+	.login-containerL {
+		min-height: auto;
 	}
 }
 @media(width<614px) {

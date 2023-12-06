@@ -105,7 +105,7 @@ export const LoginPage = () => {
   }
 
   return (
-    <div className="login-container">
+    <div className="login-containerL">
       <div className="wrapper">
         <form onSubmit={onLogin}>
 		{location.state!=null? <p>{location.state.msg}</p> : <></>}
