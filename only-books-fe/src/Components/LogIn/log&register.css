@@ -61,8 +61,10 @@ nav a {
 	padding: 40px;
 	border-radius: 34px;
 	box-shadow: 0 15px 35px rgba(0, 0, 0, 9);
+}
 
-
+.wrapper h2{
+	margin-top: 2px;
 }
 
 .login-container {
@@ -72,7 +74,7 @@ nav a {
 	flex-direction: column;
 	padding-top: 30px;
 	padding-bottom: 30px;
-	height: 77vh;
+	height: 70vh;
 	background-color: #EFFAFF;
 }
 
@@ -240,8 +242,13 @@ p>a:hover{
 .wrapper>form>button{
 	margin-top: 30px
 }
-
+@media(width<1800px) {
+	.login-container {
+		height: auto;
+	}
+}
 @media(width<614px) {
+	
 	.wrapper {
 		/* overflow: scroll; */
 		overflow-x: hidden;

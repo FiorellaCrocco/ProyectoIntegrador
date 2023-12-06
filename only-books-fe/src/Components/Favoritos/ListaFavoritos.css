@@ -1,5 +1,5 @@
 .contentContFav{
-    height: 72.7vh;
+    height: auto;
 }
 
 .listado{
@@ -7,12 +7,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    overflow-y: scroll;
 }
 
 .h2{
     color: #ff9e71;
     font-size: 40px;
+    margin: 5px;
 }
 .listado>p{
     margin: 0;
@@ -31,10 +31,10 @@
     grid-template-columns: repeat(6, minmax(100px, 1fr));
     gap: 10px;
     background-color: #eeeeee;
-    height:54.5vh;
+    height:auto;
     margin-left: 2rem;
     margin-right: 2rem;
-    overflow-y: scroll;
+   /* overflow-y: scroll;*/
 }
 .favRed{
     color:red;
@@ -46,6 +46,9 @@
     .cardFavs{
         grid-template-columns: repeat(5, minmax(100px, 1fr));
     }
+    h2{
+        margin: 2px;
+    }
 }
 @media (max-width: 1200px){
     .cardFavs{
@@ -53,7 +56,6 @@
     }
 }
 @media (max-width: 950px){
-    
     .cardFavs{
         grid-template-columns: repeat(3, minmax(100px, 1fr));
     }
@@ -67,25 +69,17 @@
 
 
 @media (max-width: 600px){
-    .body-cards{
-        width: 60vw;
-    }
     .card{
         width: 80%;
     }
     .listado{
         justify-content: flex-start;
     }
-
-    
+    .h2{
+        margin: 1.5px;
+        font-size: 30px;
+    }
     .cardFavs{
         grid-template-columns: repeat(1, minmax(100px, 1fr));
     }
-}
-@media (max-width: 600px){
-
-    .cardFavs{
-        grid-template-columns: repeat(1, minmax(100px, 1fr));
-    }
-
 }
