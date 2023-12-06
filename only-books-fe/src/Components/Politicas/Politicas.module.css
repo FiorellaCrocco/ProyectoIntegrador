@@ -57,11 +57,14 @@
     padding: 20px 40px 10px 40px;
     background-color: white;
     width: 50%;
-    min-width: 300px;
     color: rgb(48, 48, 48);
     border-radius: 10px ;
     position: relative;
     line-height: 1.7;
+    height: auto;
+    max-height: 50vh;
+    overflow-y: scroll;
+
 }
 .politicaModalBody>h4{
     margin-left: 20px;
@@ -80,16 +83,10 @@
 .politicaContent{
     font-size: 12px;
 }
+@media(max-width: 400px){
 
-/* @media (max-width: 768px) {
-    .politicascontainercolum1 {
-        margin-top: 30px; 
-    }
-    .titulopolitica {
-        font-size: 1.5rem; 
-        margin-bottom: 10px; 
-    }
-} */
+
+}
 
 
 @media (max-width: 768px) {
@@ -97,15 +94,24 @@
         flex-basis: calc(33.33% - 20px); /* 33.33% con un margen de 10px entre columnas */
     }
 
-    @media (max-width: 620px) {
+} 
+@media (max-width: 620px) {
         .politicascontainercolum1 {
             flex-basis: calc(100% - 20px); /* 100% con un margen de 10px entre columnas */
         }
+        .titulopolitica{
+            font-size: 22px;
+        }
+        .tituloh4{
+            padding: 0;
+            margin: 0;
+            font-size: 14px;
+        }
+        .politicascontainercolum1{
+            margin: 5px;
+            padding: 0px;
+        }
+        .politicascontainer{
+            padding-top: 10px;
+        }
     }
-
-    /* @media (max-width: 360px) {
-        .politicascontainercolum1 {
-            flex-basis: calc(100% - 20px); /* 100% con un margen de 10px entre columnas 
-        } 
-    } */
-}

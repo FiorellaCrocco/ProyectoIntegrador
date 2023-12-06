@@ -355,7 +355,9 @@ function DetalleLibro({ id }) {
             <div className={styles.sectionDetalles}>
               <div className={styles.titles}>
                 <div className={styles.tituloContainer}>
-                  <h1 className={styles.bookh1}>{libro.title}</h1>{" "}
+                  <h1 className={styles.bookh1}>{libro.title}</h1>
+                  <div className={styles.iconosContainer}>
+
                   <FontAwesomeIcon icon={faStarSolid} className="card-star" />
                   <span className={styles.qualificationInfo}>{libro.qualification}/5</span>
                   <span className={styles.favIcon}>
@@ -363,8 +365,9 @@ function DetalleLibro({ id }) {
                       variable={id}
                       isFavorite={isFavorite}
                       actualizarListaFav={fetchListaFavoritos}
-                    ></Favoritos>
+                      ></Favoritos>
                   </span>
+                      </div>
                 </div>
                 <p className={styles.bookp}>{libro.author}</p>
                 <p className={styles.bookp}>{libro.description}</p>

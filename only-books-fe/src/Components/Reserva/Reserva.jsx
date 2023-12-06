@@ -8,7 +8,7 @@ import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
 import CaracteristicaLibro from "../CaracteristicaLibro/CaracteristicaLibro";
 import emailjs from '@emailjs/browser';
-import { format } from 'date-fns';
+import { format, addDays} from 'date-fns';
 import { es } from 'date-fns/locale';
 
 const Reserva = () => {
@@ -133,6 +133,12 @@ const Reserva = () => {
     }
   }, [formData]);
 
+    const toPascalCase = (inputString) => {
+      const words = inputString.split(' ');
+      const pascalCaseWords = words.map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase());
+      return pascalCaseWords.join(' ');
+    };
+  
   // console.log(libro.caracteristicas);
   // console.log(libro.categorias);
 
@@ -291,7 +297,7 @@ const Reserva = () => {
                 <h3 className={styles.titleCategorias}>Categorias</h3>
                 <ul className={styles.categorias}>
                   {libro.categorias.map((categoria) => (
-                    <li key={categoria.id}>{categoria.titulo}</li>
+                    <li key={categoria.id}>{toPascalCase(categoria.titulo)}</li>
                   ))}
                 </ul>
                 {/*<CaracteristicaLibro id={libro.id} />*/}

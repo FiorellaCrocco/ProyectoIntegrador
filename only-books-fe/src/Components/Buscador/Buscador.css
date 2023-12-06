@@ -1,12 +1,13 @@
 
 .buscador-section{
   background-color: #d2d2d2;
+  background-color: #eeeeee;
   padding-bottom: 20px;
   padding-top: 20px;
 }
 .buscador-title{
   margin: 20px;
-  color: #ff9e71;
+  color: #ea7a46;
   font-size: 32px;
 }
 
@@ -26,7 +27,7 @@
 }
 
 .busquedaContainer label{
-  color: #ff9e71;
+  color: #ea7a46;
 }
 .rmdp-input{
   font-size: 18px;
@@ -134,12 +135,20 @@ box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
 } */
 
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
 .buscador-section{
   width: 100%;
 }
 .busquedaContainer{
   flex-direction: column;
 }
-
+}
+@media(max-width: 400px){
+  .busquedaFechaContainer>label{
+    text-align: center;
+  }
+  .fecha-botonContainer{
+    display: flex;
+    flex-direction: column;
+  }
 }
