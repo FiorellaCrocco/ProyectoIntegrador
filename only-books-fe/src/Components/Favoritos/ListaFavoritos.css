@@ -58,7 +58,7 @@
 }
 @media (max-width: 950px){
     .cardFavs{
-        grid-template-columns: repeat(3, minmax(100px, 1fr));
+        grid-template-columns: repeat(3,250px) ;
     }
 }
 
@@ -71,7 +71,8 @@
 
 @media (max-width: 600px){
     .card{
-        width: 80%;
+        /* width: 80%; */
+        width: 60vw;
     }
     .listado{
         justify-content: flex-start;
