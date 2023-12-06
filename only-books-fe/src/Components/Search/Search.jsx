@@ -13,6 +13,8 @@ const Search = () => {
     listaCategorias,
     rentBook,
     isLoadingRent,
+    guardarFiltros,
+    filtrosSeleccionados,
   } = useContext(GlobalContext);
   const [listaAleatoria, setListaAleatoria] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState([]);
@@ -50,32 +52,32 @@ const Search = () => {
 
   useEffect(() => {
     const listaFiltrada = listaAleatoria.filter((product) => {
-      if (selectedCategory.length === 0 || selectedCategory === "") {
+      if (filtrosSeleccionados.length === 0 || filtrosSeleccionados === "") {
         return true;
       } else {
         return (
           product.categorias &&
           product.categorias.some((categoria) =>
-            selectedCategory.includes(categoria.titulo)
+          filtrosSeleccionados.includes(categoria.titulo)
           )
         );
       }
     });
     setFilteredProducts(listaFiltrada);
-  }, [selectedCategory, listaAleatoria]);
+  }, [filtrosSeleccionados, listaAleatoria]);
 
   const renderCategoryOptions = () => {
     const categorias = listaCategorias;
     return categorias.map((category, index) => (
       <div
         key={index}
-        className={`category-square  ${selectedCategory.includes(category.titulo) ? "selected" : ""
+        className={`category-square  ${filtrosSeleccionados.includes(category.titulo) ? "selected" : ""
           }`}
       >
         <img
           src={category.imagen}
           alt={category.titulo}
-          onClick={() => handleCategoryChange(category.titulo)}
+          onClick={() => guardarFiltros(category.titulo)}
         />
         <label className='asdasd' value={category.titulo}>{category.titulo}</label>
       </div>
@@ -135,7 +137,7 @@ const Search = () => {
               <h2 className="category-title">Categorias</h2><button
                 className="clearCategorybtn"
                 onClick={() => {
-                  setSelectedCategory([]);
+                  guardarFiltros("");
                 }}
               >
                 X
