@@ -67,10 +67,10 @@ const Historial = () => {
           <ul className="listadoUl">
             <div className="titulosHistorial">
               <p className="titleReserva">TITULO</p>
-              <div className="fechasHistorialTitulos">
+              {/* <div className="fechasHistorialTitulos"> */}
                 <p className="tituloFechaH">FECHA DE INICIO</p>
                 <p className="tituloFechaF">FECHA DE FINALIZACION</p>
-              </div>
+              {/* </div> */}
             </div>
           <div className='contenedorAlt'>
             {reservas.map((reserva) => (
@@ -83,12 +83,12 @@ const Historial = () => {
                   ></img>
                   <p className="titleReservaHistorial"> {reserva.book.title}</p>
                 </div>
-                <div className="fechasHistorial">
+                {/* <div className="fechasHistorial"> */}
                   <p className="fechaInicio">{reserva.startDate.split("T")[0]}</p>
                   <p className="fechaFin">
                     {reserva.returnDate.split("T")[0]}
                   </p>
-                </div>
+                {/* </div> */}
               </li>
             ))}
             </div>

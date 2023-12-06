@@ -5,8 +5,8 @@
 
 .custom-dropdown {
     position: absolute;
-    top: 100%;
-    left: 1;
+    top: 120%;
+    right: 10%;
     z-index: 1;
     background-color: #539dc2;
     border: 1px solid #f5f4f2;

@@ -135,12 +135,20 @@ box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
 } */
 
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
 .buscador-section{
   width: 100%;
 }
 .busquedaContainer{
   flex-direction: column;
 }
-
+}
+@media(max-width: 400px){
+  .busquedaFechaContainer>label{
+    text-align: center;
+  }
+  .fecha-botonContainer{
+    display: flex;
+    flex-direction: column;
+  }
 }

@@ -47,8 +47,8 @@ const UserMenu = () => {
     }, []);
 
     return (
-        <div className="user-menu">
-            <div className="avatar-container" onClick={handleAvatarClick}>
+        <div className="user-menu avatar-container-open">
+            <div className="avatar-container " onClick={handleAvatarClick}>
             
                 <Avatar name={name} />
             </div>
