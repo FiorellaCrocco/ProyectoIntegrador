@@ -9,6 +9,7 @@
 .title{
   color: #1b2430;
   font-size: larger;
+  margin-bottom: 1.5rem;
 }
 
 .input {
@@ -262,5 +263,12 @@
   .card {
     margin-left: 60px;
     margin-right: 60px;
+  }
+  
+  .input {
+    margin-top: 0.5rem; 
+  }
+  .inputResidencia{
+  margin-top: 0.5rem;
   }
 }
