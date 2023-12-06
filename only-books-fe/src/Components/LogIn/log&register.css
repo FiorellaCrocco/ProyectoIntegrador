@@ -221,9 +221,9 @@ body {
 	font-size: 1.5rem;
 }
 
-p:last-child{
+/* p:last-child{
 	margin-top: 2rem;
-}
+}  */
 
 p>a{
 	color: #e7f1f7;
@@ -234,11 +234,46 @@ p>a:hover{
 	color: #10658f;
 	font-weight: 700;
 }
+.wrapper>form>p{
+	margin-top: 20px
+}
+.wrapper>form>button{
+	margin-top: 30px
+}
 
-@media (max-width: 614px) {
+@media(width<614px) {
 	.wrapper {
-		width: 340px;
-		padding: 40px;
+		/* overflow: scroll; */
+		overflow-x: hidden;
+		width: 250px;
 	}
+	.wrapper h2{
+		font-size: 20px;
 
+	}
+	.wrapper input {
+		font-size: 16px;
+	}
+	.wrapper>form>p{
+		text-align: center;
+	}
+}
+
+
+@media(width<350px) {
+	.wrapper {
+		width: 200px;
+	}
+	.wrapper h2{
+		font-size: 18px;
+	}
+	.wrapper input {
+		font-size: 14px;
+	}
+	.wrapper>form>p{
+		text-align: center;
+	}
+	.input{
+		padding: 15px;
+	}
 }

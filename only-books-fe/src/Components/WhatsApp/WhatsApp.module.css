@@ -15,7 +15,13 @@
 }
 
 .logo:hover {
-    
     width: 110px;
-
+}
+@media (width < 720px){
+    .logo{
+        width: 70px;
+    }
+    .logo:hover{
+        width: 80px;
+    }
 }

@@ -182,13 +182,17 @@
     .btn-create, .btn-login{
         font-size: 10px;
     }
+    .btn-create{
+        display: none;
+    }
+
 } 
 
 @media (max-width: 510px){
         .btn-create, .btn-login{
         font-size: 55%;
     }
-
+    
 }
 
 @media (max-width: 499px) {
@@ -230,9 +234,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        display: none;
     }
 
-    .btn-create, .btn-login{
-        font-size: 25%;
-    }
 }

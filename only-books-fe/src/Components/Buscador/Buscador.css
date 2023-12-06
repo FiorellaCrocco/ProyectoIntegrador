@@ -1,12 +1,13 @@
 
 .buscador-section{
   background-color: #d2d2d2;
+  background-color: #eeeeee;
   padding-bottom: 20px;
   padding-top: 20px;
 }
 .buscador-title{
   margin: 20px;
-  color: #ff9e71;
+  color: #ea7a46;
   font-size: 32px;
 }
 
@@ -26,7 +27,7 @@
 }
 
 .busquedaContainer label{
-  color: #ff9e71;
+  color: #ea7a46;
 }
 .rmdp-input{
   font-size: 18px;
