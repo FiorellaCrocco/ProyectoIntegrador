@@ -318,10 +318,17 @@ const Reserva = () => {
             </div>
           </div>
         </div>
+        <div className={styles.botones}>
+          <button className={`${styles.btn} ${desactivar ? styles['btn-disabled'] : ''}`} disabled={desactivar}>
+            Reservar
+          </button>
+          <div>
+            <button className={styles.btnVolver} onClick={() => navigate(`/detail/${libro.id}`)}>
+              Volver
+            </button>
+        </div>
+        </div>
 
-        <button className={`${styles.btn} ${desactivar ? styles['btn-disabled'] : ''}`} disabled={desactivar}>
-      Reservar
-    </button>
       </form>
 
     </>
