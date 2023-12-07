@@ -170,7 +170,7 @@ function DetalleLibro({ id }) {
 
   const handleReservar = (e) => {
     console.log(values);
-    if (values.length > 1 && values[0] != "" && values[0 !=" "]) {
+    if (values.length > 1 && values[0] != " , " && values[0] !=" ") {
       e.preventDefault();
       console.log(libro);
       const inicio = values.toString().split(",")[0];
