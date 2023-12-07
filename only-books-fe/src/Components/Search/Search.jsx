@@ -10,11 +10,13 @@ const Search = () => {
   const {
     listaLibros,
     isLoading,
+    setIsLoading,
     listaCategorias,
     rentBook,
     isLoadingRent,
     guardarFiltros,
     filtrosSeleccionados,
+    storedFilters
   } = useContext(GlobalContext);
   const [listaAleatoria, setListaAleatoria] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState([]);
@@ -34,13 +36,13 @@ const Search = () => {
     return librosSeleccionados;
   };
 
-  const handleCategoryChange = (category) => {
-    if (selectedCategory.includes(category)) {
-      setSelectedCategory(selectedCategory.filter((c) => c !== category));
-    } else {
-      setSelectedCategory([...selectedCategory, category]);
-    }
-  };
+  // const handleCategoryChange = (category) => {
+  //   if (selectedCategory.includes(category)) {
+  //     setSelectedCategory(selectedCategory.filter((c) => c !== category));
+  //   } else {
+  //     setSelectedCategory([...selectedCategory, category]);
+  //   }
+  // };
 
   useEffect(() => {
     const listaAleatoria = selectLibrosAleatorios(
@@ -64,7 +66,7 @@ const Search = () => {
       }
     });
     setFilteredProducts(listaFiltrada);
-  }, [filtrosSeleccionados, listaAleatoria]);
+  }, [storedFilters, listaAleatoria, filtrosSeleccionados]);
 
   const renderCategoryOptions = () => {
     const categorias = listaCategorias;
@@ -160,6 +162,7 @@ const Search = () => {
           librosReservados={librosReservados}
           librosFiltrados={librosFiltrados}
           librosDisponibles={librosDisponibles}
+          setIsLoading={setIsLoading}
         ></LibrosPaginados>
       </div>
     </div>

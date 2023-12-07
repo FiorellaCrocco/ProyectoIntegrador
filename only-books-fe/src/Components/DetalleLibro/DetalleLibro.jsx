@@ -3,12 +3,8 @@ import CaracteristicaLibro from "../CaracteristicaLibro/CaracteristicaLibro";
 import styles from "./DetalleLibro.module.css";
 import Calendar from "react-multi-date-picker";
 import Swal from "sweetalert2";
-import DateObject from "react-date-object";
-import { Helmet } from "react-helmet";
-import { ShareSocial } from "react-share-social";
 import { FaShare } from "react-icons/fa";
 import SharePopup from "./SharePopup";
-import CompartirRedes from "../Share/CompartirRedes";
 import { GlobalContext } from "../../Context/globalContext";
 import stylesM from "./Modal.module.css";
 import Politicas from "../Politicas/Politicas";
@@ -20,20 +16,15 @@ import Modal from "./ModalShare";
 import Favoritos from "../Favoritos/Favoritos";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
-
-import Reserva from "../Reserva/Reserva";
-
 import { useNavigate, useLocation } from "react-router-dom";
-import { min } from "date-fns";
 
 function DetalleLibro({ id }) {
   const [showGalleryModal, setShowGalleryModal] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [showPopupShare, setShowPopupShare] = useState(false);
-  const [modal, setModal] = useState(false);
   const [imagenActual, setImagenActual] = useState(0);
-  const { fetchBookById, fetchListaFavoritos } = useContext(GlobalContext);
+  const { fetchBookById, fetchListaFavoritos, favoritos } = useContext(GlobalContext);
   const [libro, setLibro] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
   const [values, setValues] = useState([]);
@@ -46,9 +37,7 @@ function DetalleLibro({ id }) {
   const navigate = useNavigate();
   const location = useLocation();
   const today = new Date().getDate();
-  // const minYear = new Date().getYear()+1900;
-  // const minMonth = new Date().getMonth();
-  // const minDate = minYear+"-"+minMonth+"-"+today
+
 
   const fechaActual = new Date();
   const año = fechaActual.getFullYear();
@@ -56,9 +45,6 @@ function DetalleLibro({ id }) {
   const día = fechaActual.getDate().toString().padStart(2, "0");
 
   const fechaFormateada = `${año}-${mes}-${día}`;
-  console.log(fechaFormateada);
-
-  console.log(today);
 
   const userData = JSON.parse(sessionStorage.getItem("userData"));
   const [shareData, setShareData] = useState({
@@ -68,10 +54,6 @@ function DetalleLibro({ id }) {
     link: `https://onlybooks.isanerd.club/detail/${id}`,
   });
 
-  const toggleModal = () => {
-    setModal(!modal);
-    setShowPopup(!showPopup);
-  };
 
   const toggleGalleryModal = () => {
     setShowGalleryModal(!showGalleryModal);
@@ -118,15 +100,25 @@ function DetalleLibro({ id }) {
 
   useEffect(() => {
     const fetch = async () => {
-      const listaFav = await fetchListaFavoritos();
-      listaFav.map((book) => {
-        if (book.id == id) {
-          setIsFavorite(true);
+      // const listaFav = await fetchListaFavoritos();
+      // listaFav.map((book) => {
+      //   if (book.id == id) {
+      //     setIsFavorite(true);
+      //   }
+      // });
+      console.log(favoritos)
+      favoritos.forEach((book)=>{
+
+        console.log(id)
+        if(book.id==id){
+          console.log("ES FAVORITO")
+          setIsFavorite(true)
+          console.log(isFavorite)
         }
-      });
+      })
     };
     fetch();
-  }, [id]);
+  }, [id, favoritos]);
 
   const obtenerFechas = (datos) => {
     setFechas(datos);
@@ -175,10 +167,6 @@ function DetalleLibro({ id }) {
     return false;
   };
 
-  const handleShareClick = () => {
-    setShowPopupShare(true);
-    setModal(true);
-  };
 
   const handleReservar = (e) => {
     console.log(values);
@@ -367,6 +355,7 @@ function DetalleLibro({ id }) {
                         variable={id}
                         isFavorite={isFavorite}
                         actualizarListaFav={fetchListaFavoritos}
+                        libro={libro}
                       ></Favoritos>
                     </span>
                   </div>

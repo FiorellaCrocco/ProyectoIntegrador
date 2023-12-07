@@ -17,6 +17,7 @@ function Card({
   actualizarListaFav,
   fechaInicio,
   fechaFin,
+  libro
 }) {
   const navigate = useNavigate();
 
@@ -26,7 +27,9 @@ function Card({
         inicio: fechaInicio,
         fin: fechaFin,
       },
-    });
+    })
+    window.location.reload();
+    ;
   };
   useEffect(() => {
     renderCard();
@@ -62,6 +65,7 @@ function Card({
             </div>
             <div className="FavCardCorazon" id="favIcon">
               <Favoritos
+                libro={libro}
                 variable={id}
                 isFavorite={isFavorite}
                 actualizarListaFav={actualizarListaFav}

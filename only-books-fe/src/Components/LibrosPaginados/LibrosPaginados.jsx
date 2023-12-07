@@ -2,21 +2,22 @@ import React, { useContext, useState, useEffect } from "react";
 import { GlobalContext } from "../../Context/globalContext";
 import Card from "../Card/Card.jsx"; // Importa el componente Card
 import "./LibrosPaginados.css";
+import { faL } from "@fortawesome/free-solid-svg-icons";
 
 function LibrosPaginados({
   libros,
   isLoading,
+  setIsLoading,
   librosFiltrados,
   librosReservados,
   totalLibros,
   fechaInicio,
   fechaFin,
 }) {
-  const { favoritos } = useContext(GlobalContext);
+  const { favoritos, storedFilters } = useContext(GlobalContext);
   const librosPorPagina = 10;
   const [pagina, setPagina] = useState(1);
   const [listaFavoritos, setListaFavoritos] = useState([]);
-  const [loading, setLoading] = useState(isLoading)
 
   const token = sessionStorage.getItem("token");
   const user = JSON.parse(sessionStorage.getItem("userData"));
@@ -25,6 +26,8 @@ function LibrosPaginados({
   const API_URL = import.meta.env.VITE_API_URL;
 
   const fetchDataMostrar = async () => {
+    setIsLoading(true)
+
     try {
       const url = `${API_URL}user/mostrarFav/${userId}`;
       const set = {
@@ -45,11 +48,13 @@ function LibrosPaginados({
         setListaFavoritos(data);
         console.log(data);
       } else {
+        setIsLoading(false)
         throw new Error("Error al realizar la operación");
       }
     } catch (error) {
       console.error("Error:", error);
     }
+    setIsLoading(false)
   };
 
   const actualizarListaFav = () => {
@@ -117,6 +122,7 @@ function LibrosPaginados({
             <Card
               key={item.id}
               {...item}
+              libro = {item}
               isFavorite={true}
               actualizarListaFav={actualizarListaFav}
               fechaInicio={fechaInicio}
@@ -132,12 +138,12 @@ function LibrosPaginados({
               actualizarListaFav={actualizarListaFav}
               fechaInicio={fechaInicio}
               fechaFin={fechaFin}
+              libro={item}
             />
           );
         }
       });
     } else {
-      if (!userId) {
         return currentItem.map((item) => {
           return (
             <Card
@@ -147,11 +153,11 @@ function LibrosPaginados({
               actualizarListaFav={actualizarListaFav}
               fechaInicio={fechaInicio}
               fechaFin={fechaFin}
+              libro={item}
             />
           );
         });
       }
-    }
   };
 
   const renderPageButtons = () => {

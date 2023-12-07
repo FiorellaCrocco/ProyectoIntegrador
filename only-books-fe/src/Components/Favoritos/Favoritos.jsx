@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faHeart as farHeart,faHeart as fasHeart,} from "@fortawesome/free-regular-svg-icons";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { useAccount } from "../../Context/accountContext";
+import { GlobalContext } from "../../Context/globalContext";
 
 const Favoritos = (props) => {
+  console.log(props.isFavorite)
   const API_URL = import.meta.env.VITE_API_URL;
+  const { favoritos, setListaFavoritos } = useContext(GlobalContext);
 
 
   const [favorito, setFavorito] = useState(props.isFavorite);
@@ -32,6 +35,8 @@ const Favoritos = (props) => {
       if (response.ok) {
         console.log("se mando ok");
         setFavorito(true);
+        setListaFavoritos([...favoritos, props.libro])
+        console.log(favoritos)
       }
       if (!response.ok) {
         throw new Error("Error al realizar la operación");
@@ -40,6 +45,12 @@ const Favoritos = (props) => {
       console.error("Error:", error);
     }
   };
+  useEffect(()=>{
+    console.log("isFavorite Cambio a")
+    setFavorito(props.isFavorite)
+
+
+  },[props.isFavorite])
 
   const fetchDataEliminar = async () => {
     try {
@@ -55,6 +66,8 @@ const Favoritos = (props) => {
       if (response.ok) {
         console.log("se borro ok");
         setFavorito(false);
+        setListaFavoritos(favoritos.filter((e)=>e!==props.libro))
+        console.log(favoritos)
       }
       if (!response.ok) {
         throw new Error("Error al realizar la operación");
