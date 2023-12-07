@@ -8,6 +8,7 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 100px;
+    height: 70vh;
 }
 
 .h2{
@@ -35,7 +36,7 @@
     height:auto;
     margin-left: 2rem;
     margin-right: 2rem;
-   /* overflow-y: scroll;*/
+    overflow-y: scroll;
 }
 .favRed{
     color:red;
