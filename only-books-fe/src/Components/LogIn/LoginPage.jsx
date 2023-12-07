@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useForm } from "./Hook/UseForm";
 import "./log&register.css";
 import { useAccount } from "../../Context/accountContext";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
+import { GlobalContext } from "../../Context/globalContext";
 
 export const LoginPage = () => {
   const API_URL = import.meta.env.VITE_API_URL;
-
+  const { fetchData } = useContext(GlobalContext);
   const url = `${API_URL}auth/login`;
   //	const url = "https://onlybooks.isanerd.club/api/auth/login";
   const navigate = useNavigate();
@@ -32,9 +33,7 @@ export const LoginPage = () => {
       password: password,
     }),
   };
-  useEffect(()=>{
-	
-  },[])
+  useEffect(() => {}, []);
 
   const { updateUserData } = useAccount();
 
@@ -76,10 +75,11 @@ export const LoginPage = () => {
           const { name, email, profileImage } = profileData;
           console.log("Nombre: ", name);
           console.log("Correo electrónico: ", email);
-		  console.log(location)
-          if (location.state!=null) {
+          console.log(location);
+          if (location.state != null) {
             navigate(-1);
           } else {
+            fetchData()
             navigate("/", {
               replace: true,
               state: {
@@ -108,7 +108,7 @@ export const LoginPage = () => {
     <div className="login-containerL">
       <div className="wrapper">
         <form onSubmit={onLogin}>
-		{location.state!=null? <p>{location.state.msg}</p> : <></>}
+          {location.state != null ? <p>{location.state.msg}</p> : <></>}
           <h2 id="h2-form">Iniciar Sesión</h2>
 
           <div className="input-group">
@@ -156,7 +156,9 @@ export const LoginPage = () => {
             <p className="error-message">{loginError}</p>
           )}
           <button className="btn-lr">Iniciar Sesion</button>
-          <p>No tienes cuenta? <Link to="/registrarse">Registrate aqui!</Link></p>
+          <p>
+            No tienes cuenta? <Link to="/registrarse">Registrate aqui!</Link>
+          </p>
         </form>
       </div>
     </div>

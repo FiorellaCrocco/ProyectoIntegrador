@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-//import { Redirect } from "react-router-dom";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faHeart as farHeart,faHeart as fasHeart,} from "@fortawesome/free-regular-svg-icons";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { useAccount } from "../../Context/accountContext";
-import { GlobalContext } from "../../Context/globalContext";
 
 const Favoritos = (props) => {
   const API_URL = import.meta.env.VITE_API_URL;
+
+
   const [favorito, setFavorito] = useState(props.isFavorite);
   const { userData } = useAccount();
   const {actualizarListaFav} = props
@@ -75,13 +75,12 @@ const Favoritos = (props) => {
     }
   };
 
-
   return (
 
     <FontAwesomeIcon
-      icon={props.isFavorite ? solidHeart : farHeart}
+      icon={favorito ? solidHeart : farHeart}
       onClick={handleToggleFavorito}
-      className={ props.isFavorite? "favRed":"favGray"}
+      className={ favorito ? "favRed":"favGray"}
       // style={{ color: favorito? "red" : "gray" }}
     />
   );

@@ -361,7 +361,8 @@ function DetalleLibro({ id }) {
                     <span className={styles.qualificationInfo}>
                       {libro.qualification}/5
                     </span>
-                    <span className={styles.favIcon}>
+                    <span className={styles.favIcon}
+                    >
                       <Favoritos
                         variable={id}
                         isFavorite={isFavorite}

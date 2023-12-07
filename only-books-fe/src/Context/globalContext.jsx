@@ -12,6 +12,7 @@ export const BookProvider = ({ children }) => {
   const [rentBook, setRentBook] = useState([]);
   const [token, setToken] = useState(sessionStorage.getItem("token") || "");
   const [filtrosSeleccionados, setFiltrosSeleccionados] = useState([]);
+  const [favoritos, setListaFavoritos] = useState([])
 
   const API_URL = import.meta.env.VITE_API_URL;
 
@@ -40,6 +41,7 @@ export const BookProvider = ({ children }) => {
   };
 
   const fetchData = async () => {
+    setIsLoading(true)
     try {
       const response = await fetch(url);
       if (!response.ok) {
@@ -117,6 +119,7 @@ export const BookProvider = ({ children }) => {
 
         if (response.ok) {
           console.log("Lista de libros favoritos:", data);
+          setListaFavoritos(data)
           return data;
         } else {
           throw new Error("Error al realizar la operación");
@@ -192,6 +195,7 @@ export const BookProvider = ({ children }) => {
     fetchCategorias();
     fetchCaracteristicas();
     fetchFiltroRent();
+    fetchListaFavoritos();
     //fetchFiltroRent()
   }, []);
 
@@ -222,6 +226,7 @@ export const BookProvider = ({ children }) => {
         fetchListaFavoritos,
         guardarFiltros,
         filtrosSeleccionados,
+        favoritos
       }}
     >
       {children}
