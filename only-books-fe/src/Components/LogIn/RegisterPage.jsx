@@ -101,6 +101,7 @@ export const RegisterPage = () => {
 				}
 				if (response.status == 403) {
 					console.log("Error al crear la cuenta");
+					setEmailError('Ya existe un usuario con ese email');
 				}
 			} catch {
 				(error) => {
