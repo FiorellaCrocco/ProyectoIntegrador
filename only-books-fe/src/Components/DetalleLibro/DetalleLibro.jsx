@@ -170,11 +170,11 @@ function DetalleLibro({ id }) {
 
   const handleReservar = (e) => {
     console.log(values);
-    if (values.length > 1 && values[0] != " , " && values[0] !=" ") {
+    if (Array.isArray(values) && values.length > 1 && values[0] !== "" && JSON.stringify(values) !== JSON.stringify([undefined, undefined])) {
       e.preventDefault();
       console.log(libro);
-      const inicio = values.toString().split(",")[0];
-      const fin = values.toString().split(",")[1];
+      const inicio = values.toString() !== undefined ? values.toString().split(",")[0] : '';
+      const fin =values.toString() !== undefined ? values.toString().split(",")[1] : '' ;
 
       if (userData) {
         navigate("/reservar", {
