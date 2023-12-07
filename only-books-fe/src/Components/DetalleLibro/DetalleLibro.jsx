@@ -182,7 +182,7 @@ function DetalleLibro({ id }) {
 
   const handleReservar = (e) => {
     console.log(values);
-    if (values.length > 1 && values[0] != "") {
+    if (values.length > 1 && values[0] != "" && values[0 !=" "]) {
       e.preventDefault();
       console.log(libro);
       const inicio = values.toString().split(",")[0];
@@ -357,26 +357,24 @@ function DetalleLibro({ id }) {
                 <div className={styles.tituloContainer}>
                   <h1 className={styles.bookh1}>{libro.title}</h1>
                   <div className={styles.iconosContainer}>
-
-                  <FontAwesomeIcon icon={faStarSolid} className="card-star" />
-                  <span className={styles.qualificationInfo}>{libro.qualification}/5</span>
-                  <span className={styles.favIcon}>
-                    <Favoritos
-                      variable={id}
-                      isFavorite={isFavorite}
-                      actualizarListaFav={fetchListaFavoritos}
+                    <FontAwesomeIcon icon={faStarSolid} className="card-star" />
+                    <span className={styles.qualificationInfo}>
+                      {libro.qualification}/5
+                    </span>
+                    <span className={styles.favIcon}>
+                      <Favoritos
+                        variable={id}
+                        isFavorite={isFavorite}
+                        actualizarListaFav={fetchListaFavoritos}
                       ></Favoritos>
-                  </span>
-                      </div>
+                    </span>
+                  </div>
                 </div>
                 <p className={styles.bookp}>{libro.author}</p>
                 <p className={styles.bookp}>{libro.description}</p>
               </div>
 
-              <button
-                className={styles.btnAtras}
-                onClick={() =>  navigate("/")}
-              >
+              <button className={styles.btnAtras} onClick={() => navigate("/")}>
                 Volver
               </button>
 

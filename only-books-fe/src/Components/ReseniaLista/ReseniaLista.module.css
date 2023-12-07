@@ -1,5 +1,6 @@
 .listaReseniaSection{
     width: 90%;
+    margin-top: 20px;
 }
 .listaResenias>li>div{
     display: flex;
