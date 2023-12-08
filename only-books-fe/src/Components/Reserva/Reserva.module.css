@@ -5,10 +5,13 @@
 
 .all {
   display: flex;
+  overflow-x: hidden;
 }
 .title{
   color: #1b2430;
   font-size: larger;
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
 .input {
@@ -115,6 +118,7 @@
   color: #1b2430;
   justify-content: center;
   margin-right: 40px;
+  align-items: center;
 }
 
 .titleCaracteristicas {
@@ -192,6 +196,7 @@
 .cuerpo{
   font-weight: 500;
   font-size: larger;
+  text-align: center;
 }
 
 .btnAtras {
@@ -262,5 +267,21 @@
   .card {
     margin-left: 60px;
     margin-right: 60px;
+  }
+  
+  .input {
+    margin-top: 0.5rem; 
+  }
+  .inputResidencia{
+  margin-top: 0.5rem;
+  }
+}
+
+@media(max-width: 450px){
+  .card{
+    margin: 10px
+  }
+  .all{
+    width: 95vw;
   }
 }

@@ -33,7 +33,7 @@
     font-weight: 600;
     padding: 13px;
     border: none;
-    border-radius: 10%;
+    border-radius: 10px;
     margin: 20px;
     box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
 }
@@ -100,7 +100,8 @@
     justify-content: space-between;
     align-items: center;
     margin: 20px 0;
-    background-color: #F3F3F3;
+    /* background-color: #F3F3F3; */
+    background-color: transparent;
     /* Agregar un fondo para destacar la sección */
     padding: 20px;
     /* Añadir espacio interno para mejorar la separación */
@@ -146,7 +147,7 @@
     font-weight: 600;
     padding: 10px 20px;
     border: none;
-    border-radius: 10%;
+    border-radius: 10px;
     margin: 20px;
     transition: background-color 0.3s;
     box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
@@ -171,7 +172,7 @@
     font-weight: 600;
     padding: 10px 20px;
     border: none;
-    border-radius: 10%;
+    border-radius: 10px;
     transition: background-color 0.3s;
     margin-left: 20px;
     cursor: pointer;
@@ -188,11 +189,12 @@
     font-weight: 600;
     padding: 10px 20px;
     border: none;
-    border-radius: 10%;
+    border-radius: 10px;
     transition: background-color 0.3s;
     margin-left: 10px;
     cursor: pointer;
     box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
+    
 }
 .borrarButton:hover {
     background-color: rgb(194, 53, 51);
@@ -213,7 +215,7 @@
     font-weight: 600;
     padding: 8px;
     border: none;
-    border-radius: 10%;
+    border-radius: 10px;
     margin: 20px;
     box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
 }
@@ -224,7 +226,7 @@
     color: #fff;
     padding: 10px 15px;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -254,7 +256,7 @@
     height: 25px;
     width: 250px;
     border: none;
-    border-radius: 0px;
+    border-radius: 5px;
     -webkit-box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
     -moz-box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
     box-shadow: 11px 10px 18px -8px rgba(0,0,0,0.68);
@@ -284,6 +286,13 @@
 .listaCateg .listaIcon > p {
     margin-top: 0;
     color: black;
+}
+@media (max-width: 1050px){
+    .iconosContainer{
+        display: flex;
+        width: 200px;
+
+    }
 }
 @media (max-width: 720px){
     .bookcontainer{
@@ -333,14 +342,21 @@
         padding: 5px 5px;
         margin: 10px 0 0 0;
         width: 110px;
-        border-radius: 5px;
+    }
+    .tituloContainer{
+        flex-direction: column;
+        
+    }
+    .bookh1{
+        text-align: center;
+    }
+    .iconosContainer{
+        justify-content: center;
     }
 }
 
 @media (max-width: 370px){
-    .tituloContainer{
-        flex-direction: column;
-    }
+    
     /* .tituloContainer>div>span:last-child{
         margin-left: 15px;
     }

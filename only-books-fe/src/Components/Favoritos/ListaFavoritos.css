@@ -7,6 +7,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 100px;
+    height: 70vh;
 }
 
 .h2{
@@ -34,7 +36,7 @@
     height:auto;
     margin-left: 2rem;
     margin-right: 2rem;
-   /* overflow-y: scroll;*/
+    overflow-y: scroll;
 }
 .favRed{
     color:red;
@@ -57,7 +59,7 @@
 }
 @media (max-width: 950px){
     .cardFavs{
-        grid-template-columns: repeat(3, minmax(100px, 1fr));
+        grid-template-columns: repeat(3,250px) ;
     }
 }
 
@@ -70,7 +72,8 @@
 
 @media (max-width: 600px){
     .card{
-        width: 80%;
+        /* width: 80%; */
+        width: 60vw;
     }
     .listado{
         justify-content: flex-start;

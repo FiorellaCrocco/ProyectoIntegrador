@@ -26,7 +26,7 @@
 .reseniaSection>form>button{
     border: 1px solid transparent;
     align-self: center;
-    border-radius: 10%;
+    border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     background: #F89344;
     color: white;

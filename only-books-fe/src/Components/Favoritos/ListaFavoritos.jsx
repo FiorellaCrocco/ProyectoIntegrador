@@ -3,14 +3,13 @@ import Favoritos from "./Favoritos";
 import { useAccount } from "../../Context/accountContext";
 import { GlobalContext } from "../../Context/globalContext";
 import Card from "../Card/Card";
-import './ListaFavoritos.css'
+import "./ListaFavoritos.css";
 import Swal from "sweetalert2";
 
 const ListaFavoritos = () => {
   const { userData } = useAccount();
   const API_URL = import.meta.env.VITE_API_URL;
   const [librosFavoritos, setLibrosFavoritos] = useState([]);
-
 
   useEffect(() => {
     // Llamar a la función para obtener y establecer la lista de libros favoritos
@@ -21,7 +20,7 @@ const ListaFavoritos = () => {
     Swal.fire({
       title: "Buscando libros favoritos...",
       icon: "info",
-      showConfirmButton:false,
+      showConfirmButton: false,
       showLoaderOnConfirm: true,
       allowOutsideClick: () => !Swal.isLoading(),
     });
@@ -52,44 +51,43 @@ const ListaFavoritos = () => {
     } catch (error) {
       console.error("Error:", error);
     }
-    Swal.close()
+    Swal.close();
   };
-    
+
   const actualizarListaFav = () => {
     fetchDataMostrar();
   };
-  
-  const renderList = () => {
-  return (
-    <div className="contentContFav">
-    <div className="listado">
-      <h2 className="h2">Tus Libros Favoritos:</h2>
-      {
-        librosFavoritos.length==0?<p>No tienes libros como favorito</p>:
-        <ul className="cardFavs">
-        {librosFavoritos.map((bookId) => (
-          <li key={bookId.id}>
-            <Card
-              key={bookId.id}
-              {...bookId}
-              isFavorite={true}
-              actualizarListaFav={actualizarListaFav}
-            />
-          </li>
-        ))}
-      </ul>
-      }
-      
-    </div>
-    </div>
-  );
-  }
-  
-            useEffect(() => {
-              renderList();
-            }, [librosFavoritos]);
-  
 
+  const renderList = () => {
+    return (
+      <div className="contentContFav">
+        <div className="listado">
+          <h2 className="h2">Tus Libros Favoritos:</h2>
+          {librosFavoritos.length == 0 ? (
+            <p>No tienes libros como favorito</p>
+          ) : (
+            <ul className="cardFavs">
+              {librosFavoritos.map((bookId) => (
+                <li key={bookId.id}>
+                  <Card
+                    key={bookId.id}
+                    {...bookId}
+                    isFavorite={true}
+                    libro={bookId}
+                    actualizarListaFav={actualizarListaFav}
+                  />
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
+    );
+  };
+
+  useEffect(() => {
+    renderList();
+  }, [librosFavoritos]);
 
   return (
     /*<div className="listado">
@@ -106,4 +104,4 @@ const ListaFavoritos = () => {
   );
 };
 
-export default ListaFavoritos;
+export default ListaFavoritos;

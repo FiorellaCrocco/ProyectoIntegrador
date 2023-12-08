@@ -12,16 +12,21 @@
 }
 
 .listaCarac{
+    padding: 0;
     color: black;
     display: flex;
     flex-direction: row;
-    align-items: baseline;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .listaIcon{
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 .listaIcon>p{

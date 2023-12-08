@@ -25,6 +25,7 @@ const UserMenu = () => {
         navigate('/', {
             replace: true,
         });
+        window.location.reload()
     };
 
     const handleClickOutside = (event) => {

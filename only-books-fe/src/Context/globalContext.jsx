@@ -11,7 +11,9 @@ export const BookProvider = ({ children }) => {
   const [listaCaracteristicas, setListaCaracteristicas] = useState([]);
   const [rentBook, setRentBook] = useState([]);
   const [token, setToken] = useState(sessionStorage.getItem("token") || "");
-  const [filtrosSeleccionados, setFiltrosSeleccionados] = useState([]);
+  const storedFilters = JSON.parse(sessionStorage.getItem("filtrosSeleccionados")) || [];
+  const [filtrosSeleccionados, setFiltrosSeleccionados] = useState(storedFilters);
+  const [favoritos, setListaFavoritos] = useState([])
 
   const API_URL = import.meta.env.VITE_API_URL;
 
@@ -26,20 +28,24 @@ export const BookProvider = ({ children }) => {
   const urlBookId = `${API_URL}book/`;
 
   const guardarFiltros = (filtro) => {
-    if (filtro == "") {
+    if (filtro === "") {
       setFiltrosSeleccionados([]);
     } else {
       if (filtrosSeleccionados.includes(filtro)) {
-        setFiltrosSeleccionados(
-          filtrosSeleccionados.filter((e) => e !== filtro)
+        setFiltrosSeleccionados((prevFilters) =>
+          prevFilters.filter((e) => e !== filtro)
         );
       } else {
-        setFiltrosSeleccionados([...filtrosSeleccionados, filtro]);
+        setFiltrosSeleccionados((prevFilters) => [...prevFilters, filtro]);
       }
     }
   };
+  useEffect(() => {
+    sessionStorage.setItem("filtrosSeleccionados", JSON.stringify(filtrosSeleccionados));
+  }, [filtrosSeleccionados]);
 
   const fetchData = async () => {
+    setIsLoading(true)
     try {
       const response = await fetch(url);
       if (!response.ok) {
@@ -117,6 +123,8 @@ export const BookProvider = ({ children }) => {
 
         if (response.ok) {
           console.log("Lista de libros favoritos:", data);
+          setListaFavoritos(data)
+          console.log(favoritos)
           return data;
         } else {
           throw new Error("Error al realizar la operación");
@@ -192,6 +200,7 @@ export const BookProvider = ({ children }) => {
     fetchCategorias();
     fetchCaracteristicas();
     fetchFiltroRent();
+    fetchListaFavoritos();
     //fetchFiltroRent()
   }, []);
 
@@ -207,6 +216,7 @@ export const BookProvider = ({ children }) => {
         listaCategorias,
         listaLibros,
         isLoading,
+        setIsLoading,
         isLoadingRent,
         listaResenias,
         actualizarListaLibros,
@@ -222,6 +232,9 @@ export const BookProvider = ({ children }) => {
         fetchListaFavoritos,
         guardarFiltros,
         filtrosSeleccionados,
+        favoritos,
+        setListaFavoritos,
+        storedFilters
       }}
     >
       {children}

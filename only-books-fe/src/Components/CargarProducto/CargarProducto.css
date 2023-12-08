@@ -1,6 +1,6 @@
 .Container {
     width: 500px;
-    height: 100vh;
+    height: auto;
     display: flex;
     flex-direction: column;
     color: #182b39;
@@ -12,16 +12,18 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 11px 09px 10px #00000061;
-    overflow-y: scroll;
+    
 }
 .divSelect{
     width: 50%;
     text-align: center;
-
+    gap: 5px;
 }
 .divSelect>div{
     margin: 5px;
     padding: 3px;
+    border: 1px solid #9cc6dd;
+    border-radius: 8px;
 }
 .divSelect>div:hover{
     background-color: #84bddc;
@@ -68,23 +70,23 @@
     text-align: center;
 }
 
-.input {
-    width: 300px;
-    height: 50px;
-    background-color: #BAE6EA;
-    margin-top: 5px;
-    border: 1px solid #152e37;
+.input_CrearProducto {
+    all:unset;
+    width: 400px;
+    height: 25px;
+    background-color: #cae0ed;
+    margin: 5px;
+    border: 1px solid #9cc6dd;
     border-radius: 8px;
-    padding: 5px;
+    padding: 15px;
+    font-size: medium;
 
 }
 
 .formulario {
-    margin-top: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
 
 .div {
@@ -97,4 +99,5 @@
 
 .labels {
     color: #152e37;
+    margin-top: 10px;
 }
