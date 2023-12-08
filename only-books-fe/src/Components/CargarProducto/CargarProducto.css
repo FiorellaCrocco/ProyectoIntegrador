@@ -17,7 +17,7 @@
 .divSelect{
     width: 50%;
     text-align: center;
-
+    gap: 5px;
 }
 .divSelect>div{
     margin: 5px;
@@ -84,11 +84,9 @@
 }
 
 .formulario {
-    margin-top: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
 
 .div {
@@ -101,4 +99,5 @@
 
 .labels {
     color: #152e37;
+    margin-top: 10px;
 }
