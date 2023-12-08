@@ -234,7 +234,7 @@ function CargarProducto() {
                 Título:
               </label>
               <input
-                className="input"
+                className="input_CrearProducto"
                 type="text"
                 id="title"
                 name="title"
@@ -247,7 +247,7 @@ function CargarProducto() {
                 Autor:
               </label>
               <input
-                className="input"
+                className="input_CrearProducto"
                 type="text"
                 id="author"
                 name="author"
@@ -260,7 +260,7 @@ function CargarProducto() {
                 Descripción:
               </label>
               <textarea
-                className="input"
+                className="input_CrearProducto"
                 id="description"
                 name="description"
                 value={formData.description}
@@ -272,7 +272,7 @@ function CargarProducto() {
                 ISBN:
               </label>
               <input
-                className="input"
+                className="input_CrearProducto"
                 type="text"
                 id="isbn"
                 name="isbn"
@@ -285,7 +285,7 @@ function CargarProducto() {
                 Año de Publicación:
               </label>
               <input
-                className="input"
+                className="input_CrearProducto"
                 type="date"
                 id="publication_year"
                 name="publication_year"
@@ -311,7 +311,7 @@ function CargarProducto() {
                 Precio:
               </label>
               <input
-                className="input"
+                className="input_CrearProducto"
                 type="number"
                 id="price"
                 name="price"
@@ -340,7 +340,7 @@ function CargarProducto() {
                 Imagen:
               </label>
               <input
-                className="input"
+                className="input_CrearProducto"
                 type="file"
                 multiple
                 id="image"

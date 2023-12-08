@@ -27,9 +27,10 @@
     border-radius: 10px;
     resize: none;
     text-align: right;
+    width: 217px;
 }
 .edit-form-product>:nth-child(5)>input{
-    width:162.727px;
+    width:217px;
 }
 
   input[type="number"]::-webkit-inner-spin-button{
@@ -46,8 +47,8 @@
     font-family: inherit;
     font-weight: 600;
     font-size: 1em;
-    height: 48.35px;
-    width: 196.53px;
+    height: 55px;
+    width: 260px;
   }
   .form-group>button:hover{
     background-color: rgba(46, 125, 50, 0.04);
