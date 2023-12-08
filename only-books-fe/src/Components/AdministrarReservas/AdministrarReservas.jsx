@@ -1,4 +1,5 @@
 import React, { useEffect,useLayoutEffect, useState } from "react";
+import { addDays} from 'date-fns';
 import "./AdministrarReservas.css";
 import Swal from "sweetalert2";
 import Button from "@mui/material/Button";
@@ -134,6 +135,10 @@ function AdministrarReservas() {
     return `${dia}-${mes}-${anio}`;
   }
 
+  function formatDate(date) {
+    return date.toLocaleDateString("es-ES"); // Puedes ajustar el idioma según tu preferencia
+  }
+
   return (
     <div>
       <h2 className="tituloListRes">Listado de Reservas</h2>
@@ -153,8 +158,10 @@ function AdministrarReservas() {
             <div className="listaTitleR">
               {reserva.user.name} {reserva.user.lastname}
             </div>
-            <div className="listaTitleR fecha">{formatearFecha(reserva.startDate.split("T")[0])}</div>
-            <div className="listaTitleR fecha">{formatearFecha(reserva.returnDate.split("T")[0])}</div>
+        {/*     <div className="listaTitleR fecha">{formatearFecha(reserva.startDate.split("T")[0])}</div>
+            <div className="listaTitleR fecha">{formatearFecha(reserva.returnDate.split("T")[0])}</div> */}
+              <div className="listaTitleR fecha">{formatDate(addDays(new Date(reserva.startDate.split("T")[0]), 0))}</div>
+              <div className="listaTitleR fecha">{formatDate(addDays(new Date(reserva.returnDate.split("T")[0]), 0))}</div>
             <div className="admin-btn-container">
               <Button
                 variant="outlined"

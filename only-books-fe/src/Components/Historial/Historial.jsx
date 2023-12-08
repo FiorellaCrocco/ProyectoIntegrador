@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { addDays} from 'date-fns';
 import './Historial.css';
 import Swal from "sweetalert2";
 
@@ -74,6 +75,11 @@ const Historial = () => {
     return reservas;
   };
 
+  function formatDate(date) {
+    return date.toLocaleDateString("es-ES"); // Puedes ajustar el idioma según tu preferencia
+  }
+  
+
   return (
     <div className='rootRes'>
     <div className="historial">
@@ -100,9 +106,9 @@ const Historial = () => {
                   <p className="titleReservaHistorial"> {reserva.book.title}</p>
                 </div>
                 {/* <div className="fechasHistorial"> */}
-                  <p className="fechaInicio">{reserva.startDate.split("T")[0]}</p>
+                  <p className="fechaInicio">{formatDate(addDays(new Date(reserva.startDate.split("T")[0]), 0))}</p>
                   <p className="fechaFin">
-                    {reserva.returnDate.split("T")[0]}
+                    {formatDate(addDays(new Date(reserva.returnDate.split("T")[0]), 0))}
                   </p>
                 {/* </div> */}
               </li>
