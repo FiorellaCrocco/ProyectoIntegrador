@@ -19,6 +19,8 @@ function Resenia({ id }) {
   const [estrella, setEstrella] = useState(0);
   const estrellas = [1, 2, 3, 4, 5];
 
+  const fecha = new Date(Date.now());
+  const fechaFormat = fecha.toISOString();
   const [formData, setFormData] = useState({
     user: {
       id: userId,
@@ -28,7 +30,7 @@ function Resenia({ id }) {
     },
     comentario: "",
     puntuacion: 0,
-    fechaResenia: "",
+    fechaResenia: fechaFormat,
   });
   const handleEstrella = (star) => {
     setEstrella(star);
@@ -51,12 +53,10 @@ function Resenia({ id }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    const fecha = new Date(Date.now());
-    const fechaFormat = fecha.toISOString();
+    
     setFormData({
       ...formData,
       [name]: value,
-      fechaResenia: fechaFormat,
     });
   };
 
@@ -116,6 +116,7 @@ function Resenia({ id }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     setFormData({
       ...formData,
       comentario: "",
@@ -126,7 +127,7 @@ function Resenia({ id }) {
     const resultado = await verificarUsuario();
     console.log("HANDLE SUBMIT")
     console.log(resultado)
-    if (resultado) {
+    if (resultado && estrella!==0) {
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -138,7 +139,7 @@ function Resenia({ id }) {
       await fetchEnviarResenia();
       await fetchObtenerResenias(bookId);
 
-    } else {
+    } else if(estrella!==0){
       console.log("No puedes hacer una reseña para este libro")
       Swal.fire({
         position: "top-end",
@@ -147,8 +148,14 @@ function Resenia({ id }) {
         showConfirmButton: false,
         timer: 2000
       });
-
-
+    }else{
+      Swal.fire({
+        position: "top-end",
+        text: 'La valoracion no puede ser 0',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 2000
+      });
 
     }
     console.log(formData);

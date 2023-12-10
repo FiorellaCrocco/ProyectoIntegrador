@@ -95,7 +95,7 @@ function DetalleLibro({ id }) {
       });
     };
     getLibro();
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
   }, [id, fetchBookById]);
 
   useEffect(() => {
@@ -106,14 +106,9 @@ function DetalleLibro({ id }) {
       //     setIsFavorite(true);
       //   }
       // });
-      console.log(favoritos)
       favoritos.forEach((book)=>{
-
-        console.log(id)
         if(book.id==id){
-          console.log("ES FAVORITO")
           setIsFavorite(true)
-          console.log(isFavorite)
         }
       })
     };
@@ -169,10 +164,8 @@ function DetalleLibro({ id }) {
 
 
   const handleReservar = (e) => {
-    console.log(values);
-    if (Array.isArray(values) && values.length > 1 && values[0] !== "" && JSON.stringify(values) !== JSON.stringify([undefined, undefined])) {
+    if (Array.isArray(values) && values.length > 1 && values[0] !== "" && JSON.stringify(values) !== JSON.stringify([undefined, undefined]) && !noDisponible) {
       e.preventDefault();
-      console.log(libro);
       const inicio = values.toString() !== undefined ? values.toString().split(",")[0] : '';
       const fin =values.toString() !== undefined ? values.toString().split(",")[1] : '' ;
 
@@ -195,7 +188,6 @@ function DetalleLibro({ id }) {
         });
       }
 
-      console.log("adentro handle");
     } else {
       Swal.fire({
         position: "top-end",
@@ -210,6 +202,22 @@ function DetalleLibro({ id }) {
   const clearCalendar = () => {
     setValues([]);
   };
+
+
+  const [numberOfMonth, setNumberOfMonth] = useState(window.innerWidth > 550 ? 2 : 1);
+  const handleResize = () => {
+    setNumberOfMonth(window.innerWidth > 550 ? 2 : 1);
+  };
+  useEffect(() => {
+    // Agregar el evento de redimensionamiento al montar el componente
+    window.addEventListener('resize', handleResize);
+
+    // Eliminar el evento al desmontar el componente
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
 
   return (
     <div>
@@ -291,7 +299,7 @@ function DetalleLibro({ id }) {
                   onChange={setValues}
                   range
                   highlightToday={false}
-                  numberOfMonths={2}
+                  numberOfMonths={numberOfMonth}
                   minDate={fechaFormateada}
                   mapDays={({ date, isSameDate }) => {
                     let props = {};

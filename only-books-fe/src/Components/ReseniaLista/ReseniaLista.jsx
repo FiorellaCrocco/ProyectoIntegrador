@@ -15,7 +15,13 @@ function ReseniaLista({ id }) {
   }, [bookId]);
 
   const renderResenias = (listaMap) => {
-    return listaMap.map((resenia) => (
+    
+    return listaMap.map((resenia) =>{
+      if(resenia.fechaResenia!==null){
+
+      
+     return (
+      
       <li key={resenia.id}>
         <div>
           <h3>
@@ -29,7 +35,9 @@ function ReseniaLista({ id }) {
         <p>{resenia.comentario}</p>
         <p>{resenia.fechaResenia.split("T")[0]}</p>
       </li>
-    ));
+    )}else{
+      return null
+    }});
   };
 
   return (
