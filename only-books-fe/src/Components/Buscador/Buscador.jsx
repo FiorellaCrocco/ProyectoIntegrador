@@ -50,6 +50,20 @@ function Buscador({ obtenerDatos, listaLibros, obtenerDatosFilt}) {
     setMostrar(true)
   }
 
+  const [numberOfMonth, setNumberOfMonth] = useState(window.innerWidth > 550 ? 2 : 1);
+  const handleResize = () => {
+    setNumberOfMonth(window.innerWidth > 550 ? 2 : 1);
+  };
+  useEffect(() => {
+    // Agregar el evento de redimensionamiento al montar el componente
+    window.addEventListener('resize', handleResize);
+
+    // Eliminar el evento al desmontar el componente
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
 
   return (
     <>
@@ -91,7 +105,7 @@ function Buscador({ obtenerDatos, listaLibros, obtenerDatosFilt}) {
                   onChange={setValues}
                   range
                   highlightToday={false}
-                  numberOfMonths={2}
+                  numberOfMonths={numberOfMonth}
                 />
 
                 <button>Buscar</button>
